@@ -1,0 +1,535 @@
+/* =========================================================================
+   Shared mechanics for the direction decks (stage, slides, steps, overview,
+   controls). Each direction sets its own tokens and layouts on top.
+   Stage is 1920 × 1080.
+   ========================================================================= */
+
+:root {
+  /* Brand palette (Bixler's UI guide) */
+  --c-white: #fffffd;
+  --c-paper: #f9f8f0;
+  --c-ink: #0f1b18;
+  --c-green: #23533c;
+  --c-sage: #d0d3c7;
+
+  --serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --sans: "Avenir Next", Avenir, "Nunito Sans", system-ui, sans-serif;
+  --mono: "Courier Prime", "Courier New", monospace;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --safe-x: 128px;
+  --safe-y: 96px;
+
+  /* Defaults, overridden by each direction */
+  --frame: #0f1b18;
+  --bg: var(--c-white);
+  --fg: var(--c-ink);
+  --muted: rgba(15, 27, 24, 0.58);
+  --rule: rgba(15, 27, 24, 0.14);
+  --accent: var(--c-green);
+  --line: var(--c-green);
+  --line-soft: rgba(35, 83, 60, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--frame);
+}
+body {
+  font-family: var(--sans);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+  -webkit-user-select: none;
+}
+body.idle,
+body.idle * {
+  cursor: none !important;
+}
+img {
+  display: block;
+}
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin: -540px 0 0 -960px;
+  transform: scale(var(--scale, 1));
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+}
+.slide.is-active,
+.slide.is-leaving {
+  visibility: visible;
+}
+.slide.is-leaving {
+  z-index: 1;
+}
+.slide.is-active {
+  z-index: 2;
+}
+.slide .notes {
+  display: none;
+}
+
+/* Entry animation */
+.slide .in {
+  opacity: 0;
+}
+.slide.is-active .in {
+  animation: rise 1.3s var(--ease) both;
+  animation-delay: calc(var(--d, 0) * 1ms + 450ms);
+}
+.slide.is-active .in.fade {
+  animation-name: fadein;
+  animation-duration: 1.8s;
+}
+.slide.is-leaving .in {
+  opacity: 1;
+  animation: none;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Word-by-word reveal behind a mask (titles marked data-split) */
+.split .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.02em 0.12em;
+  margin: 0 -0.02em -0.12em;
+}
+.split .w > span {
+  display: inline-block;
+  transform: translateY(110%);
+}
+.slide.is-active .split .w > span {
+  animation: wordup 1.15s var(--ease) both;
+  animation-delay: calc(var(--d, 0) * 1ms + var(--i, 0) * 55ms + 420ms);
+}
+.slide.is-leaving .split .w > span {
+  transform: none;
+  animation: none;
+}
+@keyframes wordup {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Steps: [data-step] from step n, [data-only] at step n only, [data-focus] highlight at step n */
+.slide [data-step],
+.slide [data-only] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 1.2s var(--ease);
+}
+.slide [data-step].on,
+.slide [data-only].on {
+  opacity: 1;
+  transform: none;
+}
+.slide .fade[data-step],
+.slide .fade[data-only] {
+  transform: none;
+}
+.slide .dim[data-step] {
+  opacity: 0.22;
+  transform: none;
+}
+.slide .dim[data-step].on {
+  opacity: 1;
+}
+
+/* Line drawings draw themselves */
+.slide .d {
+  stroke-dasharray: 1 0;
+}
+.slide.is-active .draw-in:not([data-step]) .d,
+.slide.is-active .draw-in.on .d {
+  animation: draw 2.6s var(--ease) both;
+  animation-delay: calc(var(--dd, 0) * 1ms + 300ms);
+}
+.slide.is-leaving .d {
+  animation: none;
+}
+@keyframes draw {
+  from {
+    stroke-dasharray: 0 1;
+  }
+  to {
+    stroke-dasharray: 1 0;
+  }
+}
+
+.art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+.art {
+  color: var(--line);
+}
+.art .s {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.art .t {
+  fill: none;
+  stroke: var(--line-soft);
+  stroke-width: 1.2;
+}
+.art .f {
+  fill: currentColor;
+  stroke: none;
+}
+.art .hand-s {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.art .sign-t {
+  fill: currentColor;
+  stroke: none;
+  font: 400 28px var(--serif);
+  letter-spacing: 9px;
+}
+.art .lbl-s {
+  fill: var(--muted);
+  font: 600 13px var(--sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.art .win,
+.art .shop {
+  fill: transparent;
+}
+
+/* Photos: cover their box */
+.photo {
+  position: absolute;
+  overflow: hidden;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide.is-active .kb img {
+  animation: kenburns 16s linear both;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.001);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+/* Source note on borrowed images */
+.credit {
+  position: absolute;
+  font: 600 11px/1.4 var(--sans);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 6;
+}
+
+/* Overview */
+.stage.overview .slide {
+  visibility: visible;
+  cursor: pointer;
+  transform-origin: 0 0;
+  box-shadow: 0 0 0 2px var(--rule);
+  transition:
+    transform 0.7s var(--ease),
+    box-shadow 0.3s;
+}
+.stage.overview .slide.sel {
+  box-shadow: 0 0 0 12px var(--accent);
+}
+.stage.overview .slide::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  padding: 26px 44px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 600 64px/1 var(--sans);
+  letter-spacing: 0.08em;
+}
+.stage.overview .in,
+.stage.overview [data-step],
+.stage.overview [data-only] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+.stage.overview [data-only]:not(.on) {
+  opacity: 0 !important;
+}
+.stage.overview .split .w > span,
+.stage.overview .d,
+.stage.overview .kb img {
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Controls (outside the stage) */
+.hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  font: 600 11px/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f9f8f0;
+  background: linear-gradient(to top, rgba(15, 27, 24, 0.82) 30%, transparent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+  pointer-events: none;
+}
+body.show-hud .hud {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.hud-l,
+.hud-r {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hud-count {
+  font-variant-numeric: tabular-nums;
+}
+.hud-title {
+  color: rgba(249, 248, 240, 0.6);
+}
+.hud-tag {
+  padding: 0 10px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px dashed rgba(249, 248, 240, 0.5);
+}
+.hud button,
+.hud a {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.hud a {
+  border: 1px solid rgba(249, 248, 240, 0.3);
+}
+.hud .icon {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
+}
+.hud .icon:hover,
+.hud a:hover {
+  background: rgba(249, 248, 240, 0.12);
+}
+.hud svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hud button:focus-visible,
+.hud a:focus-visible {
+  outline: 2px solid #d0d3c7;
+  outline-offset: 2px;
+}
+.progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 101;
+  height: 2px;
+  width: calc(var(--p, 0) * 100%);
+  background: #d0d3c7;
+  opacity: 0;
+  transition:
+    width 0.8s var(--ease),
+    opacity 0.4s;
+}
+body.show-hud .progress {
+  opacity: 0.8;
+}
+.help {
+  position: fixed;
+  right: 20px;
+  bottom: 64px;
+  z-index: 102;
+  width: 340px;
+  padding: 22px 24px;
+  background: #f9f8f0;
+  color: #0f1b18;
+  box-shadow: 0 20px 60px rgba(8, 15, 13, 0.35);
+  font: 400 14px/1.5 var(--sans);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+.help.open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.help h2 {
+  margin: 0 0 12px;
+  font: 600 11px/1 var(--sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(15, 27, 24, 0.55);
+}
+.help dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px 12px;
+}
+.help dt {
+  font: 600 12px/1.5 var(--sans);
+}
+.help dd {
+  margin: 0;
+  color: rgba(15, 27, 24, 0.6);
+}
+.blackout {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0f1b18;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease);
+}
+body.is-black .blackout {
+  opacity: 1;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .in,
+  .slide.is-active .split .w > span,
+  .slide.is-active .kb img,
+  .slide.is-active .draw-in .d {
+    animation: none !important;
+  }
+  .slide .in {
+    opacity: 1;
+  }
+  .split .w > span {
+    transform: none;
+  }
+  .slide [data-step],
+  .slide [data-only] {
+    transform: none;
+    transition-duration: 0.3s;
+  }
+}
+
+/* Display cases: soft glass, no glow unless a direction adds one */
+.art .glass-f { fill: color-mix(in srgb, var(--line) 6%, transparent); }
+.art .warm { fill: none; }
+/* Balanced line breaks on titles (no single word left alone) */
+.title, .h2, .h3, .lead-line, .display { text-wrap: balance; }
+
+/* Film scrub (../shared/film.js): the frame canvas sits on the slide background,
+   under every other layer. With reduced motion, two canvases cross-fade. */
+.slide canvas.film {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.slide canvas.film.xfade {
+  transition: opacity 0.6s linear;
+}

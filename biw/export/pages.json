@@ -1,0 +1,101 @@
+{
+ "pdf": "bixlers-x-rolex.pdf",
+ "pages": {
+  "film": [
+   0
+  ],
+  "cover": [
+   1
+  ],
+  "act-1": [
+   2
+  ],
+  "history": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "act-2": [
+   9
+  ],
+  "offer": [
+   10,
+   11,
+   12
+  ],
+  "rolex": [
+   13
+  ],
+  "museum": [
+   14,
+   15
+  ],
+  "service": [
+   16
+  ],
+  "admin": [
+   17
+  ],
+  "act-3": [
+   18
+  ],
+  "valley": [
+   19,
+   20,
+   21,
+   22,
+   23
+  ],
+  "thanks": [
+   24
+  ],
+  "a-index": [
+   25
+  ],
+  "a-perry": [
+   26
+  ],
+  "a-team": [
+   27
+  ],
+  "a-formula": [
+   28
+  ],
+  "a-review": [
+   29
+  ],
+  "a-foundation": [
+   30
+  ],
+  "a-presence": [
+   31
+  ],
+  "a-clients": [
+   32
+  ],
+  "a-house": [
+   33
+  ],
+  "a-market": [
+   34
+  ],
+  "a-generation": [
+   35
+  ],
+  "a-affluent": [
+   36
+  ],
+  "a-retailers": [
+   37
+  ],
+  "a-audience": [
+   38
+  ],
+  "a-digital": [
+   39
+  ]
+ }
+}

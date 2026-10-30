@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bixler's · Full preview · Maison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<link rel="stylesheet" href="full.css?v=100">
+</head>
+<!-- The whole narrative arc in the Maison direction. Images and logos: Bixler's own, hotlinked
+     from bixlers.com or taken from the V4 deck until Alice's originals arrive. Text follows the
+     first deck (deck/index.html); items to confirm are listed in the notes. -->
+<body data-deck="full" data-transition="pan">
+
+<main class="stage" id="stage" aria-roledescription="presentation">
+
+  <!-- The cold open. Its first step is the cover: the film's first frame, the globe, almost in the
+       dark, with the logo. The click lifts the dark and the film plays (the teaser, version 02,
+       assets/film/cut); when it ends, the house is drawn on the cover page. -->
+  <section class="slide film-open" id="film" data-kind="film" data-steps="1" data-title="Cold open" data-transition="fade">
+    <video src="film/teaser-02.mp4" poster="film/teaser-02.jpg" muted playsinline preload="auto"></video>
+    <div class="film-veil"></div>
+    <img class="film-logo" src="https://www.bixlers.com/cdn/shop/files/BX_REGIST_LOGO-1785_2025_1.png?v=1755892441&width=1400" alt="Bixler's 1785">
+    <aside class="notes"><p>Opens on the globe in the dark with the logo. Click: the film plays by itself (22 s) and hands over to the cover. The teaser, version 02, the CGI globe opening (assets/film/cut/teaser-version-02.mp4; it ends square on the house, framed as the cover draws it).</p></aside>
+  </section>
+  <!-- 00 · Cover: the new house drawn in line, large, the logo written by hand under it -->
+  <section class="slide cream" id="cover" data-title="Cover" data-transition="film">
+    <div class="cover-house" data-house-draw="img/house.svg?v=5"></div>
+    <div class="hero-brand">
+      <div class="logo-write-box" data-logo-write data-delay="1.7"><img class="logo-white" src="https://www.bixlers.com/cdn/shop/files/BX_REGIST_LOGO-1785_2025_1.png?v=1755892441&width=1400" alt="Bixler's 1785"></div>
+      <p class="claim in fade" style="--d:5200">America's oldest continuously operated family jewelry store</p>
+    </div>
+    <aside class="notes">
+      <p>"We are Bixler's, America's oldest continuously operated family jewelry store. Thank you for your time."</p>
+      <p>The film ends square on the house, framed exactly as the cover draws it; its last frame fades in place while the same house is drawn in line over it (img/house.py, from the Blender model) and the logo is written under it.</p>
+    </aside>
+  </section>
+  <!-- Act I · the clock turns to the act's hour (the first deck's dial) -->
+  <section class="slide cream act-dial-slide" id="act-1" data-kind="act" data-act="1" data-title="Act I · Heritage &amp; Independence" data-transition="clock" data-nav="">
+    <div class="act-bg"></div>
+    <div class="art act-dial" data-fdraw="actdial" data-hand="120" data-from="0"></div>
+    <div class="act-center">
+      <p class="act-num in" style="--d:100">I</p>
+      <h2 class="act-name in" style="--d:220">Heritage &amp; Independence</h2>
+      <p class="act-lede in" style="--d:380">241 years of continued legacy</p>
+    </div>
+    <aside class="notes"><p>Act I. 241 years of continued legacy. The clock moves to its first hour and carries on by itself.</p></aside>
+  </section>
+  <!-- Act I · the history as one flight: the house's images come toward us in time order and the
+       flight stops on each key moment (the image lands large, its card beside it); a click and it
+       flies on. The pieces of today fly past on the way to 2027, which closes the history. -->
+  <section class="slide cream" id="history" data-act="1" data-transition="iris" data-title="From 1785 to today" data-steps="5" data-nav="">
+    <div class="fl-field" data-flight>
+      <!-- to 1785. Passing images first; the last four of each moment stay in the frame around it.
+           Bixler's own archive and atelier and clips of its film (no sound), built by media.py; class
+           "piece" melts a scan on white into the paper -->
+      <img data-seg="0" src="https://www.bixlers.com/cdn/shop/files/theme_exp__about_heritage.png?width=700" alt="Easton's Centre Square in an early photograph">
+      <img class="piece" data-seg="0" src="img/archive/easton-engraving.jpg" alt="An early engraving of Easton's Centre Square">
+      <img class="piece" data-seg="0" src="img/archive/clockmaker-book-hands.jpg" alt="The clockmaker's book: designs for clock hands">
+      <img data-seg="0" src="img/archive/christian-bixler-portrait.jpg" alt="Portrait of Christian Bixler">
+      <img class="piece" data-seg="0" src="img/archive/clockmaker-book-movement.jpg" alt="The clockmaker's book: a movement drawn out">
+      <img data-seg="0" src="img/archive/christian-bixler-dial.jpg" alt="A tall-clock dial signed Christian Bixler, Easton">
+      <video data-seg="0" src="film/clips/dial-name.mp4" poster="film/clips/dial-name.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the name Christian Bixler on a clock dial"></video>
+      <img class="piece" data-seg="0" src="img/archive/coin-silver-spoons.jpg" alt="Coin silver spoons">
+      <img data-seg="0" data-stop src="shared/img/v4/homestead.jpg" alt="Drawing of the homestead of Christian Bixler">
+      <!-- to 1825 -->
+      <img class="piece" data-seg="1" src="img/archive/clockmaker-book-pendulum.jpg" alt="The clockmaker's book: a pendulum and its escapement">
+      <img class="piece" data-seg="1" src="img/archive/clockmaker-book-plan.jpg" alt="The clockmaker's book: the plan for a clock">
+      <img data-seg="1" src="img/archive/family-portrait.jpg" alt="A framed portrait of the Bixler family">
+      <video data-seg="1" src="film/clips/family-group.mp4" poster="film/clips/family-group.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the Bixler family in the nineteenth century"></video>
+      <img data-seg="1" src="img/archive/sign-of-big-watch.jpg" alt="A watch key cast with the Sign of the Big Watch, Easton">
+      <video data-seg="1" src="film/clips/dl-bixler-sign.mp4" poster="film/clips/dl-bixler-sign.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the D.L. Bixler, clock and watch maker, sign"></video>
+      <img data-seg="1" src="img/archive/key-wound-pocket-watch.jpg" alt="A key-wound pocket watch and its keys">
+      <img data-seg="1" src="img/archive/cw-bixler-pouch.jpg" alt="A leather pouch stamped C.W. Bixler and Co., Easton">
+      <img data-seg="1" data-stop src="img/archive/about-us-1825.jpg" alt="Archive collage, 1825">
+      <!-- to 1934 -->
+      <img class="piece" data-seg="2" src="img/archive/commonwealth-certificate.jpg" alt="A certificate from the Commonwealth of Pennsylvania">
+      <img data-seg="2" src="img/archive/tiffany-invoice.jpg" alt="A framed Tiffany and Co. invoice">
+      <img class="piece" data-seg="2" src="img/archive/letter.jpg" alt="A letter to the store and its envelope">
+      <video data-seg="2" src="film/clips/cw-bixler-storefront.mp4" poster="film/clips/cw-bixler-storefront.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the C.W. Bixler storefront"></video>
+      <img data-seg="2" src="img/archive/shop-window.jpg" alt="A shop window of clocks and watches">
+      <video data-seg="2" src="film/clips/cw-bixler-corner.mp4" poster="film/clips/cw-bixler-corner.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: C.W. Bixler and Co., jewelers, on its corner"></video>
+      <img data-seg="2" src="img/archive/commemorative-medal.jpg" alt="A commemorative medal in its case">
+      <img class="piece" data-seg="2" src="img/archive/cw-bixler-box.jpg" alt="A C.W. Bixler gift box">
+      <img data-seg="2" data-stop src="https://www.bixlers.com/cdn/shop/files/theme-about-us_1934.png?width=1400" alt="Old ledger books">
+      <!-- to 1979 -->
+      <img data-seg="3" src="img/archive/ad-christmas.jpg" alt="A Bixler's Christmas advertisement">
+      <img data-seg="3" src="img/archive/ad-americas-oldest.jpg" alt="A Bixler's advertisement, America's oldest jewelers">
+      <img class="piece" data-seg="3" src="img/archive/ad-quality-since-1785.jpg" alt="A newspaper page: Bixler's and quality, synonymous since 1785">
+      <img data-seg="3" src="img/archive/crowd-at-the-store.jpg" alt="A crowd outside the store">
+      <img class="piece" data-seg="3" src="img/archive/telegram.jpg" alt="A framed telegram of congratulations">
+      <video data-seg="3" src="film/clips/staff-in-the-store.mp4" poster="film/clips/staff-in-the-store.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the staff in the store"></video>
+      <img data-seg="3" src="img/archive/storefront-americas-oldest.jpg" alt="The storefront: Bixler's, America's Oldest Jewelers, established 1785">
+      <video data-seg="3" src="film/clips/store-and-clock.mp4" poster="film/clips/store-and-clock.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: the store and its street clock"></video>
+      <img data-seg="3" src="img/archive/ribbon-cutting.jpg" alt="A ribbon cutting at the store">
+      <img data-seg="3" src="img/archive/ad-170th-anniversary.jpg" alt="The 170th anniversary sale advertisement">
+      <img data-seg="3" data-stop data-pos="50% 30%" src="shared/img/v4/craftsman.jpg" alt="A craftsman at work">
+      <!-- to 2020-2024 -->
+      <img data-seg="4" src="img/archive/store-in-snow.jpg" alt="The store and its clock in the snow">
+      <img data-seg="4" src="img/archive/the-family.jpg" alt="The family today">
+      <img data-seg="4" src="img/archive/gloves-and-tweezers.jpg" alt="Checking a stone in gloved hands">
+      <video data-seg="4" src="film/clips/sketch-and-gold.mp4" poster="film/clips/sketch-and-gold.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: sketches and gold at the bench"></video>
+      <img data-seg="4" src="img/archive/soldering.jpg" alt="Soldering at the bench">
+      <video data-seg="4" src="film/clips/bench-from-above.mp4" poster="film/clips/bench-from-above.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: a jeweler at the bench"></video>
+      <img data-seg="4" src="img/archive/ring-under-the-loupe.jpg" alt="A ring under the loupe">
+      <video data-seg="4" src="film/clips/ring-on-the-peg.mp4" poster="film/clips/ring-on-the-peg.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: a ring on the bench peg"></video>
+      <img data-seg="4" src="img/archive/setting-a-stone.jpg" alt="Setting a stone">
+      <img data-seg="4" src="img/archive/princess-cut-ring.jpg" alt="A princess-cut diamond ring">
+      <img data-seg="4" data-stop src="https://www.bixlers.com/cdn/shop/files/theme-about-us_2020-24.png?width=1400" alt="A ring held at the bench">
+      <!-- to 2027: the collections worn and the pieces of today fly past, then the Foundation -->
+      <img data-seg="5" src="img/archive/campaign-green.jpg" alt="High Jewelry, the campaign">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1104_1.61CT_6.5_4Y-SAP-YG-A_Material-14K_Color-Yellow.png?v=1781535498&amp;width=600" alt="Blue sapphire and diamond ring">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-EM-LCU000196-PLAT-A_material-PLAT_color-Platinum.jpg?v=1791561906&amp;width=600" alt="Emerald and diamond tennis bracelet">
+      <video data-seg="5" src="film/clips/green-leather.mp4" poster="film/clips/green-leather.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: Bixler's, Est. 1785, in gold on green"></video>
+      <img data-seg="5" src="https://www.bixlers.com/cdn/shop/files/theme_homepage-sculpture.jpg?width=700" alt="The Sculpture collection, worn">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1225-YG-A_material-18K_color-Yellow.jpg?v=1738789503&amp;width=600" alt="Sculpture balance ring">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1181-YG-D_material-18K_color-Yellow.jpg?v=1738789548&amp;width=600" alt="Origin layered ring">
+      <img data-seg="5" src="img/archive/loose-diamonds.jpg" alt="Loose diamonds">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1267-YG-B_material-18K_color-Yellow.png?v=1769023056&amp;width=600" alt="Interlinked mixed-metal ring">
+      <img data-seg="5" src="img/archive/campaign-burgundy.jpg" alt="High Jewelry, the campaign">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1104-SAP-WG-A_Material-14K_Color-White.png?v=1781297926&amp;width=600" alt="Blue sapphire and diamond ring, white gold">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-E677-TOU-YG-A_Material-14K_Color-Yellow.png?v=1781542617&amp;width=600" alt="Tourmaline and diamond earrings">
+      <video data-seg="5" src="film/clips/diamonds.mp4" poster="film/clips/diamonds.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: diamonds"></video>
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1190-Platinum-B_material-Platinum_color-Platinum.png?v=1764968062&amp;width=600" alt="Sculpture climber ring, platinum">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-P1210-YG-A_material-18K_color-Yellow.jpg?v=1738789539&amp;width=600" alt="Origin crescent pendant">
+      <img data-seg="5" src="https://www.bixlers.com/cdn/shop/files/theme_homepage-interlinked-2.jpg?width=700" alt="The Interlinked collection, worn">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-R1190-YG-B_material-18K_color-Yellow_69076269-ebc0-4ebd-b9f6-57d864f76d12.jpg?v=1761922322&amp;width=600" alt="Sculpture climbing ring, gold">
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-E831-DIA-YG-A_material-18K_color-Yellow.jpg?v=1738789462&amp;width=600" alt="Interlinked chain-link earrings">
+      <img data-seg="5" src="img/archive/campaign-hands.jpg" alt="High Jewelry: an emerald ring and a diamond bracelet, worn">
+      <video data-seg="5" src="film/clips/dial-with-diamonds.mp4" poster="film/clips/dial-with-diamonds.jpg" width="720" height="406" muted loop playsinline preload="auto" aria-label="Film: a dial set with diamonds"></video>
+      <img class="piece" data-seg="5" src="https://cdn.shopify.com/s/files/1/0481/2413/3533/files/BX-LEGACY-E799-DIA-YG-A_material-18K_color-Yellow.jpg?v=1738789456&amp;width=600" alt="Hologlam paperclip drop earrings">
+      <img data-seg="5" src="img/archive/campaign-emerald.jpg" alt="High Jewelry: an emerald ring, worn">
+      <img data-seg="5" data-stop src="https://www.bixlers.com/cdn/shop/files/theme_exp__about_legacy.png?width=1400" alt="A jeweler's hands setting a ring at the bench">
+    </div>
+    <div class="fl-center">
+      <p class="fl-year">1785</p>
+      <p class="fl-caption">Our designs today</p>
+    </div>
+    <div class="card fl-card" data-seg="0">
+      <p class="eyebrow">Easton, Pennsylvania · 1785</p>
+      <h2 class="h2">Older Than the U.S. Constitution.</h2>
+      <p class="body">Christian Bixler III, master clockmaker and veteran of the Revolutionary War, opens his workshop in Easton, Pennsylvania.</p>
+    </div>
+    <div class="card fl-card" data-seg="1">
+      <p class="eyebrow">1825</p>
+      <h3 class="h3">An Independent Family Legacy</h3>
+      <p class="body">His son Daniel carries on. America's oldest continuously operated family jewelry store is born.</p>
+    </div>
+    <div class="card fl-card" data-seg="2">
+      <p class="eyebrow">1934</p>
+      <h3 class="h3">Turning Craft into Community</h3>
+      <p class="body">In the Great Depression, part of the workshop becomes a library for the town.</p>
+    </div>
+    <div class="card fl-card" data-seg="3">
+      <p class="eyebrow">1979</p>
+      <h3 class="h3">Perry Buys Bixler's</h3>
+      <p class="body">Perry Sporn acquires Bixler's and moves its making to an atelier in Montreal.</p>
+    </div>
+    <div class="card fl-card" data-seg="4">
+      <p class="eyebrow">2020–2024</p>
+      <h3 class="h3">A Certified Atelier</h3>
+      <p class="body">The atelier is certified by the Responsible Jewellery Council.</p>
+    </div>
+    <div class="card fl-card" data-seg="5">
+      <p class="eyebrow">2027</p>
+      <h3 class="h3">The Bixler's Foundation</h3>
+      <p class="body">Bixler's becomes a not-for-profit foundation: independent, family-guided, and dedicated to keeping the artisan's hand alive.</p>
+      <blockquote class="tl-quote">"Since 1785, we've celebrated human hands making beautiful objects. This is our heritage, and this is our future." <span>Perry Sporn, CEO</span></blockquote>
+    </div>
+    <ol class="years fl-years">
+      <li data-focus="0">1785</li><li data-focus="1">1825</li><li data-focus="2">1934</li><li data-focus="3">1979</li><li data-focus="4">2024</li><li data-focus="5">2027</li>
+    </ol>
+    <aside class="notes">
+      <p>The history is one flight. It lands on each key moment; one sentence each, then click and it flies on.</p>
+      <p>The pictures are Bixler's own: the archive, the boutique's archive photographed in 2016, the atelier and the High Jewelry campaign; the moving ones are clips of the Bixler's film, without sound (media.py builds them all).</p>
+      <p>1785: "Two years before the U.S. Constitution was signed, Christian Bixler III, master clockmaker and veteran of the Revolutionary War, opens his workshop in Easton." Swiss roots: the website says "master Swiss clockmaker"; use it aloud only once Alice confirms.</p>
+      <p>2020–2024, say aloud: "Every piece is made by hand, in our own atelier in Montreal, by thirty jewelers from around the world. Joyce Welken, a direct descendant of our founder, still works in the boutique, seven generations later." To confirm: Welken or Welkin, and the generation count.</p>
+      <p>On the way to 2027 the pieces we design today fly past. 2027: "Bixler's becomes a not-for-profit foundation: independent, family-guided, and dedicated to keeping the artisan's hand alive." Perry's words close the history; the next click goes straight into Act II, The Next Chapter.</p>
+      <p>Foundation details from the V4 deck; name, board and launch date to confirm with Alice. Perry's quote: clearance to confirm. 1979 to confirm with Alice: show the change of ownership (recommended) or leave it out.</p>
+    </aside>
+  </section>
+  <!-- Act II · the clock turns to the act's hour (the first deck's dial) -->
+  <section class="slide cream act-dial-slide" id="act-2" data-kind="act" data-act="2" data-title="Act II · The Next Chapter" data-transition="clock" data-nav="">
+    <div class="act-bg"></div>
+    <div class="art act-dial" data-fdraw="actdial" data-hand="240" data-from="120"></div>
+    <div class="act-center">
+      <p class="act-num in" style="--d:100">II</p>
+      <h2 class="act-name in" style="--d:220">The Next Chapter</h2>
+      <p class="act-lede in" style="--d:380">A new house, with Rolex at its heart</p>
+    </div>
+    <aside class="notes"><p>Act II. Our invitation: the new house, through its door, and the Rolex Corner.</p></aside>
+  </section>
+
+  <!-- The house, in one movement: the invitation, the house fills the screen and opens on its two
+       floors (more than a store), then the film: the new front rises out of
+       the drawing, we zoom to the door and walk in (film/opening.mp4); next, the Rolex Corner -->
+  <section class="slide cream" id="offer" data-act="2" data-title="The next chapter" data-steps="2" data-transition="iris" data-nav="">
+    <div class="nc-building"><img class="elev" src="img/house.svg?v=5" alt="Line drawing of the new house, 30 North Fourth Street, with the Bixler's clock before it"></div>
+    <div class="art exp-cut" data-fdraw="cutaway" data-cut="1" data-delay="1300"></div>
+    <div class="nc-film"><video src="film/opening.mp4?v=5" poster="film/opening.jpg?v=5" muted playsinline preload="none" aria-label="The new front rises out of the drawing and fills in; the view zooms to the door, the doors open and we walk into the hall"></video></div>
+    <div class="nc-copy">
+      <p class="eyebrow in" style="--d:0">Our invitation</p>
+      <h2 class="title" data-split style="--d:150">A Legacy to Share. A Chapter to Build.</h2>
+      <p class="body in" style="--d:700">We would be honoured to welcome Rolex into the next chapter of Bixler's.</p>
+    </div>
+    <div class="nc-card" data-only="1">
+      <p class="eyebrow">The house</p>
+      <h3 class="h3">More Than a Store. An Experience Center.</h3>
+      <p class="nc-line">A boutique you visit. A museum you remember.</p>
+    </div>
+    <aside class="notes">
+      <p>The pivot of the deck. "Our dream is to see Rolex with us in Easton. A legacy to share, a chapter to build. We would be honoured to welcome Rolex into the next chapter of Bixler's."</p>
+      <p>Click: the new house fills the screen and opens on its two floors. "Our new home is a historic building in downtown Easton. More than a store: an experience center. At street level, the Rolex Corner on the Church Street corner, Bixler's Boutique through the front door, and the workshop. Above, our museum, and the administration."</p>
+      <p>Click: the film plays by itself (15 s): the new design rises out of the drawing, the front fills in, we zoom to the door, the doors open and we walk in. It holds on the hall; next, the Rolex Corner.</p>
+      <p>To confirm: the building's history and the clock's story; the number of floors and their use with the floor plan. The house is drawn from the Blender model of the building (img/house.py). Placeholder images: the interior renders are to be reworked for the historic building.</p>
+    </aside>
+  </section>
+  <!-- The rooms of the house, one format: the picture lands full page and holds, then settles into
+       its half beside a panel. From room to room the pages slide in the reading direction, the
+       picture lagging behind the words (data-depth) -->
+  <!-- The Rolex Corner -->
+  <section class="slide room" id="rolex" data-act="2" data-title="The Rolex Corner" data-steps="1" data-transition="pan" data-nav="half">
+    <div class="photo room-photo kb" data-depth="-0.5"><img src="img/interior-rolex.jpg" alt="Interior render of the new house: the Rolex Corner, its green wall and counters"></div>
+    <div class="room-copy" data-depth="0.8">
+      <p class="eyebrow in" style="--d:600">The heart of the house</p>
+      <h2 class="title" data-split style="--d:750">The Rolex Corner</h2>
+      <ol class="points">
+        <li class="in" style="--d:1200"><span>01</span>A dedicated Rolex Corner within the Bixler's boutique.</li>
+        <li class="in" style="--d:1350"><span>02</span>Rolex, visible from the street.</li>
+      </ol>
+    </div>
+    <aside class="notes">
+      <p>The peak of the deck. Slow down. "At the heart of the house, a dedicated Rolex Corner, visible from the street."</p>
+      <p>Then upstairs to the museum, and the service center.</p>
+      <p>Interior renders made for the historic building (13 Oct).</p>
+      <p>Wording to settle with Alice: "visible from the street" against the brief's "discreet, integrated".</p>
+    </aside>
+  </section>
+  <!-- The museum, then the same room from its bar as an event room: one camera move, the day view
+       drawing back as the evening view comes in on the round case and settles on the bar; the panel
+       stays, a third point joins it -->
+  <section class="slide room" id="museum" data-act="2" data-title="The museum" data-steps="2" data-transition="pan" data-nav="half">
+    <div class="photo room-photo" data-depth="-0.5"><img src="img/interior-museum.jpg?v=2" alt="Interior render of the new house: the museum, a round case of watches under a suspended movement, the bar on the right"><img class="room-evening" data-step="1" src="img/interior-museum-evening.jpg?v=2" alt="Interior render of the new house: an evening in the museum, seen from its bar"></div>
+    <div class="room-copy" data-depth="0.8">
+      <p class="eyebrow in" style="--d:600">The museum</p>
+      <h2 class="title" data-split style="--d:750">241 Years on Show.</h2>
+      <ol class="points">
+        <li class="in" style="--d:1200"><span>01</span>The house's heritage since 1785, on the floor above the boutique.</li>
+        <li class="in" style="--d:1350"><span>02</span>Original clocks and books, Bixler's watches and milestones.</li>
+        <li class="fade" data-step="1"><span>03</span>By evening, an event room for private VIP events, its bar among the collection.</li>
+      </ol>
+    </div>
+    <aside class="notes">
+      <p>"Upstairs, our museum: 241 years of Bixler's on show, open to every visitor."</p>
+      <p>Click: the same room from its bar. "And by evening, the museum becomes our event room, for private VIP events."</p>
+      <p>Interior renders made for the historic building (18 Oct).</p>
+    </aside>
+  </section>
+  <!-- The service center -->
+  <section class="slide room" id="service" data-act="2" data-title="The service center" data-steps="1" data-transition="pan" data-nav="half">
+    <div class="photo room-photo kb" data-depth="-0.5"><img src="img/interior-service.jpg?v=2" alt="Interior render of the new house: the service center, a client at the counter and watchmakers at their benches"></div>
+    <div class="room-copy" data-depth="0.8">
+      <p class="eyebrow in" style="--d:600">The Rolex service center</p>
+      <h2 class="title" data-split style="--d:750">A Watchmaker Behind Glass.</h2>
+      <p class="body in" style="--d:1200">At work in full view of our clients.</p>
+    </div>
+    <aside class="notes">
+      <p>"And the Rolex service center: a watchmaker at work behind glass, in full view of our clients."</p>
+      <p>Interior render made for the historic building (18 Oct).</p>
+    </aside>
+  </section>
+  <!-- The administration -->
+  <section class="slide room" id="admin" data-act="2" data-title="The administration" data-steps="1" data-transition="pan" data-nav="half">
+    <div class="photo room-photo kb" data-depth="-0.5"><img src="img/interior-admin.jpg" alt="Interior render of the new house: the administration, a long table under the brick wall's windows, a kitchen in the panelling"></div>
+    <div class="room-copy" data-depth="0.8">
+      <p class="eyebrow in" style="--d:600">The administration</p>
+      <h2 class="title" data-split style="--d:750">The House at Work.</h2>
+      <p class="body in" style="--d:1200">Offices, a staff lounge and a kitchen, on the floor above.</p>
+    </div>
+    <aside class="notes">
+      <p>"And above the workshop, the offices where the house is run."</p>
+      <p>Interior render made for the historic building (18 Oct).</p>
+    </aside>
+  </section>
+
+  <section class="slide cream act-dial-slide" id="act-3" data-kind="act" data-act="3" data-title="Act III · A Prime Location" data-transition="clock" data-nav="">
+    <div class="act-bg"></div>
+    <div class="art act-dial" data-fdraw="actdial" data-hand="360" data-from="240"></div>
+    <div class="act-center">
+      <p class="act-num in" style="--d:100">III</p>
+      <h2 class="act-name in" style="--d:220">A Prime Location</h2>
+      <p class="act-lede in" style="--d:380">In the heart of downtown Easton</p>
+    </div>
+    <aside class="notes"><p>Act III. The clock comes full circle: why Easton.</p></aside>
+  </section>
+
+  <!-- Lehigh Valley, then why here: one map that keeps diving in. The valley, then downtown Easton,
+       then the next click zooms through the Easton dot into the block around Centre Square. -->
+  <section class="slide cream" id="valley" data-act="3" data-transition="iris" data-title="Lehigh Valley · Why here" data-steps="5" data-nav="">
+    <div class="art map-art draw-in" data-fdraw="map"></div>
+    <div class="art map-art block-art" data-fdraw="block" data-base="2"></div>
+    <div class="side-copy valley-copy fade" data-only="0 1">
+      <p class="eyebrow in" style="--d:0">Lehigh Valley</p>
+      <h2 class="h2" data-split style="--d:150">Where the Valley's New Wealth Comes to Gather.</h2>
+      <p class="body in" style="--d:600">A growing, affluent region within easy reach of New York and Philadelphia. At its heart, downtown Easton, where the Delaware and Lehigh rivers meet.</p>
+      <ul class="places" data-step="1">
+        <li>Easton Public Market</li>
+        <li>The farmers' market in Centre Square</li>
+        <li>The restored State Theatre</li>
+        <li>Lafayette College</li>
+      </ul>
+    </div>
+    <div class="side-copy why-copy fade" data-step="2">
+      <p class="eyebrow">Why here</p>
+      <h2 class="h2 trio"><span class="dim" data-step="3">Rooted.</span> <span class="dim" data-step="4">Central.</span> <span class="dim" data-step="5">Safe.</span></h2>
+      <dl class="reasons">
+        <div data-step="3"><dt>Rooted</dt><dd>The plaque of the 1785 workshop one block away, and the town clock on our facade.</dd></div>
+        <div data-step="4"><dt>Central</dt><dd>Steps from the State Theatre and the Easton Public Market, a block from Centre Square.</dd></div>
+        <div data-step="5"><dt>Safe</dt><dd>A police station next door, and secure parking for clients.</dd></div>
+      </dl>
+    </div>
+    <aside class="notes">
+      <p>"The Lehigh Valley is growing, affluent, and within easy reach of New York and Philadelphia."</p>
+      <p>Click: the map dives into Easton. "Downtown Easton has been reborn: the Public Market, the farmers' market in Centre Square, the restored State Theatre and Lafayette College, all within a short walk. This is where the Valley's new wealth comes to gather."</p>
+      <p>Click: the map dives on, through Easton, into the block around Centre Square. "Why here?" Then three reasons, one click each, the strongest first. Never mention other retailers.</p>
+      <p>"Rooted: one block from our first workshop. Central: steps from the State Theatre and the Easton Public Market, a block from Centre Square. Safe: a police station next door and secure parking."</p>
+      <p>Market figures live in Annex A9 to A12.</p>
+    </aside>
+  </section>
+  <!-- Thank you: back on the Rolex Corner -->
+  <section class="slide" id="thanks" data-title="Thank you" data-transition="dissolve">
+    <div class="photo thanks-photo kb"><img src="img/interior-rolex.jpg" alt="Interior render of the new house: the Rolex Corner, its green wall and counters"></div>
+    <div class="card end-card in fade" style="--d:500">
+      <img class="logo" src="https://www.bixlers.com/cdn/shop/files/BX_REGIST_LOGO-1785_2025_1.png?v=1755892441&width=900" alt="Bixler's 1785">
+      <p class="eyebrow">Thank you</p>
+      <h2 class="h2">Let's write the next chapter together.</h2>
+      <div class="prepared-dark"><span>Prepared for</span><img class="rolex-logo" src="img/rolex-on-light.svg" alt="Rolex"></div>
+    </div>
+    <aside class="notes">
+      <p>"We would be honoured to write the next chapter together. Thank you."</p>
+      <p>Wording to settle with Alice: "visible from the street" against the brief's "discreet, integrated".</p>
+    </aside>
+  </section>
+
+  <!-- ===================================================== ANNEXES (after the end, if asked) -->
+
+  <section class="slide cream" id="a-index" data-kind="annex" data-short="" data-title="Annex" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex</p>
+      <h2 class="title" style="font-size:80px">For a Closer Look</h2>
+    </div>
+    <nav class="ax ax-index" aria-label="Annex pages"></nav>
+    <aside class="notes"><p>The annex, for questions after the pitch: click a page to open it (or keep clicking through).</p></aside>
+  </section>
+  <section class="slide cream" id="a-perry" data-kind="annex" data-short="A1" data-title="Perry Sporn" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A1</p>
+      <h2 class="title" style="font-size:80px">Perry Sporn</h2>
+      <p class="body" style="margin-top:20px">CEO, Bixler&#39;s · Founder, Perrywinkle&#39;s</p>
+    </div>
+    <div class="ax ax-person">
+      <figure class="ax-photo"><img src="shared/img/v4/perry.jpg" alt="Perry Sporn"></figure>
+      <div class="ax-tile ax-say">
+        <p class="ax-k">Crafting legacy, shaping the future</p>
+        <blockquote class="ax-quote">&ldquo;Since 1785, we&#39;ve celebrated human hands making beautiful objects. This is our heritage, and this is our future.&rdquo;</blockquote>
+        <p class="ax-p">For 241 years, Bixler&#39;s has earned its place by staying humble, knowledgeable and devoted to the client. Our artisans design and handcraft our jewelry in our Montreal atelier, with the same precision and permanence that define fine Swiss watches.</p>
+        <p class="ax-p">Our purpose is simple: to elevate every client experience, from the first conversation to a lifetime of service.</p>
+      </div>
+    </div>
+    <aside class="notes"><p>From the V4 deck, p. 5. Clearance to quote Perry and show his portrait: to confirm.</p></aside>
+  </section>
+  <section class="slide cream" id="a-team" data-kind="annex" data-short="A2" data-title="Leadership team" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A2</p>
+      <h2 class="title" style="font-size:80px">Our Leadership Team</h2>
+      <p class="body" style="margin-top:20px">Hundreds of combined years in luxury jewelry and watches.</p>
+    </div>
+    <div class="ax ax-team">
+      <div class="ax-tile ax-lead"><img src="img/annex/alice-raffin.jpg" alt="Alice Raffin"><div><h3 class="ax-h">Alice Raffin</h3><p class="ax-role">Marketing Director</p><blockquote class="ax-quote s">&ldquo;Perry spoke with the right words, with the right values, with a very strong philosophy and kindness.&rdquo;</blockquote><p class="ax-p">Joined in 2023 after a meeting with Perry in Geneva. More than 20 years in luxury watches, including Tiffany &amp; Co. and 12 years with Patek Philippe.</p></div></div>
+      <div class="ax-tile"><h3 class="ax-h">Lisa Murraco</h3><p class="ax-role">Store Operations Director</p></div>
+      <div class="ax-tile"><h3 class="ax-h">Nathan Perkins</h3><p class="ax-role">Rolex Liaison</p></div>
+      <div class="ax-tile"><h3 class="ax-h">Peter Clark</h3><p class="ax-role">Rolex Service Director</p><p class="ax-p">36 years of service</p></div>
+      <div class="ax-tile"><h3 class="ax-h">Winklette Whittemore</h3><p class="ax-p">32 years of service</p></div>
+      <div class="ax-tile"><h3 class="ax-h">Laura Guth</h3></div>
+      <div class="ax-tile ax-muted"><h3 class="ax-h">100+</h3><p class="ax-p">Employees and artisans, named the 2026 Best of Lehigh Valley.</p></div>
+    </div>
+    <aside class="notes"><p>From the V4 deck, p. 6. Only Alice and Perry have portraits so far; roles for Winklette Whittemore and Laura Guth to add.</p></aside>
+  </section>
+  <section class="slide cream" id="a-formula" data-kind="annex" data-short="A3" data-title="A proven Rolex formula" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A3</p>
+      <h2 class="title" style="font-size:80px">A Proven Rolex Formula</h2>
+      <p class="body" style="margin-top:20px">Bixler&#39;s and Perrywinkle&#39;s: one family of houses.</p>
+    </div>
+    <div class="ax c3">
+      <div class="ax-tile"><p class="ax-k">The maker</p><h3 class="ax-h">Bixler&#39;s</h3><p class="ax-role">Lehigh Valley, Pennsylvania</p><p class="ax-p">America&#39;s oldest jeweler, est. 1785. Bixler&#39;s designs and handcrafts all of the jewelry sold in both houses, in its RJC-certified atelier in Montreal.</p></div>
+      <div class="ax-tile"><p class="ax-k">The sister house</p><h3 class="ax-h">Perrywinkle&#39;s</h3><p class="ax-role">Fine Jewelry</p><p class="ax-p">Owned by Bixler&#39;s, a Rolex authorized retailer for nearly 20 years.</p></div>
+      <div class="ax-tile ax-accent"><p class="ax-k">What it means for Rolex</p><h3 class="ax-h">Ready from Day One</h3><p class="ax-p">Perrywinkle&#39;s team will train and manage the Bixler&#39;s staff in Rolex product knowledge, procedures and brand understanding, bringing proven Rolex expertise to the Lehigh Valley flagship.</p></div>
+    </div>
+    <p class="annex-note">Bixler&#39;s 100+ employees and artisans were named the 2026 Best of Lehigh Valley. Our people stay, and our clients know them by name.</p>
+    <aside class="notes"><p>From the V4 deck, p. 7. V4 places Perrywinkle&#39;s in Vermont: left out until confirmed.</p></aside>
+  </section>
+  <section class="slide cream" id="a-review" data-kind="annex" data-short="A4" data-title="Rolex account review" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A4</p>
+      <h2 class="title" style="font-size:80px">A Proven Rolex Partner</h2>
+      <p class="body" style="margin-top:20px">Perrywinkle&#39;s annual 2025 Rolex account review.</p>
+    </div>
+    <div class="ax ax-review">
+      <div class="ax-tile"><p class="ax-k">Sell-out by month</p><div class="art" data-fdraw="cols" data-h="250" data-rows="[[&quot;Jan&quot;, 31, 30], [&quot;Feb&quot;, 34, 43], [&quot;Mar&quot;, 29, 24], [&quot;Apr&quot;, 35, 35], [&quot;May&quot;, 21, 14], [&quot;Jun&quot;, 32, 31], [&quot;Jul&quot;, 24, 28], [&quot;Aug&quot;, 29, 52], [&quot;Sep&quot;, 26, 37], [&quot;Oct&quot;, 32, 34], [&quot;Nov&quot;, 40, 36], [&quot;Dec&quot;, 29, 56]]" data-series="[&quot;2024 \u00b7 362&quot;, &quot;2025 \u00b7 420&quot;]" data-max="60" data-ticks="[20,40,60]"></div><p class="ax-small">The score, by part: Commercial 52.0% · Communication 21.3% · Service 20.0% · Finance 6.7%</p></div>
+      <div class="ax-stats">
+      <div class="ax-tile ax-stat"><p class="ax-n">88%</p><p class="ax-p">Score, end of 2025</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">85%</p><p class="ax-p">Score, end of 2024</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">420</p><p class="ax-p">Sell-out, 2025</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">427</p><p class="ax-p">Sell-out, last 12 months</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">+16%</p><p class="ax-p">Sell-out, year on year</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">1</p><p class="ax-p">Door</p></div>
+      </div>
+    </div>
+    <aside class="notes"><p>From the V4 deck, p. 10. The monthly figures are read from its chart; they add up to its totals (362 in 2024, 420 in 2025, +16%).</p></aside>
+  </section>
+  <section class="slide cream" id="a-foundation" data-kind="annex" data-short="A5" data-title="The Foundation" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A5</p>
+      <h2 class="title" style="font-size:80px">The Bixler&#39;s Foundation</h2>
+      <p class="body" style="margin-top:20px">Bixler&#39;s is transitioning its corporate structure to a not-for-profit foundation.</p>
+    </div>
+    <div class="ax c3">
+      <div class="ax-tile"><p class="ax-k">Timeline</p><h3 class="ax-h">Formed in 2027</h3><p class="ax-p">The Bixler&#39;s Foundation takes over the house in 2027.</p></div>
+      <div class="ax-tile"><p class="ax-k">Governance</p><h3 class="ax-h">A Diverse Board</h3><p class="ax-p">A board of directors including leaders from the jewelry and watch industry.</p></div>
+      <div class="ax-tile"><p class="ax-k">Mission</p><h3 class="ax-h">The Artisan&#39;s Hand</h3><p class="ax-p">Profits are distributed to preserve and sustain human artisan skills.</p></div>
+    </div>
+    <p class="annex-note">The Foundation will keep the house independent, family-guided and dedicated to keeping the human artisan&#39;s hand alive, responsibly, for the next 241 years.</p>
+    <aside class="notes"><p>From the V4 deck, p. 11. V4 gives 2028; the deck says 2027. The line on a structure inspired by Rolex&#39;s is left out (D27).</p></aside>
+  </section>
+  <section class="slide cream" id="a-presence" data-kind="annex" data-short="A6" data-title="Cultural presence" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A6</p>
+      <h2 class="title ax-title">Quiet Brand by Nature. Powerful by Presence.</h2>
+      <p class="body" style="margin-top:20px">Cultural presence and partnerships.</p>
+    </div>
+    <div class="ax c3 ax-press">
+      <figure class="ax-tile"><div class="ax-pic"><img src="img/annex/ufc-belt.jpg" alt="A UFC championship belt"></div><p class="ax-k">UFC · Since 2018</p><p class="ax-p">The championship belt.</p></figure>
+      <figure class="ax-tile"><div class="ax-pic"><img src="img/annex/epic-sands-brooch.jpg" alt="The Epic Sands brooch, diamonds round a fluted dial"></div><p class="ax-k">Oscars 2025</p><p class="ax-p">The Epic Sands custom brooch, for <i>Dune: Part Two</i>.</p></figure>
+      <figure class="ax-tile"><div class="ax-pic"><img src="img/annex/girl-who-cried-pearls.jpg" alt="A gloved hand setting a brooch"></div><p class="ax-k">Oscars 2026</p><p class="ax-p">For <i>The Girl Who Cried Pearls</i>.</p></figure>
+    </div>
+    <p class="annex-note">An RJC-certified atelier · Named the 2026 Best of Lehigh Valley</p>
+    <aside class="notes"><p>From the V4 deck, p. 8. The UFC and Oscars 2026 pictures are V4&#39;s small copies; the brooch is from the Bixler&#39;s film. What Bixler&#39;s made for the UFC to confirm. Usage rights for each name and image to confirm.</p></aside>
+  </section>
+  <section class="slide cream" id="a-clients" data-kind="annex" data-short="A7" data-title="Client experience" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A7</p>
+      <h2 class="title" style="font-size:80px">A Five-Star Experience</h2>
+      <p class="body" style="margin-top:20px">The Bixler&#39;s team was named the 2026 Best of Lehigh Valley.</p>
+    </div>
+    <div class="ax c3">
+      <figure class="ax-tile ax-q"><blockquote class="ax-quote s">&ldquo;For a ten-year anniversary gift, I purchased a men&#39;s wedding ring and watch from Bixler&#39;s, and Kallarny and her team were outstanding every step of the way, going above and beyond when we discovered we had to reorder for sizing. I highly recommend visiting this store, especially for custom pieces.&rdquo;</blockquote><figcaption>John</figcaption></figure>
+      <figure class="ax-tile ax-q"><blockquote class="ax-quote s">&ldquo;I reached out to Bixler&#39;s to inquire about a specific watch. While it wasn&#39;t in house, the team quickly sourced it and kept great communication throughout, explaining every benefit that came with my choice. The watch was quickly sized and tailored: an incredible experience.&rdquo;</blockquote><figcaption>Jose Paramo</figcaption></figure>
+      <figure class="ax-tile ax-q"><blockquote class="ax-quote s">&ldquo;I&#39;ve purchased a Tudor watch at Bixler&#39;s along with a number of Christmas gifts for my wife. Jeff Yoder is a patient and knowledgeable salesman I&#39;m privileged to know as a friend, highly recommended for unique gifts, engagements, or high-end watches.&rdquo;</blockquote><figcaption>Austin Flinn</figcaption></figure>
+    </div>
+    <p class="annex-note">A concierge experience that goes beyond the sale: the care given to every client strengthens their loyalty and trust.</p>
+    <aside class="notes"><p>From the V4 deck, pp. 26 and 27: the clients&#39; reviews as written.</p></aside>
+  </section>
+  <section class="slide cream" id="a-house" data-kind="annex" data-short="A8" data-title="The house, floor by floor" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A8</p>
+      <h2 class="title" style="font-size:80px">The House, Floor by Floor</h2>
+      <p class="body" style="margin-top:20px">Two floors: the Rolex Corner, the boutique and the workshop at street level; the museum and the administration above.</p>
+    </div>
+    <div class="ax ax-house">
+      <div class="ax-tile ax-elev"><div class="art" data-fdraw="cutaway" data-cut="0" data-ghost="1" data-view="150 380 1620 700" data-prefix="ah"></div></div>
+      <div class="ax-tile">
+        <p class="ax-k">Ground floor</p>
+        <ul class="ax-list"><li>The Rolex Corner on the Church Street corner, from the main entrance, to international Rolex standards</li><li>Bixler&#39;s Boutique: a lounge to welcome clients, 20 jewelry display units, workstations for 2 sales consultants</li><li>Technical storage between the two zones</li><li>The workshop: the Rolex service center, behind glass</li></ul>
+        <p class="ax-k">Floor above</p>
+        <ul class="ax-list"><li>The museum: the house&#39;s heritage since 1785, original clocks and books, Bixler&#39;s watches, milestones</li><li>By evening, an event room</li><li>Administration: a staff lounge, a kitchen, two offices, the safe</li></ul>
+      </div>
+    </div>
+    <p class="annex-note">Walnut panelling and brushed brass · Fluted pedestals in green and beige · Trestle tables with glass tops · A Calacatta marble floor · Cove lighting designed by Perry with Schoenbeck artisans. Floor plans and dimensions to come.</p>
+    <aside class="notes"><p>Two floors, from Christophe&#39;s zone elevation (14 Oct; assets/building/plans); the details from the V4 deck, pp. 19 to 25. V4 had three floors, the service center upstairs and the administration at the top. To confirm: the workshop as the Rolex service center. V4&#39;s areas (8,000 sq ft; the Rolex space at 2,400 or 1,200 sq ft) belong to the discarded new building and are left out.</p></aside>
+  </section>
+  <section class="slide cream" id="a-market" data-kind="annex" data-short="A9" data-title="Market data" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A9</p>
+      <h2 class="title" style="font-size:80px">Market Data</h2>
+      <p class="body" style="margin-top:20px">The Lehigh Valley in four figures.</p>
+    </div>
+    <div class="annex-grid c4 mkt">
+      <figure class="mkt-tile">
+        <figcaption>Residents, 2025</figcaption>
+        <p class="mkt-hero">708,794</p>
+        <p class="mkt-line">In the Lehigh Valley (Lehigh and Northampton counties), up <b>9.5%</b> since 2010.</p>
+        <p class="mkt-ctx">Pennsylvania +2.8% · United States +10.7%</p>
+      </figure>
+      <figure class="mkt-tile">
+        <figcaption>Population growth since 2020</figcaption>
+        <div class="art" data-fdraw="bars" data-rows="[[&quot;Northampton County&quot;, 3.7, &quot;+3.7%&quot;, 1], [&quot;Lehigh County&quot;, 2.6, &quot;+2.6%&quot;, 1], [&quot;Pennsylvania&quot;, 0.4, &quot;+0.4%&quot;, 0], [&quot;United States&quot;, 3.1, &quot;+3.1%&quot;, 0]]"></div>
+      </figure>
+      <figure class="mkt-tile">
+        <figcaption>Median household income</figcaption>
+        <div class="art" data-fdraw="bars" data-rows="[[&quot;Northampton County&quot;, 89184, &quot;$89,184&quot;, 1], [&quot;Lehigh County&quot;, 80079, &quot;$80,079&quot;, 1], [&quot;Pennsylvania&quot;, 77971, &quot;$77,971&quot;, 0], [&quot;United States&quot;, 80734, &quot;$80,734&quot;, 0]]"></div>
+      </figure>
+      <figure class="mkt-tile">
+        <figcaption>Median home value</figcaption>
+        <div class="art" data-fdraw="bars" data-rows="[[&quot;Northampton County&quot;, 308600, &quot;$308,600&quot;, 1], [&quot;Lehigh County&quot;, 300400, &quot;$300,400&quot;, 1], [&quot;Pennsylvania&quot;, 254500, &quot;$254,500&quot;, 0], [&quot;United States&quot;, 332700, &quot;$332,700&quot;, 0]]"></div>
+      </figure>
+    </div>
+    <p class="annex-note">Source: U.S. Census Bureau, QuickFacts: population estimates (V2025), Census 2010 and 2020, American Community Survey 2020–2024 (incomes in 2024 dollars). Easton is in Northampton County.</p>
+    <aside class="notes"><p>For questions after the pitch. Northampton County, home to Easton, has the highest household income of the four: about 14% above Pennsylvania and 10% above the national median. The Valley has grown about as fast as the country since 2020, and far faster than the state.</p></aside>
+  </section>
+  <section class="slide cream" id="a-generation" data-kind="annex" data-short="A10" data-title="A new generation" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A10</p>
+      <h2 class="title" style="font-size:80px">A New Generation</h2>
+      <p class="body" style="margin-top:20px">The wealthiest generation in the valley&#39;s history.</p>
+    </div>
+    <div class="ax c4 ax-gen">
+      <div class="ax-tile ax-stat"><p class="ax-n">14%</p><p class="ax-p">of pandemic-era arrivals come from the New York market: dual-income professional households.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">17,000</p><p class="ax-p">international arrivals since 2020: Lehigh County is in the top 5% of U.S. counties.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">$84,260</p><p class="ax-p">median household income in 2024, up from $64,700 in 2019 (5.4% a year).</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">$109,021</p><p class="ax-p">average household income.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">9,000</p><p class="ax-p">young adults (18 to 34) moved in since 2020: both counties in the top 10% nationally.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">11.7%</p><p class="ax-p">Gen Z growth since 2020, about three times the national 3.3%.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">$95,318</p><p class="ax-p">median household income from 24 to 44, the peak age for luxury spending.</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">33.8%</p><p class="ax-p">hold a bachelor&#39;s degree or higher; 11% a graduate degree.</p></div>
+    </div>
+    <p class="annex-note">Figures from Bixler&#39;s V4 deck; sources to cite.</p>
+    <aside class="notes"><p>From the V4 deck, pp. 28 and 29. The Census figures of A9 differ slightly (county medians); V4&#39;s sources to cite.</p></aside>
+  </section>
+  <section class="slide cream" id="a-affluent" data-kind="annex" data-short="A11" data-title="Affluent households" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A11</p>
+      <h2 class="title" style="font-size:80px">The Affluent Base</h2>
+      <p class="body" style="margin-top:20px">Households earning $100,000 or more grow by 40% by 2031.</p>
+    </div>
+    <div class="ax ax-tables">
+      <div class="ax-tile"><p class="ax-k">Affluent household projections</p><table class="ax-table"><thead><tr><th>Year</th><th class="n">Households</th><th class="n">$100K+</th><th class="n">Share</th><th class="n">Median income</th><th class="n">Regional GDP</th></tr></thead><tbody><tr><td>2024</td><td class="n">~293,000</td><td class="n">~102,500</td><td class="n">35.0%</td><td class="n">$84,260</td><td class="n">$57.3B</td></tr><tr><td>2026</td><td class="n">~305,000</td><td class="n">~112,900</td><td class="n">37.0%</td><td class="n">$90,300</td><td class="n">$62B</td></tr><tr><td>2027</td><td class="n">~311,000</td><td class="n">~118,200</td><td class="n">38.0%</td><td class="n">$93,500</td><td class="n">$65B</td></tr><tr><td>2028</td><td class="n">~317,000</td><td class="n">~124,100</td><td class="n">39.1%</td><td class="n">$97,000</td><td class="n">$68B</td></tr><tr><td>2029</td><td class="n">~324,000</td><td class="n">~130,400</td><td class="n">40.2%</td><td class="n">$100,500</td><td class="n">$71B</td></tr><tr><td>2031</td><td class="n">~337,000</td><td class="n">~144,100</td><td class="n">42.8%</td><td class="n">$108,000</td><td class="n">$78B</td></tr></tbody></table></div>
+      <div class="ax-tile"><p class="ax-k">Income bands, 2024 to 2031</p><table class="ax-table"><thead><tr><th>Income</th><th class="n">2024</th><th class="n">2031</th><th class="n">Growth</th><th>Buys</th></tr></thead><tbody><tr><td>$100K to $149K</td><td class="n">~52,700</td><td class="n">~63,200</td><td class="n up">+19.9%</td><td>Core jewelry and watch buyer</td></tr><tr><td>$150K to $199K</td><td class="n">~23,400</td><td class="n">~33,700</td><td class="n up">+44.0%</td><td>Premium watch and bridal</td></tr><tr><td>$200K and above</td><td class="n">~26,400</td><td class="n">~47,200</td><td class="n up">+78.8%</td><td>High net worth: Rolex, estate jewelry</td></tr><tr class="total"><td>Total $100K+</td><td class="n">~102,500</td><td class="n">~144,100</td><td class="n up">+40.6%</td><td></td></tr></tbody></table></div>
+    </div>
+    <p class="annex-note">Projections from Bixler&#39;s V4 deck; sources to cite.</p>
+    <aside class="notes"><p>From the V4 deck, p. 35. Projections; V4&#39;s sources to cite.</p></aside>
+  </section>
+  <section class="slide cream" id="a-retailers" data-kind="annex" data-short="A12" data-title="Nearest Rolex retailers" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A12</p>
+      <h2 class="title" style="font-size:80px">The Nearest Rolex Retailers</h2>
+      <p class="body" style="margin-top:20px">A metro of nearly 900,000 with record-high incomes, and no dedicated Rolex boutique.</p>
+    </div>
+    <div class="ax ax-one">
+      <div class="ax-tile"><table class="ax-table big"><thead><tr><th>Retailer</th><th>Location</th><th class="n">Distance</th><th>Status</th></tr></thead><tbody><tr><td>Precision Watches &amp; Jewelry</td><td>Willow Grove, PA</td><td class="n">65 mi</td><td>Authorized dealer</td></tr><tr><td>Benari Jewelers</td><td>Newtown Square, PA</td><td class="n">75 mi</td><td>Authorized dealer</td></tr><tr><td>The 1916 Company (Govberg)</td><td>Philadelphia, PA</td><td class="n">75 mi</td><td>Authorized dealer</td></tr><tr><td>London Jewelers</td><td>Short Hills, NJ</td><td class="n">70 mi</td><td>Rolex boutique</td></tr><tr><td>Tourneau | Bucherer</td><td>New York, NY</td><td class="n">80 mi</td><td>Rolex boutique</td></tr></tbody></table></div>
+    </div>
+    <p class="annex-note">The Rolex Corner at Bixler&#39;s would be the region&#39;s first purpose-built Rolex space. Distances as in the V4 deck, to confirm from Easton.</p>
+    <aside class="notes"><p>From the V4 deck, p. 30 (it writes Newton Square: Newtown Square, PA). Its text says a 25 to 85-mile drive; the table gives 65 to 80 miles. Distances to confirm from Easton.</p></aside>
+  </section>
+  <section class="slide cream" id="a-audience" data-kind="annex" data-short="A13" data-title="Audience online" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A13</p>
+      <h2 class="title" style="font-size:80px">The Audience Online</h2>
+      <p class="body" style="margin-top:20px">Where we are today on Instagram.</p>
+    </div>
+    <div class="ax ax-aud">
+      <div class="ax-stack">
+      <div class="ax-tile ax-stat"><p class="ax-n">3.6k</p><p class="ax-p">followers, up 169% from 2025</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">25 to 44</p><p class="ax-p">the strongest audience</p></div>
+      <div class="ax-tile ax-stat"><p class="ax-n">1.3%</p><p class="ax-p">Philadelphia, already among the top cities</p></div>
+      </div>
+      <div class="ax-tile"><p class="ax-k">Followers by age and gender</p><div class="art" data-fdraw="cols" data-h="290" data-scheme="id" data-values="1" data-unit="%" data-rows="[[&quot;18 to 24&quot;, 8.0, 9.0], [&quot;25 to 34&quot;, 11.0, 15.6], [&quot;35 to 44&quot;, 14.8, 12.3], [&quot;45 to 54&quot;, 13.0, 8.0], [&quot;55+&quot;, 10.6, 7.7]]" data-series="[&quot;Women&quot;, &quot;Men&quot;]" data-max="18" data-ticks="[5,10,15]"></div></div>
+    </div>
+    <p class="annex-note">The Lehigh Valley&#39;s affluent household base grows 40% by 2031: the moment is now.</p>
+    <aside class="notes"><p>From the V4 deck, pp. 32 and 35. The shares are read from its chart; exact values from the account&#39;s insights.</p></aside>
+  </section>
+  <section class="slide cream" id="a-digital" data-kind="annex" data-short="A14" data-title="From feed to boutique" data-nav="">
+    <div class="intro">
+      <p class="eyebrow">Annex A14</p>
+      <h2 class="title" style="font-size:80px">From Feed to Boutique</h2>
+      <p class="body" style="margin-top:20px">Our competitors compete on price, discounts or scale. Bixler&#39;s competes on heritage, artistry and experience.</p>
+    </div>
+    <div class="ax c4 ax-steps">
+      <div class="ax-tile"><p class="ax-k">Heirloom storytelling</p><p class="ax-p">Instagram Reels and TikTok showing heirloom transformations from our atelier: the inherited ring, the redesign sketch, the finished Heritage piece. A craft our competitors don&#39;t lead with.</p></div>
+      <div class="ax-tile"><p class="ax-k">Geo-targeted campaigns</p><p class="ax-p">Paid social campaigns around our location for our core 25 to 44 audience: engaged couples and clients who have inherited family jewelry. Heritage and craftsmanship, not price.</p></div>
+      <div class="ax-tile"><p class="ax-k">From feed to boutique</p><p class="ax-p">Every post leads to our digital concierge: a virtual heirloom consultation by Instagram message or on the website, then a private appointment in store.</p></div>
+      <div class="ax-tile"><p class="ax-k">The new website</p><p class="ax-p">A Shopify site built as a digital extension of the boutique, to Rolex&#39;s visual and editorial standards, with a digital concierge for guidance, appointments and tailored recommendations.</p></div>
+    </div>
+    <p class="annex-note">The goal is simple: to inspire discovery online and create the desire to experience Bixler&#39;s in person.</p>
+    <aside class="notes"><p>From the V4 deck, pp. 33 and 34.</p></aside>
+  </section>
+</main>
+
+<div class="hud" role="toolbar" aria-label="Presentation controls">
+  <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
+  <div class="hud-r">
+    <button type="button" class="icon" data-restart aria-label="Back to the beginning (R)" title="Back to the beginning (R)"><svg viewBox="0 0 18 18"><path d="M3.5 9a5.5 5.5 0 1 0 1.6-3.9"/><path d="M4.6 2.4v3.1h3.1"/></svg></button>
+    <button type="button" class="icon" data-act="overview" aria-label="All slides (O)" title="All slides (O)"><svg viewBox="0 0 18 18"><rect x="2" y="2" width="5.5" height="5.5"/><rect x="10.5" y="2" width="5.5" height="5.5"/><rect x="2" y="10.5" width="5.5" height="5.5"/><rect x="10.5" y="10.5" width="5.5" height="5.5"/></svg></button>
+    <a class="icon" href="export/bixlers-x-rolex.pdf" download="Bixler's x Rolex.pdf" aria-label="Download as PDF" title="Download as PDF"><svg viewBox="0 0 18 18"><path d="M9 2.5v9M5.5 8 9 11.5 12.5 8"/><path d="M3 12.5V15.5h12v-3"/></svg></a>
+    <button type="button" class="icon" data-act="help" aria-label="Keyboard shortcuts (?)" title="Keyboard shortcuts (?)"><svg viewBox="0 0 18 18"><rect x="1.5" y="4.5" width="15" height="9" rx="1"/><path d="M4.5 7.5h1M8.5 7.5h1M12.5 7.5h1M5.5 10.5h7"/></svg></button>
+    <button type="button" class="icon" data-act="fullscreen" aria-label="Fullscreen (F)" title="Fullscreen (F)"><svg viewBox="0 0 18 18"><path d="M2 6.5V2h4.5M11.5 2H16v4.5M16 11.5V16h-4.5M6.5 16H2v-4.5"/></svg></button>
+  </div>
+</div>
+<div class="progress" aria-hidden="true"></div>
+<div class="help" id="help" role="dialog" aria-label="Keyboard shortcuts">
+  <h2>Shortcuts</h2>
+  <dl>
+    <dt>→ Space Click</dt><dd>Next step or slide</dd>
+    <dt>←</dt><dd>Back</dd>
+    <dt>F</dt><dd>Fullscreen</dd>
+    <dt>R</dt><dd>Back to the beginning</dd>
+    <dt>A</dt><dd>The annex contents</dd>
+  </dl>
+</div>
+<div class="blackout" aria-hidden="true"></div>
+<div class="sr" id="live" aria-live="polite"></div>
+<script src="logo-write.js?v=17"></script>
+<script src="full.js?v=65"></script>
+<script src="shared/engine.js"></script>
+</body>
+</html>
