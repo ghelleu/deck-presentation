@@ -419,12 +419,17 @@
   "a2b": {
     "label": "A7 · Prague, 27 April 1929",
     "chapter": "A7",
-    "kicker": "Annex 7 · The piece and the document",
+    "kicker": "Annex 7 · The piece and the record",
     "title": "Prague, 27 April 1929",
-    "docCaption": "Dispatch ledger, page 0145: no. 100118 goes to Eduard Riemer, Prague, for 360 francs",
+    "docCaption": "Shipping book, page 0145, 27 April 1929 · the line of 100118 framed",
     "docAlt": "Page 0145 of the A. Lange & Söhne dispatch ledger, dated 27 April 1929: three watches for the firm Eduard Riemer in Prague, including no. 100118 at 360 francs.",
-    "pieceCaption": "Round Peseux calibre, 9 ¾ lignes, 16 jewels, green gold case no. 100118 · interpretive diagram",
-    "notes": []
+    "notes": [],
+    "p1": "The house's shipping books record every watch that left Glashütte. Page 0145, 27 April 1929: three gentlemen's wristwatches go to Eduard Riemer, in Prague.",
+    "p2": "Among them, no. 100118: green gold 0.585 case, 9 ¾-line calibre with 16 jewels, sold for 360 francs.",
+    "p3": "The invoice is in Swiss francs and payable in Geneva, to the Usine Genevoise de Dégrossissage d'Or: these watches are sold from Switzerland.",
+    "reading": "One line in an archive is enough to find a watch again: its number, its buyer, its price and its link with Geneva.",
+    "watchCaption": "No. 100118 · glashuetteuhren.de",
+    "watchAlt": "Watch no. 100118, rectangular green gold case with lugs, dial signed A. Lange & Söhne Genf."
   },
   "a1": {
     "label": "A1 · Lange and Geneva, milestones",
@@ -834,7 +839,8 @@
     "p2": "On 27 April 1929, no. 100118, a green gold watch with a Peseux calibre, goes to Eduard Riemer in Prague for 360 Swiss francs.",
     "chartHead": "Geneva watches sold, by year",
     "sources": "Stegemann, Klassik Uhren [3]; glashuetteuhren.de [20].",
-    "notes": []
+    "notes": [],
+    "docCaption": "Shipping book, page 0145: no. 100118 goes to Eduard Riemer, in Prague, for 360 francs"
   },
   "sales": {
     "note": "From the dispatch ledgers, as read by W. Stegemann",

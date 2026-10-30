@@ -421,10 +421,15 @@
     "chapter": "A7",
     "kicker": "Annexe 7 · La pièce et le document",
     "title": "Prague, 27 avril 1929",
-    "docCaption": "Livre d'expédition, page 0145 : la 100118 part chez Eduard Riemer, à Prague, pour 360 francs",
+    "docCaption": "Livre d'expédition, page 0145, 27 avril 1929 · la ligne de la 100118 encadrée",
     "docAlt": "Page 0145 du livre d'expédition d'A. Lange & Söhne, datée du 27 avril 1929 : trois montres pour la maison Eduard Riemer à Prague, dont la 100118 à 360 francs.",
-    "pieceCaption": "Calibre Peseux rond de 9 ¾ lignes, 16 rubis, boîtier en or vert n° 100118 · schéma d'interprétation",
-    "notes": []
+    "notes": [],
+    "p1": "Le livre d'expédition de la maison garde la trace de chaque montre sortie de Glashütte. Page 0145, le 27 avril 1929 : trois montres-bracelets pour homme partent chez Eduard Riemer, à Prague.",
+    "p2": "Parmi elles, la n° 100118 : boîtier en or vert 0,585, calibre de 9 ¾ lignes à 16 rubis, vendue 360 francs.",
+    "p3": "La facture est libellée en francs suisses et payable à Genève, à l'Usine Genevoise de Dégrossissage d'Or : ces montres sont vendues depuis la Suisse.",
+    "reading": "Une ligne d'archive suffit à retrouver une montre : son numéro, son acheteur, son prix et son lien avec Genève.",
+    "watchCaption": "La n° 100118 · glashuetteuhren.de",
+    "watchAlt": "La montre n° 100118, boîtier rectangulaire à cornes en or vert, cadran signé A. Lange & Söhne Genf."
   },
   "a1": {
     "label": "A1 · Lange et Genève, repères",
@@ -834,7 +839,8 @@
     "p2": "Le 27 avril 1929, la n° 100118, une montre en or vert à calibre Peseux, part chez Eduard Riemer, à Prague, pour 360 francs suisses.",
     "chartHead": "Montres genevoises vendues, par année",
     "sources": "Stegemann, Klassik Uhren [3] ; glashuetteuhren.de [20].",
-    "notes": []
+    "notes": [],
+    "docCaption": "Livre d'expédition, page 0145 : la 100118 part chez Eduard Riemer, à Prague, pour 360 francs"
   },
   "sales": {
     "note": "D'après les livres d'expédition, relevés par W. Stegemann",

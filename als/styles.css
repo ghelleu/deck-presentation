@@ -3377,3 +3377,48 @@ html.gated .hud,
 html.gated .progress {
   display: none !important;
 }
+
+/* A7 · the shipping-book page, its line framed, and the watch itself */
+.a7 .a7-media .figure {
+  position: absolute;
+  display: grid;
+  grid-template-columns: min-content;
+  justify-items: end;
+  inset: auto;
+}
+.slide.a7 .a7-media .a7-doc {
+  left: 0;
+  top: 0;
+}
+.a7 .a7-doc .docmark img {
+  width: 520px;
+  height: auto;
+  max-width: none;
+  max-height: none;
+}
+.a7 .dm-fog {
+  opacity: 0.55;
+}
+.slide.a7 .a7-media .a7-watch {
+  left: auto;
+  right: -40px;
+  top: 360px;
+}
+.slide.a7 .a7-doc {
+  justify-items: start;
+}
+.slide.a7 .a7-doc figcaption {
+  text-align: left;
+  max-width: 440px;
+}
+.a7 .col-text .body {
+  font-size: 26px;
+}
+.a7 .a7-watch img {
+  width: auto;
+  height: 440px;
+  max-height: none;
+}
+.a7 .figure figcaption {
+  margin-top: 10px;
+}
