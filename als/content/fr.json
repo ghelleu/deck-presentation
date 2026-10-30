@@ -1,0 +1,1379 @@
+{
+  "meta": {
+    "lang": "fr",
+    "title": "A. Lange & Söhne · Genève 2027",
+    "house": "A. Lange & Söhne",
+    "event": "Geneva Grand Opening 2027",
+    "confidential": "MCI · Confidentiel",
+    "notesTitle": "Notes · Genève 2027",
+    "notesStep": "Étape {n} sur {total}",
+    "notesNext": "Ensuite · {label}",
+    "notesEnd": "Fin de la présentation",
+    "notesPrev": "Retour",
+    "notesNextBtn": "Suivant",
+    "help": [
+      [
+        "→ espace clic",
+        "avancer"
+      ],
+      [
+        "←",
+        "revenir"
+      ],
+      [
+        "R",
+        "revenir au début"
+      ],
+      [
+        "O",
+        "toutes les slides"
+      ],
+      [
+        "H",
+        "masquer ou afficher (dans O)"
+      ],
+      [
+        "A",
+        "sommaire des annexes"
+      ],
+      [
+        "N",
+        "notes du présentateur"
+      ],
+      [
+        "F",
+        "plein écran"
+      ],
+      [
+        "B",
+        "écran noir"
+      ],
+      [
+        "?",
+        "aide"
+      ]
+    ],
+    "notesBlocked": "Fenêtre de notes bloquée : autorisez les fenêtres pop-up pour cette adresse, puis appuyez de nouveau sur n.",
+    "reading": "Ce que cela montre",
+    "hud": {
+      "bar": "Commandes de la présentation",
+      "restart": "Revenir au début (R)",
+      "overview": "Toutes les slides (O)",
+      "annexes": "Sommaire des annexes (A)",
+      "pdf": "Télécharger en PDF",
+      "notes": [],
+      "help": "Raccourcis clavier (?)",
+      "fullscreen": "Plein écran (F)",
+      "otherLang": "EN",
+      "langAria": "Switch to English",
+      "pdfFile": "A. Lange & Söhne · Genève 2027.pdf",
+      "step": "étape {n}/{total}"
+    },
+    "picks": {
+      "title": "Slides à présenter",
+      "count": "<b>{on}</b> sur {all} affichées · un clic masque ou affiche une slide, un double-clic l’ouvre",
+      "all": "Tout afficher",
+      "cancel": "Annuler",
+      "done": "Terminé",
+      "hidden": "Masquée",
+      "tick": "Afficher dans la présentation"
+    }
+  },
+  "cover": {
+    "label": "Couverture",
+    "title": "Inauguration de la nouvelle boutique de Genève",
+    "notes": [],
+    "kicker": "Genève · juin 2027",
+    "sub": "A. Lange & Söhne · Rue Robert-Céard"
+  },
+  "s1927": {
+    "pieceCaption": "Mouvement de la succursale, gravé « A. Lange & Söhne Glashütte & Genf », 16 rubis",
+    "pieceAlt": "Mouvement de montre vu côté ponts, gravé A. Lange & Söhne, Glashütte & Genf, 16 rubis, marqué Swiss.",
+    "watchCaption": "Cadran de la montre n° 100118, signé « A. Lange & Söhne Genf », petite seconde à six heures · glashuetteuhren.de"
+  },
+  "act1": {
+    "label": "I · L'esprit de la maison",
+    "kicker": "Chapitre I",
+    "titleA": "L'esprit",
+    "titleB": "de la maison",
+    "range": "Slides 01 — 04",
+    "notes": []
+  },
+  "act2": {
+    "label": "II · Fondation",
+    "kicker": "Chapitre II",
+    "titleA": "Fondation",
+    "titleB": "",
+    "range": "Slides 05 — 12",
+    "notes": []
+  },
+  "act3": {
+    "label": "III · Célébrer l'échange",
+    "kicker": "Chapitre III",
+    "titleA": "Célébrer",
+    "titleB": "l'échange",
+    "range": "Slides 13 — 17",
+    "notes": []
+  },
+  "s02": {
+    "label": "13 · A Century of Exchange",
+    "chapter": "13",
+    "kicker": "1927 / 2027",
+    "titleA": "Célébrer",
+    "titleB": "l'échange",
+    "q1": "« En 1927, Genève ouvrait à Lange les portes de son savoir-faire.",
+    "q2": "Cent ans plus tard, Lange ouvre à Genève les portes du sien. »",
+    "trace": {
+      "fromTop": "Genève",
+      "fromBottom": "Glashütte",
+      "toTop": "Glashütte",
+      "toBottom": "Genève"
+    },
+    "traceAlt": "Deux lignes partent de Genève et de Glashütte en 1927, se croisent et arrivent de l'autre côté en 2027.",
+    "notes": []
+  },
+  "s03": {
+    "label": "14 · Une maison qui ouvre ses portes",
+    "chapter": "14",
+    "kicker": "Rue Robert-Céard",
+    "titleA": "Une maison qui ouvre ses",
+    "titleB": "portes",
+    "p1": "Depuis 2021, Lange reçoit ses clients genevois sur rendez-vous, dans son Salon de la place de Longemalle. Rue Robert-Céard, la maison s'installe sur trois étages, avec son propre atelier d'horloger.",
+    "p2": "Pendant les jours d'inauguration, la boutique s'ouvre à cinq publics. Chacun y découvre l'histoire de 1927 et vit une rencontre entre Glashütte et Genève.",
+    "salonYear": "2021",
+    "salonCaption": "Le Salon, place de Longemalle · A. Lange & Söhne",
+    "salonAlt": "Le Salon de Genève, place de Longemalle : vitrines, table de rendez-vous et fauteuils de cuir.",
+    "frontYear": "2027",
+    "frontCaption": "Rue Robert-Céard · brief ALS, 14.10.2026",
+    "frontAlt": "Devanture sombre de la rue Robert-Céard, à Genève, avec la plaque de rue.",
+    "notes": []
+  },
+  "s04": {
+    "label": "15 · Une rencontre à chaque moment",
+    "chapter": "15",
+    "kicker": "Glashütte et Genève",
+    "titleA": "Une",
+    "titleB": "rencontre",
+    "titleC": "à chaque moment",
+    "intro": "Chaque moment de l'inauguration réunit Glashütte et Genève autour d'une montre, d'un geste ou d'une table.",
+    "items": [
+      "Un horloger de la manufacture et un horloger genevois penchés sur la même montre de 1927.",
+      "Une archive de Genève et une archive de Glashütte dans la même vitrine.",
+      "Un chef genevois et un chef saxon aux fourneaux du même dîner.",
+      "Un artisan de la ville et un artisan de la maison pour le même cadeau."
+    ],
+    "coda": "Les deux villes s'y retrouvent comme de vieilles amies, d'égale à égale.",
+    "notes": []
+  },
+  "s05": {
+    "label": "16 · Toute l'histoire, pour chaque invité",
+    "chapter": "16",
+    "kicker": "Cinq publics",
+    "titleA": "Toute l'histoire, pour chaque",
+    "titleB": "invité",
+    "p": "Journalistes, collectionneurs, prospects, clients et amis de la maison ne viennent pas au même moment. Chacun reçoit pourtant l'histoire entière : le récit de 1927 devant une pièce d'archive, une rencontre entre les deux villes, la découverte de la boutique et des collections, une attention à emporter.",
+    "cols": [
+      "Journalistes",
+      "Collectionneurs",
+      "Prospects",
+      "Clients",
+      "Amis de la maison"
+    ],
+    "rows": [
+      "Le récit de 1927 devant une pièce d'archive",
+      "Une rencontre entre les deux villes",
+      "La découverte de la boutique et des collections",
+      "Une attention à emporter"
+    ],
+    "axisFrom": "Plus public",
+    "axisTo": "Plus intime",
+    "coda": "Seule la manière change, du plus public au plus intime.",
+    "notes": [],
+    "cells": [
+      [
+        "La vitrine de l'inscription de 1927",
+        "Une montre Glashütte / Genf, ouverte",
+        "Un calibre genevois des années 1920",
+        "La vitrine de 1927, puis le film",
+        "Une montre Lange devant chaque couvert"
+      ],
+      [
+        "Le CEO prend la parole à Genève",
+        "Un horloger Lange, un horloger Niton",
+        "Calibre genevois et calibre Lange, côte à côte",
+        "Un verre de vin genevois",
+        "Un chef genevois et un chef saxon"
+      ],
+      [
+        "La visite en petits groupes",
+        "La vitrine de la période genevoise",
+        "Un geste d'horloger à l'établi",
+        "Quarante minutes, de la vitrine au salon",
+        "Une seule table, quelques couverts"
+      ],
+      [
+        "Reproduction de 1927 et dossier historique",
+        "Carnet des montres genevoises, 1927-1936",
+        "Invitation à un rendez-vous privé",
+        "Un outil d'horloger gravé, fait pour l'occasion",
+        "Un objet fait à quatre mains"
+      ]
+    ]
+  },
+  "s06": {
+    "label": "17 · La boutique raconte",
+    "chapter": "17",
+    "kicker": "La boutique",
+    "titleA": "La boutique",
+    "titleB": "raconte",
+    "p": "La boutique vient d'être dessinée, on n'y déplace rien. Le récit s'installe dans ce qu'elle offre déjà : le mur d'histoire et l'espace consacré à Glashütte au rez-de-chaussée, le cinéma et la salle multisensorielle au premier étage, l'atelier et le salon privé au deuxième.",
+    "floors": [
+      [
+        "Deuxième étage",
+        "L'atelier et le salon privé"
+      ],
+      [
+        "Premier étage",
+        "Le cinéma et la salle multisensorielle"
+      ],
+      [
+        "Rez-de-chaussée",
+        "Le mur d'histoire et l'espace consacré à Glashütte"
+      ]
+    ],
+    "coda": "S'y ajoutent quelques vitrines d'archives et des hôtes qui connaissent l'histoire.",
+    "notes": []
+  },
+  "s07": {
+    "label": "18 · Deux à trois jours à Genève",
+    "chapter": "18",
+    "kicker": "Le calendrier",
+    "titleA": "Deux à trois jours à",
+    "titleB": "Genève",
+    "days": [
+      "Jour 1",
+      "Jour 2",
+      "Jour 3"
+    ],
+    "d1": "Le premier jour s'ouvre avec la presse, la prise de parole du CEO et la coupure du ruban. L'après-midi appartient aux collectionneurs.",
+    "d2": "Le lendemain, clients et prospects découvrent la boutique par petits groupes, du matin au soir.",
+    "evening": "Chaque soir",
+    "e": "Chaque soir, la boutique se referme sur un dîner de quelques couverts pour les amis les plus proches de la maison.",
+    "d3": "Un troisième jour peut prolonger les visites et accueillir un dernier dîner.",
+    "notes": []
+  },
+  "s08": {
+    "label": "19 · The Exchange of Stories",
+    "chapter": "19",
+    "kicker": "Presse",
+    "titleA": "The Exchange of",
+    "titleB": "Stories",
+    "p1": "La presse découvre l'histoire par sa preuve. Au rez-de-chaussée, une vitrine expose l'inscription de la succursale au registre du commerce de Genève, conservée aux Archives d'État, à côté de sa publication dans la Feuille officielle suisse du commerce du 6 mai 1927.",
+    "p2": "Le CEO prend la parole, puis coupe le ruban. Les journalistes visitent ensuite la boutique en petits groupes, jusqu'à l'atelier où l'horloger les attend.",
+    "caption": "Feuille officielle suisse du commerce, n° 105, 6 mai 1927, p. 833 · e-periodica.ch",
+    "alt": "Page entière de la Feuille officielle suisse du commerce du 6 mai 1927, où figure l'inscription de la succursale genevoise d'A. Lange & Söhne.",
+    "notes": []
+  },
+  "s09": {
+    "label": "20 · The Exchange of Knowledge",
+    "chapter": "20",
+    "kicker": "Collectionneurs",
+    "titleA": "The Exchange of",
+    "titleB": "Knowledge",
+    "p1": "Deux horlogers, une montre de 1927. Un horloger de Lange et un horloger de Niton ouvrent ensemble une montre signée Glashütte / Genf, équipée il y a un siècle d'un calibre Niton. Devant les collectionneurs, ils la lisent à voix haute : le calibre et ses finitions, puis ce que chacun y reconnaît de son propre métier.",
+    "p2": "Le nom de Niton a été relancé à Genève par une nouvelle équipe. Sa présence fait revivre la signature qui équipait les premières montres de la succursale.",
+    "p3": "Autour de l'établi, une vitrine réunit des montres de la période genevoise, prêtées par la maison, des collectionneurs ou des maisons de ventes genevoises. Une Cabaret les accompagne, la montre rectangulaire qui prolonge depuis 1997 la lignée des montres de forme de l'époque.",
+    "cabaretCaption": "Cabaret, depuis 1997 · A. Lange & Söhne",
+    "cabaretAlt": "Montre Cabaret rectangulaire en or rose, lunette sertie, cadran nacre à grande date.",
+    "notes": [],
+    "oldCaption": "Montre rectangulaire signée A. Lange & Söhne Genf, années 1930 · glashuetteuhren.de",
+    "oldAlt": "Montre-bracelet rectangulaire en or rose, cadran argenté signé A. Lange & Söhne Genf, bracelet de cuir.",
+    "calCaption": "Calibre L931.3 de la Cabaret, vu côté fond",
+    "calAlt": "Le calibre L931.3 de la Cabaret vu côté fond : platine trois-quarts à côtes de Glashütte, chatons d'or vissés de bleu, coq de balancier gravé, dessiné à l'échelle de la montre."
+  },
+  "s10": {
+    "label": "21 · The Exchange of Discovery",
+    "chapter": "21",
+    "kicker": "Prospects",
+    "titleA": "The Exchange of",
+    "titleB": "Discovery",
+    "p1": "Une première rencontre avec la maison, par la main. À l'atelier, l'horloger pose côte à côte deux mouvements : un calibre genevois des années 1920 et un calibre Lange d'aujourd'hui, avec sa trois-quarts platine en maillechort, la signature de Glashütte.",
+    "p2": "Le visiteur apprend à les distinguer à la loupe, puis s'essaie lui-même à un geste d'horloger sur un mouvement d'exercice. Il repart avec une invitation à revenir découvrir les collections en rendez-vous privé.",
+    "caption": "Mouvement Lange, vu de près · A. Lange & Söhne",
+    "alt": "Gros plan d'un mouvement Lange : ponts, rubis sertis dans des chatons d'or, roues et vis bleuies.",
+    "notes": []
+  },
+  "s11": {
+    "label": "22 · The Exchange of Experiences",
+    "chapter": "22",
+    "kicker": "Clients",
+    "titleA": "The Exchange of",
+    "titleB": "Experiences",
+    "p1": "Les clients viennent par groupes de huit à dix, tout au long de la journée. Chaque visite dure une quarantaine de minutes et suit le fil de l'histoire : la vitrine de 1927 au rez-de-chaussée, un court film au cinéma du premier étage, puis l'atelier, où l'horloger montre son travail sur un mouvement en cours.",
+    "p2": "La visite s'achève au salon autour d'un verre de vin genevois, avec un conseiller de la maison, pendant que le groupe suivant monte à l'atelier.",
+    "routeHead": "Groupes de 8 à 10 · environ 40 minutes",
+    "stops": [
+      [
+        "Rez-de-chaussée",
+        "La vitrine de 1927"
+      ],
+      [
+        "Premier étage",
+        "Un court film au cinéma"
+      ],
+      [
+        "Deuxième étage",
+        "L'atelier"
+      ],
+      [
+        "",
+        "Le salon, un verre de vin genevois"
+      ]
+    ],
+    "notes": []
+  },
+  "s12": {
+    "label": "23 · The Exchange of Taste",
+    "chapter": "23",
+    "kicker": "Amis de la maison",
+    "titleA": "The Exchange of",
+    "titleB": "Taste",
+    "p1": "Le dîner a lieu dans la boutique, autour d'une seule table de quelques couverts. Il se répète deux ou trois soirs de suite, pour que chacun reste dans un très petit cercle.",
+    "p2": "Devant chaque convive est posée une montre Lange, ancienne ou récente. Au fil du dîner, les montres passent de main en main et la conversation suit leur tour de table. Un maître horloger présente chaque pièce et raconte, à partir d'elle, ce que Glashütte et Genève se sont transmis.",
+    "p3": "Le menu mêle les cuisines des deux villes, préparé à quatre mains par un chef genevois et un chef saxon.",
+    "notes": []
+  },
+  "s13": {
+    "label": "24 · Chacun repart avec un fragment de l'histoire",
+    "chapter": "24",
+    "kicker": "Les attentions",
+    "titleA": "Chacun repart avec un",
+    "titleB": "fragment",
+    "titleC": "de l'histoire",
+    "items": [
+      [
+        "Presse",
+        "une reproduction de l'inscription de 1927 et le dossier historique."
+      ],
+      [
+        "Collectionneurs",
+        "un carnet consacré aux montres genevoises de Lange, de 1927 à 1936."
+      ],
+      [
+        "Prospects",
+        "l'invitation à un rendez-vous privé en boutique."
+      ],
+      [
+        "Clients",
+        "un outil d'horloger gravé aux noms de Glashütte et de Genève, fabriqué pour l'occasion."
+      ],
+      [
+        "Amis de la maison",
+        "un objet gravé ou émaillé, réalisé à quatre mains par un artisan genevois et un artisan de Lange."
+      ]
+    ],
+    "notes": []
+  },
+  "niton": {
+    "size": "9 × 11 lignes",
+    "thick": "2,5 mm",
+    "jewels": "Dix-huit rubis",
+    "seals": "Deux poinçons de Genève",
+    "note": "Schéma d'interprétation, d'après photographies",
+    "alt": "Schéma du calibre Niton de forme tonneau : platine, ponts à côtes de Genève, rochet, balancier bimétallique et spiral, rubis ; cotes de 9 × 11 lignes, 2,5 mm d'épaisseur, dix-huit rubis, deux poinçons de Genève.",
+    "caption": "Calibre Niton de forme, 9 × 11 lignes, mouvement n° 4763 · schéma d'interprétation",
+    "captionArb": ""
+  },
+  "tonneau": {
+    "size": "10 lignes",
+    "note": "Schéma d'interprétation",
+    "h1": "",
+    "h2": "",
+    "h3": "",
+    "h4": "",
+    "alt": "Schéma du calibre tonneau de 10 lignes ; dans la version arbitrée, quatre maisons reliées par un même filet autour du mouvement.",
+    "caption": "Calibre Niton tonneau de 10 lignes, boîtiers 100008 à 100015 · schéma d'interprétation"
+  },
+  "peseux": {
+    "bridge": "Pont",
+    "wheel": "Roue",
+    "balance": "Balancier",
+    "note": "Schéma d'interprétation, d'après photographie",
+    "alt": "Vue éclatée du calibre Peseux rond : le pont, le rouage et le balancier se séparent en trois couches."
+  },
+  "a2": {
+    "label": "A6 · Les montres de Genève, 1927-1936",
+    "chapter": "A6",
+    "kicker": "Annexe 6",
+    "title": "Les montres de Genève, 1927-1936",
+    "p1": "Les premières montres de la succursale utilisent un calibre de forme Niton de 9 × 11 lignes, gravé « A. Lange & Söhne, Geneva-Swiss, Eighteen Jewels, all Adjustments », orné de côtes de Genève et frappé de deux Poinçons de Genève. Le même calibre équipe à l'époque des montres Patek Philippe [3].",
+    "p2a": "La n° 100009 a un boîtier tonneau octogonal en or vert de 25 × 37 mm, rehaussé d'émail noir.",
+    "p2b": "",
+    "p2c": "Elle est restée dans la même famille jusqu'en 2009 [3].",
+    "p3": "À partir de la n° 100016, la succursale se fournit chez Altus, puis adopte en 1931 un calibre de forme Altus de 8 ¼ × 12 lignes [3][11][12]. Les montres, rectangulaires ou en tonneau, sont vendues sous les noms Lange-Uhr Glashütte et A. Lange & Söhne Genf [12].",
+    "p4": "La Cabaret, lancée en 1997 avec le calibre de forme L931, reprend cette lignée. La Cabaret Tourbillon, née en 2008, a connu une édition Handwerkskunst de 30 pièces en 2021 et une édition Honeygold en 2026 [11][12].",
+    "houses": "",
+    "notes": [],
+    "showCaption": "Montres de la succursale, 1927-1940 · Klassik Uhren, glashuetteuhren.de"
+  },
+  "a2b": {
+    "label": "A7 · Prague, 27 avril 1929",
+    "chapter": "A7",
+    "kicker": "Annexe 7 · La pièce et le document",
+    "title": "Prague, 27 avril 1929",
+    "docCaption": "Livre d'expédition, page 0145 : la 100118 part chez Eduard Riemer, à Prague, pour 360 francs",
+    "docAlt": "Page 0145 du livre d'expédition d'A. Lange & Söhne, datée du 27 avril 1929 : trois montres pour la maison Eduard Riemer à Prague, dont la 100118 à 360 francs.",
+    "pieceCaption": "Calibre Peseux rond de 9 ¾ lignes, 16 rubis, boîtier en or vert n° 100118 · schéma d'interprétation",
+    "notes": []
+  },
+  "a1": {
+    "label": "A1 · Lange et Genève, repères",
+    "chapter": "A1",
+    "kicker": "Annexe 1",
+    "title": "Lange et Genève, repères",
+    "eraA": "1845 — 1936",
+    "eraB": "1990 — 2027",
+    "rows": [
+      [
+        "7 déc. 1845",
+        "Ferdinand Adolph Lange fonde sa manufacture à Glashütte.",
+        "[5] [15]"
+      ],
+      [
+        "1919",
+        "Fondation à Genève de la manufacture Niton par trois horlogers, dont deux anciens de Vacheron Constantin. De 1921 à 1929, elle se classe au premier ou au deuxième rang pour le nombre de mouvements contrôlés par le Poinçon de Genève.",
+        "[9]"
+      ],
+      [
+        "3 mai 1927",
+        "Inscription de la succursale de Lange au registre du commerce de Genève, 25, avenue du Mail, Plainpalais. Publication le 6 mai 1927.",
+        "[1]"
+      ],
+      [
+        "1927",
+        "Premières montres-bracelets genevoises, n° 100008 à 100015, équipées de calibres Niton. Mouvements Altus à partir de la n° 100016.",
+        "[3]"
+      ],
+      [
+        "1927-1933",
+        "Livres d'expédition de la production genevoise, conservés au Deutsches Uhrenmuseum Glashütte.",
+        "[3]"
+      ],
+      [
+        "11 mars 1936",
+        "Radiation de la succursale. Publication le 16 mars 1936.",
+        "[2]"
+      ],
+      [
+        "7 déc. 1990",
+        "Walter Lange refonde la maison à Glashütte, avec Günter Blümlein.",
+        "[15]"
+      ],
+      [
+        "24 oct. 1994",
+        "Présentation de la première collection de la nouvelle ère au château de Dresde.",
+        "[15]"
+      ],
+      [
+        "1997",
+        "Lancement de la Cabaret.",
+        "[11]"
+      ],
+      [
+        "2000",
+        "Richemont acquiert Les Manufactures Horlogères, qui détiennent 90 % de Lange.",
+        "[16]"
+      ],
+      [
+        "2009",
+        "Aiguille d'Or du Grand Prix d'Horlogerie de Genève pour la Zeitwerk.",
+        "[13]"
+      ],
+      [
+        "2014",
+        "Prix spécial du jury du Grand Prix d'Horlogerie de Genève décerné à Walter Lange.",
+        "[13]"
+      ],
+      [
+        "14 juin 2021",
+        "Ouverture du Salon de la place de Longemalle.",
+        "[7]"
+      ],
+      [
+        "Nov. 2025",
+        "Phillips expose à Genève la collection Lange du Dr Helmut Crott.",
+        "[14]"
+      ],
+      [
+        "Juin 2027",
+        "Grand Opening de la boutique de la rue Robert-Céard.",
+        ""
+      ]
+    ],
+    "notes": []
+  },
+  "a3": {
+    "label": "A15 · Sources",
+    "chapter": "A15",
+    "kicker": "Annexe 15",
+    "title": "Sources",
+    "items": [
+      [
+        "Feuille officielle suisse du commerce, n° 105, 6 mai 1927, p. 833. ETH-Bibliothek, e-periodica.",
+        "e-periodica.ch"
+      ],
+      [
+        "Feuille officielle suisse du commerce, 16 mars 1936, p. 652. ETH-Bibliothek, e-periodica.",
+        "e-periodica.ch"
+      ],
+      [
+        "Klassik Uhren, n° 2/2011, p. 40-43, et n° 2/2013, p. 12-13 (articles de Wolfgang Stegemann sur les montres genevoises de Lange).",
+        "jimcontent.com"
+      ],
+      [
+        "glashuetteuhren.de, « A. Lange & Söhne, Niederlassung Genf ».",
+        "glashuetteuhren.de"
+      ],
+      [
+        "A. Lange & Söhne, « Ferdinand Adolph Lange, early years ».",
+        "alange-soehne.com"
+      ],
+      [
+        "A. Lange & Söhne, « Three-quarter plate ».",
+        "alange-soehne.com"
+      ],
+      [
+        "A. Lange & Söhne, communiqué « A. Lange & Söhne Salon in Genf », juin 2021.",
+        "press.alange-soehne.com"
+      ],
+      [
+        "Archives d'État de Genève, fonds Commerce, cote Commerce L : registre du commerce, registres d'inscription des sociétés depuis 1883.",
+        "archives-etat-ge.ch"
+      ],
+      [
+        "Niton, « History ».",
+        "niton.swiss"
+      ],
+      [
+        "GQ France, « La maison horlogère Niton fait son grand retour ».",
+        "gqmagazine.fr"
+      ],
+      [
+        "Langepedia, « A. Lange & Söhne Cabaret ».",
+        "langepedia.com"
+      ],
+      [
+        "Monochrome Watches, « A. Lange & Söhne Cabaret Tourbillon Handwerkskunst », 13 juillet 2021.",
+        "monochrome-watches.com"
+      ],
+      [
+        "Grand Prix d'Horlogerie de Genève, palmarès 2001-2018.",
+        "gphg.org"
+      ],
+      [
+        "Phillips, exposition de la collection du Dr Helmut Crott, Genève, novembre 2025.",
+        "phillips.com"
+      ],
+      [
+        "A. Lange & Söhne, « A unique opportunity ».",
+        "press.alange-soehne.com"
+      ],
+      [
+        "Richemont, communiqué du 21 juillet 2000.",
+        "richemont.com"
+      ],
+      [
+        "A. Lange & Söhne, « Richard and Emil Lange, rise and global renown ».",
+        "alange-soehne.com"
+      ],
+      [
+        "A. Lange & Söhne, « A. Lange & Söhne is reborn ».",
+        "alange-soehne.com"
+      ],
+      [
+        "Sander Peeters, Klassik Uhren, n° 1/2019, p. 19-33 (histoire de Niton et de Sarcar).",
+        "Klassik Uhren"
+      ],
+      [
+        "glashuetteuhren.de, « Armbanduhren bei A. Lange & Söhne », mis à jour le 21 octobre 2026.",
+        "glashuetteuhren.de"
+      ],
+      [
+        "glashuetteuhren.de, « A. Lange & Söhne 1868-1945 », d'après la Deutsche Uhrmacher-Zeitung, 1927, n° 21, p. 401.",
+        "glashuetteuhren.de"
+      ],
+      [
+        "Worldtempus, « A. Lange & Söhne : dans les traces de Ferdinand A. Lange ».",
+        "worldtempus.com"
+      ],
+      [
+        "glashuetteuhren.de, « Die so genannte Glashütte Regel ».",
+        "glashuetteuhren.de"
+      ],
+      [
+        "Brief ALS Geneva BTQ Opening, 14.10.2026 (confidentiel).",
+        "A. Lange & Söhne"
+      ],
+      [
+        "A. Lange & Söhne, communiqué « A. Lange & Söhne opens new boutique in Lisbon », 16 juin 2026.",
+        "press.alange-soehne.com"
+      ],
+      [
+        "Richemont, communiqué « A. Lange & Söhne opens new flagship boutique in London », 5 décembre 2025.",
+        "richemont.com"
+      ]
+    ],
+    "notes": []
+  },
+  "plan06": {
+    "wall": "Mur d'histoire",
+    "saxony": "Espace Glashütte",
+    "cinema": "Cinéma",
+    "atelier": "Atelier",
+    "salon": "Salon privé",
+    "note": "Schéma d'après les plans du brief ALS, pp. 31-35",
+    "alt": "Les trois étages de la boutique redessinés en vue axonométrique ; le mur d'histoire et l'espace Glashütte au rez-de-chaussée, le cinéma au premier, l'atelier et le salon privé au deuxième s'allument tour à tour."
+  },
+  "plan11": {
+    "r1": "Vitrine de 1927",
+    "r2": "Cinéma",
+    "r3": "Atelier",
+    "r4": "Salon",
+    "note": "Schéma d'après les plans du brief ALS, pp. 31-35",
+    "alt": "Le parcours des clients tracé sur les trois étages : de l'entrée à la vitrine de 1927, au cinéma, à l'atelier, puis au salon."
+  },
+  "scene": {
+    "stories": {
+      "label": "19 · Scène · Stories",
+      "chapter": "19 · The Exchange of Stories",
+      "caption": "Le CEO prend la parole à l'accueil, devant la presse, la vitrine de 1927 et le ruban.",
+      "alt": "La matinée presse à l'accueil : le CEO au pupitre, les journalistes et les photographes, la vitrine de 1927, le ruban prêt à être coupé.",
+      "notes": []
+    },
+    "knowledge": {
+      "label": "20 · Scène · Knowledge",
+      "chapter": "20 · The Exchange of Knowledge",
+      "caption": "Deux horlogers ouvrent ensemble une montre de 1927 devant les collectionneurs.",
+      "alt": "Dans l'espace d'exposition du deuxième étage, deux horlogers en blouse ouvrent une montre ancienne, entourés de collectionneurs ; des montres de la période genevoise dans les vitrines.",
+      "notes": []
+    },
+    "discovery": {
+      "label": "21 · Scène · Discovery",
+      "chapter": "21 · The Exchange of Discovery",
+      "caption": "À l'établi, un visiteur apprend à lire un mouvement à la loupe.",
+      "alt": "Un établi installé dans le salon du rez-de-chaussée : deux mouvements côte à côte, un horloger guide un visiteur qui regarde à la loupe.",
+      "notes": []
+    },
+    "experiences": {
+      "label": "22 · Scène · Experiences",
+      "chapter": "22 · The Exchange of Experiences",
+      "caption": "Un groupe de clients au cinéma du premier étage, devant un film d'archives.",
+      "alt": "Huit clients au cinéma du premier étage regardent un court film d'archives sur le Genève des années 1920.",
+      "notes": []
+    },
+    "taste": {
+      "label": "23 · Scène · Taste",
+      "chapter": "23 · The Exchange of Taste",
+      "caption": "Au dîner, le chef genevois et le chef de Glashütte servent ensemble.",
+      "alt": "Le dîner des amis de la maison dans la salle du deuxième étage : le chef genevois et le chef de Glashütte, côte à côte, présentent le plat aux convives.",
+      "notes": []
+    }
+  },
+  "cabaret": {
+    "size": "Boîtier, 25,5 mm",
+    "date": "Grande date",
+    "seconds": "Petite seconde"
+  },
+  "act4": {
+    "label": "IV · Le programme",
+    "kicker": "Chapitre IV",
+    "titleA": "Le programme",
+    "titleB": "",
+    "range": "Slides 18 — 24",
+    "notes": []
+  },
+  "e2": {
+    "label": "01 · Une maison née de l'échange",
+    "chapter": "01",
+    "kicker": "Dresde, 1837",
+    "titleA": "Une maison née",
+    "titleB": "de l'échange",
+    "p1": "De 1837 à 1841, Ferdinand Adolph Lange se forme dans les grands centres de l'horlogerie de précision : près de Paris chez Joseph Thaddäus Winnerl, élève de Breguet, puis en Suisse et à Londres. Il en rapporte le système métrique et le projet d'une manufacture saxonne, qu'il fonde à Glashütte en 1845.",
+    "p2": "En 1927, ses petits-fils refont le chemin. Le savoir qui leur manque, la montre-bracelet, est à Genève.",
+    "p3": "En 2027, la maison revient à Genève avec le sien.",
+    "notes": [],
+    "quote": "« N'oublie pas ta patrie ! Elle t'accueillera à bras ouverts si tu reviens un jour, riche d'expérience. »",
+    "quoteBy": "Gutkaes, dans le carnet de voyage de son apprenti · A. Lange & Söhne [5]",
+    "reading": "Lange s'est fondée sur un échange : aller chercher le meilleur savoir d'Europe et le transformer à Glashütte. C'est sa méthode depuis l'origine."
+  },
+  "route": {
+    "london": "Londres",
+    "paris": "Paris",
+    "swiss": "Suisse",
+    "dresden": "Dresde",
+    "glashutte": "Glashütte",
+    "y1837": "1837",
+    "y1841": "1841",
+    "alt": "Carte schématique de l'Europe : le voyage du fondateur de Dresde à Paris, en Suisse et à Londres de 1837 à 1841, puis Glashütte en 1845.",
+    "y1845": "1845"
+  },
+  "e3": {
+    "label": "02 · Recevoir et donner",
+    "chapter": "02",
+    "kicker": "L'échange dans les deux sens",
+    "titleA": "Recevoir",
+    "titleB": "et donner",
+    "aHead": "Recevoir",
+    "aYear": "1930",
+    "a": "Richard Lange, fils du fondateur, a 84 ans. Il lit l'article de deux ingénieurs de Siemens et en tire un brevet : un alliage au béryllium pour les spiraux de montre.",
+    "bHead": "Donner",
+    "bYear": "Nivarox",
+    "b": "L'invention est reprise en Suisse sous le nom Nivarox. Ce spiral équipe aujourd'hui la plupart des montres mécaniques de qualité.",
+    "cHead": "Réunir",
+    "cYear": "1990",
+    "c": "Walter Lange refonde la maison à Glashütte avec Günter Blümlein, venu de l'horlogerie suisse : le savoir saxon et l'expérience suisse se rejoignent.",
+    "reading": "Chez Lange, l'échange va dans les deux sens : la maison reçoit, transforme, et rend à toute l'horlogerie. Un échange d'égal à égal.",
+    "sources": "A. Lange & Söhne, « Richard and Emil Lange » [17], « A. Lange & Söhne is reborn » [18].",
+    "notes": []
+  },
+  "e4": {
+    "label": "04 · Les fondations",
+    "chapter": "04",
+    "kicker": "Lecture stratégique",
+    "titleA": "Trois",
+    "titleB": "fondations",
+    "items": [
+      [
+        "L'échange comme méthode",
+        "Depuis 1837, la maison va chercher le meilleur savoir là où il se trouve, et le transforme à Glashütte."
+      ],
+      [
+        "D'égal à égal",
+        "Elle reçoit et elle donne : ce qu'elle apprend nourrit à son tour toute l'horlogerie."
+      ],
+      [
+        "L'ancrage local",
+        "Chaque boutique dialogue avec sa ville et avec ses savoir-faire."
+      ]
+    ],
+    "coda": "Pour Genève, la question devient : quelle histoire la maison partage-t-elle avec cette ville ?",
+    "notes": []
+  },
+  "rw": {
+    "label": "05 · The Century of a Memory",
+    "chapter": "05",
+    "tagline": "The Century of a Memory",
+    "startCaption": "Rue Robert-Céard, Genève · juin 2027",
+    "endCaption": "Feuille officielle suisse du commerce · 6 mai 1927",
+    "notes": []
+  },
+  "fosc": {
+    "label": "06 · 6 mai 1927",
+    "chapter": "06",
+    "kicker": "Feuille officielle suisse du commerce · n° 105 · p. 833",
+    "title": "6 mai 1927",
+    "quote": "« La société en nom collectif A. Lange & Söhne […], à Glashütte (Saxe), a établi à Plainpalais une succursale […]. Genre d'affaires : fabrication, achat et vente d'horlogerie et fournitures. Locaux : 25, Avenue du Mail. »",
+    "caption": "ETH-Bibliothek, e-periodica.ch [1]",
+    "alt": "Page entière de la Feuille officielle suisse du commerce du 6 mai 1927 ; en haut à gauche, l'inscription de la succursale genevoise d'A. Lange & Söhne.",
+    "notes": []
+  },
+  "m1": {
+    "label": "07 · 25, avenue du Mail",
+    "chapter": "07",
+    "kicker": "Genève-Plainpalais, 1927",
+    "titleA": "25, avenue",
+    "titleB": "du Mail",
+    "p1": "La succursale est l'affaire de la troisième génération : Adolf-Otto, Wilhelm-Rudolf et Hans-Gerhard Lange, petits-fils du fondateur. Ils en confient la gérance à un Neuchâtelois installé au Petit-Saconnex, Paul Piaget, originaire des Bayards.",
+    "p2": "La direction de Glashütte justifie le choix de Genève, « centre de l'industrie horlogère suisse », par le savoir-faire de la ville en montre-bracelet. Fabrication et vente se font désormais en Suisse, en francs suisses.",
+    "coda": "Glashütte vient apprendre à Genève.",
+    "alt": "Élévation dessinée de l'immeuble du 25, avenue du Mail : quatre étages et un attique au-dessus d'un rez-de-chaussée à arcades, balcons en fer forgé.",
+    "sources": "Feuille officielle suisse du commerce [1] ; Deutsche Uhrmacher-Zeitung, 1927 [21] ; Stegemann [3] ; glashuetteuhren.de [4].",
+    "notes": []
+  },
+  "m2": {
+    "label": "08 · Niton",
+    "chapter": "08",
+    "kicker": "Le fournisseur",
+    "titleA": "Manufacture des",
+    "titleB": "Montres Niton",
+    "p1": "Pour ses premières montres-bracelets, Lange s'adresse à l'une des meilleures manufactures de Genève, fondée en 1919 : Niton.",
+    "p2": "En 1922, elle se classe au premier rang du contrôle officiel genevois ; en 1928, elle est primée au concours de chronométrie de Genève. Elle fournit Cartier, Gübelin et Patek Philippe.",
+    "p3": "Les premières montres de la succursale reçoivent ses calibres de forme.",
+    "captionA": "Les fondateurs de Niton · Klassik Uhren 1/2019",
+    "altA": "Photographie ancienne de trois hommes en costume, les fondateurs de la manufacture Niton, l'un tenant une montre.",
+    "captionB": "Modèles de cadrans Niton, 1928 · niton.swiss",
+    "altB": "Publicité Niton de 1928 : trois modèles de cadrans rectangulaires.",
+    "sources": "Peeters, Klassik Uhren 1/2019 [19] ; Stegemann [3] ; Niton [9].",
+    "notes": []
+  },
+  "m3": {
+    "label": "09 · Glashütte / Genf",
+    "chapter": "09",
+    "kicker": "La double signature",
+    "titleA": "Glashütte /",
+    "titleB": "Genf",
+    "p1": "Les montres de la succursale portent les deux villes. Sur les premières, le mouvement Niton est gravé « A. Lange & Söhne, Geneva-Swiss, Eighteen Jewels, all Adjustments » et orné de côtes de Genève.",
+    "p2": "Il est frappé de deux Poinçons de Genève, le sceau que la ville réserve aux mouvements les plus soignés.",
+    "p3a": "Les mouvements portent la mention « Glashütte & Genf », les cadrans « A. Lange & Söhne Genf ».",
+    "p3b": "",
+    "dialAlt": "Cadran tonneau signé A. Lange & Söhne Genf, chiffres arabes, petite seconde à six heures.",
+    "sources": "Stegemann, Klassik Uhren [3] ; glashuetteuhren.de [4] [20].",
+    "notes": [],
+    "captionA": "Calibre Niton, mouvement n° 4763 · Klassik Uhren",
+    "altA": "Calibre Niton de forme vu côté ponts, rubis sertis, côtes de Genève.",
+    "captionB": "« A. Lange & Söhne · Glashütte & Genf », gravé sur un mouvement de la succursale",
+    "altB": "Gros plan sur la gravure dorée A. Lange & Söhne, Glashütte & Genf, sur le pont d'un mouvement."
+  },
+  "m4": {
+    "label": "10 · Les livres d'expédition",
+    "chapter": "10",
+    "kicker": "1927 — 1933",
+    "titleA": "Quelques centaines",
+    "titleB": "de montres",
+    "p1": "Les livres d'expédition de la production genevoise sont conservés au Deutsches Uhrenmuseum de Glashütte. On y compte 24 montres vendues en 1927, 147 en 1928, environ 150 en 1929, 49 en 1930 et 116 en 1931, expédiées jusqu'à Tokyo.",
+    "p2": "Le 27 avril 1929, la n° 100118, une montre en or vert à calibre Peseux, part chez Eduard Riemer, à Prague, pour 360 francs suisses.",
+    "chartHead": "Montres genevoises vendues, par année",
+    "sources": "Stegemann, Klassik Uhren [3] ; glashuetteuhren.de [20].",
+    "notes": []
+  },
+  "sales": {
+    "note": "D'après les livres d'expédition, relevés par W. Stegemann",
+    "alt": "Montres genevoises vendues par année : 24 en 1927, 147 en 1928, environ 150 en 1929, 49 en 1930, 116 en 1931."
+  },
+  "m5": {
+    "label": "11 · 11 mars 1936",
+    "chapter": "11",
+    "kicker": "La radiation",
+    "titleA": "11 mars",
+    "titleB": "1936",
+    "p1": "Neuf ans après son inscription, la succursale est radiée du registre du commerce de Genève, « ensuite de sa suppression ». La Feuille officielle le publie le 16 mars 1936.",
+    "p2": "La maison continue de vendre des montres-bracelets depuis Glashütte. Puis la guerre, l'expropriation de 1948 et quarante ans d'interruption effacent le souvenir de Genève.",
+    "coda": "Pendant près d'un siècle, l'histoire s'oublie.",
+    "caption": "Feuille officielle suisse du commerce, n° 63, 16 mars 1936, p. 652 · e-periodica.ch [2]",
+    "alt": "Extrait de la Feuille officielle suisse du commerce du 16 mars 1936 : radiation de la succursale de Genève d'A. Lange & Söhne.",
+    "sources": "Feuille officielle suisse du commerce [2] ; A. Lange & Söhne [18].",
+    "notes": []
+  },
+  "m6": {
+    "label": "12 · Une mémoire retrouvée",
+    "chapter": "12",
+    "kicker": "Le dossier",
+    "titleA": "Une mémoire",
+    "titleB": "retrouvée",
+    "intro": "Cette histoire ne figure pas dans le récit de la maison. Nous l'avons reconstituée, pièce à pièce, dans les archives suisses et allemandes.",
+    "items": [
+      [
+        "6 mai 1927",
+        "L'inscription de la succursale, Feuille officielle suisse du commerce"
+      ],
+      [
+        "1927-1933",
+        "Les livres d'expédition genevois, Deutsches Uhrenmuseum Glashütte"
+      ],
+      [
+        "1927",
+        "La n° 100009 au catalogue du musée de Glashütte"
+      ],
+      [
+        "1927-1936",
+        "Les mouvements gravés « Glashütte & Genf »"
+      ],
+      [
+        "1919-1957",
+        "Niton, reconstituée par Sander Peeters"
+      ],
+      [
+        "16 mars 1936",
+        "La radiation, Feuille officielle suisse du commerce"
+      ]
+    ],
+    "coda": "Cent ans plus tard, nous proposons à la maison de rendre ce souvenir à Genève.",
+    "notes": []
+  },
+  "af": {
+    "label": "A2 · Quatre générations",
+    "chapter": "A2",
+    "kicker": "Annexe 2",
+    "title": "Quatre générations, un même voyage",
+    "intro": "Génération après génération, la maison va chercher ailleurs ce qui lui manque et le rapporte à Glashütte.",
+    "head": [
+      [
+        "Génération",
+        "Qui",
+        "Ce qu'ils vont chercher ailleurs"
+      ]
+    ],
+    "rows": [
+      [
+        "1re génération",
+        "Ferdinand Adolph Lange",
+        "Paris, la Suisse et Londres, de 1837 à 1841 : le métier de précision, le système métrique et l'idée d'une manufacture."
+      ],
+      [
+        "2e génération",
+        "Richard et Emil Lange",
+        "Paris, où Emil siège au jury de l'Exposition universelle ; la science des matériaux, d'où naît en 1930 le brevet de Richard sur le spiral au béryllium."
+      ],
+      [
+        "*3e génération",
+        "Adolf-Otto, Wilhelm-Rudolf et Hans-Gerhard Lange",
+        "Genève, de 1927 à 1936 : la montre-bracelet, avec Niton et les fournisseurs genevois."
+      ],
+      [
+        "4e génération",
+        "Walter Lange (1924-2017)",
+        "L'école d'horlogerie de Karlstein, en Autriche, à partir de 1941 ; en 1990, la refondation avec Günter Blümlein."
+      ],
+      [
+        "Aujourd'hui",
+        "A. Lange & Söhne",
+        "Genève de nouveau : le Salon en 2021, la boutique de la rue Robert-Céard en 2027."
+      ]
+    ],
+    "notes": []
+  },
+  "ar": {
+    "label": "A3 · Les deux inscriptions",
+    "chapter": "A3",
+    "kicker": "Annexe 3",
+    "title": "L'ouverture et la fermeture",
+    "a": {
+      "date": "6 mai 1927 · n° 105, p. 833",
+      "text": "« Horlogerie et fournitures. — 3 mai. La société en nom collectif « A. Lange & Söhne Deutsche Uhrenfabrikation-Glashütte, à Glashütte (Saxe) » (inscrite au registre du commerce de Lauenstein [Saxe], suivant certificat délivré le 30 mars 1927), a établi à Plainpalais, une succursale sous la raison sociale : A. Lange & Söhne Deutsche Uhrenfabrikation-Glashütte, à Glashütte, succursale de Genève. Cette succursale est représentée par l'un ou l'autre des associés qui sont : Adolf-Otto Lange ; Wilhelm-Rudolf Lange et Hans-Gerhard Lange, tous trois de nationalité allemande, domiciliés à Glashütte, ou encore par Paul Piaget, des Bayards (Neuchâtel), au Petit-Saconnex, gérant de la succursale, auquel procuration a été conférée à cet effet. Genre d'affaires : Fabrication, achat et vente d'horlogerie et fournitures. Locaux : 25, Avenue du Mail. »",
+      "src": "Feuille officielle suisse du commerce · e-periodica.ch [1]",
+      "alt": "Inscription de la succursale de Genève, Feuille officielle suisse du commerce, 6 mai 1927."
+    },
+    "b": {
+      "date": "16 mars 1936 · n° 63, p. 652",
+      "text": "« Horlogerie, etc. — 11 mars. La succursale établie à Genève, sous la raison sociale A. Lange & Söhne Deutsche Uhrenfabrikation-Glashütte, à Glashütte, succursale de Genève, fabrication, achat et vente d'horlogerie et fournitures (F. o. s. du c. du 6 mai 1927, page 833), par la société en nom collectif « A. Lange & Söhne Deutsche Uhrenfabrikation-Glashütte », à Glashütte (Allemagne), est radiée ensuite de sa suppression. »",
+      "src": "Feuille officielle suisse du commerce · e-periodica.ch [2]",
+      "alt": "Radiation de la succursale de Genève, Feuille officielle suisse du commerce, 16 mars 1936."
+    },
+    "notes": []
+  },
+  "an": {
+    "label": "A4 · Niton, 1919-1972",
+    "chapter": "A4",
+    "kicker": "Annexe 4",
+    "title": "Niton, la manufacture oubliée",
+    "intro": "Le fournisseur genevois de la succursale, d'après l'étude de Sander Peeters.",
+    "rows": [
+      [
+        "28 oct. 1919",
+        "Constitution de « Jeannet, Morel et Bourquin », rue du Mont-Blanc. Morel et Bourquin sortent de Vacheron Constantin (1908-1916)."
+      ],
+      [
+        "10 oct. 1922",
+        "La société devient la Manufacture des Montres Niton. Premier rang au classement du contrôle officiel genevois."
+      ],
+      [
+        "*1927-1929",
+        "Niton fournit les premières montres de la succursale Lange, boîtiers 100008 à 100015."
+      ],
+      [
+        "1928",
+        "Prix au concours de chronométrie de Genève, avec le calibre n° 4903."
+      ],
+      [
+        "Juil. 1929",
+        "Succursale à New York, 607 Fifth Avenue."
+      ],
+      [
+        "30 déc. 1933",
+        "Alfred Bourquin, resté seul, se retire."
+      ],
+      [
+        "1941",
+        "Cession d'une partie des droits de production à Ebauches SA ; Niton fabrique pour Chopard, Rolex et Universal jusqu'en 1955."
+      ],
+      [
+        "1957-1972",
+        "Rachat par Sarcar le 4 février 1957, puis fusion."
+      ],
+      [
+        "Aujourd'hui",
+        "Le nom est relancé à Genève par une nouvelle équipe, sans continuité d'entreprise."
+      ]
+    ],
+    "notes": []
+  },
+  "ap": {
+    "label": "A5 · Le Poinçon de Genève",
+    "chapter": "A5",
+    "kicker": "Annexe 5",
+    "title": "Le Poinçon de Genève",
+    "p1": "Institué par une loi genevoise de 1886, le Poinçon de Genève distingue les mouvements fabriqués, assemblés et réglés dans le canton, contrôlés selon des critères de finition fixés par l'État.",
+    "p2": "Dans les années 1920, Niton est l'une des manufactures qui en présentent le plus au contrôle : de 1921 à 1929, elle se classe au premier ou au deuxième rang.",
+    "p3": "Les calibres Niton des premières montres de la succursale en portent deux.",
+    "caption": "Calibre Niton de forme, mouvement n° 4763 · d'après Stegemann",
+    "alt": "Calibre Niton de forme vu côté ponts, rubis sertis, gravure A. Lange & Söhne.",
+    "notes": []
+  },
+  "aw": {
+    "label": "A8 · Où sont les montres",
+    "chapter": "A8",
+    "kicker": "Annexe 8",
+    "title": "Où sont les montres de Genève",
+    "intro": "Pièces de la succursale localisées dans les ventes et les publications : un point de départ pour les prêts.",
+    "head": [
+      [
+        "N°",
+        "La pièce",
+        "Son histoire",
+        "Où la trouver"
+      ]
+    ],
+    "rows": [
+      [
+        "100009",
+        "Tonneau octogonal en or vert et émail noir, calibre Niton 9 × 11 lignes n° 4763",
+        "Vendue le 21 octobre 1927, restée dans la même famille jusqu'en 2009",
+        "Heickmann, Chemnitz, vente 71, lot 5031"
+      ],
+      [
+        "100011",
+        "Calibre Niton, mouvement n° 4745",
+        "Passée en vente à deux reprises",
+        "Dr Crott, vente 57, lot 662"
+      ],
+      [
+        "100012",
+        "Calibre Niton, mouvement n° 4746",
+        "Reproduite dans l'étude sur Niton",
+        "Peeters, Klassik Uhren 1/2019"
+      ],
+      [
+        "100014",
+        "Montre de la série Niton",
+        "Reproduite dans un ouvrage de référence",
+        "Brunner et Pfeiffer-Belli, p. 244"
+      ],
+      [
+        "100002",
+        "Montre de poche ouverte, style Art déco",
+        "Datée du 13 décembre 1928",
+        "Dr Crott, vente 62, lot 1281"
+      ],
+      [
+        "100118",
+        "Or vert, calibre Peseux 9 ¾ lignes, 16 rubis",
+        "Vendue à Prague le 27 avril 1929",
+        "glashuetteuhren.de"
+      ]
+    ],
+    "notes": []
+  },
+  "aq": {
+    "label": "A9 · Questions sensibles",
+    "chapter": "A9",
+    "kicker": "Annexe 9",
+    "title": "Les questions que la presse posera",
+    "intro": "Réponses préparées, à valider avec la Maison. Elles ne sont pas à l'écran pendant l'événement.",
+    "rows": [
+      [
+        "Lange a-t-elle vendu des montres suisses sous son nom ?",
+        "Oui, de 1927 à 1936, et sans le cacher : les montres portent « Genf » ou « Geneva-Swiss ». En décembre 1928, la maison demande même à ses revendeurs de préciser qu'elles n'ont pas la précision de ses montres de poche."
+      ],
+      [
+        "Lange ne poursuivait-elle pas ceux qui mêlaient mouvements suisses et nom de Glashütte ?",
+        "Si, en 1904, contre l'Union Horlogère. Vingt ans plus tard, la crise de la montre de poche oblige la maison à changer de stratégie ; elle le fait sous un nom distinct, celui de sa succursale genevoise."
+      ],
+      [
+        "Pourquoi la succursale ferme-t-elle en 1936 ?",
+        "Les sources consultées ne le disent pas. La maison sort alors de la crise par des commandes publiques, à Glashütte."
+      ],
+      [
+        "Paul Piaget, le gérant, a-t-il un lien avec la maison Piaget ?",
+        "Aucune source consultée ne le dit. Ne pas le suggérer."
+      ]
+    ],
+    "notes": []
+  },
+  "ag": {
+    "label": "A10 · Publics et jauges",
+    "chapter": "A10",
+    "kicker": "Annexe 10",
+    "title": "Cinq publics, cinq formats",
+    "head": [
+      [
+        "Public",
+        "Jauge",
+        "Moment",
+        "Format",
+        "Attention"
+      ]
+    ],
+    "rows": [
+      [
+        "Journalistes",
+        "~30",
+        "Jour 1, matin",
+        "Prise de parole du CEO, ruban, visite par petits groupes",
+        "Reproduction de 1927 et dossier historique"
+      ],
+      [
+        "Collectionneurs",
+        "~10",
+        "Jour 1, après-midi",
+        "Deux horlogers ouvrent une montre de 1927",
+        "Carnet des montres genevoises, 1927-1936"
+      ],
+      [
+        "Prospects",
+        "à définir",
+        "Jour 2",
+        "Deux mouvements côte à côte, un geste à l'établi",
+        "Invitation à un rendez-vous privé"
+      ],
+      [
+        "Clients",
+        "~80",
+        "Jour 2, groupes de 8 à 10",
+        "Visite de 40 minutes, de la vitrine au salon",
+        "Outil d'horloger gravé, fait pour l'occasion"
+      ],
+      [
+        "Amis de la maison",
+        "10-15",
+        "Chaque soir",
+        "Dîner à une seule table, menu à quatre mains",
+        "Objet réalisé à quatre mains"
+      ]
+    ],
+    "notes": []
+  },
+  "ae": {
+    "label": "A11 · La boutique, étage par étage",
+    "chapter": "A11",
+    "kicker": "Annexe 11",
+    "title": "La boutique, étage par étage",
+    "intro": "Ce que la boutique offre déjà, et ce que l'inauguration y installe. Surfaces et capacités à confirmer sur les plans définitifs.",
+    "head": [
+      [
+        "Étage",
+        "Existant",
+        "Pendant l'inauguration",
+        "Point d'attention"
+      ]
+    ],
+    "rows": [
+      [
+        "Rez-de-chaussée",
+        "Mur d'histoire, espace Glashütte, accueil",
+        "Vitrine de 1927, prise de parole du CEO, ruban",
+        "Flux de la presse et des clients, sécurité de la vitrine"
+      ],
+      [
+        "Premier étage",
+        "Cinéma, salle multisensorielle, salon",
+        "Court film d'archives pour les groupes de clients",
+        "Durée du film calée sur la rotation de 40 minutes"
+      ],
+      [
+        "Deuxième étage",
+        "Atelier, salon privé, salle de 25 m²",
+        "Horlogers à l'établi, rencontre des collectionneurs, dîner",
+        "Dix à quinze couverts n'y tiennent pas : capacité ou lieu extérieur à trancher"
+      ]
+    ],
+    "notes": []
+  },
+  "at": {
+    "label": "A12 · Rétroplanning",
+    "chapter": "A12",
+    "kicker": "Annexe 12",
+    "title": "De novembre 2026 à juin 2027",
+    "intro": "Proposition de calendrier de préparation, à caler sur la date d'ouverture.",
+    "head": [
+      [
+        "Quand",
+        "Quoi",
+        "Avec qui"
+      ]
+    ],
+    "rows": [
+      [
+        "Nov. 2026",
+        "Validation du concept et du récit de 1927",
+        "Maison, service patrimoine"
+      ],
+      [
+        "Nov. 2026",
+        "Demandes d'archives et de droits : registre du commerce, Feuille officielle, livres d'expédition",
+        "Archives d'État, ETH-Bibliothek, musée de Glashütte"
+      ],
+      [
+        "Déc. 2026",
+        "Approche de Niton et des collectionneurs pour les prêts de montres",
+        "Niton, Dr Crott, maisons de ventes"
+      ],
+      [
+        "Janv. 2027",
+        "Choix des chefs et de l'artisan genevois ; lancement de l'objet à quatre mains",
+        "Chefs, artisans"
+      ],
+      [
+        "Févr. 2027",
+        "Écriture et production du film d'archives",
+        "Production, Maison"
+      ],
+      [
+        "Mars 2027",
+        "Invitations, listes et jauges par public",
+        "Maison, MCI"
+      ],
+      [
+        "Avril 2027",
+        "Fabrication des vitrines, du carnet et des reproductions",
+        "Scénographe, imprimeur"
+      ],
+      [
+        "Mai 2027",
+        "Répétitions, formation des hôtes au récit",
+        "Équipes de la boutique, horlogers"
+      ],
+      [
+        "*Juin 2027",
+        "Grand Opening, rue Robert-Céard",
+        "Tous"
+      ]
+    ],
+    "notes": []
+  },
+  "ac": {
+    "label": "A13 · Partenaires à solliciter",
+    "chapter": "A13",
+    "kicker": "Annexe 13",
+    "title": "Partenaires à solliciter",
+    "head": [
+      [
+        "Partenaire",
+        "Ce qu'on lui demande",
+        "Pour quel moment"
+      ]
+    ],
+    "rows": [
+      [
+        "Archives d'État de Genève",
+        "Consultation et reproduction de l'inscription au registre du commerce, 1927",
+        "Vitrine de 1927, presse"
+      ],
+      [
+        "ETH-Bibliothek, e-periodica",
+        "Droits de reproduction des pages de la Feuille officielle, 1927 et 1936",
+        "Reproduction offerte à la presse"
+      ],
+      [
+        "Deutsches Uhrenmuseum Glashütte",
+        "Accès aux livres d'expédition genevois, prêt ou fac-similé",
+        "Vitrine, carnet des collectionneurs"
+      ],
+      [
+        "Niton",
+        "Présence d'un horloger, prêt d'un calibre de l'époque",
+        "Rencontre des collectionneurs"
+      ],
+      [
+        "Dr Helmut Crott, Phillips",
+        "Réseau des collectionneurs de montres « Lange Genf »",
+        "Prêts pour la vitrine"
+      ],
+      [
+        "Wolfgang Stegemann, Sander Peeters",
+        "Relecture historique, intervention éventuelle",
+        "Dossier de presse, carnet"
+      ],
+      [
+        "Chefs genevois et saxon",
+        "Menu à quatre mains",
+        "Dîner des amis de la maison"
+      ],
+      [
+        "Artisan genevois",
+        "Objet gravé ou émaillé, réalisé avec un artisan de Lange",
+        "Attention des amis de la maison"
+      ]
+    ],
+    "notes": []
+  },
+  "aa": {
+    "label": "A14 · Points à arbitrer",
+    "chapter": "A14",
+    "kicker": "Annexe 14",
+    "title": "Points à arbitrer",
+    "head": [
+      [
+        "Point",
+        "Pourquoi",
+        "Repli"
+      ]
+    ],
+    "rows": [
+      [
+        "Le récit de 1927",
+        "Validation de la Maison avant toute diffusion",
+        "Le réserver aux collectionneurs et à la presse spécialisée"
+      ],
+      [
+        "« Première montre-bracelet livrée »",
+        "Formule de Klassik Uhren ; sources contradictoires sur la 100009",
+        "La retirer, garder « l'une des premières »"
+      ],
+      [
+        "Horloger de Niton",
+        "Accord de Niton et disponibilité",
+        "Un historien indépendant aux côtés de l'horloger Lange"
+      ],
+      [
+        "Prêt des archives",
+        "Originaux aux Archives d'État et au musée de Glashütte",
+        "Fac-similés"
+      ],
+      [
+        "Duo de chefs",
+        "Disponibilités, budget, logistique",
+        "Un seul chef, menu à inspirations croisées"
+      ],
+      [
+        "Dîner au deuxième étage",
+        "Salle de 25 m², trop petite pour 10 à 15 couverts",
+        "Lieu extérieur proche"
+      ],
+      [
+        "Troisième jour",
+        "Budget, équipes, sécurité, agenda du CEO",
+        "Deux jours"
+      ]
+    ],
+    "notes": []
+  },
+  "e5": {
+    "label": "03 · Chaque boutique parle sa ville",
+    "chapter": "03",
+    "kicker": "Lisbonne, Londres",
+    "titleA": "Chaque boutique",
+    "titleB": "parle sa ville",
+    "p1": "Lisbonne, juin 2026. Avenida da Liberdade, l'accueil de la nouvelle boutique est pavé d'une calçada portuguesa, posée à la main en éventail : la maison y voit un écho au perlage de ses platines.",
+    "p2": "Londres, décembre 2025. Sur Old Bond Street, le salon reprend l'esprit des clubs de Mayfair, et la maison rappelle ses « liens historiques » avec la ville, où son fondateur s'était formé.",
+    "reading": "Une boutique Lange n'est pas un écrin standard : elle s'ancre dans sa ville et fait dialoguer un savoir-faire local avec celui de Glashütte.",
+    "captionA": "La boutique de Lisbonne, avenida da Liberdade · A. Lange & Söhne",
+    "altA": "Intérieur de la boutique de Lisbonne : comptoir sombre, vitrines murales, sol en mosaïque.",
+    "captionB": "La façade de Lisbonne · A. Lange & Söhne",
+    "altB": "Façade de la boutique de Lisbonne, deux vitrines sous auvents blancs.",
+    "sources": "A. Lange & Söhne, communiqué Lisbonne, 16.06.2026 [25] ; Richemont, communiqué Londres, 05.12.2025 [26].",
+    "notes": []
+  },
+  "facade": {
+    "label": "25, avenue du Mail · élévation"
+  },
+  "cabcal": {
+    "date": "Grande date",
+    "tourbillon": "Tourbillon"
+  },
+  "ax": {
+    "label": "Annexes · Sommaire",
+    "kicker": "Annexes",
+    "title": "Pour aller plus loin",
+    "notes": []
+  }
+}

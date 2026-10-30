@@ -1,0 +1,3327 @@
+/* =========================================================================
+   A Century of Exchange · A. Lange & Söhne · Geneva 2027
+   Stage is 1920 × 1080. Tokens are fixed by the production brief (§04):
+   set here once, never redefined further down.
+   ========================================================================= */
+
+:root {
+  --paper: #f5f2eb;
+  --ink: #14120f;
+  --accent: #6e5a3a; /* patinated brass: rules, numbers, one word per slide */
+  --rule: rgba(20, 18, 15, 0.14);
+  --muted: rgba(20, 18, 15, 0.55);
+
+  --serif: "Cormorant Garamond", "Spectral", Garamond, "Times New Roman", serif;
+  --sans: "Archivo", "Univers", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Archivo", "Univers", "Helvetica Neue", Arial, sans-serif; /* labels: a neo-grotesque after the brand's Univers */
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-short: 600ms;
+  --t-long: 1200ms;
+
+  --safe-x: 128px;
+  --safe-y: 96px;
+  --col: calc((1920px - 2 * var(--safe-x) - 11 * var(--gutter)) / 12);
+  --gutter: 32px;
+
+  --frame: #0e0d0b; /* letterbox around the 16:9 stage */
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--frame);
+}
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+body.idle,
+body.idle * {
+  cursor: none !important;
+}
+img {
+  display: block;
+}
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- Stage */
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin: -540px 0 0 -960px;
+  transform: scale(var(--scale, 1));
+  overflow: hidden;
+  background: var(--paper);
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+}
+.slide.is-active,
+.slide.is-leaving {
+  visibility: visible;
+}
+.slide.is-leaving {
+  z-index: 1;
+}
+.slide.is-active {
+  z-index: 2;
+}
+.slide .notes {
+  display: none;
+}
+body.is-black .stage {
+  visibility: hidden;
+}
+
+/* ------------------------------------------------------------- Typography */
+
+.label {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.label.accent,
+.accent {
+  color: var(--accent);
+}
+.num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.display {
+  font: 400 132px/0.98 var(--serif);
+  letter-spacing: -0.01em;
+}
+.title {
+  font: 400 112px/1 var(--serif);
+  letter-spacing: -0.005em;
+}
+.lead {
+  font: 400 38px/1.3 var(--serif);
+}
+.body {
+  font: 400 29px/1.42 var(--serif);
+}
+.coda {
+  font: italic 400 38px/1.3 var(--serif);
+}
+.caption {
+  font: 400 11px/1.5 var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* Folio: chapter number and house name, bottom left */
+.folio {
+  position: absolute;
+  left: var(--safe-x);
+  bottom: 52px;
+  display: flex;
+  gap: 18px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.folio .num {
+  color: var(--accent);
+}
+/* Sources line (history slides only), bottom right of the folio */
+.sources {
+  position: absolute;
+  right: var(--safe-x);
+  bottom: 52px;
+  max-width: 1000px;
+  text-align: right;
+  font: 400 11px/1.4 var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* Rules */
+.rule-h {
+  position: absolute;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ------------------------------------------------------------- Steps
+   [data-step="n"]  shown from step n   (.on)  · .at at step n · .past after n
+   [data-only="n"]  shown at step n only (.on)                                */
+
+.slide [data-step],
+.slide [data-only] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 900ms var(--ease),
+    transform var(--t-long) var(--ease);
+}
+.slide [data-step].on,
+.slide [data-only].on {
+  opacity: 1;
+  transform: none;
+}
+.slide .fade[data-step],
+.slide .fade[data-only] {
+  transform: none;
+}
+.slide.snap,
+.slide.snap * {
+  transition: none !important;
+}
+/* An earlier step steps back once the story has moved on */
+.slide .recede.past {
+  opacity: 0.42;
+}
+
+/* Entry: elements marked .in rise once when their slide arrives */
+.slide .in {
+  opacity: 0;
+}
+.slide.is-active .in {
+  animation: rise var(--t-long) var(--ease) both;
+  animation-delay: calc(var(--d, 0) * 1ms + 300ms);
+}
+.slide.is-leaving .in {
+  opacity: 1;
+  animation: none;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------- Line drawings
+   .s stroke · .d stroke that draws itself (pathLength 1, delay --dd) · .t hairline · .f fill */
+
+.art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.art .s {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.art .t {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.art .f {
+  fill: var(--ink);
+  stroke: none;
+}
+.art .a {
+  stroke: var(--accent);
+}
+.slide .d {
+  stroke-dasharray: 1 0;
+}
+.slide.is-active .draw .d,
+.slide.is-active .draw.on .d {
+  animation: draw var(--t-long) var(--ease) both;
+  animation-delay: calc(var(--dd, 0) * 1ms + 300ms);
+}
+.slide.is-active .draw[data-step]:not(.on) .d {
+  animation: none;
+  stroke-dasharray: 0 1;
+}
+.slide.is-leaving .d {
+  animation: none;
+}
+@keyframes draw {
+  from {
+    stroke-dasharray: 0 1;
+  }
+  to {
+    stroke-dasharray: 1 0;
+  }
+}
+
+/* ------------------------------------------------------------- Figures */
+
+.figure {
+  position: absolute;
+  margin: 0;
+}
+.figure .frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.figure figcaption {
+  margin-top: 18px;
+}
+
+/* ------------------------------------------------------------- Cover */
+
+.cover .top {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: var(--safe-y);
+  display: flex;
+  justify-content: space-between;
+}
+.cover .kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: 300px;
+}
+.cover .display {
+  position: absolute;
+  left: var(--safe-x);
+  top: 300px;
+  width: 1500px;
+}
+.cover .axis {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 610px;
+  height: 120px;
+}
+
+.cover .axis .label {
+  position: absolute;
+}
+.cover .axis-l,
+.cover .axis-r {
+  top: 14px;
+  color: var(--ink);
+}
+.cover .axis-ld,
+.cover .axis-rd {
+  top: 74px;
+  font: 400 190px/1 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+.cover .axis-l,
+.cover .axis-ld {
+  left: 0;
+}
+.cover .axis-r,
+.cover .axis-rd {
+  right: 0;
+}
+
+/* ------------------------------------------------------------- Acts */
+
+.act .act-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 820px;
+}
+.act .display {
+  margin: 36px 0 44px;
+}
+.act .display .line2 {
+  display: block;
+}
+.act .dial {
+  position: absolute;
+  left: 1000px;
+  top: 160px;
+  width: 760px;
+  height: 760px;
+}
+/* Lange 1-style act dial (engine.js, dial()) */
+.art .rn {
+  font: 400 34px var(--serif);
+  fill: var(--ink);
+}
+.art .dg {
+  font: 500 98px var(--serif);
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+  fill: var(--ink);
+}
+.art .pr {
+  font: 500 17px var(--serif);
+  letter-spacing: 0.14em;
+  fill: var(--ink);
+}
+.art .hf {
+  fill: var(--paper);
+}
+.art .paperfill {
+  fill: var(--paper);
+  stroke: none;
+}
+.art .rot {
+  transform-box: view-box;
+}
+.art .lbl {
+  font: 500 22px var(--mono);
+  letter-spacing: 0.08em;
+  fill: var(--muted);
+}
+.art .lbl.cur {
+  fill: var(--accent);
+}
+.art .fa {
+  fill: var(--accent);
+}
+.art .hand {
+  transform-box: view-box;
+  transform-origin: 320px 320px;
+}
+
+/* ------------------------------------------------------------- 02 · Reciprocity */
+
+.s02 .kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+}
+.s02 .title {
+  position: absolute;
+  left: var(--safe-x);
+  top: 140px;
+}
+.s02 .quote {
+  position: absolute;
+  left: var(--safe-x);
+  top: 330px;
+  width: 1500px;
+  font: italic 400 56px/1.24 var(--serif);
+}
+.s02 .quote span {
+  display: block;
+}
+.s02 .quote span + span {
+  margin-top: 18px;
+}
+.s02 .trace {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 640px;
+  height: 300px;
+}
+.art .city {
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: var(--ink);
+}
+.s02 .trace .cross {
+  opacity: 0;
+  transition: opacity var(--t-short) var(--ease) 1100ms;
+}
+.s02 .trace.on .cross {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------- 03 · Rue Robert-Céard */
+
+.s03 .col-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  width: 760px;
+}
+.s03 .kicker {
+  margin-bottom: 28px;
+}
+.s03 .title {
+  margin-bottom: 44px;
+}
+.s03 .body {
+  font-size: 33px;
+}
+.s03 .body[data-step] {
+  margin-top: 30px;
+}
+.s03 .col-media {
+  position: absolute;
+  left: 1000px;
+  top: var(--safe-y);
+  width: 792px;
+}
+.s03 .figure {
+  position: relative;
+}
+.s03 .figure + .figure {
+  margin-top: 30px;
+}
+.s03 .figure .frame {
+  height: 340px;
+  overflow: hidden;
+}
+.s03 .figure img {
+  object-fit: cover;
+}
+.s03 .figure figcaption {
+  margin-top: 12px;
+  display: flex;
+  gap: 18px;
+}
+
+/* ------------------------------------------------------------- Shared: chapter heads placed on the page */
+
+.s04 .kicker,
+.s05 .kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+}
+.s04 .title,
+.s05 .title {
+  position: absolute;
+  left: var(--safe-x);
+  top: 140px;
+  white-space: nowrap;
+}
+.s05 .title {
+  font-size: 96px;
+  top: 148px;
+}
+
+/* ------------------------------------------------------------- 04 · Encounters */
+
+.s04 .intro {
+  position: absolute;
+  left: var(--safe-x);
+  top: 300px;
+  width: 860px;
+}
+/* The four moments in one column; on the right, one image per moment, each new one
+   dropping onto the stack a little lower than the last */
+.s04 .pairs {
+  position: absolute;
+  left: var(--safe-x);
+  top: 460px;
+  width: 860px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.s04 .pairs li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  border-top: 1px solid var(--rule);
+  padding: 16px 0 18px;
+  font: 400 29px/1.28 var(--serif);
+}
+.s04 .pairs .num {
+  padding-top: 9px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.s04 .stack {
+  position: absolute;
+  left: 1092px;
+  top: 320px;
+  width: 700px;
+  height: 530px;
+}
+.s04 .card {
+  position: absolute;
+  left: calc(var(--i) * 24px);
+  top: calc(var(--i) * 46px);
+  width: 600px;
+  height: 380px;
+  margin: 0;
+  padding: 10px;
+  background: #fbf9f4;
+  box-shadow: 0 1px 2px rgba(20, 18, 15, 0.12), 0 18px 40px -18px rgba(20, 18, 15, 0.35);
+  opacity: 0;
+  transform: translateY(-60px);
+  transition: opacity 0.6s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease);
+}
+.s04 .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.s04 .card .num {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  padding: 4px 8px;
+  background: #fbf9f4;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.s04 .card.on {
+  opacity: 1;
+  transform: none;
+}
+.s04 .card.past {
+  filter: saturate(0.55) brightness(0.96);
+}
+.s04 .coda {
+  position: absolute;
+  left: 1092px;
+  top: 862px;
+  width: 700px;
+  padding-top: 18px;
+  font-size: 30px;
+  border-top: 1px solid var(--accent);
+}
+
+/* ------------------------------------------------------------- 05 · Five audiences */
+
+.s05 .para {
+  position: absolute;
+  left: var(--safe-x);
+  top: 330px;
+  width: 540px;
+}
+/* Same four elements for every guest, five ways of giving them: each cell says how. The
+   columns darken from the most public (press) to the most intimate (friends of the house). */
+.s05 .matrix {
+  position: absolute;
+  left: 728px;
+  top: 300px;
+  width: 1064px;
+}
+.s05 .mhead,
+.s05 .mrow,
+.s05 .maxis {
+  display: grid;
+  grid-template-columns: 234px repeat(5, 1fr);
+}
+.s05 .mhead {
+  align-items: end;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--accent);
+}
+.s05 .mhead .label {
+  padding: 0 12px;
+  color: var(--ink);
+}
+.s05 .mrow {
+  min-height: 118px;
+  border-bottom: 1px solid var(--rule);
+}
+.s05 .rl {
+  align-self: center;
+  font: 400 23px/1.2 var(--serif);
+  padding-right: 20px;
+}
+.s05 .cell {
+  padding: 14px 12px;
+  font: italic 400 19px/1.22 var(--serif);
+  background: rgba(110, 90, 58, calc(0.025 + var(--c) * 0.035));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-short) var(--ease), transform var(--t-short) var(--ease);
+  transition-delay: calc(var(--r) * 160ms + var(--c) * 90ms);
+}
+.s05.s1 .cell {
+  opacity: 1;
+  transform: none;
+}
+.s05 .maxis {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+.s05 .mhead {
+  grid-template-columns: 300px repeat(5, 1fr);
+  align-items: end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.s05 .mhead .label {
+  text-align: center;
+  color: var(--ink);
+  padding: 0 6px;
+}
+.s05 .mrow {
+  align-items: center;
+  min-height: 104px;
+  border-bottom: 1px solid var(--rule);
+}
+.s05 .rl {
+  font: 400 27px/1.2 var(--serif);
+  padding-right: 24px;
+}
+.s05 .track {
+  position: relative;
+  height: 100%;
+  min-height: 104px;
+}
+/* the row's line runs from the first audience to the last */
+.s05 .track i {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-long) var(--ease);
+  transition-delay: calc(var(--r) * 140ms);
+}
+.s05 .track b {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: var(--paper);
+  transition: background-color var(--t-short) var(--ease);
+}
+.s05 .track b:nth-of-type(1) { left: 10%; }
+.s05 .track b:nth-of-type(2) { left: 30%; }
+.s05 .track b:nth-of-type(3) { left: 50%; }
+.s05 .track b:nth-of-type(4) { left: 70%; }
+.s05 .track b:nth-of-type(5) { left: 90%; }
+.s05.s1 .track i {
+  transform: scaleX(1);
+}
+.s05.s1 .track b {
+  background-color: var(--accent);
+}
+.s05.s1 .track b:nth-of-type(1) { transition-delay: calc(var(--r) * 140ms + 100ms); }
+.s05.s1 .track b:nth-of-type(2) { transition-delay: calc(var(--r) * 140ms + 340ms); }
+.s05.s1 .track b:nth-of-type(3) { transition-delay: calc(var(--r) * 140ms + 580ms); }
+.s05.s1 .track b:nth-of-type(4) { transition-delay: calc(var(--r) * 140ms + 820ms); }
+.s05.s1 .track b:nth-of-type(5) { transition-delay: calc(var(--r) * 140ms + 1060ms); }
+.s05 .maxis {
+  padding-top: 18px;
+}
+.s05 .axisline {
+  grid-column: 2 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 2%;
+}
+.s05 .axisline i {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.s05 .coda {
+  position: absolute;
+  left: var(--safe-x);
+  top: 884px;
+  width: 1664px;
+  padding-top: 24px;
+  border-top: 1px solid var(--accent);
+}
+
+/* ------------------------------------------------------------- 06 · The boutique */
+
+.s06 .col-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  width: 760px;
+}
+.s06 .kicker {
+  margin-bottom: 28px;
+}
+.s06 .title {
+  margin-bottom: 44px;
+}
+.s06 .body {
+  font-size: 32px;
+}
+.s06 .coda {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--accent);
+}
+/* A section through the house, set in rules: three floors on a ground line */
+.s06 .section {
+  position: absolute;
+  left: 1000px;
+  top: 180px;
+  width: 792px;
+  height: 750px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.s06 .floor {
+  height: 226px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.s06 .fl {
+  font: 400 40px/1.2 var(--serif);
+  max-width: 640px;
+}
+.s06 .ground {
+  display: block;
+  height: 0;
+  border-top: 2px solid var(--ink);
+}
+
+/* ------------------------------------------------------------- Shared layouts (Act III) */
+
+/* .headed: kicker and title set on the page, full width */
+.headed .kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+}
+.headed .title {
+  position: absolute;
+  left: var(--safe-x);
+  top: 140px;
+}
+
+/* .split: text on the left, one figure or one diagram on the right */
+.split .col-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  width: 800px;
+}
+.split .kicker {
+  margin-bottom: 28px;
+}
+.split .title {
+  margin-bottom: 40px;
+}
+.split .title .line2 {
+  display: block;
+}
+.split .body + .body,
+.split .in + .body {
+  margin-top: 22px;
+}
+.split .col-media {
+  position: absolute;
+  left: 1040px;
+  top: var(--safe-y);
+  width: 752px;
+  height: 860px;
+}
+.split .col-media.figure,
+.split .col-media .figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.split .col-media .figure {
+  position: absolute;
+  inset: 0;
+}
+.split .figure .frame {
+  height: auto;
+  max-height: 780px;
+}
+.split .figure img {
+  max-height: 780px;
+  width: auto;
+  max-width: 752px;
+  margin: 0 auto;
+}
+.split .figure figcaption {
+  align-self: stretch;
+  text-align: center;
+}
+/* An object opens from its centre */
+.figure.piece .frame {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path var(--t-long) var(--ease);
+}
+.figure.piece.on .frame {
+  clip-path: circle(71% at 50% 50%);
+}
+
+/* ------------------------------------------------------------- 07 · Calendar */
+
+.s07 .days {
+  position: absolute;
+  left: var(--safe-x);
+  top: 330px;
+  width: 1664px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 48px;
+  row-gap: 22px;
+}
+.s07 .dayhead {
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+}
+.s07 .dayhead.opt {
+  border-top-style: dashed;
+}
+.s07 .days .body {
+  font-size: 32px;
+}
+.s07 .evening {
+  position: absolute;
+  left: var(--safe-x);
+  top: 700px;
+  width: 1664px;
+  padding-top: 20px;
+  border-top: 1px solid var(--accent);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 48px;
+}
+.s07 .evening .body {
+  font: italic 400 36px/1.3 var(--serif);
+}
+
+/* ------------------------------------------------------------- 08 · Press */
+
+.s08 .col-media .frame {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 22px 0;
+}
+.s08 .col-media img {
+  max-height: 740px;
+}
+
+/* ------------------------------------------------------------- 09 · Collectors */
+
+.s09 .body {
+  font-size: 28px;
+}
+/* The Niton and the Cabaret side by side, at the same scale (mm): Niton 17.7 units/mm,
+   Cabaret 11 px/mm, so the Cabaret's units are drawn 1.61 times larger. */
+.s09 .col-media {
+  left: 1000px;
+  width: 792px;
+}
+.s09 .duo .pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+}
+.s09.split .frame.drawing.niton {
+  width: 427px;
+  height: 330px;
+}
+.s09 .frame.drawing.cabaret {
+  width: 363px;
+  height: 390px;
+}
+.s09 .duo figcaption {
+  margin-top: 28px;
+  line-height: 1.7;
+}
+.art .cab-num {
+  font: 400 19px var(--serif);
+  fill: var(--ink);
+}
+.art .cab-date {
+  font: 500 30px var(--serif);
+  fill: var(--ink);
+}
+.art .cab-photo image {
+  pointer-events: none;
+}
+/* ------------------------------------------------------------- 11 · Clients, the route */
+
+.s11 .route-wrap {
+  padding-top: 110px;
+}
+.s11 .route .label:empty {
+  display: none;
+}
+.s11 .route {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0 0 0 40px;
+  border-left: 1px solid var(--accent);
+}
+.s11 .route li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 54px;
+}
+.s11 .route li::before {
+  content: "";
+  position: absolute;
+  left: -47px;
+  top: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.s11 .route .stop {
+  font: 400 40px/1.2 var(--serif);
+}
+
+/* ------------------------------------------------------------- 12 · Dinner */
+
+.s12 .col-text .body {
+  font-size: 33px;
+}
+.s12 .table-text {
+  top: 330px;
+  height: auto;
+}
+.s12 .lead {
+  font-size: 40px;
+  line-height: 1.32;
+}
+.s12 .coda {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--accent);
+}
+
+/* ------------------------------------------------------------- 13 · Gifts, a register */
+
+.s13 .title {
+  width: 1300px;
+}
+.s13 .register {
+  position: absolute;
+  left: var(--safe-x);
+  top: 440px;
+  width: 1664px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.s13 .register li {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+}
+.s13 .register li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.s13 .register .label {
+  color: var(--accent);
+}
+.s13 .gift {
+  font: 400 36px/1.25 var(--serif);
+}
+
+/* ------------------------------------------------------------- Calibre drawings */
+
+.drawing svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.split .frame.drawing.niton {
+  width: 752px;
+  height: 581px;
+  max-height: none;
+}
+.split .frame.drawing.tonneau {
+  width: 700px;
+  height: 700px;
+  max-height: none;
+}
+.art .t.dash {
+  stroke-dasharray: 4 5;
+}
+.art .cote,
+.art text.cote {
+  font: 500 14px var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink);
+}
+.art .eng {
+  font: 400 9px var(--mono);
+  letter-spacing: 0.14em;
+  fill: var(--muted);
+}
+.art .note {
+  font: 400 11px var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+.art .house {
+  font: italic 400 30px var(--serif);
+  fill: var(--ink);
+}
+/* Finishing (stripes, timing screws, engraving) and dimensions arrive after the drawing,
+   the dimensions one by one (--cd). */
+.slide .art .late,
+.slide .art g.cote {
+  opacity: 0;
+}
+.slide.is-active .art .late,
+.slide.is-active .art g.cote {
+  animation: fadein var(--t-short) var(--ease) both;
+  animation-delay: calc(var(--cd, 1600) * 1ms);
+}
+.slide.is-active [data-only]:not(.on) .art .late,
+.slide.is-active [data-only]:not(.on) .art g.cote {
+  animation: none;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.stage.overview .art .late,
+.stage.overview .art g.cote {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* ------------------------------------------------------------- Annexes */
+
+/* Annexes: discussion material, set apart from the deck on the brass of the accent,
+   colours inverted (the tokens are re-pointed inside the annex slides only). */
+.slide.annex {
+  --paper: #6e5a3a;
+  --ink: #f5f2eb;
+  --accent: #e9d3a4;
+  --rule: rgba(245, 242, 235, 0.24);
+  --muted: rgba(245, 242, 235, 0.68);
+  background: var(--paper);
+  color: var(--ink);
+}
+.annex .title {
+  font-size: 72px;
+}
+.a2 .body {
+  font-size: 24px;
+  line-height: 1.4;
+}
+.a2 .col-media {
+  height: 760px;
+}
+/* the arbitrated sentence sits under the drawing it explains */
+.a2 .houses-line {
+  position: absolute;
+  left: 1040px;
+  top: 856px;
+  width: 752px;
+  padding-top: 14px;
+  border-top: 1px solid var(--accent);
+  font: italic 400 24px/1.3 var(--serif);
+}
+
+/* A1 · milestones, in two times */
+.a1 .era {
+  position: absolute;
+  top: 270px;
+  width: 800px;
+}
+.a1 .era-a {
+  left: var(--safe-x);
+}
+.a1 .era-b {
+  left: 992px;
+}
+.a1 .era-head {
+  margin-bottom: 14px;
+}
+.a1 .milestones {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.a1 .milestones li {
+  display: grid;
+  grid-template-columns: 150px 1fr 76px;
+  column-gap: 20px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-top: 1px solid var(--rule);
+}
+.a1 .milestones li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.a1 .fact {
+  font: 400 22px/1.3 var(--serif);
+}
+.a1 .milestones li > .label:last-child {
+  text-align: right;
+}
+.a1 .arrival .fact {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* A3 · sources, two columns, domains only (no outgoing link on screen) */
+.a3 .refs {
+  position: absolute;
+  left: var(--safe-x);
+  top: 236px;
+  width: 1664px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 64px;
+}
+.a3 .refs li {
+  break-inside: avoid;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  row-gap: 2px;
+  padding: 7px 0;
+  border-top: 1px solid var(--rule);
+}
+.a3 .ref {
+  font: 400 17px/1.25 var(--serif);
+}
+.a3 .refs li > .label:last-child {
+  grid-column: 2;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+/* A2 · the piece and the document */
+.a2b .kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+}
+.a2b .title {
+  position: absolute;
+  left: var(--safe-x);
+  top: 132px;
+}
+.a2b .doc {
+  position: absolute;
+  left: var(--safe-x);
+  top: 250px;
+  width: 440px;
+}
+.a2b .doc .frame {
+  position: relative;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.a2b .doc img {
+  width: 440px;
+  height: auto;
+}
+/* the 100118 line sits at about 50 % of the page */
+.a2b .doc .mark {
+  position: absolute;
+  left: -20px;
+  top: calc(18px + 49%);
+  height: 6%;
+  width: 1px;
+  background: var(--accent);
+}
+.a2b .doc figcaption {
+  margin-top: 14px;
+}
+.a2b .piece-draw {
+  position: absolute;
+  left: 660px;
+  top: var(--safe-y);
+  width: 1132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.a2b .drawing.peseux {
+  width: 820px;
+  height: 820px;
+}
+.a2b .piece-draw figcaption {
+  margin-top: 6px;
+}
+.a2b .layer {
+  transition: transform var(--t-long) var(--ease);
+}
+.a2b .l1 {
+  transform: translateY(-62px);
+}
+.a2b .l3 {
+  transform: translateY(62px);
+}
+.a2b.s1 .l1 {
+  transform: translateY(-280px);
+}
+.a2b.s1 .l3 {
+  transform: translateY(280px);
+}
+.a2b .lead,
+.a2b .axes {
+  opacity: 0;
+  transition: opacity var(--t-short) var(--ease) 600ms;
+}
+.a2b.s1 .lead {
+  opacity: 1;
+}
+.a2b.s1 .axes {
+  opacity: 0.8;
+}
+
+/* ------------------------------------------------------------- 1927 */
+
+.s1927 .col-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  width: 800px;
+}
+.s1927 .kicker {
+  margin-bottom: 28px;
+}
+.s1927 .title {
+  margin-bottom: 44px;
+}
+.s1927 .lead {
+  margin-bottom: 26px;
+}
+.s1927 .body + .body {
+  margin-top: 22px;
+}
+.s1927 .coda {
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--accent);
+  width: 800px;
+}
+.s1927 .col-media {
+  position: absolute;
+  left: 1040px;
+  top: var(--safe-y);
+  width: 752px;
+  height: 820px;
+}
+.s1927 .figure {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.s1927 .figure .frame {
+  height: auto;
+}
+.s1927 .fig-doc .frame {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 24px 0;
+}
+.s1927 .fig-doc .mark {
+  position: absolute;
+  left: -22px;
+  /* the Lange entry sits at about 34 % to 66 % of the crop's height */
+  top: calc(24px + 34%);
+  height: 31%;
+  width: 1px;
+  background: var(--accent);
+}
+.s1927 .fig-piece .frame {
+  width: 640px;
+  height: 640px;
+  margin: 0 auto;
+}
+/* The piece opens from its centre (iris), the document has already gone */
+.s1927 .fig-piece .frame {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path var(--t-long) var(--ease);
+}
+.s1927 .fig-piece.on .frame {
+  clip-path: circle(50% at 50% 50%);
+}
+.s1927 .fig-piece figcaption {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------- Overview (sommaire, key o) */
+
+.stage.overview .slide {
+  visibility: visible;
+  cursor: pointer;
+  transform-origin: 0 0;
+  outline: 2px solid var(--rule);
+  transition: transform 700ms var(--ease);
+}
+.stage.overview .slide.sel {
+  outline: 10px solid var(--accent);
+}
+.stage.overview .slide::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  padding: 24px 40px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 500 54px/1 var(--mono);
+  letter-spacing: 0.06em;
+}
+.stage.overview .in,
+.stage.overview [data-step],
+.stage.overview [data-only] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+.stage.overview [data-only]:not(.on) {
+  opacity: 0 !important;
+}
+.stage.overview .d {
+  animation: none !important;
+  stroke-dasharray: 1 0 !important;
+}
+
+/* ------------------------------------------------------------- Help (key ?) */
+
+.help {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  padding: 22px 26px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  font: 400 12px/1.9 var(--mono);
+  letter-spacing: 0.04em;
+  display: none;
+}
+.help.open {
+  display: block;
+}
+.help kbd {
+  display: inline-block;
+  min-width: 64px;
+  color: var(--accent);
+  font: inherit;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- Reduced motion: fades only */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide [data-step],
+  .slide [data-only],
+  .slide.is-active .in {
+    transform: none !important;
+    animation-name: fadein !important;
+  }
+  .slide.is-active .draw .d {
+    animation: none !important;
+  }
+  .slide .art .late,
+  .slide .art g.cote {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .a2b .layer {
+    transition: none !important;
+  }
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* ------------------------------------------------------------- Print: one 16:9 page per slide, no notes
+   engine.js puts every slide at its last step before printing (beforeprint, or ?print for a headless export). */
+
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+@media print {
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .stage,
+  body.is-black .stage {
+    position: static;
+    margin: 0;
+    width: 1920px;
+    height: auto;
+    overflow: visible;
+    transform: none;
+    visibility: visible;
+  }
+  .slide {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    visibility: visible !important;
+    transform: none !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .slide:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .slide .in,
+  .slide .art .late,
+  .slide .art g.cote {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .slide .d {
+    stroke-dasharray: 1 0 !important;
+  }
+  /* on paper every paragraph reads at full strength */
+  .slide .recede.past {
+    opacity: 1 !important;
+  }
+  [data-print="hide"] {
+    display: none !important;
+  }
+  [data-print="show"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .notes,
+  .help,
+  #live {
+    display: none !important;
+  }
+}
+
+/* =====================================================================
+   Exploration (branch explore/visuals)
+   ===================================================================== */
+
+/* History flight */
+.flight-slide .fl-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.fl-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.fl-frame {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.fl-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: calc(var(--w, 9999px) * 1.3);
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.fl-item.piece {
+  mix-blend-mode: multiply;
+}
+.fl-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 200;
+  padding: 6px 36px 14px;
+  background: var(--paper);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.6s var(--ease);
+  pointer-events: none;
+}
+.fl-center.off {
+  opacity: 0;
+}
+.fl-year {
+  font: 400 132px/1 var(--serif);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.fl-card {
+  position: absolute;
+  left: 880px;
+  top: 520px;
+  z-index: 210;
+  width: 820px;
+  padding: 40px 48px;
+  background: var(--paper);
+  opacity: 0;
+  transform: translate(40px, -50%);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.9s var(--ease);
+  pointer-events: none;
+}
+.fl-card.shown {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.fl-card .lead {
+  margin-top: 14px;
+}
+.fl-card .lead + .label {
+  margin-top: 30px;
+}
+.hist-kicker {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  z-index: 220;
+}
+.fl-years {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  bottom: 52px;
+  z-index: 220;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 14px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  font: 500 13px var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.fl-years li.on {
+  color: var(--accent);
+}
+
+/* The boutique, redrawn */
+.art .zone {
+  fill: rgba(110, 90, 58, 0.16);
+  stroke: var(--accent);
+  stroke-width: 1.2;
+}
+.s06 .plan06 {
+  position: absolute;
+  left: 872px;
+  top: 150px;
+  width: 920px;
+  height: 720px;
+}
+.s11 .plan-wrap {
+  padding-top: 40px;
+}
+.s11 .plan11 {
+  width: 752px;
+  height: 590px;
+  margin-top: 24px;
+}
+/* on slide 06 the floors arrive stacked and spread apart */
+.slide .plan06 .pf1 {
+  transform: translateY(118px);
+}
+.slide .plan06 .pf2 {
+  transform: translateY(236px);
+}
+.slide.is-active .plan06 .pf1,
+.slide.is-active .plan06 .pf2 {
+  transform: none;
+  transition: transform 1.2s var(--ease) 0.5s;
+}
+.stage.overview .plan06 .pf1,
+.stage.overview .plan06 .pf2 {
+  transform: none;
+}
+
+/* Generated images: same frame as photographs */
+.split .figure.gen img {
+  max-width: 752px;
+  width: 752px;
+  height: auto;
+}
+@media print {
+  .slide .plan06 .pf1,
+  .slide .plan06 .pf2 {
+    transform: none !important;
+  }
+}
+
+/* Slide 01: the image group flies across the whole page; each key image lands in the right
+   column (data-stop), under the text layer */
+.s1927 .fl-page {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.s1927 .col-text,
+.s1927 .col-media,
+.s1927 .folio,
+.s1927 .sources {
+  z-index: 2;
+}
+.fl-item.stop .fl-frame img {
+  height: auto;
+  max-height: 680px;
+  object-fit: contain;
+}
+.fl-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.7s var(--ease);
+}
+.fl-cap.shown {
+  opacity: 1;
+}
+
+/* Illustration slides (generated scenes), full bleed with a paper band */
+.scene .scene-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 960px;
+  margin: 0;
+  overflow: hidden;
+}
+.scene .scene-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide.is-active .kb img {
+  animation: kenburns 14s linear both;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.001);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+.scene .scene-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  padding: 0 var(--safe-x);
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  align-items: center;
+  column-gap: 40px;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+.scene .scene-caption {
+  font: italic 400 30px/1.25 var(--serif);
+}
+.scene .scene-gen {
+  max-width: 420px;
+  text-align: right;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .kb img {
+    animation: none;
+  }
+}
+
+/* Faithful plans (vectorised from the brief) */
+.art .pl-walls {
+  fill: var(--ink);
+  fill-opacity: 0.82;
+  stroke: none;
+}
+
+/* =====================================================================
+   Round 4 · chapter I (the house that leaves to learn), chapter II (the memory),
+   generic ledgers, fifteen annexes
+   ===================================================================== */
+
+/* Ledgers: rows built from the content file (engine.js, renderLists) */
+.ledger {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ledger li {
+  display: grid;
+  grid-template-columns: var(--cols, 180px 1fr);
+  column-gap: 28px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+}
+.ledger li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.ledger .fact {
+  font: 400 22px/1.32 var(--serif);
+}
+.ledger .fact.strong {
+  font-weight: 500;
+  font-size: 23px;
+}
+.ledger li.hl .fact {
+  color: var(--accent);
+  font-style: italic;
+}
+.ledger li.hl .label.accent {
+  color: var(--accent);
+}
+.ledger li > .label:last-child:not(:first-child) {
+  text-align: right;
+}
+.ledger.thead li {
+  padding: 0 0 10px;
+  border: 0;
+}
+.ledger.thead li > .label:last-child:not(:first-child) {
+  text-align: left;
+}
+
+/* Pull quote under a column of text */
+.pull {
+  margin: 34px 0 0;
+  padding: 22px 0 0 28px;
+  border-left: 1px solid var(--accent);
+}
+.pull .label {
+  margin-top: 14px;
+}
+
+/* 01 · Leave to learn: the portrait stays narrow */
+.e1 .col-media .frame img {
+  max-height: 760px;
+}
+
+/* 02 · The journeys: text column on the left, the chart across the rest */
+.e2 .col-text {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  width: 560px;
+}
+.e2 .kicker {
+  margin-bottom: 28px;
+}
+.e2 .title {
+  margin-bottom: 40px;
+}
+.e2 .title .line2 {
+  display: block;
+}
+.e2 .body + .body,
+.e2 .in + .body {
+  margin-top: 22px;
+}
+.e2 .route {
+  position: absolute;
+  left: 720px;
+  top: 170px;
+  width: 1080px;
+  height: 666px;
+}
+.art text.cote.dim {
+  fill: var(--muted);
+}
+.art text.cote.acc {
+  fill: var(--accent);
+  font-size: 16px;
+}
+
+/* 03 · A house that learns: the ledger on the left, a portrait on the right */
+.e3 .ledger {
+  position: absolute;
+  left: var(--safe-x);
+  top: 290px;
+  width: 1080px;
+  --cols: 150px 1fr 90px;
+}
+.e3 .ledger li {
+  padding: 13px 0;
+}
+.e3 .e3-fig {
+  left: 1290px;
+  top: 300px;
+  width: 502px;
+}
+.e3 .e3-fig figcaption {
+  text-align: left;
+}
+
+/* 05 · The rewind */
+.rw {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.rw .fl-frame img {
+  max-height: none;
+  height: auto;
+}
+.rw .rw-start .fl-frame img {
+  height: 680px;
+  object-fit: cover;
+}
+.rw .rw-end .fl-frame img {
+  height: auto;
+  max-height: 770px;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgba(20, 18, 15, 0.18);
+}
+.rw-tag-year {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  font: 500 13px var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.rw-yearbox {
+  position: absolute;
+  left: 50%;
+  top: 880px;
+  z-index: 300;
+  padding: 0 40px 8px;
+  background: var(--paper);
+  transform: translate(-50%, -50%);
+  transition:
+    top 1.1s var(--ease),
+    opacity 0.8s var(--ease);
+}
+.rewind.rw-flying .rw-yearbox {
+  top: 540px;
+}
+.rewind.rw-at-end .rw-yearbox {
+  top: 1000px;
+}
+.rw-year {
+  font: 400 220px/1 var(--serif);
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.rewind.rw-at-end .rw-year {
+  font-size: 120px;
+  color: var(--accent);
+}
+.rw-cap {
+  position: absolute;
+  left: 50%;
+  top: 104px;
+  z-index: 300;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+}
+.rw-cap-end {
+  top: 52px;
+}
+.rewind.rw-at-start .rw-cap-start,
+.rewind.rw-at-end .rw-cap-end {
+  opacity: 1;
+}
+.rewind.s2 .rw-cap,
+.rewind.s2 .rw-yearbox {
+  opacity: 0;
+}
+.rw-final {
+  position: absolute;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 242, 235, 0.94);
+  text-align: center;
+}
+.rw-dates {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  font: 400 150px/1 var(--serif);
+  color: var(--accent);
+}
+.rw-dates i {
+  display: block;
+  width: 220px;
+  height: 1px;
+  background: var(--accent);
+}
+.rw-title {
+  margin-top: 40px;
+  font: italic 400 148px/1 var(--serif);
+  letter-spacing: -0.01em;
+}
+.rw-sub {
+  margin-top: 44px;
+  max-width: 1100px;
+  color: var(--muted);
+}
+
+/* 06 · The proof, full page */
+.fosc .fosc-page {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.fosc .fosc-page img {
+  width: 1920px;
+  height: auto;
+  transform-origin: 160px 345px;
+  transition: transform 1.6s var(--ease);
+}
+.slide.fosc.is-active .fosc-page img {
+  animation: fosc-drift 14s linear both;
+}
+@keyframes fosc-drift {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -120px;
+  }
+}
+.fosc.s1 .fosc-page img {
+  animation: none;
+  transform: translate(0, 60px) scale(1.18);
+}
+.fosc-veil {
+  position: absolute;
+  left: 62px;
+  top: 334px;
+  width: 1052px;
+  height: 414px;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 0 3000px rgba(245, 242, 235, 0.93);
+  pointer-events: none;
+}
+.fosc-card {
+  position: absolute;
+  left: 1220px;
+  top: 300px;
+  width: 572px;
+}
+.fosc-card .title {
+  margin: 18px 0 30px;
+  font-size: 96px;
+}
+.fosc-quote {
+  font-size: 26px;
+  font-style: italic;
+}
+.fosc-card .caption {
+  margin-top: 22px;
+}
+.fosc .folio {
+  z-index: 5;
+  padding: 6px 10px;
+  margin-left: -10px;
+  background: var(--paper);
+}
+
+/* 08 · Niton, 09 · Glashütte / Genf: two figures in the media column */
+.slide.split .m2-pair .figure,
+.slide.split .m3-pair .figure {
+  position: absolute;
+  right: auto;
+  bottom: auto;
+  display: block;
+  width: 400px;
+}
+.slide.split .m2-pair .figure img,
+.slide.split .m3-pair .figure img {
+  width: 100%;
+  height: auto;
+}
+.slide.split .m2-pair .m2-a {
+  left: 0;
+  top: 40px;
+  width: 380px;
+}
+.slide.split .m2-pair .m2-b {
+  left: 410px;
+  top: 300px;
+  width: 342px;
+}
+.slide.split .m3-pair .m3-a {
+  left: 0;
+  top: 40px;
+  width: 470px;
+}
+.slide.split .m3-pair .m3-b {
+  left: 360px;
+  top: 400px;
+  width: 392px;
+}
+.m2-pair figcaption,
+.m3-pair figcaption {
+  margin-top: 12px;
+}
+
+/* 10 · The shipping books */
+.m4-media .sales {
+  width: 752px;
+  height: 416px;
+  margin-top: 26px;
+}
+.slide.split .m4-media .m4-doc {
+  position: absolute;
+  left: 0;
+  top: 520px;
+  right: auto;
+  bottom: auto;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  column-gap: 24px;
+  align-items: end;
+  width: 752px;
+}
+.slide.split .m4-media .m4-doc figcaption {
+  margin: 0;
+  text-align: left;
+}
+.slide.split .m4-media .m4-doc img {
+  width: 100%;
+  height: auto;
+}
+.art .barfill {
+  fill: rgba(110, 90, 58, 0.18);
+}
+
+/* 11 · 1936 */
+.m5 .col-media.doc img {
+  max-width: 752px;
+  width: 752px;
+}
+
+/* 12 · A memory found again */
+.m6 .m6-intro {
+  position: absolute;
+  left: var(--safe-x);
+  top: 268px;
+  width: 1300px;
+}
+.m6 .dossier {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 400px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.m6 .dossier li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.m6 .dossier .thumb {
+  height: 280px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.m6 .dossier .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.m6 .dossier .fact {
+  font: 400 20px/1.3 var(--serif);
+}
+.m6 .m6-coda {
+  position: absolute;
+  left: var(--safe-x);
+  top: 850px;
+  width: 1400px;
+}
+
+/* Annexes built from tables */
+.atab .title {
+  top: 140px;
+}
+.atab .a-intro {
+  position: absolute;
+  left: var(--safe-x);
+  top: 238px;
+  width: 1400px;
+  font-size: 24px;
+}
+.atab .a-table {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 250px;
+}
+.atab .a-intro + .a-table {
+  top: 310px;
+}
+.atab .ledger .fact {
+  font-size: 20px;
+}
+.atab .ledger .fact.strong {
+  font-size: 21px;
+}
+.atab .ledger li {
+  padding: 10px 0;
+}
+
+/* A3 · the two entries */
+.apair .apair-col {
+  position: absolute;
+  top: 250px;
+  width: 784px;
+}
+.apair .apair-l {
+  left: var(--safe-x);
+}
+.apair .apair-r {
+  left: 1008px;
+}
+.apair .doc-crop {
+  margin: 14px 0 22px;
+  height: 230px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.apair .doc-crop img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+.apair .fact {
+  font: italic 400 19px/1.4 var(--serif);
+}
+.apair .caption {
+  margin-top: 14px;
+}
+
+/* A5 · Poinçon */
+.ap .col-media .frame img {
+  max-height: 700px;
+}
+
+/* a coda under a column of text keeps its distance */
+.split .col-text .coda {
+  margin-top: 32px;
+}
+
+/* =====================================================================
+   Round 5 · black cover and chapter pages, strategic chapter I, fixes
+   ===================================================================== */
+
+/* Chapter pages and the cover: Lange black, white line, to cut through the paper pages */
+.slide.act,
+.slide.cover {
+  --paper: #0b0b0a;
+  --ink: #f5f2eb;
+  --accent: #cdb88f;
+  --rule: rgba(245, 242, 235, 0.2);
+  --muted: rgba(245, 242, 235, 0.62);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Cover: the logo alone, then the dial draws itself, then the title */
+.cover .cv-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 520px;
+  transform: translate(-50%, -50%);
+  transition: opacity 1s var(--ease), transform 1.4s var(--ease);
+}
+.cover.s1 .cv-logo {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
+}
+.cover .cv-dial {
+  position: absolute;
+  left: 510px;
+  top: 90px;
+  width: 900px;
+  height: 900px;
+  transform: none !important;
+  transition: opacity 1.6s var(--ease) !important;
+}
+.cover .cv-dial.on {
+  opacity: 1;
+  animation: cv-dim 1.6s var(--ease) 4.6s both;
+}
+@keyframes cv-dim {
+  to {
+    opacity: 0.16;
+  }
+}
+.art .tl-num {
+  font: 400 30px var(--serif);
+  fill: var(--ink);
+}
+.art .tl-num.acc {
+  fill: var(--accent);
+}
+.art .tl-roman {
+  font: 400 40px var(--serif);
+  fill: var(--ink);
+}
+.art .tl-date {
+  font: 400 66px var(--serif);
+  fill: var(--ink);
+}
+.art .tl-win {
+  font: 500 21px var(--serif);
+  letter-spacing: 0.06em;
+  fill: var(--ink);
+}
+.art .tl-edge {
+  font: 500 19px var(--sans);
+  letter-spacing: 0.32em;
+  fill: var(--ink);
+}
+.cover .tl-hand {
+  transform: rotate(var(--a));
+}
+.slide.cover.is-active .cv-dial.on .tl-hand {
+  animation: tl-turn 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--hd);
+}
+@keyframes tl-turn {
+  from {
+    transform: rotate(calc(var(--a) - 300deg));
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+.cover .cv-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+  pointer-events: none;
+}
+.cover.s1 .cv-title {
+  opacity: 1;
+  transition-delay: 5s;
+}
+.cover .cv-display {
+  max-width: 1500px;
+  font: 400 120px/1.02 var(--serif);
+  letter-spacing: -0.01em;
+}
+.cover .cv-conf {
+  position: absolute;
+  right: var(--safe-x);
+  bottom: 52px;
+}
+/* a drawing inside a step waits for its step: its late parts too */
+.slide.is-active [data-step]:not(.on) .art .late,
+.slide.is-active .art[data-step]:not(.on) .late,
+.slide.is-active .draw[data-only]:not(.on) .d {
+  animation: none;
+}
+.slide.is-active .draw[data-only]:not(.on) .d {
+  stroke-dasharray: 0 1;
+}
+
+/* "What this shows": the strategic reading under each fact */
+.reading {
+  padding-top: 18px;
+  border-top: 1px solid var(--accent);
+}
+.reading .lead {
+  margin-top: 12px;
+  font-style: italic;
+}
+.e2 .reading {
+  position: absolute;
+  left: 720px;
+  right: var(--safe-x);
+  top: 846px;
+}
+.e2 .route {
+  top: 120px;
+  height: 640px;
+  width: 1040px;
+}
+.reading.inline {
+  margin-top: 34px;
+}
+.reading.wide {
+  position: absolute;
+  left: var(--safe-x);
+  width: 1400px;
+  top: 800px;
+}
+
+/* 02 · Receiving and giving: three facts side by side */
+.e3 .facts {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+.e3 .fact-col {
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+.e3 .fact-big {
+  margin: 14px 0 20px;
+  font: 400 92px/1 var(--serif);
+  font-family: var(--serif);
+  color: var(--accent);
+}
+.e3 .fact-col .body {
+  font-size: 26px;
+}
+
+/* 03 · Every boutique speaks its city */
+.slide.split .e5-pair .figure {
+  position: absolute;
+  right: auto;
+  bottom: auto;
+  display: block;
+}
+.slide.split .e5-pair .figure img {
+  width: 100%;
+  height: auto;
+}
+.slide.split .e5-pair .e5-a {
+  left: 0;
+  top: 20px;
+  width: 640px;
+}
+.slide.split .e5-pair .e5-b {
+  left: 330px;
+  top: 470px;
+  width: 422px;
+}
+.e5-pair figcaption {
+  margin-top: 10px;
+}
+
+/* 04 · The foundations */
+.e4 .pillars {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 310px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.e4 .pillars li {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--accent);
+}
+.e4 .pillar-n {
+  font: 400 64px/1 var(--serif);
+  color: var(--accent);
+}
+.e4 .pillar-h {
+  font: 400 44px/1.1 var(--serif);
+}
+.e4 .e4-coda {
+  position: absolute;
+  left: var(--safe-x);
+  top: 800px;
+  width: 1500px;
+}
+
+/* 05 · The rewind: no box around the year; it stays over the newspaper */
+.rw-yearbox {
+  background: none;
+  padding: 0;
+}
+.rw-year {
+  text-shadow: 0 0 28px var(--paper), 0 0 10px var(--paper);
+}
+.rewind.rw-at-end .rw-yearbox {
+  top: 540px;
+}
+.rewind.rw-at-end .rw-year {
+  font-size: 220px;
+  color: var(--ink);
+}
+
+/* 06 · The proof, static */
+.slide.fosc.is-active .fosc-page img {
+  animation: none;
+}
+
+/* 07 · The building, drawn */
+.m1 .facade {
+  position: absolute;
+  left: 1060px;
+  top: 96px;
+  width: 712px;
+  height: 834px;
+}
+
+/* 09 · One image at a time */
+.slide.split .m3-media .figure {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.slide.split .m3-media .m3-a img {
+  max-height: 680px;
+  width: auto;
+}
+.slide.split .m3-media .m3-b img {
+  width: 752px;
+  height: auto;
+  max-height: none;
+}
+
+/* 10 · The ledger page, large */
+.slide.split .m4-doc img {
+  max-height: 800px;
+  width: auto;
+}
+
+/* 11 · Highlighted document: the passage framed, the rest of the page veiled */
+.docmark {
+  position: relative;
+  display: inline-block;
+}
+.docmark img {
+  display: block;
+}
+.docmark .dm-veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.docmark .dm-fog {
+  fill: var(--paper);
+  opacity: 0.8;
+}
+.docmark .dm-frame {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 5;
+}
+.slide.split .m5-doc img {
+  max-height: 800px;
+  width: auto;
+  max-width: 752px;
+}
+
+/* 12 · a link under each document */
+.m6 .src-link {
+  font: 500 11px var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  align-self: flex-start;
+}
+.m6 .src-link:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* 16 · each cell filled edge to edge */
+.s05 .mrow .cell {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+/* 20 · old watch, calibre, today's Cabaret */
+.slide.split .cab-seq .figure {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.slide.split .cab-seq img {
+  max-height: 700px;
+  width: auto;
+}
+.cab-seq .cab-cal .frame {
+  width: 560px;
+  height: 790px;
+  max-height: none;
+}
+.art .cb-dg {
+  font: 400 50px var(--serif);
+  fill: var(--ink);
+}
+
+/* A6 · the watches, in turn */
+.a6-show .slideshow {
+  position: relative;
+  width: 600px;
+  height: 640px;
+}
+.a6-show .slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.a6-show .slideshow img.on {
+  opacity: 1;
+}
+
+/* A7 · the order page, large */
+.a2b .doc {
+  left: 50%;
+  width: 640px;
+  top: 220px;
+  transform: translateX(-50%);
+}
+.a2b .doc img {
+  width: 640px;
+  max-height: 740px;
+  object-fit: contain;
+}
+
+/* 01 · a lighter column */
+.e2 .title {
+  font-size: 88px;
+  margin-bottom: 30px;
+}
+.e2 .body {
+  font-size: 25px;
+}
+.e2 .pull {
+  margin-top: 24px;
+}
+.e2 .pull .coda {
+  font-size: 30px;
+}
+
+/* =====================================================================
+   Presenter controls (after the Bixler's deck): toolbar, progress,
+   slides to present, annex contents
+   ===================================================================== */
+
+/* Toolbar along the foot of the window, shown while the mouse moves */
+.hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f5f2eb;
+  background: linear-gradient(to top, rgba(11, 11, 10, 0.86) 30%, transparent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+  pointer-events: none;
+}
+body.show-hud .hud {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.hud-l,
+.hud-r {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.hud-r {
+  gap: 4px;
+}
+.hud-count {
+  font-variant-numeric: tabular-nums;
+  color: #cdb88f;
+}
+.hud-title {
+  color: rgba(245, 242, 235, 0.62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hud button,
+.hud a {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  letter-spacing: inherit;
+  height: 32px;
+  padding: 0 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.hud .icon {
+  width: 36px;
+  padding: 0;
+}
+.hud button:hover,
+.hud a:hover {
+  background: rgba(245, 242, 235, 0.12);
+}
+.hud svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hud button:focus-visible,
+.hud a:focus-visible {
+  outline: 1px solid #cdb88f;
+  outline-offset: 2px;
+}
+/* the PDF of the ticked slides is being put together */
+.hud a.busy {
+  pointer-events: none;
+  animation: hud-busy 0.8s ease-in-out infinite alternate;
+}
+@keyframes hud-busy {
+  to {
+    opacity: 0.3;
+  }
+}
+.progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 101;
+  height: 2px;
+  width: calc(var(--p, 0) * 100%);
+  background: #cdb88f;
+  opacity: 0;
+  transition:
+    width 0.8s var(--ease),
+    opacity 0.4s;
+}
+body.show-hud .progress {
+  opacity: 0.85;
+}
+/* the shortcuts panel sits above the toolbar */
+.help {
+  bottom: 64px;
+  z-index: 102;
+}
+.help kbd {
+  min-width: 120px;
+}
+
+/* Overview: on the black of the frame, taller than the screen, moved by the wheel (--ovy) */
+.stage.ov-move {
+  transition: transform 0.65s var(--ease);
+}
+.stage.overview.ov-move {
+  transition: transform 0.25s ease-out;
+}
+.stage.overview {
+  overflow: visible;
+  background: transparent;
+  transform: translateY(calc(var(--ovy, 0px) * var(--scale, 1))) scale(var(--scale, 1));
+}
+.stage.overview .slide {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(245, 242, 235, 0.14);
+}
+.stage.overview .slide.sel {
+  box-shadow: 0 0 0 14px #cdb88f;
+}
+.slide > .pick {
+  display: none;
+}
+.stage.overview .slide > .pick {
+  appearance: none;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 61;
+  display: block;
+  width: 140px;
+  height: 140px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #6e5a3a
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-8.2' fill='none' stroke='%23f5f2eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 70% no-repeat;
+  box-shadow:
+    0 0 0 8px #f5f2eb,
+    0 6px 18px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+/* left out: the page darkens to a ghost, its tick an empty ring */
+.stage.overview .slide.skip {
+  box-shadow:
+    inset 0 0 0 4000px #1a1917,
+    0 0 0 3px rgba(245, 242, 235, 0.2);
+}
+.stage.overview .slide.skip.sel {
+  box-shadow:
+    inset 0 0 0 4000px #1a1917,
+    0 0 0 14px #cdb88f;
+}
+.stage.overview .slide.skip > :not(.pick) {
+  filter: opacity(0.14) grayscale(1);
+}
+.stage.overview .slide.skip > .pick {
+  background: transparent;
+  box-shadow: inset 0 0 0 8px rgba(245, 242, 235, 0.75);
+}
+.stage.overview .slide.skip::before {
+  background: transparent;
+  color: rgba(245, 242, 235, 0.6);
+}
+.stage.overview .slide.skip::after {
+  content: var(--hidden-label);
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  font: italic 400 150px/1 var(--serif);
+  color: #f5f2eb;
+  pointer-events: none;
+}
+/* the bar across the top while the overview is open */
+.picks {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 101;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 64px;
+  padding: 0 24px 0 32px;
+  background: rgba(11, 11, 10, 0.92);
+  border-bottom: 1px solid rgba(245, 242, 235, 0.16);
+  color: #f5f2eb;
+  font: 400 13px/1 var(--sans);
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+body:has(.stage.overview) .picks {
+  display: flex;
+}
+.picks-t {
+  font: italic 400 26px/1 var(--serif);
+}
+.picks-n {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(245, 242, 235, 0.66);
+  letter-spacing: 0.02em;
+}
+.picks-n b {
+  color: #cdb88f;
+  font-weight: 600;
+}
+.picks-b {
+  display: flex;
+  gap: 10px;
+}
+.picks button {
+  padding: 10px 18px;
+  border: 1px solid rgba(245, 242, 235, 0.35);
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.picks button:hover {
+  background: rgba(245, 242, 235, 0.1);
+}
+.picks button[data-done] {
+  border-color: #f5f2eb;
+  background: #f5f2eb;
+  color: #0b0b0a;
+}
+
+/* Annex contents (key A): three columns of five, each a way in; every annex folio leads back */
+.ax-index .ax-list {
+  position: absolute;
+  left: var(--safe-x);
+  right: var(--safe-x);
+  top: 330px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, auto);
+  column-gap: 56px;
+}
+.ax-index .ax-list button {
+  appearance: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: baseline;
+  gap: 16px;
+  padding: 28px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  background: none;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.3s var(--ease);
+}
+.ax-index .ax-list li:nth-child(5n) button {
+  border-bottom: 1px solid var(--rule);
+}
+.ax-index .ax-t {
+  font: 400 30px/1.2 var(--serif);
+}
+.ax-index .ax-list .label {
+  font-size: 15px;
+}
+.ax-index .ax-list button:hover .ax-t {
+  color: var(--accent);
+}
+.slide.annex .folio {
+  cursor: pointer;
+}
+.stage.overview .cover .cv-dial.on {
+  opacity: 0.16 !important;
+}
+
+@media print {
+  .hud,
+  .progress,
+  .picks,
+  .slide > .pick {
+    display: none !important;
+  }
+  /* the cover's dial as it ends on screen: dimmed under the title */
+  .cover .cv-dial.on {
+    opacity: 0.16 !important;
+  }
+  /* the print dialog (no exported PDF): the slides left out stay out */
+  .slide.skip {
+    display: none !important;
+  }
+}
+
+/* ============================================================= Round 7 */
+
+/* 01 · the map of Europe, opened by the journey (route() in engine.js) */
+.art .map path {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.art .map-coast {
+  stroke: var(--ink);
+  stroke-width: 1.3;
+  opacity: 0.85;
+}
+.art .map-border {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+  opacity: 0.55;
+}
+.art .map-river {
+  stroke: var(--accent);
+  stroke-width: 1.1;
+  opacity: 0.55;
+}
+.e2 .route > svg > path.t {
+  opacity: 0.5;
+}
+.art .map-lake {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+/* One caption system: a caption sits right under its image, flush with its right edge.
+   Figures in the media column shrink to their image (min-content), so the caption wraps
+   to the image's width. Free or round shapes carry none. */
+.figure figcaption,
+.figure .caption {
+  text-align: right;
+}
+.split .col-media .figure,
+.split .col-media.figure {
+  display: grid;
+  grid-template-columns: min-content;
+  justify-content: center;
+  align-content: center;
+  justify-items: end;
+}
+.slide.split .figure figcaption {
+  align-self: auto;
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* 05 · the rule between the two years, on the middle of the old-style figures */
+.rw-dates i {
+  transform: translateY(0.12em);
+}
+
+/* 03 · Lisbon: two pictures on one right edge */
+.slide.split .e5-pair .figure {
+  display: block;
+  left: auto;
+  right: 0;
+}
+.slide.split .e5-pair .e5-a {
+  top: 10px;
+  width: 700px;
+}
+.slide.split .e5-pair .e5-b {
+  top: 520px;
+  width: 420px;
+}
+
+/* 08 · Niton: two pictures on one baseline, their captions on one line */
+.slide.split .m2-pair .figure {
+  display: block;
+  top: auto;
+  bottom: 230px;
+}
+.slide.split .m2-pair .m2-a {
+  left: 0;
+  width: 370px;
+}
+.slide.split .m2-pair .m2-b {
+  left: 400px;
+  width: 352px;
+}
+
+/* 09 · the Niton calibre, its two Geneva seals ringed at step 1; then the round movement */
+.slide.split .m3-media .m3-a img {
+  max-height: 700px;
+}
+.frame.pinned {
+  position: relative;
+  width: fit-content;
+  line-height: 0;
+}
+.frame.pinned .pins {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.pins circle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 5;
+}
+.pins .pin-fog {
+  fill: var(--paper);
+  opacity: 0.62;
+}
+.slide.split .m3-media .figure {
+  display: grid;
+  grid-template-columns: min-content;
+  justify-content: center;
+  align-content: center;
+  justify-items: end;
+}
+.slide.split .m3-media .m3-b img {
+  width: 640px;
+  max-width: 640px;
+  max-height: none;
+  border-radius: 50%;
+}
+
+/* 10 · the shipping books: the chart, then the page */
+.slide.split .m4-media .figure {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+.slide.split .m4-media .m4-chart .sales {
+  width: 752px;
+  height: 416px;
+}
+.slide.split .m4-media .m4-doc {
+  width: auto;
+  grid-template-columns: min-content;
+}
+.slide.split .m4-media .m4-doc img {
+  max-height: 780px;
+  width: auto;
+}
+
+/* 11 · 1936: the page, then its two halves brought together */
+.slide.split .m5-doc {
+  display: block;
+}
+.slide.split .m5-doc .docmark {
+  position: absolute;
+  left: 111px;
+  top: 0;
+  width: 529px;
+  height: 800px;
+  transition: opacity 1s var(--ease);
+}
+.slide.split .m5-doc .docmark img {
+  width: 529px;
+  height: 800px;
+  max-width: none;
+  max-height: none;
+}
+.slide.m5.s1 .m5-doc .docmark {
+  opacity: 0.1;
+}
+.m5-merge {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.slide.split .m5-doc .m5-part {
+  position: absolute;
+  max-width: none;
+  max-height: none;
+  transform-origin: 0 0;
+  transform: var(--from);
+  opacity: 0;
+  transition:
+    transform 1.8s var(--ease),
+    opacity 0.5s var(--ease);
+}
+.slide.m5.s1 .m5-part {
+  transform: none;
+  opacity: 1;
+}
+.slide.m5.s1 .m5-part + .m5-part {
+  transition-delay: 0.15s;
+}
+.slide.split .m5-doc figcaption {
+  position: absolute;
+  right: 112px;
+  top: 812px;
+  margin: 0;
+  transition: opacity 0.6s var(--ease);
+}
+
+/* 12 · the six documents arrive one after the other, on their own */
+.m6 .dossier li[data-step] {
+  transition-delay: calc(var(--i, 0) * 420ms);
+}
+.m6 .dossier li[data-step]:not(.on) {
+  transition-delay: 0ms;
+}
+
+/* 20 · three layers on one register: the watch of the 1930s, the calibre, the Cabaret.
+   Dial openings matched (centre 376, 430, height 440); the straps fade out. */
+.slide.split .cab-stack {
+  overflow: visible;
+}
+.cab-view {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(transparent 0, #000 110px, #000 750px, transparent 860px);
+  mask-image: linear-gradient(transparent 0, #000 110px, #000 750px, transparent 860px);
+}
+.cab-layer {
+  position: absolute;
+  max-width: none;
+  max-height: none;
+  transition: opacity 1.1s var(--ease);
+}
+.slide .cab-layer[data-step],
+.slide .cab-layer[data-only] {
+  transform: none;
+}
+img.cab-old {
+  left: 145.3px;
+  top: -40.4px;
+  width: 462.2px;
+  height: 1069.5px;
+}
+img.cab-new,
+img.cab-ghost {
+  left: 182.6px;
+  top: -37.7px;
+  width: 384.5px;
+  height: 961.4px;
+}
+.cab-cal {
+  inset: 0;
+  width: 752px;
+  height: 860px;
+}
+.cab-stack .cab-cap {
+  position: absolute;
+  right: 204px;
+  top: 880px;
+  width: 520px;
+  text-align: right;
+}
+.art .mv-plate,
+.art .mv-cock {
+  fill: var(--paper);
+}
+.art .mv path,
+.art .mv circle {
+  vector-effect: non-scaling-stroke;
+}
+.art .mv-gold {
+  stroke: var(--accent);
+}
+.art .mv-blue {
+  stroke: #2f4a7a;
+}
+.art .mv-ruby {
+  fill: #9b2f4a;
+}
+.art .mv-eng {
+  font-family: var(--serif);
+  fill: var(--accent);
+}
+.slide .cab-ghost.on {
+  opacity: 0.1;
+  filter: grayscale(1);
+}
+
+/* A6 · the watches as cut-outs on the annex ground, straps fading out */
+.a6-show .slideshow {
+  -webkit-mask-image: linear-gradient(transparent 0, #000 70px, #000 570px, transparent 640px);
+  mask-image: linear-gradient(transparent 0, #000 70px, #000 570px, transparent 640px);
+}
+.s03 .figure figcaption {
+  justify-content: flex-end;
+}
+
+/* Cover dial: drawn typography (terraluna(), assets/dial-glyphs.js) */
+.art .cv-glyph {
+  fill: var(--ink);
+}
+.art .cv-glyph.acc {
+  fill: var(--accent);
+}
