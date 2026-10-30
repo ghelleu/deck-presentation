@@ -1262,79 +1262,137 @@
     </svg>`;
   }
 
-  /* ---------------------------------------------------- Calibre L931.3 of the Cabaret, caseback
-     side (slide 20), traced from a photograph of the movement squared up (deployant.com, 2014):
-     three-quarter plate with Glashütte stripes and its engravings, three gold chatons held by
-     blued screws, the engraved balance cock with its swan-neck regulator, the balance, the
-     escape-wheel cock, part of the train seen past the plate. Drawn on the same register as the
-     two watches of the slide (752 × 860, dial centre 376, 430), over a faint Cabaret (index.html). The movement is traced in the photograph's
-     own units (1000 × 1450) and scaled to 280 × 406. */
-  function l931() {
-    const S = 0.28,
-      OX = 236,
-      OY = 227;
+  /* ---------------------------------------------------- Calibre L042.1 of the Cabaret Tourbillon, dial
+     side (slide 20), after the manufacture's photographs of the movement (the frontal view
+     squared up: the date ring is a circle). Drawn in the units of the watch photograph
+     (cabaret-tourbillon-cut-834.webp, 834 × 2000) and placed on the slide's register like that
+     image, so the tens cross and the units ring show "2" and "5" exactly in the dial's date
+     window, the hour pinion sits under the hands and the tourbillon in its aperture. */
+  function l042() {
     const id = `mv${uid++}`;
-    const plate = "M30 0 H970 Q1000 0 1000 30 V330 C870 340 700 470 600 650 C520 790 480 900 530 1040 C470 1120 360 1200 300 1450 H30 Q0 1450 0 1420 V30 Q0 0 30 0 Z";
-    const frame = "M30 0 H970 Q1000 0 1000 30 V1420 Q1000 1450 970 1450 H30 Q0 1450 0 1420 V30 Q0 0 30 0 Z";
-    const cock = "M1000 410 C930 400 860 440 840 520 C820 600 860 660 830 740 C810 800 790 840 800 880 C810 950 760 985 720 970 C670 955 670 880 705 850 C740 820 770 780 780 720 C795 620 760 520 820 450 C860 400 930 380 1000 380 Z";
-    const cock2 = "M1000 1180 C930 1170 850 1200 780 1190 C700 1180 650 1140 590 1140 C520 1140 500 1220 540 1250 C600 1290 690 1240 760 1270 C820 1300 850 1380 840 1450 H1000 Z";
-    const blued = (x, y, r, a, ms) => {
-      const [x1, y1] = polar(x, y, r * 0.78, a),
-        [x2, y2] = polar(x, y, r * 0.78, a + Math.PI);
-      return `<circle class="s d mv-blue" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><path class="s late" style="--cd:${ms + 500}" d="M${f1(x1)} ${f1(y1)} L${f1(x2)} ${f1(y2)}"/>`;
+    const C = [389, 865], // date ring: units disc, figures every 36°, "5" at 18° under the window
+      X = [353, 788], // tens cross: "2" up, "1" to the left
+      H = [394, 932], // hour pinion, under the hands
+      T = [394, 1192]; // tourbillon
+    const x0 = 120,
+      x1 = 688,
+      y0 = 532,
+      y1 = 1334;
+    const plate = `M${x0 + 16} ${y0} H${x1 - 16} Q${x1} ${y0} ${x1} ${y0 + 16} V772 H612 V913 H${x1} V${y1 - 16} Q${x1} ${y1} ${x1 - 16} ${y1} H${x0 + 16} Q${x0} ${y1} ${x0} ${y1 - 16} V${y0 + 16} Q${x0} ${y0} ${x0 + 16} ${y0} Z`;
+    // the plate's recess: the date ring's circle and the tourbillon's, run together
+    const R1 = 214,
+      R2 = 134;
+    const dx = T[0] - C[0],
+      dy = T[1] - C[1],
+      dist = Math.hypot(dx, dy),
+      ux = dx / dist,
+      uy = dy / dist,
+      ad = (R1 * R1 - R2 * R2 + dist * dist) / (2 * dist),
+      hh = Math.sqrt(R1 * R1 - ad * ad);
+    const pA = [C[0] + ad * ux + hh * uy, C[1] + ad * uy - hh * ux],
+      pB = [C[0] + ad * ux - hh * uy, C[1] + ad * uy + hh * ux];
+    const recess = `M${f1(pA[0])} ${f1(pA[1])} A${R1} ${R1} 0 1 0 ${f1(pB[0])} ${f1(pB[1])} A${R2} ${R2} 0 1 0 ${f1(pA[0])} ${f1(pA[1])} Z`;
+    // the plate's decoration: rows of overlapping scales
+    let scales = "";
+    for (let row = 0, y = y0 + 30; y < y1 + 30; row++, y += 30)
+      for (let x = x0 - 40 + (row % 2) * 22; x < x1 + 40; x += 44) scales += `M${x - 30} ${y} A30 30 0 0 1 ${x + 30} ${y} `;
+    const units = [5, 6, 7, 8, 9, 0, 1, 2]
+      .map((d, i) => {
+        const deg = 18 + i * 36,
+          [x, y] = at(C, 150, deg);
+        return textAt(x, y, deg - 18, String(d), "date", 58);
+      })
+      .join("");
+    const cross = `M${X[0] - 33} ${X[1] - 104} H${X[0] + 33} V${X[1] - 33} H${X[0] + 104} V${X[1] + 33} H${X[0] + 33} V${X[1] + 104} H${X[0] - 33} V${X[1] + 33} H${X[0] - 104} V${X[1] - 33} H${X[0] - 33} Z`;
+    const cy = C[1] - 88,
+      cw = Math.sqrt(100 * 100 - 88 * 88);
+    const disc = `M${f1(C[0] - cw)} ${cy} H${f1(C[0] + cw)} A100 100 0 1 1 ${f1(C[0] - cw)} ${cy} Z`;
+    let teeth = "";
+    for (let a = 40; a <= 150; a += 6) {
+      const [ax, ay] = at(C, 100, a),
+        [bx, by] = at(C, 106, a + 1.5),
+        [cx2, cy2] = at(C, 106, a + 3.5),
+        [ex, ey] = at(C, 100, a + 5);
+      teeth += `M${ax} ${ay} L${bx} ${by} L${cx2} ${cy2} L${ex} ${ey} `;
+    }
+    const slot = (x, y, r, a) => {
+      const [sx1, sy1] = polar(x, y, r * 0.75, a),
+        [sx2, sy2] = polar(x, y, r * 0.75, a + Math.PI);
+      return `M${f1(sx1)} ${f1(sy1)} L${f1(sx2)} ${f1(sy2)}`;
     };
-    const chaton = (x, y, r, angles, ms) =>
-      `<circle class="s d mv-gold" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><circle class="s d" ${dd(ms + 80)} cx="${x}" cy="${y}" r="${r * 0.55}"/><circle class="f mv-ruby" cx="${x}" cy="${y}" r="${r * 0.2}"/>` +
-      angles.map((a, i) => blued(...polar(x, y, r * 1.22, (a * Math.PI) / 180).map((v) => +f1(v)), r * 0.36, a, ms + 200 + i * 60)).join("");
-    const silver = (x, y, r, ms) => `<circle class="s d" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><circle class="s" cx="${x}" cy="${y}" r="${r * 0.45}"/>`;
-    let stripes = "";
-    for (let x = -1500; x < 1000; x += 46) stripes += `M${x} 1450 L${x + 1500} 0 `;
-    const eng = (x, y, t, size, ms, ls = 0.16) =>
-      `<text class="mv-eng late" style="--cd:${ms};font-size:${size}px;letter-spacing:${ls}em" transform="translate(${x} ${y}) rotate(-90)" text-anchor="middle">${t}</text>`;
+    const blued = (x, y, r, a, ms) => `<circle class="s hf d mv-blue" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><path class="s late" style="--cd:${ms + 500}" d="${slot(x, y, r, a)}"/>`;
+    const steel = (x, y, r, a, ms) => `<circle class="s hf d" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><path class="s late" style="--cd:${ms + 500}" d="${slot(x, y, r, a)}"/>`;
+    const hole = (x, y, r, ms) => `<circle class="s d" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><circle class="t late" style="--cd:${ms + 400}" cx="${x}" cy="${y}" r="${f1(r * 0.6)}"/>`;
+    const post = (x, y, r, ms) => `<circle class="s hf d" ${dd(ms)} cx="${x}" cy="${y}" r="${r}"/><circle class="s late" style="--cd:${ms + 400}" cx="${x}" cy="${y}" r="${f1(r * 0.45)}"/>`;
+    const ruby = (x, y, ms) => `<circle class="s hf d mv-gold" ${dd(ms)} cx="${x}" cy="${y}" r="9"/><circle class="f mv-ruby late" style="--cd:${ms + 300}" cx="${x}" cy="${y}" r="4.5"/>`;
+    // tourbillon: carriage arms, balance with its timing screws, hairspring
+    const arm = (a) => {
+      const p = [polar(T[0], T[1], 24, a - 0.42), polar(T[0], T[1], 70, a - 0.13), polar(T[0], T[1], 70, a + 0.13), polar(T[0], T[1], 24, a + 0.42)];
+      const [ex, ey] = polar(T[0], T[1], 76, a);
+      return `<path class="mv-cock s" d="${path(p)}"/><circle class="s hf" cx="${f1(ex)}" cy="${f1(ey)}" r="10"/><path class="s" d="${slot(ex, ey, 10, a + 0.7)}"/>`;
+    };
+    let studs = "";
+    for (let k = 0; k < 16; k++) {
+      const [sx, sy] = polar(T[0], T[1], 101, (k * Math.PI) / 8 + 0.1);
+      studs += `<circle class="s mv-gold" cx="${f1(sx)}" cy="${f1(sy)}" r="3.6"/>`;
+    }
+    const [b1x, b1y] = polar(T[0], T[1], 92, 0.45),
+      [b2x, b2y] = polar(T[0], T[1], 92, 0.45 + Math.PI);
     return `<svg viewBox="0 0 752 860">
-      <defs>
-        <clipPath id="${id}p"><path d="${plate}"/></clipPath>
-        <clipPath id="${id}o"><path d="${frame}"/></clipPath>
-        <path id="${id}m" d="M640 690 C700 560 800 420 930 360"/>
-      </defs>
-      <g transform="translate(${OX} ${OY}) scale(${S})" class="mv">
-        <path class="s d" ${dd(0)} d="${frame}" style="stroke-width:1.6"/>
-        <g clip-path="url(#${id}o)">
-          <circle class="s d" ${dd(500)} cx="690" cy="760" r="120"/>
-          <path class="t late" style="--cd:900" d="${gear(690, 760, 112, 64, 10)}"/>
-          <path class="t late" style="--cd:950" d="${gear(610, 1010, 62, 15, 14)}"/>
-          <path class="s d" ${dd(700)} d="${arc(750, 905, 226, -2.6, 2.6)}" style="stroke-width:1.4"/>
-          <path class="t" d="${arc(750, 905, 210, -2.6, 2.6)}"/>
-          <path class="t d" pathLength="1" style="--dd:900" d="${spiral(750, 905, 24, 110, 6)}"/>
-        </g>
-        <path class="mv-plate s d" ${dd(150)} d="${plate}" style="stroke-width:1.3"/>
-        <path class="t late" style="--cd:1100" clip-path="url(#${id}p)" d="${stripes}"/>
-        <path class="mv-cock s d" ${dd(400)} d="${cock}"/>
-        <path class="t late" style="--cd:1200" d="M840 520 C870 470 930 450 990 440 M855 600 C880 540 930 510 990 500 M840 690 C860 620 920 580 990 570"/>
-        <path class="s d" ${dd(800)} d="M820 860 C870 820 900 760 880 700 C870 670 900 650 930 660" style="stroke-width:1"/>
-        <path class="s d" ${dd(850)} d="M752 905 L742 1110 L735 1110 L740 905" style="stroke-width:1"/>
-        <path class="mv-cock s d" ${dd(450)} d="${cock2}"/>
-        <path class="t late" style="--cd:1250" d="M800 1300 C850 1260 930 1240 1000 1240 M820 1380 C870 1330 940 1310 1000 1310"/>
-        <circle class="s d" ${dd(600)} cx="750" cy="905" r="42"/><circle class="f mv-ruby" cx="750" cy="905" r="12"/>
-        <circle class="s d" ${dd(620)} cx="580" cy="1190" r="34"/><circle class="f mv-ruby" cx="580" cy="1190" r="10"/>
-        ${chaton(390, 410, 54, [-60, 60, 180], 1000)}${chaton(480, 700, 50, [-90, 30, 150], 1100)}${chaton(380, 910, 46, [0, 180], 1200)}
-        <circle class="s d mv-gold" ${dd(1300)} cx="490" cy="1080" r="30"/><circle class="f mv-ruby" cx="490" cy="1080" r="7"/>
-        ${blued(80, 120, 42, 0.5, 1400)}${blued(920, 90, 42, 2.3, 1420)}${blued(80, 1290, 40, 1.2, 1440)}${blued(900, 1305, 42, 1.6, 1460)}${blued(950, 550, 38, 0.3, 1480)}
-        ${silver(260, 115, 30, 1500)}${silver(870, 245, 28, 1520)}${silver(940, 315, 28, 1540)}${silver(185, 720, 28, 1560)}${silver(30, 800, 20, 1580)}
-        <circle class="s d" ${dd(1600)} cx="400" cy="130" r="76"/><circle class="t" cx="400" cy="130" r="58"/><path class="s late" style="--cd:2000" d="M380 100 L430 120 L410 160"/>
-        ${eng(112, 760, "A. LANGE &amp; SÖHNE", 64, 1700)}
-        ${eng(190, 1010, "Nº 67512", 40, 1750)}
-        ${eng(190, 360, "GLASHÜTTE I/SA", 54, 1800)}
-        ${eng(285, 860, "DREISSIG (30) RUBINE", 38, 1850)}
-        ${eng(565, 255, "REGULIERT IN", 40, 1900)}
-        ${eng(620, 255, "FÜNF (5) LAGEN", 40, 1950)}
-        <text class="mv-eng late" style="--cd:2000;font-size:34px;letter-spacing:0.18em"><textPath href="#${id}m">MADE IN GERMANY</textPath></text>
-        <text class="mv-eng late" style="--cd:2050;font-size:28px;letter-spacing:0.12em" transform="translate(905 470) rotate(-60)">L931.3</text>
+      <defs><clipPath id="${id}p"><path d="${plate}"/></clipPath></defs>
+      <g transform="translate(165.7 -70) scale(0.533)" class="mv">
+        <path class="mv-plate s d" ${dd(0)} d="${plate}" style="stroke-width:1.6"/>
+        <path class="t late" style="--cd:1500" clip-path="url(#${id}p)" d="${scales}"/>
+        <path class="mv-plate s d" ${dd(200)} d="${recess}" style="stroke-width:1.3"/>
+        <!-- big date: units ring, tens cross, centre disc -->
+        <circle class="mv-plate s d" ${dd(300)} cx="${C[0]}" cy="${C[1]}" r="204" style="stroke-width:1.4"/>
+        <circle class="t" cx="${C[0]}" cy="${C[1]}" r="198"/>
+        <g class="late" style="--cd:1300">${units}</g>
+        <path class="mv-plate s d" ${dd(450)} d="${cross}" style="stroke-width:1.3"/>
+        <g class="late" style="--cd:1350">${textAt(X[0], X[1] - 66, 0, "2", "date", 58)}${textAt(X[0] - 66, X[1], -90, "1", "date", 58)}</g>
+        <path class="mv-plate s d" ${dd(550)} d="${disc}" style="stroke-width:1.3"/>
+        <path class="s late" style="--cd:1000;stroke-width:1" d="${teeth}"/>
+        <path class="t late" style="--cd:1100" d="${arc(C[0], C[1], 84, 2.2, 4.0)} ${arc(C[0], C[1], 64, 1.4, 4.6)}"/>
+        ${ruby(334, 795, 1200)}${ruby(451, 875, 1240)}
+        ${blued(461, 926, 12, 0.7, 1300)}${blued(363, 954, 12, 2.2, 1340)}
+        <path class="s late" style="--cd:1150;stroke-width:1" d="${gear(H[0], H[1], 15, 12, 4)}"/>
+        <circle class="s hf mv-gold d" ${dd(1180)} cx="${H[0]}" cy="${H[1]}" r="12"/><circle class="s hf" cx="${H[0]}" cy="${H[1]}" r="5"/>
+        <!-- around the ring: the bridge with two screws, the jumper, a post -->
+        <path class="mv-cock s d" ${dd(650)} d="M330 606 H428 Q446 606 446 626 V646 Q446 664 428 664 H330 Q312 664 312 646 V626 Q312 606 330 606 Z"/>
+        ${steel(355, 636, 13, 0.4, 1400)}${steel(400, 636, 13, 2.1, 1430)}
+        <path class="mv-cock s d" ${dd(700)} d="M498 654 C520 660 548 682 578 718 C586 728 578 738 568 732 C540 708 514 690 492 674 C484 668 488 652 498 654 Z"/>
+        ${steel(533, 692, 11, 1.2, 1460)}
+        ${post(206, 758, 16, 1480)}
+        <!-- setting: the yoke in its notch, the stem -->
+        <path class="mv-cock s d" ${dd(750)} d="M614 790 L684 806 V858 L626 850 Z"/>
+        ${steel(664, 828, 10, 0.3, 1500)}
+        <path class="s d" ${dd(800)} d="M612 822 H704 V834 H612" style="stroke-width:1.2"/>
+        <!-- the plate: screws, holes, jewels -->
+        ${blued(414, 548, 15, 0.9, 1520)}${blued(185, 1148, 16, 0.6, 1540)}${blued(618, 1286, 16, 2.4, 1560)}
+        ${hole(459, 567, 9, 900)}${hole(176, 644, 15, 920)}${hole(232, 1058, 15, 940)}${hole(172, 1231, 9, 960)}${hole(576, 1122, 15, 980)}${hole(559, 1259, 15, 1000)}${hole(627, 1244, 8, 1020)}
+        ${post(631, 695, 14, 1580)}${post(652, 893, 11, 1600)}${post(593, 1006, 13, 1620)}${post(627, 1161, 13, 1640)}
+        <circle class="f mv-ruby late" style="--cd:1700" cx="563" cy="1064" r="5"/><circle class="f mv-ruby late" style="--cd:1720" cx="606" cy="1089" r="5"/>
+        <!-- tourbillon -->
+        <path class="t late" style="--cd:1200" d="${gear(T[0], T[1], 112, 90, 5)}"/>
+        <circle class="s d mv-gold" ${dd(850)} cx="${T[0]}" cy="${T[1]}" r="96" style="stroke-width:1.6"/>
+        <circle class="s d mv-gold" ${dd(900)} cx="${T[0]}" cy="${T[1]}" r="87"/>
+        <g class="late" style="--cd:1300">${studs}</g>
+        <path class="s d mv-gold" ${dd(950)} d="M${f1(b1x)} ${f1(b1y)} L${f1(b2x)} ${f1(b2y)}" style="stroke-width:1.3"/>
+        <path class="t d" pathLength="1" style="--dd:1000" d="${spiral(T[0], T[1], 14, 58, 7)}"/>
+        <path class="t late" style="--cd:1400" d="${gear(T[0] + 44, T[1] + 46, 15, 15, 4)}"/>
+        ${arm(-0.5)}${arm(1.6)}${arm(3.7)}
+        <circle class="f mv-ruby late" style="--cd:1750" cx="466" cy="1262" r="5"/><circle class="f mv-ruby late" style="--cd:1770" cx="488" cy="1254" r="5"/>
+        <path class="mv-cock s d" ${dd(1100)} d="M226 1192 H562 V1214 H226 Z"/>
+        <circle class="mv-cock s d" ${dd(1150)} cx="226" cy="1203" r="24"/><circle class="mv-cock s d" ${dd(1160)} cx="562" cy="1203" r="24"/>
+        ${steel(226, 1203, 15, 1.2, 1650)}${steel(562, 1203, 15, 1.9, 1670)}
+        <circle class="mv-cock s d" ${dd(1200)} cx="${T[0]}" cy="${T[1]}" r="34"/>
+        <circle class="s d mv-gold" ${dd(1250)} cx="${T[0]}" cy="${T[1]}" r="22"/>
+        <circle class="s hf" cx="${T[0]}" cy="${T[1]}" r="9"/><path class="t" d="M${T[0] - 6} ${T[1]} L${T[0]} ${T[1] - 6} L${T[0] + 6} ${T[1]} L${T[0]} ${T[1] + 6} Z"/>
       </g>
     </svg>`;
   }
 
-  const DRAW = { dial: (el) => dial(+el.closest(".slide").dataset.act || 0), trace, niton, cabaret, tonneau10, peseux, plan, route, sales, terraluna, cabcal, facade, l931 };
+  const DRAW = { dial: (el) => dial(+el.closest(".slide").dataset.act || 0), trace, niton, cabaret, tonneau10, peseux, plan, route, sales, terraluna, cabcal, facade, l042 };
   $$("[data-draw]").forEach((el) => (el.innerHTML = DRAW[el.dataset.draw](el)));
 
   // An act opens (clock transition, forward only): the minute hand turns once and the hour hand
