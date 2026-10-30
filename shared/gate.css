@@ -1,0 +1,57 @@
+/* Access screen (shared/gate.js), common to every deck.
+   Each deck sets its own look in its styles.css by overriding these variables on .gate,
+   and hides its own controls with html.gated (e.g. html.gated .hud { display: none !important; }). */
+.gate {
+  --gate-bg: #0b0b0a;
+  --gate-label-font: 500 12px/1 ui-monospace, Menlo, monospace;
+  --gate-label-spacing: 0.32em;
+  --gate-label-color: rgba(245, 242, 235, 0.72);
+  --gate-code-font: 400 26px/1 ui-monospace, Menlo, monospace;
+  --gate-code-color: #f5f2eb;
+  --gate-line: rgba(245, 242, 235, 0.55);
+  --gate-caret: #cdb88f;
+
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--gate-bg);
+  transition: opacity 0.6s ease;
+}
+.gate.open {
+  opacity: 0;
+  pointer-events: none;
+}
+.gate-box {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  margin: 0;
+}
+.gate-label {
+  font: var(--gate-label-font);
+  letter-spacing: var(--gate-label-spacing);
+  text-transform: uppercase;
+  color: var(--gate-label-color);
+}
+.gate-code {
+  width: 15ch;
+  padding: 10px 0 10px 1.6ch;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: linear-gradient(90deg, var(--gate-line) 0 2.2ch, transparent 0) 0 100% / 3ch 1px repeat-x;
+  font: var(--gate-code-font);
+  letter-spacing: 1.75ch;
+  color: var(--gate-code-color);
+  caret-color: var(--gate-caret);
+  text-align: left;
+}
+.gate.no .gate-code {
+  animation: gate-no 0.38s ease;
+}
+@keyframes gate-no {
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
