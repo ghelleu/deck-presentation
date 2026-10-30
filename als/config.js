@@ -11,4 +11,9 @@ window.DECK_CONFIG = {
   /* Default language; ?lang=en in the URL overrides it. */
   LANG: "fr",
   LANGS: ["fr", "en"],
+
+  /* Access screen (gate.js): SHA-256 of the 5-digit code, in hex. null: no screen.
+     A courtesy screen, not a lock: the files stay readable by their address.
+     Skipped for the PDF export (?print) and the local preview. */
+  GATE: "f7d1e8632e310accbe1b06f5f8858ac614143fe117e0ffc4154742e9aab6ab3b",
 };
