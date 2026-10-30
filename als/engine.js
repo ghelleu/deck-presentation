@@ -200,132 +200,256 @@
 
   /* ======================================================== Line drawings (built here, never imported) */
 
-  /* ---------------------------------------------------- Act dial, in the manner of a Lange 1
-     800 × 800. Off-centre hours dial (left), overlapping small seconds (below), power reserve
-     AUF / AB (right), outsize date (top right). The date shows the act number:
-     01, 02, 03; on arrival its units disc jumps digit by digit. No wordmark on the dial:
-     the brief forbids redrawing the house's logotype. */
-  const ACT = {
-    1: { date: 1, h: 10, pr: -40 }, // the big date shows the act number
-    2: { date: 2, h: 11, pr: -6 },
-    3: { date: 3, h: 12, pr: 28 },
-    4: { date: 4, h: 13, pr: 46 },
+  /* ---------------------------------------------------- Drawn typography for the dials (cover, act pages)
+     Figures and letters as outlines (assets/dial-glyphs.js), Roman numerals built stroke by stroke. */
+  const D2R = Math.PI / 180;
+  const at = (c, r, deg) => polar(c[0], c[1], r, deg * D2R);
+  // ---- figures and letters: one outline per glyph, centred on (0, 0), cap height h
+  const CAP = 755;
+  const run = (str, style, h, sx = 1, track = 0) => {
+    const g = window.DIAL_GLYPHS[style],
+      sc = h / CAP;
+    let x = 0,
+      parts = "";
+    const chars = [...str];
+    chars.forEach((ch, i) => {
+      const q = g[ch];
+      if (q) parts += `<path transform="translate(${f1(x)} 0)" d="${q.d}"/>`;
+      x += (q ? q.adv : 300) + (i < chars.length - 1 ? track : 0);
+    });
+    const first = g[chars[0]],
+      last = g[chars[chars.length - 1]];
+    const x0 = first ? first.box[0] : 0,
+      x1 = x - (last ? last.adv - last.box[2] : 0);
+    return `<g transform="scale(${(sc * sx).toFixed(5)} ${sc.toFixed(5)}) translate(${f1(-(x0 + x1) / 2)} ${CAP / 2})">${parts}</g>`;
   };
-  const ACT_BEFORE = { date: 0, h: 9, pr: -50 }; // what the dial shows just before act I
+  const textAt = (x, y, rot, str, style, h, cls = "cv-glyph", sx = 1, track = 0) =>
+    `<g class="${cls}" transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)})">${run(str, style, h, sx, track)}</g>`;
+  // along a circle, spread over an angular span; tops outward reading clockwise, or inward reading anticlockwise
+  // along a circle, the first and last glyph centred on a0 and a1 (as measured); tops outward
+  // reading clockwise, or tops inward reading anticlockwise (inward)
+  const textArc = (c, r, a0, a1, str, style, h, inward = false, cls = "cv-glyph") => {
+    const g = window.DIAL_GLYPHS[style],
+      sc = h / CAP,
+      chars = [...str];
+    const adv = chars.map((ch) => (g[ch] ? g[ch].adv : 330) * sc);
+    const n = chars.length;
+    const L = Math.abs(a1 - a0) * D2R * r;
+    const natural = adv.reduce((p, v) => p + v, 0) - adv[0] / 2 - adv[n - 1] / 2;
+    const extra = n > 1 ? (L - natural) / (n - 1) : 0;
+    let pos = -adv[0] / 2,
+      out = "";
+    chars.forEach((ch, i) => {
+      const mid = pos + adv[i] / 2;
+      pos += adv[i] + extra;
+      if (ch === " ") return;
+      const t = L ? mid / L : 0;
+      const deg = inward ? a1 - t * (a1 - a0) : a0 + t * (a1 - a0);
+      const [x, y] = at(c, r, deg);
+      out += textAt(x, y, inward ? deg - 180 : deg, ch, style, h, cls);
+    });
+    return out;
+  };
+  // radial figures: tops outward, those of the lower half turned to stay readable
+  const upright = (deg) => {
+    let r = ((deg % 360) + 360) % 360;
+    if (r > 180) r -= 360;
+    return Math.abs(r) > 90 ? r - 180 * Math.sign(r) : r;
+  };
+  // ---- Roman numerals, drawn: thick stems and hairlines, flat serifs, as on the dial
+  const RN = { h: 71.5, stem: 5.9, thick: 7.6, hair: 2.7, serif: 2.5, over: 2.7, gap: 1.0 };
+  const rect = (x0, y0, x1, y1) => `M${f1(x0)} ${f1(y0)} H${f1(x1)} V${f1(y1)} H${f1(x0)} Z`;
+  const quad = (p) => "M" + p.map(([x, y]) => `${f1(x)} ${f1(y)}`).join(" L") + " Z";
+  const letter = (ch, x) => {
+    const { h, stem, thick, hair, serif: st, over } = RN;
+    if (ch === "I") {
+      const w = stem + 2 * over,
+        br = 1.6;
+      const d = `M${f1(x)} 0 H${f1(x + w)} V${st} Q${f1(x + w - over)} ${st} ${f1(x + w - over)} ${f1(st + br)} V${f1(h - st - br)} Q${f1(x + w - over)} ${f1(h - st)} ${f1(x + w)} ${f1(h - st)} V${h} H${f1(x)} V${f1(h - st)} Q${f1(x + over)} ${f1(h - st)} ${f1(x + over)} ${f1(h - st - br)} V${f1(st + br)} Q${f1(x + over)} ${st} ${f1(x)} ${st} Z`;
+      return [d, w];
+    }
+    if (ch === "V") {
+      const w = 20.6,
+        tip = x + w / 2;
+      const d =
+        quad([[x + over, st], [x + over + thick, st], [tip + 1.2, h], [tip - 1.4, h]]) +
+        quad([[x + w - over - hair, st], [x + w - over, st], [tip + 1.2, h], [tip - 0.4, h]]) +
+        rect(x, 0, x + 2 * over + thick, st) +
+        rect(x + w - 2 * over - hair, 0, x + w, st);
+      return [d, w];
+    }
+    // X
+    const w = 21.1;
+    const d =
+      quad([[x + over, st], [x + over + thick, st], [x + w - over, h - st], [x + w - over - thick, h - st]]) +
+      quad([[x + w - over - hair, st], [x + w - over, st], [x + over + hair, h - st], [x + over, h - st]]) +
+      rect(x, 0, x + 2 * over + thick, st) +
+      rect(x + w - 2 * over - hair, 0, x + w, st) +
+      rect(x, h - st, x + 2 * over + hair, h) +
+      rect(x + w - 2 * over - thick, h - st, x + w, h);
+    return [d, w];
+  };
+  const roman = (str) => {
+    let x = 0,
+      d = "";
+    [...str].forEach((ch) => {
+      const [p, w] = letter(ch, x);
+      d += p;
+      x += w + RN.gap;
+    });
+    return `<path transform="translate(${f1(-(x - RN.gap) / 2)} ${-RN.h / 2})" d="${d}"/>`;
+  };
+
+  /* ---------------------------------------------------- Act dial: the Lange 1, black dial (act pages)
+     Drawn over a photograph of the watch (assets/src/lange1-noir.webp): every centre, radius,
+     angle and size below is measured on it, in the photo's pixels, and brought into this
+     800 × 800 frame by P() and K. Hours dial with its minute bars, Roman numerals and lozenges;
+     small seconds; power reserve AUF / AB along the edge; outsize date. No inscriptions other
+     than AUF / AB, and no wordmark: the brief forbids redrawing the house's logotype. The date
+     shows the act number (01 to 04) and its units disc jumps digit by digit on arrival. */
+  const ACT = {
+    1: { date: 1, h: 10, pr: -38 }, // the big date shows the act number; the reserve runs down act by act
+    2: { date: 2, h: 11, pr: -20 },
+    3: { date: 3, h: 12, pr: 0 },
+    4: { date: 4, h: 13, pr: 20 },
+  };
+  const ACT_BEFORE = { date: 0, h: 9, pr: -41 }; // what the dial shows just before act I
   const ACT_MIN = 8; // a quiet 10:08, 11:08, 12:08
-  const DIAL = { M: [290, 420], rm: 200, S: [474, 604], rs: 104, P: [566, 440], D: { x: 470, y: 168, w: 80, h: 98, gap: 10 } };
+  const L1 = { c: [927.3, 950.9], r: 888.8 }; // the dial on the photo
+  const K = 372 / L1.r;
+  const P = (x, y) => [400 + (x - L1.c[0]) * K, 400 + (y - L1.c[1]) * K];
+  const DIAL = {
+    M: P(632, 945), // hours and minutes
+    S: P(1238, 1373), // small seconds
+    R: P(1236, 947), // power reserve
+    D: { tens: [1075, 423, 1218, 596], units: [1234, 423, 1398, 596], frame: [1061, 409, 1411, 609] },
+  };
+  DIAL.D.h = (DIAL.D.units[3] - DIAL.D.units[1]) * K; // one date digit's travel (deck:clock)
   const angH = (h) => ((h % 12) + ACT_MIN / 60) * 30;
   const angM = () => ACT_MIN * 6;
 
-  // Lance-shaped hand pointing up from its pivot at (0, 0).
+  // Lance-shaped hand pointing up from its pivot at (0, 0) (calibres, older drawings).
   const lance = (len, w) =>
     `M-2.4 22 L-2.4 ${f1(-len * 0.5)} L${-w} ${f1(-len * 0.7)} L0 ${-len} L${w} ${f1(-len * 0.7)} L2.4 ${f1(-len * 0.5)} L2.4 22 Z`;
+  // A hand from its measured profile: [distance from the pivot, half width], pointing up.
+  const leaf = (prof) => {
+    const pts = [...prof.map(([d, w]) => [w, -d]), ...prof.map(([d, w]) => [-w, -d]).reverse()];
+    let d = `M${f1(pts[0][0])} ${f1(pts[0][1])}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(i - 1, 0)],
+        p1 = pts[i],
+        p2 = pts[i + 1],
+        p3 = pts[Math.min(i + 2, pts.length - 1)];
+      d += ` C${f1(p1[0] + (p2[0] - p0[0]) / 6)} ${f1(p1[1] + (p2[1] - p0[1]) / 6)} ${f1(p2[0] - (p3[0] - p1[0]) / 6)} ${f1(p2[1] - (p3[1] - p1[1]) / 6)} ${f1(p2[0])} ${f1(p2[1])}`;
+    }
+    return d + " Z";
+  };
+  const scaleProf = (prof) => prof.map(([d, w]) => [d * K, w * K]);
 
   function dial(actNo) {
     const st = ACT[actNo] || ACT[1];
-    const [mx, my] = DIAL.M,
-      [sx, sy] = DIAL.S,
-      [px, py] = DIAL.P,
-      rm = DIAL.rm,
-      rs = DIAL.rs,
-      D = DIAL.D;
+    const M = DIAL.M,
+      S = DIAL.S,
+      R = DIAL.R,
+      C = [400, 400];
     const o = (ms) => `pathLength="1" style="--dd:${ms}"`;
-    const seg = (cx, cy, r1, r2, a) => {
-      const [x1, y1] = polar(cx, cy, r1, a),
-        [x2, y2] = polar(cx, cy, r2, a);
-      return `M${f1(x1)} ${f1(y1)} L${f1(x2)} ${f1(y2)}`;
+    const bars = (c, r1, r2, n, w, ms, keep = () => true) => {
+      let d = "";
+      for (let i = 0; i < n; i++) {
+        if (!keep(i)) continue;
+        const [x1, y1] = at(c, r1 * K, (i * 360) / n),
+          [x2, y2] = at(c, r2 * K, (i * 360) / n);
+        d += `M${f1(x1)} ${f1(y1)} L${f1(x2)} ${f1(y2)} `;
+      }
+      return `<path class="s late" style="--cd:${ms};stroke-width:${f1(w * K)};stroke-linecap:round" d="${d}"/>`;
     };
 
-    // Hours dial: minute track, Roman numerals at the quarters (set radially), lozenges between.
-    let fine = "",
-      bold = "";
-    for (let i = 0; i < 60; i++) {
-      const a = (i * Math.PI) / 30;
-      if (i % 5) fine += seg(mx, my, rm - 12, rm - 3, a) + " ";
-      else bold += seg(mx, my, rm - 20, rm - 3, a) + " ";
-    }
+    // Hours dial: the ring, a bar for each minute, numerals at the quarters, lozenges between
+    const RNH = 87 * K; // numeral height on the photo: 87 px
     const romans = [["XII", 0], ["III", 90], ["VI", 180], ["IX", 270]]
       .map(([t, deg]) => {
-        const [x, y] = polar(mx, my, rm - 52, (deg * Math.PI) / 180);
-        return `<text class="rn" x="${f1(x)}" y="${f1(y)}" text-anchor="middle" dominant-baseline="central" transform="rotate(${deg} ${f1(x)} ${f1(y)})">${t}</text>`;
+        const [x, y] = at(M, 396 * K, deg);
+        // the Lange 1 numerals are broad: XII is 1.7 times as wide as it is tall (147 × 87 px)
+        const sc = RNH / RN.h;
+        return `<g class="cv-glyph" transform="translate(${f1(x)} ${f1(y)}) rotate(${deg}) scale(${(sc * 2.25).toFixed(4)} ${sc.toFixed(4)})">${roman(t)}</g>`;
       })
       .join("");
     let lozenges = "";
     for (let hr = 1; hr < 12; hr++) {
       if (hr % 3 === 0) continue;
-      const [x, y] = polar(mx, my, rm - 50, (hr * Math.PI) / 6);
-      lozenges += `<path class="s" transform="rotate(${hr * 30} ${f1(x)} ${f1(y)})" d="M${f1(x)} ${f1(y - 11)} L${f1(x + 4.5)} ${f1(y)} L${f1(x)} ${f1(y + 11)} L${f1(x - 4.5)} ${f1(y)} Z" style="stroke-width:1.1"/>`;
+      const [x, y] = at(M, 397 * K, hr * 30),
+        l = 23 * K,
+        w = 9.5 * K;
+      lozenges += `<path class="f" transform="translate(${f1(x)} ${f1(y)}) rotate(${hr * 30})" d="M0 ${f1(-l)} L${f1(w)} 0 L0 ${f1(l)} L${f1(-w)} 0 Z"/>`;
     }
 
-    // Small seconds, drawn over the hours dial as on the watch.
-    let sFine = "",
-      sFive = "",
-      sQuarter = "";
-    for (let i = 0; i < 60; i++) {
-      const a = (i * Math.PI) / 30;
-      if (i % 15 === 0) sQuarter += seg(sx, sy, rs - 22, rs - 3, a) + " ";
-      else if (i % 5 === 0) sFive += seg(sx, sy, rs - 15, rs - 3, a) + " ";
-      else sFine += seg(sx, sy, rs - 10, rs - 3, a) + " ";
-    }
+    // Power reserve: triangles on the dial's edge, pointing in; AUF and AB along the edge
+    const tri = [63.2, 77.0, 89.8, 102.7, 107.1]
+      .map((deg) => {
+        const [x, y] = at(C, 802 * K, deg),
+          s_ = 9.5 * K;
+        return `<path class="f" transform="translate(${f1(x)} ${f1(y)}) rotate(${deg})" d="M0 ${f1(s_)} L${f1(-s_ * 1.05)} ${f1(-s_ * 0.8)} L${f1(s_ * 1.05)} ${f1(-s_ * 0.8)} Z"/>`;
+      })
+      .join("");
 
-    // Power reserve: five triangles from AUF (top) to AB (bottom); 0° points right.
-    const prAt = (deg, r) => [px + r * Math.cos((deg * Math.PI) / 180), py + r * Math.sin((deg * Math.PI) / 180)];
-    let prMarks = "";
-    for (const deg of [-50, -25, 0, 25, 50]) {
-      const [x, y] = prAt(deg, 132);
-      // small filled triangles pointing back towards the hand
-      prMarks += `<path class="f" transform="rotate(${deg} ${f1(x)} ${f1(y)})" d="M${f1(x + 6)} ${f1(y - 6)} L${f1(x - 6)} ${f1(y)} L${f1(x + 6)} ${f1(y + 6)} Z"/>`;
-    }
-    const [aufX, aufY] = prAt(-66, 138),
-      [abX, abY] = prAt(66, 138);
-
-    // Outsize date: tens on the cross (left window), units on the disc (right window).
-    const id = `dw${uid++}`,
-      tx = D.x,
-      ux = D.x + D.w + D.gap;
+    // Outsize date: tens fixed at 0, units on a disc that turns (deck:clock)
+    const id = `dw${uid++}`;
+    const box = ([x0, y0, x1, y1]) => [...P(x0, y0), ...P(x1, y1)];
+    const [fx0, fy0, fx1, fy1] = box(DIAL.D.frame),
+      [tx0, ty0, tx1, ty1] = box(DIAL.D.tens),
+      [ux0, uy0, ux1, uy1] = box(DIAL.D.units);
+    const DH = 121 * K; // digit height on the photo: 121 px
     let strip = "";
-    for (let d = 0; d <= 10; d++)
-      strip += `<text class="dg" x="${ux + D.w / 2}" y="${D.y + D.h / 2 + d * D.h}" text-anchor="middle" dominant-baseline="central">${d % 10}</text>`;
+    for (let d = 0; d <= 10; d++) strip += textAt((ux0 + ux1) / 2, (uy0 + uy1) / 2 + d * DIAL.D.h, 0, String(d % 10), "date", DH);
+    const win = (x0, y0, x1, y1, ms, w = 1.3) =>
+      `<rect class="s d" ${o(ms)} x="${f1(x0)}" y="${f1(y0)}" width="${f1(x1 - x0)}" height="${f1(y1 - y0)}" style="stroke-width:${w}"/>`;
 
-    const hand = (cls, cx, cy, deg, inner, extra = "") =>
-      `<g class="rot ${cls}" ${extra} style="transform-origin:${cx}px ${cy}px;transform:rotate(${f1(deg)}deg)"><g transform="translate(${cx} ${cy})">${inner}</g></g>`;
+    // Hands, from their profiles on the photo (px from the pivot, half width)
+    const minute = leaf(scaleProf([[-30, 6], [40, 6.5], [90, 9], [130, 14], [160, 14], [250, 9.5], [350, 5], [430, 2], [465, 0.4]]));
+    const hour = leaf(scaleProf([[-30, 6], [40, 6.5], [80, 10], [110, 14], [140, 13], [220, 7.5], [300, 2.5], [334, 0.4]]));
+    const reserve = leaf(scaleProf([[-24, 4.5], [30, 5], [80, 8.5], [120, 9], [250, 5], [380, 1.8], [441, 0.3]]));
+    const secLong = leaf(scaleProf([[-110, 3.2], [-40, 3.6], [0, 3.6], [60, 4], [140, 2.6], [232, 0.4]]));
+    const lz = (cy, l, w) => `M0 ${f1(cy - l)} L${f1(w)} ${f1(cy)} L0 ${f1(cy + l)} L${f1(-w)} ${f1(cy)} Z`;
+    const secLoz = `${lz(137 * K, 14 * K, 11 * K)} ${lz(137 * K, 7 * K, 5 * K)}`;
+    const cap = (c, r) =>
+      `<circle class="s hf" cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(r * K)}"/><circle class="s" cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(r * K * 0.48)}" style="stroke-width:1"/><circle class="f" cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(r * K * 0.2)}"/>`;
+    const hand = (cls, c, deg, inner, extra = "") =>
+      `<g class="rot ${cls}" ${extra} style="transform-origin:${f1(c[0])}px ${f1(c[1])}px;transform:rotate(${f1(deg)}deg)"><g transform="translate(${f1(c[0])} ${f1(c[1])})">${inner}</g></g>`;
 
     return `<svg viewBox="0 0 800 800">
       <circle class="s d" ${o(0)} cx="400" cy="400" r="372" style="stroke-width:1.8"/>
-      <circle class="t" cx="400" cy="400" r="356"/>
 
-      <circle class="s d" ${o(150)} cx="${mx}" cy="${my}" r="${rm}"/>
-      <path class="t d" ${o(250)} d="${fine}"/>
-      <path class="s d" ${o(300)} d="${bold}" style="stroke-width:2.2"/>
+      <circle class="s d" ${o(150)} cx="${f1(M[0])}" cy="${f1(M[1])}" r="${f1(494 * K)}" style="stroke-width:1.2"/>
+      ${bars(M, 443, 468, 60, 7, 700)}
       <g class="late" style="--cd:900">${romans}${lozenges}</g>
 
-      <circle class="paperfill" cx="${sx}" cy="${sy}" r="${rs + 8}"/>
-      <circle class="s d" ${o(400)} cx="${sx}" cy="${sy}" r="${rs}"/>
-      <path class="t d" ${o(480)} d="${sFine}"/>
-      <path class="s d" ${o(500)} d="${sFive}" style="stroke-width:1.4"/>
-      <path class="s d" ${o(520)} d="${sQuarter}" style="stroke-width:3.2"/>
+      <circle class="paperfill" cx="${f1(S[0])}" cy="${f1(S[1])}" r="${f1(285 * K)}"/>
+      <circle class="s d" ${o(400)} cx="${f1(S[0])}" cy="${f1(S[1])}" r="${f1(279 * K)}" style="stroke-width:1.2"/>
+      ${bars(S, 242, 262, 60, 4, 800, (i) => i % 5)}
+      ${bars(S, 232, 262, 12, 5, 820, (i) => i % 3)}
+      ${bars(S, 218, 262, 4, 9, 840)}
 
-      <g class="late" style="--cd:1000">${prMarks}
-        <text class="pr" x="${f1(aufX)}" y="${f1(aufY)}" text-anchor="middle" dominant-baseline="central" transform="rotate(24 ${f1(aufX)} ${f1(aufY)})">AUF</text>
-        <text class="pr" x="${f1(abX)}" y="${f1(abY)}" text-anchor="middle" dominant-baseline="central" transform="rotate(-24 ${f1(abX)} ${f1(abY)})">AB</text>
+      <g class="late" style="--cd:1000">${tri}
+        ${textArc(C, 791 * K, 49.3, 56.2, "AUF", "bold", 34 * K)}
+        ${textArc(C, 792 * K, 113.9, 117.5, "AB", "bold", 34 * K)}
       </g>
 
-      <clipPath id="${id}t"><rect x="${tx}" y="${D.y}" width="${D.w}" height="${D.h}"/></clipPath>
-      <clipPath id="${id}u"><rect x="${ux}" y="${D.y}" width="${D.w}" height="${D.h}"/></clipPath>
-      <rect class="s d" ${o(600)} x="${tx - 9}" y="${D.y - 9}" width="${2 * D.w + D.gap + 18}" height="${D.h + 18}" style="stroke-width:1.4"/>
-      <rect class="s d" ${o(650)} x="${tx}" y="${D.y}" width="${D.w}" height="${D.h}"/>
-      <rect class="s d" ${o(700)} x="${ux}" y="${D.y}" width="${D.w}" height="${D.h}"/>
+      <clipPath id="${id}t"><rect x="${f1(tx0)}" y="${f1(ty0)}" width="${f1(tx1 - tx0)}" height="${f1(ty1 - ty0)}"/></clipPath>
+      <clipPath id="${id}u"><rect x="${f1(ux0)}" y="${f1(uy0)}" width="${f1(ux1 - ux0)}" height="${f1(uy1 - uy0)}"/></clipPath>
+      ${win(fx0, fy0, fx1, fy1, 600, 1.8)}${win(tx0, ty0, tx1, ty1, 650)}${win(ux0, uy0, ux1, uy1, 700)}
       <g class="late" style="--cd:1000">
-        <g clip-path="url(#${id}t)"><text class="dg" x="${tx + D.w / 2}" y="${D.y + D.h / 2}" text-anchor="middle" dominant-baseline="central">0</text></g>
-        <g clip-path="url(#${id}u)"><g class="strip" style="transform:translateY(${-st.date * D.h}px)">${strip}</g></g>
+        <g clip-path="url(#${id}t)">${textAt((tx0 + tx1) / 2, (ty0 + ty1) / 2, 0, "0", "date", DH)}</g>
+        <g clip-path="url(#${id}u)"><g class="strip" style="transform:translateY(${f1(-st.date * DIAL.D.h)}px)">${strip}</g></g>
       </g>
 
       <g class="late hands" style="--cd:1100">
-        ${hand("pr-hand", px, py, 90 + st.pr, `<path class="s hf" d="${lance(110, 5)}"/><circle class="s hf" r="7"/>`)}
-        ${hand("sh", sx, sy, 0, `<path class="s" d="M0 18 L0 -92" style="stroke-width:1.3"/><path class="s hf" d="M0 -76 L4.5 -64 L0 -52 L-4.5 -64 Z"/><circle class="s hf" r="5"/>`)}
-        ${hand("hh", mx, my, angH(st.h), `<path class="s hf" d="${lance(120, 9)}"/>`)}
-        ${hand("mh", mx, my, angM(), `<path class="s hf" d="${lance(180, 7.5)}"/>`)}
-        <circle class="s hf" cx="${mx}" cy="${my}" r="11"/><circle class="f" cx="${mx}" cy="${my}" r="3.5"/>
+        ${hand("pr-hand", R, 90 + st.pr, `<path class="f" d="${reserve}"/>`)}
+        ${cap(R, 30)}
+        ${hand("sh", S, 0, `<path class="f" d="${secLong}"/><path class="f" fill-rule="evenodd" d="${secLoz}"/>`)}
+        ${cap(S, 26)}
+        ${hand("hh", M, angH(st.h), `<path class="f" d="${hour}"/>`)}
+        ${hand("mh", M, angM(), `<path class="f" d="${minute}"/>`)}
+        ${cap(M, 45)}
       </g>
     </svg>`;
   }
@@ -910,104 +1034,9 @@
     // brought into this 1000 frame (dial centre 500, 500; radius 470). Lines as before; the
     // typography is drawn: Roman numerals built stroke by stroke, figures and inscriptions from
     // Bodoni Moda outlines (assets/dial-glyphs.js) placed glyph by glyph. No wordmark.
-    const G = window.DIAL_GLYPHS;
     const M = [496.4, 383.0], // minutes, outsize date above
       Sx = [343.1, 622.9], // small seconds
       H = [655.9, 622.6]; // hours
-    const D2R = Math.PI / 180;
-    const at = (c, r, deg) => polar(c[0], c[1], r, deg * D2R);
-    // ---- figures and letters: one outline per glyph, centred on (0, 0), cap height h
-    const CAP = 755;
-    const run = (str, style, h, sx = 1, track = 0) => {
-      const g = G[style],
-        sc = h / CAP;
-      let x = 0,
-        parts = "";
-      const chars = [...str];
-      chars.forEach((ch, i) => {
-        const q = g[ch];
-        if (q) parts += `<path transform="translate(${f1(x)} 0)" d="${q.d}"/>`;
-        x += (q ? q.adv : 300) + (i < chars.length - 1 ? track : 0);
-      });
-      const first = g[chars[0]],
-        last = g[chars[chars.length - 1]];
-      const x0 = first ? first.box[0] : 0,
-        x1 = x - (last ? last.adv - last.box[2] : 0);
-      return `<g transform="scale(${(sc * sx).toFixed(5)} ${sc.toFixed(5)}) translate(${f1(-(x0 + x1) / 2)} ${CAP / 2})">${parts}</g>`;
-    };
-    const textAt = (x, y, rot, str, style, h, cls = "cv-glyph", sx = 1, track = 0) =>
-      `<g class="${cls}" transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)})">${run(str, style, h, sx, track)}</g>`;
-    // along a circle, spread over an angular span; tops outward reading clockwise, or inward reading anticlockwise
-    const textArc = (c, r, a0, a1, str, style, h, inward = false, cls = "cv-glyph") => {
-      const g = G[style],
-        sc = h / CAP,
-        chars = [...str];
-      const adv = chars.map((ch) => (g[ch] ? g[ch].adv : 330) * sc);
-      const natural = adv.reduce((p, v) => p + v, 0);
-      const L = Math.abs(a1 - a0) * D2R * r;
-      const extra = (L - natural) / Math.max(chars.length - 1, 1);
-      let pos = 0,
-        out = "";
-      chars.forEach((ch, i) => {
-        const mid = pos + adv[i] / 2;
-        pos += adv[i] + extra;
-        if (ch === " ") return;
-        const t = mid / L;
-        const deg = inward ? a1 - t * (a1 - a0) : a0 + t * (a1 - a0);
-        const [x, y] = at(c, r, deg);
-        out += textAt(x, y, inward ? deg - 180 : deg, ch, style, h, cls);
-      });
-      return out;
-    };
-    // radial figures: tops outward, those of the lower half turned to stay readable
-    const upright = (deg) => {
-      let r = ((deg % 360) + 360) % 360;
-      if (r > 180) r -= 360;
-      return Math.abs(r) > 90 ? r - 180 * Math.sign(r) : r;
-    };
-    // ---- Roman numerals, drawn: thick stems and hairlines, flat serifs, as on the dial
-    const RN = { h: 71.5, stem: 5.9, thick: 7.6, hair: 2.7, serif: 2.5, over: 2.7, gap: 1.0 };
-    const rect = (x0, y0, x1, y1) => `M${f1(x0)} ${f1(y0)} H${f1(x1)} V${f1(y1)} H${f1(x0)} Z`;
-    const quad = (p) => "M" + p.map(([x, y]) => `${f1(x)} ${f1(y)}`).join(" L") + " Z";
-    const letter = (ch, x) => {
-      const { h, stem, thick, hair, serif: st, over } = RN;
-      if (ch === "I") {
-        const w = stem + 2 * over,
-          br = 1.6;
-        const d = `M${f1(x)} 0 H${f1(x + w)} V${st} Q${f1(x + w - over)} ${st} ${f1(x + w - over)} ${f1(st + br)} V${f1(h - st - br)} Q${f1(x + w - over)} ${f1(h - st)} ${f1(x + w)} ${f1(h - st)} V${h} H${f1(x)} V${f1(h - st)} Q${f1(x + over)} ${f1(h - st)} ${f1(x + over)} ${f1(h - st - br)} V${f1(st + br)} Q${f1(x + over)} ${st} ${f1(x)} ${st} Z`;
-        return [d, w];
-      }
-      if (ch === "V") {
-        const w = 20.6,
-          tip = x + w / 2;
-        const d =
-          quad([[x + over, st], [x + over + thick, st], [tip + 1.2, h], [tip - 1.4, h]]) +
-          quad([[x + w - over - hair, st], [x + w - over, st], [tip + 1.2, h], [tip - 0.4, h]]) +
-          rect(x, 0, x + 2 * over + thick, st) +
-          rect(x + w - 2 * over - hair, 0, x + w, st);
-        return [d, w];
-      }
-      // X
-      const w = 21.1;
-      const d =
-        quad([[x + over, st], [x + over + thick, st], [x + w - over, h - st], [x + w - over - thick, h - st]]) +
-        quad([[x + w - over - hair, st], [x + w - over, st], [x + over + hair, h - st], [x + over, h - st]]) +
-        rect(x, 0, x + 2 * over + thick, st) +
-        rect(x + w - 2 * over - hair, 0, x + w, st) +
-        rect(x, h - st, x + 2 * over + hair, h) +
-        rect(x + w - 2 * over - thick, h - st, x + w, h);
-      return [d, w];
-    };
-    const roman = (str) => {
-      let x = 0,
-        d = "";
-      [...str].forEach((ch) => {
-        const [p, w] = letter(ch, x);
-        d += p;
-        x += w + RN.gap;
-      });
-      return `<path transform="translate(${f1(-(x - RN.gap) / 2)} ${-RN.h / 2})" d="${d}"/>`;
-    };
     const ROM = ["XII", "I", "II", "III", "IIII", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
     const romans = ROM.map((t, i) => {
       const [x, y] = at(H, 183.9, i * 30);
@@ -2360,6 +2389,12 @@
       Promise.all(imgs.map((i) => (i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r))))).then(
         () => (root.dataset.ready = "print"),
       );
+      // PowerPoint export (tools/export-pptx.py): the probe reads the text blocks of each slide
+      if (new URLSearchParams(location.search).has("pptx")) {
+        const probe = document.createElement("script");
+        probe.src = "tools/pptx-probe.js";
+        document.body.appendChild(probe);
+      }
     }
   }
   const fontsReady = document.fonts
