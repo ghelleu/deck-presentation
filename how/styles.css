@@ -957,9 +957,10 @@ body.is-black .stage {
   }
 }
 
-/* ------------------------------------------------------------- Scenographic schemas (vectorised, tools/vectorize-schemas.py)
-   Default state is the finished drawing (print, overview). On arrival: the lines draw themselves,
-   the surfaces settle in, the violet pieces appear one by one, then breathe. */
+/* ------------------------------------------------------------- Scenographic schemas (line art, tools/redraw-schemas.py)
+   As in the ALS drawings: every line is a stroke that draws itself (pathLength 1, delay --dd, length --dl).
+   Then the surfaces settle under the lines, the violet route is walked, violet objects appear one by one.
+   Default state is the finished drawing (print, overview). */
 
 .sc-svg svg {
   display: block;
@@ -968,62 +969,61 @@ body.is-black .stage {
   overflow: visible;
 }
 .slide.is-active .sc-svg svg {
-  animation: float 9s ease-in-out 4s infinite alternate;
+  animation: float 9s ease-in-out 5s infinite alternate;
 }
-.vx .vx-s {
+.rd .rd-s {
   fill: none;
   stroke: var(--night);
-  stroke-width: 0.8;
-  stroke-dasharray: 1 1;
-  opacity: 0;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 0;
 }
-.slide.is-active .vx .vx-s {
-  animation: vx-draw 1500ms var(--ease) calc(200ms + var(--i) * 6ms) both;
+.slide.is-active .rd .rd-s {
+  animation: rd-draw calc(var(--dl) * 1ms) var(--ease) calc(var(--dd) * 1ms + 250ms) both;
 }
-.slide.is-active .vx .vx-f {
-  animation: sv-fade 700ms ease 1500ms both;
+.slide.is-active .rd .rd-white,
+.slide.is-active .rd .rd-cool,
+.slide.is-active .rd .rd-warm {
+  animation: rd-fade 1200ms ease 1500ms both;
 }
-.slide.is-active .vx .vx-white,
-.slide.is-active .vx .vx-cool,
-.slide.is-active .vx .vx-warm {
-  animation: sv-fade 1000ms ease 1300ms both;
+.rd .rd-walk {
+  stroke-dasharray: 1 0;
 }
-.vx .vx-violet path {
+.slide.is-active .rd .rd-walk {
+  animation: rd-draw 3000ms cubic-bezier(0.45, 0, 0.3, 1) 2300ms both;
+}
+.rd .rd-objects path {
   transform-box: fill-box;
   transform-origin: 50% 100%;
 }
-.slide.is-active .vx .vx-violet path {
+.slide.is-active .rd .rd-objects path {
   animation:
-    vx-pop 900ms cubic-bezier(0.2, 0.9, 0.3, 1.15) calc(2000ms + var(--i) * 160ms) both,
-    vx-breathe 3.2s ease-in-out calc(3400ms + var(--i) * 300ms) infinite alternate;
+    rd-pop 900ms cubic-bezier(0.2, 0.9, 0.3, 1.2) calc(2300ms + var(--i) * 170ms) both,
+    rd-breathe 3.2s ease-in-out calc(3800ms + var(--i) * 300ms) infinite alternate;
 }
-@keyframes vx-draw {
+@keyframes rd-draw {
   from {
-    stroke-dashoffset: 1;
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
+    stroke-dasharray: 0 1;
   }
   to {
-    stroke-dashoffset: 0;
-    opacity: 0;
+    stroke-dasharray: 1 0;
   }
 }
-@keyframes sv-fade {
+@keyframes rd-fade {
   from {
     opacity: 0;
   }
 }
-@keyframes vx-pop {
+@keyframes rd-pop {
   from {
     opacity: 0;
-    transform: scale(0.4);
+    transform: scale(0.3);
   }
 }
-@keyframes vx-breathe {
+@keyframes rd-breathe {
   to {
-    opacity: 0.78;
+    opacity: 0.75;
   }
 }
 
