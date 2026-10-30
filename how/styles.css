@@ -983,6 +983,8 @@ body.is-black .stage {
   animation: rd-draw calc(var(--dl) * 1ms) var(--ease) calc(var(--dd) * 1ms + 250ms) both;
 }
 .slide.is-active .rd .rd-white,
+.slide.is-active .rd .rd-light,
+.slide.is-active .rd .rd-side,
 .slide.is-active .rd .rd-cool,
 .slide.is-active .rd .rd-warm {
   animation: rd-fade 1200ms ease 1500ms both;
