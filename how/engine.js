@@ -94,7 +94,8 @@
     const pdf = $('.hud [data-act="pdf"]');
     pdf.setAttribute("href", `export/how-ww-2027-${lang}.pdf`);
     pdf.setAttribute("download", (T.meta.hud && T.meta.hud.pdfFile) || "deck.pdf");
-    if (CFG.LANGS.length < 2) $('.hud [data-act="lang"]').hidden = true;
+    const lb = $('.hud [data-act="lang"]');
+    if (lb && CFG.LANGS.length < 2) lb.hidden = true;
     marks();
   }
 
@@ -634,31 +635,9 @@
       case "Escape":
         overview(true);
         break;
-      case "1":
-      case "2":
-      case "3":
-      case "4":
-        goId("c" + k);
-        break;
-      case "c":
-      case "C":
-        toConcepts();
-        break;
       case "f":
       case "F":
         fullscreen();
-        break;
-      case "n":
-      case "N":
-        openNotes();
-        break;
-      case "b":
-      case "B":
-      case ".":
-        document.body.classList.toggle("is-black");
-        break;
-      case "?":
-        toggleHelp();
         break;
       default:
         return;
@@ -741,9 +720,6 @@
   const ACTIONS = {
     restart,
     overview: () => overview(),
-    concepts: toConcepts,
-    notes: () => openNotes(),
-    help: () => toggleHelp(),
     lang: switchLang,
     fullscreen,
   };

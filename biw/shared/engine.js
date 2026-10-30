@@ -672,18 +672,6 @@
       case "F":
         fullscreen();
         break;
-      case "n":
-      case "N":
-        openNotes();
-        break;
-      case "b":
-      case "B":
-      case ".":
-        document.body.classList.toggle("is-black");
-        break;
-      case "?":
-        toggleHelp();
-        break;
       default:
         return;
     }
@@ -719,15 +707,15 @@
     }
   });
 
+  // The toolbar comes from the platform (../../shared/controls.js); restart is wired in full.js
+  // and the PDF is a plain link.
   const ACTIONS = {
     overview: () => overview(),
-    notes: openNotes,
-    help: () => toggleHelp(),
     fullscreen,
   };
-  $$(".hud [data-act]").forEach((b) =>
+  $$(".hud button[data-act]").forEach((b) =>
     b.addEventListener("click", () => {
-      ACTIONS[b.dataset.act]();
+      ACTIONS[b.dataset.act]?.();
       b.blur();
     }),
   );

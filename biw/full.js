@@ -891,7 +891,7 @@
     clearTimeout(auto);
     d.go(d.state.list[0].id, 0);
   };
-  const btn = document.querySelector(".hud [data-restart]");
+  const btn = document.querySelector('.hud [data-act="restart"]');
   if (btn)
     btn.addEventListener("click", () => {
       restart();
@@ -905,7 +905,7 @@
     e.preventDefault();
   });
 
-  // To the annex contents: the corner label on an annex page, or A from anywhere
+  // To the annex contents: the corner label on an annex page
   const toIndex = () => {
     const d = window.deck;
     if (!d || d.state.overview || !d.state.list.some((x) => x.id === "a-index"))
@@ -917,13 +917,6 @@
     if (!e.target.closest(".folio .to-index")) return;
     e.preventDefault();
     toIndex();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey || (e.key !== "a" && e.key !== "A"))
-      return;
-    if (document.querySelector(".help.open")) return;
-    toIndex();
-    e.preventDefault();
   });
 
   // Slides to present. In All slides (O) each slide carries a tick: an unticked slide is left out

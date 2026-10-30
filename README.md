@@ -33,6 +33,23 @@ Ce qui sert à plusieurs decks vit dans `shared/`, à la racine, et n'est pas re
 |---|---|
 | `shared/gate.js` | Écran d'accès à 5 chiffres. Lit `GATE` (empreinte SHA-256) dans le `config.js` du deck ; `null` : pas d'écran. Sauté pour `?print` et l'aperçu local (`?gate` le force). |
 | `shared/gate.css` | Structure de cet écran. Chaque deck règle son apparence dans son `styles.css` avec les variables `--gate-*` posées sur `.gate`, et masque ses propres commandes avec `html.gated …`. |
+| `shared/controls.js` | La barre de commandes, identique sur tous les decks : **plein écran (F) · revenir au début (R) · toutes les slides (O) · langue · télécharger le PDF**, dans cet ordre, rien d'autre. Le bouton langue n'apparaît que si `DECK_CONFIG.LANGS` compte au moins deux langues. Clavier : flèches, espace, Entrée, retour arrière, Page préc./suiv., Début/Fin, plus F, R, O et Échap (ouvre et ferme les vignettes). Aucune autre touche, aucun bouton propre à un deck. |
+
+La plateforme est un lecteur de decks : chaque deck fait le travail derrière ces cinq commandes (son PDF, ses langues, ses vignettes), mais n'en ajoute pas. Dans le `index.html` du deck, la barre est une boîte vide que `controls.js` remplit :
+
+```html
+<div class="hud" role="toolbar">
+  <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
+  <div class="hud-r" data-controls data-pdf="export/deck.pdf" data-pdf-name="Deck.pdf"></div>
+</div>
+…
+<script src="config.js"></script>
+<script src="../shared/gate.js"></script>
+<script src="../shared/controls.js"></script>        <!-- avant le moteur du deck -->
+<script src="engine.js"></script>
+```
+
+Le moteur du deck branche les boutons par leur `data-act` : `fullscreen`, `restart`, `overview`, `lang`, et le lien `pdf` (il peut en changer l'adresse, par exemple selon la langue).
 
 Dans le `index.html` du deck :
 
@@ -42,6 +59,7 @@ Dans le `index.html` du deck :
 …
 <script src="config.js"></script>
 <script src="../shared/gate.js"></script>             <!-- après config.js -->
+<script src="../shared/controls.js"></script>         <!-- avant le moteur du deck -->
 ```
 
 Répartition du travail : la plateforme (page d'accueil, `shared/`, README, domaine) se modifie depuis ce dépôt ; chaque deck se construit dans son propre dossier de travail et ne touche que son dossier ici (`als/`, `how/`…). Les sources d'un deck doivent donc pointer vers `../shared/` et ne plus contenir leur propre `gate.js`, sinon la prochaine copie du deck le remet.

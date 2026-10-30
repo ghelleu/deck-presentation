@@ -124,7 +124,8 @@
     const pdf = $('.hud [data-act="pdf"]');
     pdf.setAttribute("href", `export/als-geneve-2027-${lang}.pdf`);
     pdf.setAttribute("download", (T.meta.hud && T.meta.hud.pdfFile) || "deck.pdf");
-    if (CFG.LANGS.length < 2) $('.hud [data-act="lang"]').hidden = true;
+    const lb = $('.hud [data-act="lang"]');
+    if (lb && CFG.LANGS.length < 2) lb.hidden = true;
     const list = $("#annexes .ax-list");
     if (list)
       list.replaceChildren(
@@ -2194,25 +2195,9 @@
       case "Escape":
         overview(true);
         break;
-      case "a":
-      case "A":
-        toAnnexes();
-        break;
       case "f":
       case "F":
         fullscreen();
-        break;
-      case "n":
-      case "N":
-        openNotes();
-        break;
-      case "b":
-      case "B":
-      case ".":
-        document.body.classList.toggle("is-black");
-        break;
-      case "?":
-        toggleHelp();
         break;
       default:
         return;
@@ -2269,9 +2254,6 @@
   const ACTIONS = {
     restart,
     overview: () => overview(),
-    annexes: toAnnexes,
-    notes: () => openNotes(),
-    help: () => toggleHelp(),
     lang: switchLang,
     fullscreen,
   };
