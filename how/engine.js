@@ -91,9 +91,9 @@
   // Toolbar tooltips, the PDF of the current language, the tick bar.
   function renderControls(lang) {
     $$(".hud [aria-label]").forEach((el) => (el.title = el.getAttribute("aria-label")));
-    const pdf = $('.hud [data-act="pdf"]');
-    pdf.setAttribute("href", `export/how-ww-2027-${lang}.pdf`);
-    pdf.setAttribute("download", (T.meta.hud && T.meta.hud.pdfFile) || "deck.pdf");
+    const pdf = $('.hud [data-act="pdf"]'); // the bar comes from ../shared/controls.js
+    if (pdf) pdf.setAttribute("href", `export/how-ww-2027-${lang}.pdf`);
+    if (pdf) pdf.setAttribute("download", (T.meta.hud && T.meta.hud.pdfFile) || "deck.pdf");
     const lb = $('.hud [data-act="lang"]');
     if (lb && CFG.LANGS.length < 2) lb.hidden = true;
     marks();
@@ -749,7 +749,7 @@
       document.head.append(sc);
     }));
   const saveAs = (href, name) => Object.assign(document.createElement("a"), { href, download: name }).click();
-  pdfLink.addEventListener("click", async (e) => {
+  pdfLink?.addEventListener("click", async (e) => {
     e.preventDefault();
     pdfLink.blur();
     if (pdfLink.classList.contains("busy")) return;
