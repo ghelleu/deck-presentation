@@ -51,6 +51,10 @@ La plateforme est un lecteur de decks : chaque deck fait le travail derrière ce
 
 Le moteur du deck branche les boutons par leur `data-act` : `fullscreen`, `restart`, `overview`, `lang`, et le lien `pdf` (il peut en changer l'adresse, par exemple selon la langue).
 
+Exception : BIW a son propre dossier `biw/shared/` ; il charge la barre par `/shared/controls.js` (chemin absolu).
+
+Aperçu local d'un deck depuis son dossier de travail : un lien `shared` (ignoré par git) à la racine de ce dossier pointe vers `~/Projects/deck-presentation/shared`, pour que `../shared/` et `/shared/` y trouvent les fichiers de la plateforme (`ln -s ~/Projects/deck-presentation/shared shared`). En place pour ALS (`~/Projects/als-century-of-exchange`) et BIW (`~/Projects/bixter`) ; HOW se construit directement dans `how/` (gabarit `~/HOW-sources/tools/index.tpl.html`).
+
 Dans le `index.html` du deck :
 
 ```html
