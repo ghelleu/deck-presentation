@@ -2393,11 +2393,6 @@ body:has(.stage.overview) .picks {
 .picks button:hover {
   background: rgba(249, 248, 240, 0.1);
 }
-.picks button[data-done] {
-  border-color: var(--c-paper);
-  background: var(--c-paper);
-  color: #000;
-}
 /* the PDF of the ticked slides is being put together */
 .hud a.icon.busy {
   pointer-events: none;

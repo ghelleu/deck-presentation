@@ -1771,11 +1771,6 @@ body:has(.stage.overview) .picks {
 .picks button:hover {
   background: rgba(246, 244, 241, 0.1);
 }
-.picks button[data-done] {
-  border-color: var(--ivory);
-  background: var(--ivory);
-  color: var(--night);
-}
 
 /* ------------------------------------------------------------- Access screen (structure in ../shared/gate.css): HOW look */
 

@@ -2957,11 +2957,6 @@ body:has(.stage.overview) .picks {
 .picks button:hover {
   background: rgba(245, 242, 235, 0.1);
 }
-.picks button[data-done] {
-  border-color: #f5f2eb;
-  background: #f5f2eb;
-  color: #0b0b0a;
-}
 
 /* Annex contents (key A): three columns of five, each a way in; every annex folio leads back */
 .ax-index .ax-list {

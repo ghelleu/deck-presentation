@@ -372,7 +372,6 @@
     if (on) {
       if (state.overview) return;
       relist(true);
-      before = new Set(hidden);
       state.overview = true;
       state.sel = state.i;
       stage.classList.add("overview", "ov-move");
@@ -441,8 +440,8 @@
 
   /* ======================================================== Slides to present (in the overview)
      Each slide carries a tick: an unticked slide is left out of the presentation (the arrows skip
-     it) and of the PDF. Click a slide or press H to tick or untick it; double-click or Enter opens
-     it. The choice stays in this browser. The slides hidden in the PowerPoint start unticked. */
+     it) and of the PDF. Click its tick or press H to tick or untick it; a click elsewhere on it or Enter
+     opens it. The choice stays in this browser. The slides hidden in the PowerPoint start unticked. */
   const HKEY = "how-hidden";
   let hidden = new Set(ALL.filter((s) => "defaultHidden" in s.dataset).map((s) => s.id));
   try {
@@ -451,7 +450,6 @@
   } catch (e) {
     /* storage unavailable: the PowerPoint's choice */
   }
-  let before = null;
   const shown = (s) => !hidden.has(s.id);
   function relist(all, keep = state.list[state.i]) {
     state.list = all ? ALL.slice() : ALL.filter((s) => shown(s) || s === keep);
@@ -471,8 +469,7 @@
     picks.innerHTML =
       `<span class="picks-t">${P.title || ""}</span>` +
       `<span class="picks-n">${tpl(P.count, { on: ALL.filter(shown).length, all: ALL.length })}</span>` +
-      `<span class="picks-b">${hidden.size ? `<button type="button" data-all>${P.all}</button>` : ""}` +
-      `<button type="button" data-cancel>${P.cancel}</button><button type="button" data-done>${P.done}</button></span>`;
+      `<span class="picks-b">${hidden.size ? `<button type="button" data-all>${P.all}</button>` : ""}</span>`;
   }
   function saveHidden() {
     try {
@@ -489,16 +486,7 @@
     } else hidden.delete(s.id);
     saveHidden();
   }
-  function cancelPicks() {
-    if (before) hidden = new Set(before);
-    saveHidden();
-  }
   picks.addEventListener("click", (e) => {
-    if (e.target.closest("[data-done]")) overview(false);
-    if (e.target.closest("[data-cancel]")) {
-      cancelPicks();
-      overview(false);
-    }
     if (e.target.closest("[data-all]")) {
       hidden.clear();
       saveHidden();
@@ -614,10 +602,7 @@
         follow();
       } else if (k === "Enter" || k === " ") overview(false, state.sel);
       else if (k === "h" || k === "H") toggleShown(state.list[state.sel]);
-      else if (k === "Escape") {
-        cancelPicks();
-        overview(false);
-      } else if (k === "o" || k === "O") overview(false);
+      else if (k === "Escape" || k === "o" || k === "O") overview(false);
       else return;
       e.preventDefault();
       return;
@@ -684,21 +669,20 @@
 
   stage.addEventListener("click", (e) => {
     if (state.overview) {
+      // the tick (top right) shows or hides the slide; anywhere else on it opens it
       const s = e.target.closest(".slide");
       if (!s) return;
-      state.sel = state.list.indexOf(s);
-      markSel();
-      toggleShown(s);
+      if (e.target.closest(".pick")) {
+        state.sel = state.list.indexOf(s);
+        markSel();
+        toggleShown(s);
+      } else overview(false, state.list.indexOf(s));
       return;
     }
     const to = e.target.closest("[data-go]");
     if (to) return goId(to.dataset.go);
     if (e.target.closest("a, button, video")) return;
     next();
-  });
-  stage.addEventListener("dblclick", (e) => {
-    const s = state.overview && e.target.closest(".slide");
-    if (s) overview(false, state.list.indexOf(s));
   });
 
   let touchX = null;

@@ -313,10 +313,8 @@
   },
   "picks": {
    "title": "Slides à présenter",
-   "count": "<b>{on}</b> sur {all} affichées · un clic masque ou affiche une slide, un double-clic l’ouvre",
+   "count": "<b>{on}</b> sur {all} affichées · un clic ouvre une slide, sa coche la masque ou l’affiche",
    "all": "Tout afficher",
-   "cancel": "Annuler",
-   "done": "Terminé",
    "hidden": "Masquée",
    "tick": "Afficher dans la présentation"
   }

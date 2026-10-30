@@ -71,10 +71,8 @@
     },
     "picks": {
       "title": "Slides to present",
-      "count": "<b>{on}</b> of {all} shown · click a slide to hide or show it, double-click to open it",
+      "count": "<b>{on}</b> of {all} shown · click a slide to open it, its tick hides or shows it",
       "all": "Show all",
-      "cancel": "Cancel",
-      "done": "Done",
       "hidden": "Hidden",
       "tick": "Show in the presentation"
     }

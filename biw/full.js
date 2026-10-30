@@ -971,9 +971,8 @@
     const on = SLIDES.filter(shown).length;
     picks.innerHTML =
       `<span class="picks-t">Slides to present</span>` +
-      `<span class="picks-n"><b>${on}</b> of ${SLIDES.length} shown · click a slide to show or hide it, double-click to open it</span>` +
-      `<span class="picks-b">${hidden.size ? '<button type="button" data-all>Show all</button>' : ""}` +
-      `<button type="button" data-cancel>Cancel</button><button type="button" data-done>Done</button></span>`;
+      `<span class="picks-n"><b>${on}</b> of ${SLIDES.length} shown · click a slide to open it, its tick hides or shows it</span>` +
+      `<span class="picks-b">${hidden.size ? '<button type="button" data-all>Show all</button>' : ""}</span>`;
     fillIndex();
   }
   function save() {
@@ -997,19 +996,7 @@
       '<button type="button" class="pick" aria-pressed="true" aria-label="Show in the presentation"></button>',
     );
   });
-  let before = null; // the ticks as they were when the overview opened, for Cancel
-  const close = () =>
-    document.querySelector('.hud [data-act="overview"]')?.click();
-  const cancel = () => {
-    if (before) hidden = new Set(before);
-    save();
-  };
   picks.addEventListener("click", (e) => {
-    if (e.target.closest("[data-done]")) close();
-    if (e.target.closest("[data-cancel]")) {
-      cancel();
-      close();
-    }
     if (e.target.closest("[data-all]")) {
       hidden.clear();
       save();
@@ -1035,13 +1022,12 @@
           document.querySelector(".help.open")
         )
           return;
-        if (d.state.overview && e.key === "Escape")
-          cancel(); // Esc cancels, the engine then closes
-        else if (["o", "O", "Escape"].includes(e.key)) opening();
+        if (!d.state.overview && ["o", "O", "Escape"].includes(e.key)) opening();
       },
       true,
     );
-    // in the overview a click ticks or unticks the slide (and selects it); a double click opens it
+    // in the overview the tick (top right) shows or hides the slide; a click elsewhere on it
+    // goes to the engine, which opens it
     const pick = (s) => {
       d.state.sel = d.state.list.indexOf(s);
       d.state.list.forEach((el, k) =>
@@ -1052,7 +1038,7 @@
       "click",
       (e) => {
         const s = d.state.overview && e.target.closest(".stage .slide");
-        if (!s) return;
+        if (!s || !e.target.closest(".pick")) return;
         e.stopPropagation(); // not the engine's click, which would open it
         e.preventDefault();
         pick(s);
@@ -1060,14 +1046,6 @@
       },
       true,
     );
-    document.addEventListener("dblclick", (e) => {
-      const s = d.state.overview && e.target.closest(".stage .slide");
-      if (!s) return;
-      pick(s); // its two clicks have ticked it and back
-      document.body.dispatchEvent(
-        new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
-      );
-    });
     addEventListener("keydown", (e) => {
       if (
         d.state.overview &&
@@ -1132,7 +1110,6 @@
       if (on === open) return; // only its opening and closing (and not our own class below)
       open = on;
       if (on) {
-        before = new Set(hidden);
         stage.classList.add("ov-move"); // so that leaving it eases back with the engine's zoom
         fitDeck(); // whole in the overview
         return follow();
