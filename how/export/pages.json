@@ -1,0 +1,168 @@
+{
+ "pages": {
+  "cover": [
+   0
+  ],
+  "intro": [
+   1
+  ],
+  "reality": [
+   2,
+   3
+  ],
+  "why": [
+   4
+  ],
+  "opportunity": [
+   5,
+   6
+  ],
+  "challenge": [
+   7,
+   8
+  ],
+  "territories": [
+   9
+  ],
+  "c1": [
+   10
+  ],
+  "c1-promise": [
+   11
+  ],
+  "c1-scen": [
+   12
+  ],
+  "c1-moods": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18
+  ],
+  "sand": [
+   19
+  ],
+  "aura": [
+   20
+  ],
+  "marb": [
+   21
+  ],
+  "tastem": [
+   22
+  ],
+  "c2": [
+   23
+  ],
+  "c2-promise": [
+   24
+  ],
+  "c2-scen": [
+   25
+  ],
+  "c2-moods": [
+   26,
+   27,
+   28,
+   29,
+   30
+  ],
+  "walk": [
+   31
+  ],
+  "dinner": [
+   32,
+   33,
+   34
+  ],
+  "runway": [
+   35
+  ],
+  "silk": [
+   36
+  ],
+  "c3": [
+   37
+  ],
+  "c3-promise": [
+   38
+  ],
+  "c3-scen": [
+   39
+  ],
+  "c3-moods": [
+   40,
+   41,
+   42,
+   43
+  ],
+  "photo": [
+   44
+  ],
+  "museo": [
+   45
+  ],
+  "master": [
+   46
+  ],
+  "c4": [
+   47
+  ],
+  "c4-promise": [
+   48
+  ],
+  "c4-scen": [
+   49
+  ],
+  "c4-moods": [
+   50,
+   51,
+   52,
+   53
+  ],
+  "reveal": [
+   54
+  ],
+  "uniform": [
+   55
+  ],
+  "tasteuv": [
+   56
+  ],
+  "additional": [
+   57
+  ],
+  "activation": [
+   58
+  ],
+  "act-sky": [
+   59
+  ],
+  "act-violet": [
+   60
+  ],
+  "act-mobility": [
+   61
+  ],
+  "act-street": [
+   62
+  ],
+  "act-ooh": [
+   63
+  ],
+  "venues": [
+   64
+  ],
+  "wrapup": [
+   65
+  ],
+  "wrap": [
+   66
+  ],
+  "end": [
+   67
+  ]
+ }
+}

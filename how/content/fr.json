@@ -1,0 +1,517 @@
+{
+ "cover": {
+  "left": "ÉVÉNEMENT PRESSE ET DÉTAILLANTS 2027",
+  "right": "BLACK FLOWER AGENCY"
+ },
+ "div1": {
+  "title": "INTRODUCTION",
+  "num": "I"
+ },
+ "div2": {
+  "title": "TERRITOIRES CRÉATIFS",
+  "num": "II"
+ },
+ "div3": {
+  "title": "MÉCANIQUES D’ACTIVATION",
+  "num": "III"
+ },
+ "div4": {
+  "title": "lieux",
+  "num": "IV"
+ },
+ "div5": {
+  "title": "synthèse",
+  "num": "v"
+ },
+ "reality": {
+  "a": "Watches and Wonders est **la semaine**\n**la plus concurrentielle** de l’horlogerie.",
+  "label": "LA RÉALITÉ",
+  "b": "C’est aussi le moment de l’année où il est le plus difficile\nde s’affranchir des conventions du secteur."
+ },
+ "why": {
+  "label": "POURQUOI",
+  "k1": "MARQUES HISTORIQUES",
+  "t1": "PRISONNIÈRES DE LEUR HÉRITAGE",
+  "p1": "Les grandes maisons sont contraintes par leur propre héritage. Pour une maison présente depuis 150 ans, chaque geste audacieux est poli par les comités, les responsables du patrimoine et le poids des codes qu’elle a mis un siècle à bâtir. Résultat : impeccable et policé.",
+  "k2": "PETITES MARQUES",
+  "t2": "PERDUES DANS LA FOULE",
+  "p2": "À l’autre extrémité, de jeunes marques indépendantes entrent au Carré des Horlogers : le bon public, le bon contexte, mais un format qui aligne tout le monde sur la même grille. Pas d’espace pour respirer, pas d’espace narratif."
+ },
+ "opp": {
+  "label": "L’OPPORTUNITÉ",
+  "a": "Entre les géants prisonniers de leur héritage et les indépendants engloutis par le format, il y a\n**une place à prendre.**",
+  "b": "ET ELLE SE TROUVE **EN DEHORS**\nDE WATCHES AND WONDERS."
+ },
+ "chal": {
+  "label": "LE DÉFI",
+  "a": "Mais sortir de WW ne suffit pas. Il faut **une raison qui fasse traverser la ville**.",
+  "b": "Nous sommes là pour vous aider à créer\nle **facteur « ça vaut le détour »**."
+ },
+ "lab": {
+  "concept1": "CONCEPT 1",
+  "concept2": "CONCEPT 2",
+  "concept3": "CONCEPT 3",
+  "concept4": "CONCEPT 4",
+  "promise": "LA PROMESSE",
+  "narrative": "LE RÉCIT",
+  "scen": "INTENTION SCÉNOGRAPHIQUE",
+  "idea": "IDÉE",
+  "ideas": "IDÉES"
+ },
+ "c1": {
+  "title": "MYSTICAL\nMALLORCA",
+  "promise": "House of Wunder apporte une sauvagerie sophistiquée et une forme de spiritualité dans l’univers très codifié de l’horlogerie.",
+  "narr": [
+   "**Vivez l’esprit libre de Majorque à Genève.**",
+   "Échappez à l’agitation et au ciel gris de Genève. Sentez le vent dans vos cheveux, le soleil sur votre peau. Entrez dans un monde où l’énergie brute de la nature rencontre une sophistication sans effort, et où les journées nonchalantes au soleil deviennent des soirées glamour qui semblent ne jamais finir."
+  ],
+  "scen": "Chaque îlot présente un produit, accompagné d’une pierre ou d’un objet d’art ou d’artisanat local qui inspire la marque. L’îlot devient une unité transportable, qui peut être déployée lors d’un autre événement.",
+  "m1": "NATURE BRUTE",
+  "m2": "SURFACE RÉFLÉCHISSANTE ET ILLUSION D’EAU",
+  "m3": "LE POUVOIR DES PIERRES",
+  "m4": "ARTISANAT LOCAL",
+  "m5": "LIEN ET RITUEL PARTAGÉ",
+  "m6": "SOPHISTICATION DÉTENDUE"
+ },
+ "c2": {
+  "title": "THE FLOW",
+  "promise": "House of Wunder réinvente l’expérience du showroom traditionnel en créant un parcours sensoriel unique qui bouscule les conventions.",
+  "narr": [
+   "**Une expérience sensorielle pour donner vie au Wunderflow.**",
+   "Chaque bracelet House of Wunder offre une sensation Wunderflow unique : une fusion harmonieuse de mouvement et de fluidité qui enveloppe la peau d’une sensation sensuelle. Nous invitons les invités à découvrir la signature la plus distinctive de la marque, le Wunderflow, à travers une installation artistique immersive qui transforme une sensation tactile unique en expérience artistique."
+  ],
+  "scen": "Les invités traversent une série de matières tactiles (du velours doux et de la maille délicate jusqu’aux rideaux de maillons métalliques) et ressentent sur leur peau la fluidité, le mouvement et la sensualité du Wunderflow.",
+  "m1": "FLOW",
+  "m2": "DRAPÉ ET FLUIDITÉ",
+  "m3": "COULEURS DE PEAU",
+  "m4": "TEXTURES REBONDIES",
+  "m5": "ENVELOPPEMENT ET IMMERSION"
+ },
+ "c3": {
+  "title": "BORN\nTO BE ART",
+  "promise": "House of Wunder propose à ses invités de vivre montres et bijoux comme des œuvres d’art.",
+  "narr": [
+   "**Le temps d’une nuit, House of Wunder ouvre un musée imaginaire.**",
+   "Mi-galerie d’art, mi-temple, cet espace extraordinaire célèbre montres et bijoux comme des œuvres d’art. Plutôt que d’être exposées derrière une vitre, les créations prennent vie sur des sculptures : un poignet orné d’une montre, un buste drapé d’un collier, une silhouette sculpturale révélant un détail précieux. Chaque création devient une relique moderne, éclairée de façon spectaculaire et élevée au rang de chef-d’œuvre."
+  ],
+  "scen": "Un champ de figures, répétées à l’infini. Dans une salle noire, un champ de socles, de statues, de mannequins sans tête et de monolithes sombres, chacun seul dans son propre faisceau de lumière",
+  "m1": "LUMIÈRE DRAMATIQUE, CLAIR-OBSCUR",
+  "m2": "RELIQUES MODERNES",
+  "m3": "SCULPTURES ET TABLEAUX VIVANTS",
+  "m4": "DÉTOURNEMENTS SURRÉALISTES"
+ },
+ "c4": {
+  "title": "THE\nULTRAVIOLET\nCLUB",
+  "promise": "Le temps d’une nuit, House of Wunder bouscule les conventions genevoises et transforme l’élégance discrète de la ville en quelque chose d’étrange, de sensuel et de légèrement troublant.",
+  "narr": [
+   "**Un club social à la nuit tombée.**",
+   "Quelque part à Genève, une porte anonyme s’ouvre sur un monde que la ville n’a jamais vu. Étrange, sensuel et légèrement troublant, cet univers lynchien invite les invités à laisser les conventions derrière eux. À l’intérieur, une succession de salles thématiques se déploie, chacune révélant une nouvelle facette de l’univers de House of Wunder. Destination finale : une boîte de nuit entièrement violette."
+  ],
+  "scen": "L’espace se déploie en une série de salles communicantes, chacune révélant un secret différent de House of Wunder. Les invités parcourent l’univers de la marque et en découvrent les merveilles une à une, avant d’atteindre la surprise finale : une boîte de nuit entièrement violette.",
+  "m1": "INSPIRATION CLUB AUDIOPHILE ANNÉES 70",
+  "m2": "MAXIMALISME CHOISI",
+  "m3": "CURIOSITÉS SURRÉALISTES",
+  "m4": "LA RÉVÉLATION DE L’ULTRAVIOLET CLUB"
+ },
+ "sand": {
+  "t": "LE SABLE",
+  "p": [
+   "• Les invités foulent une plage de sable fin de Majorque. Des éléments scénographiques sont cachés sous la surface",
+   "• Les invités creusent avec leurs mains",
+   "• Ils repartent avec une fiole de sable : un fragment de nature sauvage, raffiné."
+  ]
+ },
+ "aura": {
+  "t": "LE LECTEUR D’AURA",
+  "p": [
+   "Dans une cabine lumineuse, un lecteur d’aura, mi-mystique, mi-artiste, capte l’énergie de chaque invité et la traduit en couleur, en matière ou en pierre assortie."
+  ]
+ },
+ "marb": {
+  "t": "MARBRURE SUR L’EAU",
+  "p": [
+   "Inspirés par l’art traditionnel de l’Ebru, les invités explorent la marbrure sur l’eau pour recréer les motifs complexes, les lignes fluides et les couleurs vibrantes des pierres signature de la Maison.",
+   "Des tourbillons verts hypnotiques de la malachite aux motifs bleu profond et turquoise de l’azurmalachite, chaque invité reçoit une composition unique sur l’eau avant de la transférer sur un objet personnalisé à emporter."
+  ]
+ },
+ "tastem": {
+  "t": "UN GOÛT DE MAJORQUE",
+  "p": [
+   "Un cocktail dînatoire baléare signé par un chef de l’île : huile d’olive, sobrasada, fruits de mer, amandes et herbes sauvages, servis sur de la pierre et des céramiques d’artisans locaux."
+  ]
+ },
+ "walk": {
+  "t": "TRAVERSER LE WUNDERFLOW",
+  "p": [
+   "Une structure inspirée des maillons du bracelet.",
+   "La lumière, le son et la texture ondulent à mesure que vous avancez."
+  ]
+ },
+ "dinner": {
+  "t": "LE DÎNER WUNDERFLOW",
+  "p": [
+   "Un dîner immersif dans un décor doux et enveloppant : des murs qui respirent, des textures qu’on a envie de toucher, une lumière qui bouge comme une peau.",
+   "Chaque plat est chorégraphié avec des projections sur les tissus, et les pièces apparaissent sur les mains des serveurs."
+  ]
+ },
+ "table": {
+  "t": "LA TABLE WUNDERFLOW"
+ },
+ "cocktail": {
+  "t": "LE COCKTAIL WUNDERFLOW",
+  "p": [
+   "Un dîner immersif dans un décor doux et enveloppant : des murs qui respirent, des textures qu’on a envie de toucher, une lumière qui bouge comme une peau.",
+   "Chaque plat est chorégraphié avec des projections sur les tissus, et les pièces apparaissent sur les mains des serveurs."
+  ]
+ },
+ "runway": {
+  "t": "LE DÉFILÉ HEAD",
+  "p": [
+   "Avec la HEAD – Genève, des étudiants en mode conçoivent une capsule autour du Wunderflow : des tissus qui drapent et bougent comme les bracelets.",
+   "Dévoilée lors d’une performance-défilé, des corps en mouvement portant les pièces."
+  ]
+ },
+ "silk": {
+  "t": "SOIE WUNDERFLOW",
+  "p": [
+   "Un délicat ruban de soie imprimé des montres et bracelets iconiques de House of Wunder, qui traduit le Wunderflow en un cadeau tactile.",
+   "Douce, fluide et légère sur la peau, la soie évoque la façon dont les créations Wunder glissent sur le corps, jusqu’à ne faire qu’un avec qui les porte."
+  ]
+ },
+ "photo": {
+  "t": "PHOTOCALL",
+  "p": [
+   "House of Wunder transforme le photocall traditionnel en galerie de portraits vivants.",
+   "Devant une peinture classique dans un cadre doré orné, les invités deviennent partie intégrante de l’œuvre et brouillent la frontière entre l’art et l’horlogerie."
+  ]
+ },
+ "museo": {
+  "t": "MUSÉOGRAPHIE",
+  "p": [
+   "House of Wunder crée un dialogue entre l’art, la haute horlogerie et la joaillerie. Devant une œuvre monumentale ou une projection immersive, les créations de la Maison sont présentées comme des reliques précieuses et s’intègrent à la composition artistique."
+  ]
+ },
+ "master": {
+  "t": "DIALOGUE ENTRE CHEFS-D’ŒUVRE",
+  "p": [
+   "House of Wunder invite ses hôtes à découvrir trois expressions d’un savoir-faire exceptionnel. À travers un dialogue entre chefs-d’œuvre, créations précieuses et vins d’exception, les invités explorent comment le temps, l’art et le savoir-faire transforment l’extraordinaire en un moment véritablement inoubliable."
+  ]
+ },
+ "reveal": {
+  "t": "RÉVÉLER L’INVISIBLE",
+  "p": [
+   "Tout au long de la nuit, la lumière ultraviolette révèle une couche cachée de l’expérience : messages invisibles, menus secrets et détails inattendus sur les murs, les objets, les tenues. Ce qui était caché devient soudain visible et invite les invités à regarder de plus près pour percer les secrets de l’Ultraviolet Club."
+  ]
+ },
+ "uniform": {
+  "t": "UNIFORME VIOLET",
+  "p": [
+   "Le personnel fait partie de l’expérience, vêtu de combinaisons assorties violet profond et de gants élégants, créant une présence mystérieuse, presque surréelle, dans tout le club. Chaque uniforme est accessoirisé de montres et de bijoux House of Wunder, faisant de chaque interaction une occasion subtile de présenter les collections."
+  ]
+ },
+ "tasteuv": {
+  "t": "UN GOÛT D’ULTRAVIOLET",
+  "p": [
+   "Tout au long de la nuit, l’identité de l’Ultraviolet Club s’étend à la nourriture et aux boissons. Des cocktails créatifs aux teintes violettes et des bouchées inattendues jouent avec les couleurs, les textures et les saveurs. Un cocktail signature Ultraviolet devient la star de la carte."
+  ]
+ },
+ "add": {
+  "label": "POUR ALLER PLUS LOIN",
+  "p": "Ce concept offre aussi un cadre créatif souple, qui permet à tous les autres thèmes proposés de prendre vie dans ses différentes salles.",
+  "l1": "Univers sur le thème de Majorque",
+  "l2": "Expérience Wunderflow",
+  "l3": "Art, cabinet de curiosité",
+  "l4": "Ultraviolet club"
+ },
+ "act": {
+  "sky": "SIGNAL DANS LE CIEL",
+  "violet": "SILHOUETTES VIOLETTES",
+  "mobility": "MOBILITÉ",
+  "street": "RUE",
+  "ooh": "FAUX AFFICHAGE"
+ },
+ "wrap": {
+  "t": "**SYNTHÈSE**",
+  "n1": "MYSTICAL MALLORCA",
+  "n2": "THE FLOW",
+  "n3": "BORN TO BE ART",
+  "n4": "THE ULTRAVIOLET CLUB"
+ },
+ "end": {
+  "t": "QUELLE EST VOTRE PART SAUVAGE ?",
+  "agency": "BLACK FLOWER AGENCY"
+ },
+ "meta": {
+  "lang": "fr",
+  "title": "House of Wunder x W&W 2027",
+  "notesTitle": "Notes · House of Wunder x W&W 2027",
+  "notesStep": "Étape {n} sur {total}",
+  "notesNext": "Ensuite · {label}",
+  "notesEnd": "Fin de la présentation",
+  "notesPrev": "Retour",
+  "notesNextBtn": "Suivant",
+  "help": [
+   [
+    "→ espace clic",
+    "avancer"
+   ],
+   [
+    "←",
+    "revenir"
+   ],
+   [
+    "R",
+    "revenir au début"
+   ],
+   [
+    "O",
+    "toutes les slides"
+   ],
+   [
+    "H",
+    "masquer ou afficher (dans O)"
+   ],
+   [
+    "1 2 3 4",
+    "aller à un concept"
+   ],
+   [
+    "C",
+    "les quatre concepts"
+   ],
+   [
+    "N",
+    "notes du présentateur"
+   ],
+   [
+    "F",
+    "plein écran"
+   ],
+   [
+    "B",
+    "écran noir"
+   ],
+   [
+    "?",
+    "aide"
+   ]
+  ],
+  "notesBlocked": "Fenêtre de notes bloquée : autorisez les fenêtres pop-up pour cette adresse, puis appuyez de nouveau sur n.",
+  "hud": {
+   "bar": "Commandes de la présentation",
+   "restart": "Revenir au début (R)",
+   "overview": "Toutes les slides (O)",
+   "concepts": "Les quatre concepts (C)",
+   "pdf": "Télécharger en PDF",
+   "notes": "Notes du présentateur (N)",
+   "help": "Raccourcis clavier (?)",
+   "fullscreen": "Plein écran (F)",
+   "otherLang": "EN",
+   "langAria": "Switch to English",
+   "pdfFile": "House of Wunder x W&W 2027 (FR).pdf",
+   "step": "étape {n}/{total}"
+  },
+  "picks": {
+   "title": "Slides à présenter",
+   "count": "<b>{on}</b> sur {all} affichées · un clic masque ou affiche une slide, un double-clic l’ouvre",
+   "all": "Tout afficher",
+   "cancel": "Annuler",
+   "done": "Terminé",
+   "hidden": "Masquée",
+   "tick": "Afficher dans la présentation"
+  }
+ },
+ "lbl": {
+  "cover": "House of Wunder",
+  "intro": "I · INTRODUCTION",
+  "reality": "La réalité",
+  "why": "Pourquoi",
+  "opportunity": "L’opportunité",
+  "challenge": "Le défi",
+  "territories": "II · TERRITOIRES CRÉATIFS",
+  "c1": "CONCEPT 1 · Mystical Mallorca",
+  "c1-promise": "Mystical Mallorca · Promesse, récit",
+  "c1-scen": "Mystical Mallorca · Intention scénographique",
+  "c1-moods": "Mystical Mallorca · Planches d’ambiance",
+  "sand": "Le sable",
+  "aura": "Le lecteur d’aura",
+  "marb": "Marbrure sur l’eau",
+  "tastem": "Un goût de majorque",
+  "c2": "CONCEPT 2 · The Flow",
+  "c2-promise": "The Flow · Promesse, récit",
+  "c2-scen": "The Flow · Intention scénographique",
+  "c2-moods": "The Flow · Planches d’ambiance",
+  "walk": "Traverser le wunderflow",
+  "dinner": "Le dîner, la table, le cocktail Wunderflow",
+  "runway": "Le défilé head",
+  "silk": "Soie wunderflow",
+  "c3": "CONCEPT 3 · Born To Be Art",
+  "c3-promise": "Born To Be Art · Promesse, récit",
+  "c3-scen": "Born To Be Art · Intention scénographique",
+  "c3-moods": "Born To Be Art · Planches d’ambiance",
+  "photo": "Photocall",
+  "museo": "Muséographie",
+  "master": "Dialogue entre chefs-d’œuvre",
+  "c4": "CONCEPT 4 · The Ultraviolet Club",
+  "c4-promise": "The Ultraviolet Club · Promesse, récit",
+  "c4-scen": "The Ultraviolet Club · Intention scénographique",
+  "c4-moods": "The Ultraviolet Club · Planches d’ambiance",
+  "reveal": "Révéler l’invisible",
+  "uniform": "Uniforme violet",
+  "tasteuv": "Un goût d’ultraviolet",
+  "additional": "Pour aller plus loin",
+  "activation": "III · MÉCANIQUES D’ACTIVATION",
+  "act-sky": "Signal dans le ciel",
+  "act-violet": "Silhouettes violettes",
+  "act-mobility": "Mobilité",
+  "act-street": "Rue",
+  "act-ooh": "Faux affichage",
+  "venues": "IV · LIEUX",
+  "wrapup": "V · SYNTHÈSE",
+  "wrap": "Synthèse",
+  "end": "Quelle est votre part sauvage ?"
+ },
+ "notes": {
+  "cover": [
+   "Quatre directions créatives pour l’activation House of Wunder à Watches and Wonders Genève 2027, conçues pour la conversation avec Michael. Non pas quatre idées rivales : quatre façons de vivre la même conviction."
+  ],
+  "intro": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "reality": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève.",
+   "Malgré toutes ces dépenses, tout le monde joue encore selon les mêmes codes. La vraie différenciation reste l’exception."
+  ],
+  "why": [
+   "Deux pièges. Les maisons historiques sont prisonnières de leur héritage ; les indépendants sont écrasés par le format du Carré des Horlogers, comme des bouteilles identiques sur une étagère. House of Wunder doit éviter les deux."
+  ],
+  "opportunity": [
+   "Entre les deux, il existe un espace que personne ne possède. C’est cet espace que nous proposons de prendre.",
+   "Idée clé : cet espace se trouve en dehors de Watches and Wonders, pas à l’intérieur."
+  ],
+  "challenge": [
+   "Pendant la semaine de W&W, un journaliste reçoit 40 invitations. Un détaillant a le choix entre 30 dîners. Un influenceur a un agenda plein avant même d’atterrir. Ils ne traverseront pas Genève par une soirée pluvieuse d’avril pour un cocktail et une vitrine. Ils la traverseront pour quelque chose qu’ils ne peuvent pas se permettre de manquer.",
+   "Mais quitter le salon ne suffit pas. Les invités ont plus d’invitations que de soirées. Il nous faut une raison assez forte pour leur faire traverser la ville.",
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "territories": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "c1": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "c1-promise": [
+   "House of Wunder apporte une sauvagerie sophistiquée et une forme de spiritualité dans l’univers très codifié de l’horlogerie.",
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c1-scen": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c1-moods": [],
+  "sand": [
+   "Fouiller le sable : la découverte remplace l’exposition. Chaussures retirées à l’entrée, pièces cachées dans le sable, une fiole de sable en cadeau de départ."
+  ],
+  "aura": [
+   "Lecteur d’aura : la dimension spirituelle de la marque, rendue personnelle. La lecture mène naturellement à une pierre, puis à une pièce."
+  ],
+  "marb": [
+   "Association de pierres : le pont le plus direct vers la vente, par l’expertise plutôt que par un argumentaire commercial. Peut ouvrir sur le sur-mesure."
+  ],
+  "tastem": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c2": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "c2-promise": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c2-scen": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c2-moods": [],
+  "walk": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "dinner": [
+   "Le dîner Wunderflow : le moment intime et assis pour les détaillants et la presse, où les conversations se transforment en commandes."
+  ],
+  "runway": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "silk": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c3": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "c3-promise": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c3-scen": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c3-moods": [],
+  "photo": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "museo": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "master": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c4": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "c4-promise": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c4-scen": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "c4-moods": [],
+  "reveal": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "uniform": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "tasteuv": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "additional": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "activation": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "act-sky": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "act-violet": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "act-mobility": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "act-street": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "act-ooh": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "venues": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "wrapup": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "wrap": [
+   "Les barres dorées indiquent le niveau d’audace : Palma moyen, Body and Movement moyen-élevé, The Link élevé sur le concept et souple dans l’exécution, The Rite of Passage le plus élevé."
+  ],
+  "end": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ]
+ }
+}

@@ -1,0 +1,6 @@
+/* Aviano (display) and Termina Test (text), from the deck's own files. */
+@font-face { font-family: "Aviano"; src: url("aviano-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Aviano Serif"; src: url("aviano-serif-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Termina"; src: url("termina-light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Termina"; src: url("termina-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Termina"; src: url("termina-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
