@@ -25,6 +25,27 @@ Site servi par GitHub Pages, relié au domaine `deck-presentation.com` acheté c
 
 Le fichier `.nojekyll` est présent : les dossiers dont le nom commence par un souligné sont servis tels quels, sans transformation Jekyll.
 
+## Fonctions communes à tous les decks (`shared/`)
+
+Ce qui sert à plusieurs decks vit dans `shared/`, à la racine, et n'est pas recopié dans les dossiers des decks.
+
+| Fichier | Rôle |
+|---|---|
+| `shared/gate.js` | Écran d'accès à 5 chiffres. Lit `GATE` (empreinte SHA-256) dans le `config.js` du deck ; `null` : pas d'écran. Sauté pour `?print` et l'aperçu local (`?gate` le force). |
+| `shared/gate.css` | Structure de cet écran. Chaque deck règle son apparence dans son `styles.css` avec les variables `--gate-*` posées sur `.gate`, et masque ses propres commandes avec `html.gated …`. |
+
+Dans le `index.html` du deck :
+
+```html
+<link rel="stylesheet" href="../shared/gate.css">   <!-- avant styles.css -->
+<link rel="stylesheet" href="styles.css">
+…
+<script src="config.js"></script>
+<script src="../shared/gate.js"></script>             <!-- après config.js -->
+```
+
+Répartition du travail : la plateforme (page d'accueil, `shared/`, README, domaine) se modifie depuis ce dépôt ; chaque deck se construit dans son propre dossier de travail et ne touche que son dossier ici (`als/`, `how/`…). Les sources d'un deck doivent donc pointer vers `../shared/` et ne plus contenir leur propre `gate.js`, sinon la prochaine copie du deck le remet.
+
 ## Vérifier après un changement
 
 ```bash

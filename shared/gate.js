@@ -1,6 +1,8 @@
 /* Access screen: a black page, "Password", five digits. A courtesy screen for people who
    receive the link, not a lock (the deck's files stay readable by their address).
-   No cookie, nothing stored: the code is asked at each visit. Set in config.js (GATE). */
+   No cookie, nothing stored: the code is asked at each visit. Set in each deck's config.js (GATE).
+   Shared by every deck: load ../shared/gate.css before the deck's styles.css,
+   and ../shared/gate.js after config.js. */
 (function () {
   const want = (window.DECK_CONFIG || {}).GATE;
   const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
