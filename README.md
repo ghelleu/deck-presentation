@@ -16,10 +16,11 @@ Site servi par GitHub Pages, relié au domaine `deck-presentation.com` acheté c
 
 1. Créer un dossier à la racine, nommé en minuscules sans espaces : `mon-deck/`.
 2. Y déposer un `index.html` (le deck), avec ses images et ses polices en chemins relatifs.
-3. Ajouter une ligne dans la liste de `index.html` à la racine :
+3. Ajouter une ligne au tableau de `index.html` à la racine (toute la ligne ouvre le deck) :
    ```html
-   <li><a href="/mon-deck/"><span class="titre">Mon deck</span><span class="fleche" aria-hidden="true">→</span></a></li>
+   <tr class="lien"><td class="code"><a href="/mon-deck/">CODE</a></td><td>Client</td><td>Type</td><td>MCI</td><td>Nov. 2026</td></tr>
    ```
+   Une présentation pas encore en ligne : `<tr class="attente">` et le code sans lien.
 4. Pousser sur `main`. GitHub Pages reconstruit en une minute environ.
 
 Le fichier `.nojekyll` est présent : les dossiers dont le nom commence par un souligné sont servis tels quels, sans transformation Jekyll.
