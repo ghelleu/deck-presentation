@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Deck Presentation</title>
   <meta name="description" content="Publications de présentations — deck-presentation.com">
   <style>
@@ -46,6 +46,37 @@
     tr.lien:focus-within td { background: color-mix(in srgb, var(--encre) 8%, transparent); }
     /* not online yet */
     tr.attente td { color: var(--encre-2); }
+
+    /* phone: each row becomes a card (code and date, client, type and context) */
+    @media (max-width: 640px) {
+      main {
+        padding: calc(8vh + env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) calc(64px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+      }
+      .tableau { overflow: visible; }
+      table, tbody { display: block; min-width: 0; }
+      thead { display: none; }
+      tbody { border-top: 1px solid var(--encre); }
+      tbody tr {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas: "code . date" "client client client" "type context context";
+        column-gap: 0;
+        row-gap: 4px;
+        padding: 16px 4px;
+        border-bottom: 1px solid var(--filet);
+      }
+      tbody tr:last-child { border-bottom-color: var(--encre); }
+      th, td { padding: 0; border: 0; text-align: left; white-space: normal; }
+      tbody tr:last-child td { border: 0; }
+      td:nth-child(1) { grid-area: code; font-size: .8rem; letter-spacing: .12em; }
+      td:nth-child(2) { grid-area: client; font-size: 1.15rem; font-weight: 500; }
+      td:nth-child(3) { grid-area: type; font-size: .9rem; color: var(--encre-2); }
+      td:nth-child(4) { grid-area: context; font-size: .9rem; color: var(--encre-2); }
+      td:nth-child(4)::before { content: "\00a0·\00a0"; }
+      td:nth-child(5) { grid-area: date; font-size: .8rem; color: var(--encre-2); text-align: right; }
+      tr.lien:hover td, tr.lien:focus-within td { background: none; }
+      tr.lien:active { background: color-mix(in srgb, var(--encre) 6%, transparent); }
+    }
   </style>
 </head>
 <body>
