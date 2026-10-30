@@ -55,26 +55,22 @@
     }
     li a:hover .titre { text-decoration: underline; text-underline-offset: 4px; }
     li .titre { font-size: 1.1rem; font-weight: 500; }
-    li .meta { font-size: .85rem; color: var(--encre-2); white-space: nowrap; }
+    li .fleche { font-size: 1.1rem; color: var(--encre-2); transition: transform .2s ease, color .2s ease; }
+    li a:hover .fleche { transform: translateX(4px); color: var(--encre); }
     .vide { padding: 22px 4px; color: var(--encre-2); font-size: .95rem; }
     footer { margin-top: 72px; font-size: .8rem; color: var(--encre-2); }
   </style>
 </head>
 <body>
   <main>
-    <p class="surtitre">deck-presentation.com</p>
-    <h1>Deck Presentation</h1>
-    <p class="intro">Cette adresse sert à publier et partager des présentations. Chaque présentation vit dans son propre dossier et s'ouvre plein écran dans le navigateur.</p>
-
     <h2>Publications</h2>
     <ul id="liste">
       <!-- Pour ajouter une présentation :
-           <li><a href="/mon-deck/"><span class="titre">Mon deck</span><span class="meta">2026</span></a></li>
+           <li><a href="/mon-deck/"><span class="titre">Mon deck</span><span class="fleche" aria-hidden="true">→</span></a></li>
            Sera remplacé par la liste réelle au fur et à mesure des publications. -->
-      <li><a href="/als/"><span class="titre">A. Lange &amp; Söhne · Genève 2027</span><span class="meta">2026</span></a></li>
+      <li><a href="/als/"><span class="titre">A. Lange &amp; Söhne · Genève 2027</span><span class="fleche" aria-hidden="true">→</span></a></li>
     </ul>
 
-    <footer>Les fichiers de cette adresse sont servis par GitHub Pages.</footer>
   </main>
 </body>
 </html>

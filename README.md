@@ -18,7 +18,7 @@ Site servi par GitHub Pages, relié au domaine `deck-presentation.com` acheté c
 2. Y déposer un `index.html` (le deck), avec ses images et ses polices en chemins relatifs.
 3. Ajouter une ligne dans la liste de `index.html` à la racine :
    ```html
-   <li><a href="/mon-deck/"><span class="titre">Mon deck</span><span class="meta">2026</span></a></li>
+   <li><a href="/mon-deck/"><span class="titre">Mon deck</span><span class="fleche" aria-hidden="true">→</span></a></li>
    ```
 4. Pousser sur `main`. GitHub Pages reconstruit en une minute environ.
 
