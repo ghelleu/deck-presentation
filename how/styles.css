@@ -451,39 +451,6 @@ body.is-black .stage {
   background: radial-gradient(circle, rgba(196, 160, 132, 0.34), rgba(140, 106, 120, 0.12) 38%, transparent 66%);
   animation: breathe 8s ease-in-out infinite alternate;
 }
-.dv-ring {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  width: 860px;
-  height: 860px;
-  margin: -430px 0 0 -430px;
-  fill: none;
-  stroke: var(--champagne);
-  stroke-width: 1.2;
-  opacity: 0.55;
-  overflow: visible;
-}
-.dv-ring circle {
-  stroke-dasharray: 2702;
-  stroke-dashoffset: 2702;
-  transform-origin: 500px 500px;
-  transform: rotate(-90deg);
-}
-.dv-ring .dv-ring2 {
-  stroke-dasharray: 2 14;
-  stroke-dashoffset: 0;
-  opacity: 0.5;
-  animation: spin 120s linear infinite;
-}
-.slide.is-active .dv-ring circle:not(.dv-ring2) {
-  animation: draw 2600ms var(--soft) both 300ms;
-}
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 @keyframes spin {
   to {
     transform: rotate(270deg);
@@ -1890,8 +1857,5 @@ html.gated .aura-cursor {
   .rail,
   .pick {
     display: none !important;
-  }
-  .dv-ring circle {
-    stroke-dashoffset: 0 !important;
   }
 }
