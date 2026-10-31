@@ -52,6 +52,7 @@ deck-presentation/
 ├── MANUEL.md         ce document                                    ← plateforme
 ├── AGENTS.md         consignes pour les agents (CLAUDE.md y renvoie) ← plateforme
 ├── CNAME, .nojekyll  domaine ; fichiers servis tels quels            ← plateforme
+├── robots.txt        interdit l'indexation de tout le site            ← plateforme
 ├── als/              copie publiée du deck ALS                       ← deck (recopié depuis sa source)
 ├── how/              copie publiée du deck HOW                       ← deck (fabriqué par build.py)
 └── biw/              copie publiée du deck BIW                       ← deck (recopié depuis bixter)
@@ -241,7 +242,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 |---|---|---|---|
 | 1 | **Élevé** | **Confidentialité.** Le dépôt de la plateforme est public : textes (`content/*.json`), images et PDF sont lisibles sans code, sur GitHub comme par leur adresse directe. Le code à 5 chiffres ne fait que 100 000 combinaisons et son empreinte est dans `config.js` : on le retrouve en moins d'une seconde. | Le considérer comme une politesse. Pour un deck vraiment confidentiel, il faut une protection côté serveur, par exemple Cloudflare Access devant le domaine, ou un hébergeur avec mot de passe. Un site GitHub Pages reste public même depuis un dépôt privé. |
 | 2 | **Élevé** | **HOW n'est pas versionné.** `~/HOW-sources`, avec le PowerPoint d'origine et les outils, n'a ni git ni sauvegarde. Une perte du disque perd la source. | En faire un dépôt privé (`ghelleu/how-sources`). C'est à décider dans le canal HOW. |
-| 3 | Moyen | **Indexation.** L'accueil n'a pas de `noindex` et il n'y a pas de `robots.txt` à la racine. Le tableau, avec les noms des clients, peut donc être indexé. Les `robots.txt` placés dans `als/`, `how/` et `biw/` sont ignorés par les moteurs, qui ne lisent que celui de la racine. Les PDF ne sont pas couverts par le `noindex` des pages. | Ajouter un `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. |
+| 3 | ~~Moyen~~ Corrigé | **Indexation.** L'accueil, avec les noms des clients, pouvait être indexé. Les `robots.txt` placés dans les dossiers des decks sont ignorés : seul celui de la racine compte. | Fait le 31.10.2026 : `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. Ne pas les retirer. |
 | 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIW : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
 | 6 | À décider | **BIW n'a pas d'écran d'accès.** | Donner un code à 5 chiffres si on en veut un. Il faut alors ajouter un `config.js` avec `GATE` et charger `gate.js`/`gate.css` dans la source BIW. |
@@ -273,3 +274,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 30.10.2026 | Vignettes : un clic ouvre la slide, la coche masque ou réaffiche ; Annuler et Terminer sont supprimés (tous les decks). |
 | 31.10.2026 | Barre de commandes commune (`shared/controls.js`) : 5 commandes, plus de touches propres aux decks. |
 | 31.10.2026 | Audit : source ALS régularisée, commande de publication sécurisée, ce manuel et `AGENTS.md`. |
+| 31.10.2026 | Indexation bloquée : `robots.txt` à la racine, `noindex` sur l'accueil. |
