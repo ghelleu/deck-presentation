@@ -77,7 +77,7 @@ Un tableau sobre (Code, Client, Type, Context, Date), en clair et en sombre selo
 - Un écran noir, « Password », 5 chiffres. Le deck reste caché tant que le code n'est pas bon.
 - Le code est stocké dans le `config.js` du deck sous forme d'empreinte SHA-256 (clé `GATE`). Avec `GATE: null`, il n'y a pas d'écran.
 - L'écran est sauté pour `?print` (export PDF) et pour l'aperçu local. Ajouter `?gate` le force en local.
-- Rien n'est mémorisé : le code est redemandé à chaque visite.
+- Une fois le bon code saisi, l'onglet le retient pour ce deck jusqu'à sa fermeture (`sessionStorage`, sans cookie). Tout ce qui recharge la page ne le redemande donc pas : bouton langue, actualisation, retour depuis le PDF. Un nouvel onglet ou une nouvelle visite le redemande. Changer le code oblige à le ressaisir.
 - Chaque deck règle l'apparence de l'écran avec les variables `--gate-*` dans son `styles.css`, et masque ses propres éléments avec `html.gated …`.
 - Changer le code : `printf 12345 | shasum -a 256`, puis coller l'empreinte dans `GATE`.
 
@@ -275,3 +275,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 31.10.2026 | Barre de commandes commune (`shared/controls.js`) : 5 commandes, plus de touches propres aux decks. |
 | 31.10.2026 | Audit : source ALS régularisée, commande de publication sécurisée, ce manuel et `AGENTS.md`. |
 | 31.10.2026 | Indexation bloquée : `robots.txt` à la racine, `noindex` sur l'accueil. |
+| 01.11.2026 | Écran d'accès : le code est retenu par l'onglet ; changer de langue ou actualiser ne le redemande plus. |

@@ -1,6 +1,8 @@
 /* Access screen: a black page, "Password", five digits. A courtesy screen for people who
    receive the link, not a lock (the deck's files stay readable by their address).
-   No cookie, nothing stored: the code is asked at each visit. Set in each deck's config.js (GATE).
+   No cookie. Once the right code is typed, the tab remembers it (sessionStorage, per deck) until it
+   is closed, so anything that reloads the page (the language button, a refresh, coming back from
+   the PDF) does not ask again. A new tab or a new visit asks again. Set in each deck's config.js (GATE).
    Shared by every deck: load ../shared/gate.css before the deck's styles.css,
    and ../shared/gate.js after config.js. */
 (function () {
@@ -8,6 +10,12 @@
   const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   const q = new URLSearchParams(location.search);
   if (!want || q.has("print") || (local && !q.has("gate"))) return; // ?gate shows it on the local preview too
+
+  // this tab already opened this deck with this code (the key changes when the code changes)
+  const key = "deck-gate:" + location.pathname.replace(/[^/]*$/, "");
+  const seen = () => { try { return sessionStorage.getItem(key) === want; } catch (e) { return false; } };
+  const keep = () => { try { sessionStorage.setItem(key, want); } catch (e) {} };
+  if (seen()) return;
 
   const gate = document.createElement("div");
   gate.className = "gate";
@@ -39,6 +47,7 @@
     input.value = input.value.replace(/\D/g, "").slice(0, 5);
     if (input.value.length < 5) return;
     if ((await hex(input.value)) === want) {
+      keep();
       removeEventListener("keydown", guard, true);
       gate.classList.add("open");
       document.documentElement.classList.remove("gated");
