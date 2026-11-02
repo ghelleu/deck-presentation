@@ -233,20 +233,9 @@ body::before { content: ""; position: fixed; inset: 0; pointer-events: none;
 .kicker:empty { display: none; }
 .kicker.swap { opacity: 0; transform: translateY(-8px); }
 
-/* ------------------------------------------------------------ hud */
-.hud { position: fixed; left: 0; right: 0; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px;
-  font: 700 11px/1 var(--sans); font-stretch: 112%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper);
-  background: linear-gradient(rgba(22, 23, 28, 0.85), rgba(22, 23, 28, 0)); opacity: 0; transition: opacity 0.5s; }
-body.hud-on .hud, .hud:hover, .hud:focus-within { opacity: 1; }
-.hud-l { display: flex; gap: 18px; }
-.hud-title { color: rgba(246, 240, 225, 0.5); }
-.hud-r { display: flex; gap: 6px; }
-.hud .icon, .hud .lang { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid transparent; border-radius: 50%; background: none; color: var(--paper); cursor: pointer; font: inherit; text-decoration: none; }
-.hud .icon:hover, .hud .lang:hover { border-color: var(--ink); background: var(--yellow); color: var(--ink); }
-.hud svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
-.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 4px; z-index: 40; background: rgba(246, 240, 225, 0.06); }
-.progress i { display: block; height: 100%; width: 0; background: radial-gradient(circle, var(--yellow) 0 45%, transparent 50%) 0 50% / 8px 4px repeat-x; transition: width 0.8s var(--ease); }
-html.gated .hud, html.gated .progress, html.gated .chrome { display: none !important; }
+/* ------------------------------------------------------------ the controls: the viewer's bar (../shared/controls.css), tinted */
+:root { --hud-ink: #f6f0e1; --hud-accent: #ffd60a; --hud-shade: rgba(22, 23, 28, 0.9); }
+html.gated .chrome { display: none !important; }
 .gate { --gate-bg: #16171c; --gate-caret: #ffd60a; --gate-code-color: #fff; }
 
 /* ------------------------------------------------------------ snapshots: overview thumbnails and printed pages */
@@ -281,6 +270,6 @@ html.gated .hud, html.gated .progress, html.gated .chrome { display: none !impor
 /* print: one page per view */
 @page { size: 1920px 1080px; margin: 0; }
 html.print, html.print body { overflow: visible; height: auto; }
-html.print body::before, html.print .viewport, html.print body > .chrome, html.print .hud, html.print .progress { display: none; }
+html.print body::before, html.print .viewport, html.print body > .chrome, html.print .hud, html.print .progress { display: none !important; }
 html.print body { margin: 0; }
 html.print .snap { break-after: page; page-break-after: always; break-inside: avoid; contain: strict; }

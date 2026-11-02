@@ -1,0 +1,118 @@
+/* The deck controls, the same on every deck of deck-presentation.com: the look of the bar that shared/controls.js fills.
+   It belongs to the viewer, not to the deck: a strip along the foot of the window, in the type of the home page,
+   shown while the mouse moves (the deck engine sets body.show-hud), with the progress line under it.
+   Load it before the deck's styles.css. A deck may only tint it, with these variables on :root:
+     --hud-ink     text and icons            (default: ivory)
+     --hud-accent  slide count, focus, progress (default: ivory)
+     --hud-shade   the gradient behind the bar (default: near black)
+   The engine sets --p (0 to 1) on .progress. */
+.hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  font: 600 11px/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hud-ink, #f5f2eb);
+  background: linear-gradient(to top, var(--hud-shade, rgba(12, 12, 12, 0.86)) 30%, transparent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  pointer-events: none;
+}
+body.show-hud .hud,
+.hud:focus-within {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.hud-l,
+.hud-r {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.hud-r {
+  gap: 4px;
+}
+.hud-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--hud-accent, var(--hud-ink, #f5f2eb));
+}
+.hud-title {
+  opacity: 0.62;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hud button,
+.hud a {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  letter-spacing: inherit;
+  height: 32px;
+  padding: 0 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.hud .icon {
+  width: 36px;
+  padding: 0;
+}
+.hud button:hover,
+.hud a:hover {
+  background: rgba(245, 242, 235, 0.12);
+}
+.hud svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hud button:focus-visible,
+.hud a:focus-visible {
+  outline: 1px solid var(--hud-accent, currentColor);
+  outline-offset: 2px;
+}
+.progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 101;
+  height: 2px;
+  width: calc(var(--p, 0) * 100%);
+  background: var(--hud-accent, var(--hud-ink, #f5f2eb));
+  opacity: 0;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.4s;
+}
+body.show-hud .progress {
+  opacity: 0.85;
+}
+html.gated .hud,
+html.gated .progress {
+  display: none !important;
+}
+@media print {
+  .hud,
+  .progress {
+    display: none !important;
+  }
+}

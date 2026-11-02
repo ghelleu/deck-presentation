@@ -4,7 +4,7 @@
    rays and bursts, the speech balloon, the floor plan in Ben Day screens, the labelled axonometry,
    and « ceci devient cela », where the dots of a Pop Art painting re-ink themselves into the plan of the room.
    Platform contract: ../shared/controls.js fills the .hud box, this engine wires its buttons by data-act. No other control. */
-(() => {
+(async () => {
   "use strict";
   const Q = new URLSearchParams(location.search);
   const PRINT = Q.has("print");
@@ -15,6 +15,24 @@
   const rnd = (seed) => () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
 
   const VIEWS = JSON.parse(document.getElementById("views").textContent);
+
+  /* ================================================================ language: content/<lang>.json, as on every deck of the platform
+     [data-t] gets the inner HTML of its key (line breaks are composed by hand in each language), [data-t-alt] its alt text;
+     ui holds the words drawn by this engine, views the label and chapter of each view. The French in the page is the fallback. */
+  const CFG = Object.assign({ LANG: "fr", LANGS: ["fr"] }, window.DECK_CONFIG);
+  const asked = Q.get("lang"), LANG = CFG.LANGS.includes(asked) ? asked : CFG.LANG;
+  let T = null;
+  try { T = await (await fetch(`content/${LANG}.json`, { cache: "no-cache" })).json(); } catch (e) { /* opened from disk: keep the page as written */ }
+  const UI = Object.assign({ folio: CFG.FOLIO || [], plan: ["Ballroom Zurich", "Ballroom Geneva", "Vestiaire", "Toilettes", "Accès", "Sortie"],
+    axo: ["Fresque murale", "Lounge", "Bar / buffet", "Stickers d’onomatopées", "Mange-debout", "Scène", "Photocall", "Vestiaire"],
+    overview: "Toutes les vues", check: "Montrer ou masquer cette vue", pdfName: "TotalEnergies - Powerded by Superheros.pdf" }, T && T.ui);
+  root.lang = LANG;
+  if (T) {
+    if (UI.title) document.title = UI.title;
+    $$("[data-t]").forEach((el) => { const v = T.text[el.dataset.t]; if (typeof v === "string") el.innerHTML = v; });
+    $$("[data-t-alt]").forEach((el) => { const v = T.alt[el.dataset.tAlt]; if (typeof v === "string") el.alt = v; });
+    VIEWS.forEach((v) => { const t = T.views[v.id]; if (t) [v.label, v.kicker] = t; });
+  }
   const world = document.getElementById("world");
   $$(".page, .panel", world).forEach((e) => (e.dataset.pid = e.id));
   const C = { ink: "#17161A", paper: "#F6F0E1", white: "#FFFDF7", yellow: "#FFD60A", red: "#E8262B", blue: "#1C5BD6", cyan: "#19A7E0", pink: "#F27FA0" };
@@ -86,19 +104,19 @@
       } else if (layer === "salles") {
         zones = Z(P.zones.zurich, "url(#te-blue)", 0) + Z(P.zones.geneva, "url(#te-blue)", 1);
         over = `<path class="link" d="${P.link}"/>` +
-          `<text class="lbl" x="1373" y="331" text-anchor="middle">Ballroom Zurich</text><text class="lbl" x="1243" y="702" text-anchor="middle">Ballroom Geneva</text>`;
+          `<text class="lbl" x="1373" y="331" text-anchor="middle">${UI.plan[0]}</text><text class="lbl" x="1243" y="702" text-anchor="middle">${UI.plan[1]}</text>`;
       } else if (layer === "flux") {
         zones = Z(P.zones.hall, "url(#te-blue-soft)", 0);
         over = `<g class="flow guests">${P.guests.map((d) => `<path d="${d}"/>`).join("")}</g><g class="flow service">${P.service.map((d) => `<path d="${d}"/>`).join("")}</g>` +
-          [["Vestiaire", 838, 492], ["Toilettes", 977, 425], ["Accès", 1067, 312], ["Sortie", 1074, 602]].map(([t, tx, ty]) => `<text class="lbl red" x="${tx}" y="${ty}">${t}</text>`).join("");
+          [[UI.plan[2], 838, 492], [UI.plan[3], 977, 425], [UI.plan[4], 1067, 312], [UI.plan[5], 1074, 602]].map(([t, tx, ty]) => `<text class="lbl red" x="${tx}" y="${ty}">${t}</text>`).join("");
       }
       el.innerHTML = `<svg viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="Plan du niveau événementiel"><path class="base" d="${P.base}"/>${zones}<path class="walls" d="${P.walls}"/><path class="details" d="${P.details}"/>${over}</svg>`;
     },
     // labels of the axonometry, in the coordinates of the PDF page
     axo(el) {
       const L = [
-        ["Fresque murale", 1, 349, 1203, 185.5], ["Lounge", 1, 421, 1177, 231], ["Bar / buffet", 1, 501, 1277, 600], ["Stickers d’onomatopées", 1, 566, 1342, 600],
-        ["Mange-debout", 1, 870, 1208, 750.5], ["Scène", 1, 995, 1070.5, 941.4], ["Photocall", 0, 364, 915.5, 554.7], ["Vestiaire", 0, 697, 649, 844.2],
+        [UI.axo[0], 1, 349, 1203, 185.5], [UI.axo[1], 1, 421, 1177, 231], [UI.axo[2], 1, 501, 1277, 600], [UI.axo[3], 1, 566, 1342, 600],
+        [UI.axo[4], 1, 870, 1208, 750.5], [UI.axo[5], 1, 995, 1070.5, 941.4], [UI.axo[6], 0, 364, 915.5, 554.7], [UI.axo[7], 0, 697, 649, 844.2],
       ];
       let s = "";
       L.forEach(([t, right, ly, dx, dy], i) => {
@@ -112,7 +130,7 @@
   $$("[data-draw]", world).forEach((el) => DRAW[el.dataset.draw] && DRAW[el.dataset.draw](el));
 
   /* the folio, printed in the bottom margin of every page, as in a comic book */
-  const F = (window.DECK_CONFIG && window.DECK_CONFIG.FOLIO) || [];
+  const F = UI.folio;
   $$(".page:not(.cover-page)", world).forEach((pg, i) => {
     const f = document.createElement("p");
     f.className = "runfoot"; f.setAttribute("aria-hidden", "true");
@@ -290,7 +308,7 @@
       history.replaceState(null, "", "#" + v.id);
       hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + VIEWS.length;
       hudTitle.textContent = v.label || "";
-      bar.style.width = ((i + 1) / VIEWS.length) * 100 + "%";
+      bar.style.setProperty("--p", (i + 1) / VIEWS.length);
     }
     function nextIndex(d) {
       let i = cur + d;
@@ -311,7 +329,7 @@
     let ov = null;
     function buildOverview() {
       ov = document.createElement("div");
-      ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "Toutes les vues");
+      ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", UI.overview);
       VIEWS.forEach((v, i) => {
         const card = document.createElement("div"); card.className = "ov-card"; card.dataset.i = i;
         const thumb = document.createElement("div"); thumb.className = "ov-thumb";
@@ -319,7 +337,7 @@
         const cap = document.createElement("div"); cap.className = "ov-cap";
         cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${v.label || ""}</span>`;
         const chk = document.createElement("button"); chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-        chk.setAttribute("aria-label", "Montrer ou masquer cette vue");
+        chk.setAttribute("aria-label", UI.check);
         chk.addEventListener("click", (e) => { e.stopPropagation(); skipped.has(v.id) ? skipped.delete(v.id) : skipped.add(v.id); card.classList.toggle("skipped", skipped.has(v.id)); saveSkip(); });
         card.classList.toggle("skipped", skipped.has(v.id));
         card.append(thumb, cap, chk);
@@ -340,13 +358,23 @@
     const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
 
     /* ---------------------------------------------------------- controls */
+    // the other language, at the same view
+    function switchLang() {
+      const other = CFG.LANGS.find((l) => l !== LANG);
+      if (!other) return;
+      const u = new URL(location.href); u.searchParams.set("lang", other);
+      location.href = u.href;
+    }
+    // the PDF of the current language (tools/export-pdf.py)
+    const pdf = document.querySelector('.hud [data-act="pdf"]');
+    if (pdf) { pdf.setAttribute("href", `export/TotalEnergies_Powerded-by-Superheros-${LANG}.pdf`); pdf.setAttribute("download", UI.pdfName); }
     function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(() => {}); }
     const restart = () => { closeOverview(); go(0); };
     document.addEventListener("click", (e) => {
       const b = e.target.closest("[data-act]");
       if (!b) return;
       const a = b.dataset.act;
-      if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview();
+      if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") switchLang();
       if (a !== "pdf") b.blur();
     });
     addEventListener("keydown", (e) => {
@@ -372,7 +400,7 @@
       touch = null;
     });
     let hudTimer = 0;
-    addEventListener("mousemove", () => { document.body.classList.add("hud-on"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("hud-on"), 2200); });
+    addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
     addEventListener("resize", resize);
     addEventListener("scroll", () => { if (scrollX || scrollY) scrollTo(0, 0); });
     addEventListener("hashchange", () => { const i = VIEWS.findIndex((v) => "#" + v.id === location.hash); if (i >= 0 && i !== cur) go(i); });

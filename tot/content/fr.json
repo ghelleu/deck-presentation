@@ -1,0 +1,377 @@
+{
+  "ui": {
+    "title": "Powerded by Superheros · Soirée TotalEnergies",
+    "folio": [
+      "Powerded by Superheros",
+      "Soirée TotalEnergies",
+      "Hilton Genève"
+    ],
+    "plan": [
+      "Ballroom Zurich",
+      "Ballroom Geneva",
+      "Vestiaire",
+      "Toilettes",
+      "Accès",
+      "Sortie"
+    ],
+    "axo": [
+      "Fresque murale",
+      "Lounge",
+      "Bar / buffet",
+      "Stickers d’onomatopées",
+      "Mange-debout",
+      "Scène",
+      "Photocall",
+      "Vestiaire"
+    ],
+    "overview": "Toutes les vues",
+    "check": "Montrer ou masquer cette vue",
+    "pdfName": "TotalEnergies - Powerded by Superheros.pdf"
+  },
+  "views": {
+    "couverture": [
+      "Powerded by Superheros",
+      ""
+    ],
+    "etat": [
+      "État des lieux",
+      "01 · État des lieux"
+    ],
+    "zurich-1": [
+      "Ballroom Zurich, vue 01",
+      "01 · État des lieux"
+    ],
+    "zurich-2": [
+      "Ballroom Zurich, vue 02",
+      "01 · État des lieux"
+    ],
+    "zurich-3": [
+      "Ballroom Zurich, vue 03",
+      "01 · État des lieux"
+    ],
+    "zurich-4": [
+      "Ballroom Zurich, vue 04",
+      "01 · État des lieux"
+    ],
+    "geneva-1": [
+      "Ballroom Geneva, vue 01",
+      "01 · État des lieux"
+    ],
+    "geneva-2": [
+      "Ballroom Geneva, vue 02",
+      "01 · État des lieux"
+    ],
+    "espace": [
+      "Étude de l’espace",
+      "02 · Étude de l’espace"
+    ],
+    "surfaces": [
+      "Des surfaces morcelées",
+      "02 · Étude de l’espace"
+    ],
+    "zones": [
+      "Cinq zones",
+      "02 · Étude de l’espace"
+    ],
+    "salles": [
+      "Deux salles éloignées",
+      "02 · Étude de l’espace"
+    ],
+    "servant-servi": [
+      "Servant / servi",
+      "02 · Étude de l’espace"
+    ],
+    "concept": [
+      "Concept visuel",
+      "03 · Concept visuel"
+    ],
+    "titre": [
+      "Powerded by Superheros",
+      "03 · Concept visuel"
+    ],
+    "planche": [
+      "Références",
+      "03 · Concept visuel"
+    ],
+    "annees-50": [
+      "Les super-héros",
+      "03 · Concept visuel"
+    ],
+    "comic-book": [
+      "Le comic book",
+      "03 · Concept visuel"
+    ],
+    "trame": [
+      "La trame de points",
+      "03 · Concept visuel"
+    ],
+    "lichtenstein": [
+      "Roy Lichtenstein",
+      "03 · Concept visuel"
+    ],
+    "vocabulaire": [
+      "Un vocabulaire",
+      "03 · Concept visuel"
+    ],
+    "traduction": [
+      "Traduction spatiale",
+      "04 · Traduction spatiale"
+    ],
+    "densite": [
+      "Un univers dense",
+      "04 · Traduction spatiale"
+    ],
+    "big-picture": [
+      "The big picture",
+      "04 · Traduction spatiale"
+    ],
+    "ceci": [
+      "Ceci",
+      "04 · Traduction spatiale"
+    ],
+    "cela": [
+      "devient cela",
+      "04 · Traduction spatiale"
+    ],
+    "composition": [
+      "La composition",
+      "04 · Traduction spatiale"
+    ],
+    "volume": [
+      "En volume",
+      "04 · Traduction spatiale"
+    ],
+    "plan": [
+      "En plan",
+      "04 · Traduction spatiale"
+    ],
+    "scene": [
+      "La scène",
+      "04 · La scène"
+    ],
+    "scene-refs": [
+      "La scène, références",
+      "04 · La scène"
+    ],
+    "scene-maquette": [
+      "La scène, maquette",
+      "04 · La scène"
+    ],
+    "scene-concert": [
+      "La scène, le concert",
+      "04 · La scène"
+    ],
+    "photocall": [
+      "Le photocall",
+      "04 · Le photocall"
+    ],
+    "photocall-refs": [
+      "Le Daily Planet",
+      "04 · Le photocall"
+    ],
+    "photocall-volume": [
+      "Le photocall en volume",
+      "04 · Le photocall"
+    ],
+    "photocall-1": [
+      "Our Daily Planet",
+      "04 · Le photocall"
+    ],
+    "photocall-2": [
+      "Our Daily Planet",
+      "04 · Le photocall"
+    ],
+    "buffet": [
+      "The halftone buffet",
+      "04 · The halftone buffet"
+    ],
+    "salle": [
+      "La grande salle",
+      "04 · The halftone buffet"
+    ],
+    "salle-fete": [
+      "La grande salle, en fête",
+      "04 · The halftone buffet"
+    ],
+    "buffet-salle": [
+      "Le buffet",
+      "04 · The halftone buffet"
+    ],
+    "geometraux": [
+      "Géométraux",
+      "05 · Géométraux"
+    ],
+    "geo-scene": [
+      "La scène",
+      "05 · Géométraux"
+    ],
+    "geo-photocall": [
+      "Le photocall",
+      "05 · Géométraux"
+    ],
+    "fresque": [
+      "La fresque murale",
+      "05 · Géométraux"
+    ],
+    "fresque-1": [
+      "Fresque, exemple 1",
+      "05 · Géométraux"
+    ],
+    "fresque-2": [
+      "Fresque, exemple 2",
+      "05 · Géométraux"
+    ],
+    "fresque-3": [
+      "Fresque, exemple 3",
+      "05 · Géométraux"
+    ],
+    "mobiliers": [
+      "Mobiliers",
+      "05 · Géométraux"
+    ],
+    "contact": [
+      "Contact",
+      ""
+    ]
+  },
+  "text": {
+    "cover.issue": "Concept<br>scénographique",
+    "cover.title": "Powerded<br>by Superheros",
+    "cover.cap1": "Soirée TotalEnergies · Hilton Genève",
+    "h-1.chap": "État des lieux",
+    "z1.tab1": "Ballroom Zurich <i>Vue 01</i>",
+    "z2.tab1": "Ballroom Zurich <i>Vue 02</i>",
+    "z3.tab1": "Ballroom Zurich <i>Vue 03</i>",
+    "z4.tab1": "Ballroom Zurich <i>Vue 04</i>",
+    "g1.tab1": "Ballroom Geneva <i>Vue 01</i>",
+    "g2.tab1": "Ballroom Geneva <i>Vue 02</i>",
+    "h-2.chap": "Étude de l’espace",
+    "s1.cap1": "Les surfaces disponibles pour la soirée<br>sont généreuses. Leur organisation,<br>elle, reste très morcelée.",
+    "s2.cap1": "Elles se répartissent en cinq zones<br>principales, chacune isolée des autres.",
+    "s3.cap1": "À cette fragmentation s’ajoute<br>l’éloignement des deux salles de bal,<br>Zurich et Geneva, situées à distance<br>l’une de l’autre.",
+    "s4.cap1": "L’enjeu majeur devient donc la circulation<br>entre ces deux salles : elle doit rester<br>la plus fluide possible. Nous adoptons<br>pour cela une logique <b>servant / servi</b>.",
+    "s4.p1": "<b class=\"k-blue\">À droite,</b> les circulations principales<br>des invités.",
+    "s4.p2": "<b class=\"k-red\">À gauche,</b> les circulations de service :<br>vestiaire, sanitaires, accès techniques.",
+    "h-3.chap": "Concept visuel",
+    "quote.say": "Powerded<br>by Superheros",
+    "h1.cap1": "Dans les années 1950 et 1960,<br>les super-héros s’imposent<br>comme des icônes de la culture<br>populaire américaine.",
+    "h2.cap1": "Le comic book devient leur<br>territoire naturel. Il y invente<br>un langage visuel pensé pour être<br>direct, populaire et spectaculaire.",
+    "h3.cap1": "Imprimés vite et à bas coût,<br>ces comics transforment la trame<br>de points en signature visuelle,<br>iconique presque par accident.",
+    "h4.cap1": "Dans les années 1960, Roy Lichtenstein<br>isole et agrandit ces codes. La trame<br>de points, ou points Ben Day, devient<br>sa signature et fait entrer le comic<br>book dans le champ du Pop Art.",
+    "h5.cap1": "Explosions, impacts, éclairs<br>et onomatopées deviennent alors<br>des signes graphiques immédiatement<br>lisibles. <b>C’est ce vocabulaire<br>que nous faisons nôtre pour la soirée.</b>",
+    "h-4.chap": "Traduction spatiale",
+    "dens.ttl": "Un univers qui demande<br>de la densité",
+    "dens.cap1": "Le Pop Art fonctionne par accumulation, saturation et impact.<br>Pour être convaincant, son univers doit être généreux, dense, immersif.",
+    "dens.cap2": "Le contexte impose une équation particulièrement contrainte :<br>un espace immense à habiller, <b>800 à 850 invités</b>, un plafond bas,<br>de nombreux éléments fonctionnels à intégrer (scène, bars, buffets,<br>mange-debout, lounges), et un budget décoration limité à <b>40 k€</b>.",
+    "dens.cap3": "Vouloir décorer tout l’espace reviendrait à diluer ce budget,<br>et avec lui l’impact visuel.",
+    "big.ttl": "The big picture",
+    "big.cap1": "Les éléments indispensables à l’événement<br>deviennent la scénographie elle-même.",
+    "big.cap2": "Vue en plan, la salle se lit comme un tableau Pop Art monumental<br>à la Lichtenstein : l’explosion devient la scène, les étincelles<br>se déploient en linéaires de bars et de buffets, la trame de points<br>se matérialise en alignements de mange-debout et de mobilier.",
+    "big.cap3": "À mesure que la salle se remplit, les invités complètent la composition<br>et lui donnent vie. <b>Ils sont dans l’image, ils la composent.</b>",
+    "morph.cap1": "Ceci",
+    "morph.cap2": "devient cela",
+    "axo.cap1": "La composition organise aussi les flux. La scène ancre<br>le fond de la grande salle, la trame de mange-debout guide<br>la circulation des invités, bars et lounges s’installent<br>en périphérie, le vestiaire et les services restent<br>en retrait selon la logique servant / servi.",
+    "sc-txt.ttl": "La scène",
+    "sc-txt.cap1": "Une scénographie explosive pour porter<br>le temps fort de la soirée : le concert live<br>de 90 minutes joué par les équipes.",
+    "sc-txt.cap2": "La même scène accueille ensuite le DJ<br>pour faire basculer la soirée en mode festif.",
+    "sc-txt.cap3": "Une explosion Pop Art jaillit du sol<br>et des murs et fait de la scène<br>le point de mire de toute la salle.",
+    "pc-txt.ttl": "Le photocall<br><span>« Our Daily Planet »</span>",
+    "pc-txt.cap1": "Revivre de l’intérieur l’âge d’or des super-héros,<br>au pied du Daily Planet rebaptisé pour<br>l’occasion : « Our Daily Planet ».",
+    "pc-txt.cap2": "Un photocall immersif où chaque invité<br>entre dans la case du comic,<br>au cœur de l’explosion.",
+    "bf-txt.ttl": "The<br>halftone<br>buffet",
+    "h-5.chap": "Géométraux",
+    "geo-sc.tab1": "La scène",
+    "geo-pc.tab1": "Le photocall",
+    "fr-room.tab1": "La fresque murale",
+    "fr-1.tab1": "Exemple d’illustration pour la fresque",
+    "mob.ttl": "Mobiliers",
+    "mob.h41": "Lounge",
+    "mob.dd1": "Canapé 3 places",
+    "mob.dd2": "Canapé 2 places",
+    "mob.dd3": "Fauteuil lounge",
+    "mob.dd4": "Table basse",
+    "mob.h42": "Catering",
+    "mob.ml1": "36 ml",
+    "mob.dd5": "Module buffet / bar 2 m",
+    "mob.dd6": "Mange-debout Ø 70–80 cm",
+    "mob.dd7": "Tabouret haut",
+    "mob.dd8": "Corbeille / poubelle discrète",
+    "mob.h43": "Vestiaire",
+    "mob.ml2": "18 ml",
+    "mob.dd9": "Portants",
+    "mob.ml3": "6 ml",
+    "mob.dd10": "Module comptoir",
+    "mob.h44": "Fresque",
+    "mob.dd11": "Bâche publicitaire 40 × 5 m",
+    "mob.dd12": "Système de fixation",
+    "mob.h45": "Scène",
+    "mob.dd13": "Praticable de scène 100 × 200 × 50 cm",
+    "mob.dd14": "Escalier de scène",
+    "mob.dd15": "« Épine » de scène",
+    "mob.dd16": "Revêtement de scène",
+    "mob.dd17": "Panneaux backdrop",
+    "mob.dd18": "Moquette éclats sol",
+    "mob.dd19": "Éclats murs",
+    "mob.h46": "Photobooth",
+    "mob.dd20": "Moquette",
+    "mob.dd21": "Backdrop rigide 450 × 600 cm",
+    "mob.dd22": "Backdrop souple 450 × 600 cm",
+    "mob.dd23": "Sphère « Daily Planet » Ø 150 cm",
+    "mob.h47": "Divers",
+    "mob.ml4": "4 ml",
+    "mob.dd24": "Régie intégrée à l’espace",
+    "mob.dd25": "Stickers d’onomatopées",
+    "fr-2.tab1": "Exemple d’illustration pour la fresque",
+    "fr-3.tab1": "Exemple d’illustration pour la fresque",
+    "back.say": "Contact<br><a href=\"mailto:guillaumehelleu.pro@gmail.com\">guillaumehelleu.pro@gmail.com</a>"
+  },
+  "alt": {
+    "z1.alt": "Ballroom Zurich, vue 01 : un long volume sous verrière, murs gris et bois",
+    "z2.alt": "Ballroom Zurich, vue 02 : la salle dressée en tables rondes",
+    "z3.alt": "Ballroom Zurich, vue 03",
+    "z4.alt": "Ballroom Zurich, vue 04 : mange-debout sous la verrière",
+    "g1.alt": "Ballroom Geneva, vue 01 : grande salle à plafond bas",
+    "g2.alt": "Ballroom Geneva, vue 02",
+    "s1.alt": "Plan d’architecte du niveau événementiel du Hilton",
+    "mood.alt": "Onomatopées BOOM, POP, BANG en patchwork",
+    "mood.alt2": "Décor d’explosion rouge et jaune autour d’invités",
+    "mood.alt3": "Lounge pop aux murs couverts de cases de comic",
+    "mood.alt4": "Installation pop lumineuse",
+    "mood.alt5": "Scène habillée d’une explosion de comic",
+    "h1.alt": "Couverture de Fantomen, 1950",
+    "h2.alt": "Une pile de comic books",
+    "h3.alt": "Détail d’impression de comic : la trame de points",
+    "h4.alt": "Détail d’une toile de Roy Lichtenstein, points Ben Day",
+    "h5.alt": "Sweet Dreams, Baby! de Roy Lichtenstein, 1965",
+    "morph.alt": "Une toile Pop Art : POP! au cœur d’une explosion",
+    "morph.alt2": "Le plan de la grande salle composé comme cette toile",
+    "axo.alt": "Axonométrie du niveau : scène, mange-debout, bars, lounges, photocall, vestiaire, fresque",
+    "iso.alt": "Le niveau en volume, vu de biais",
+    "top.alt": "Le niveau vu de dessus",
+    "sc-txt.alt": "Une explosion façon Lichtenstein",
+    "sc-refs.alt": "Explosion jaune posée dans une rue",
+    "sc-refs.alt2": "Musiciens devant une explosion jaune",
+    "sc-refs.alt3": "Cuivres devant une explosion jaune",
+    "sc-refs.alt4": "Explosion jaune en volume dans la rue",
+    "sc-model.alt": "Maquette blanche de l’explosion de scène",
+    "sc-render.alt": "Le concert sur la scène en explosion jaune",
+    "pc-txt.alt": "Le globe du Daily Planet dessiné en comic",
+    "pc-refs.alt": "Le Daily Planet en dessin",
+    "pc-refs.alt2": "Le globe du Daily Planet",
+    "pc-refs.alt3": "Le Daily Planet de nuit",
+    "pc-refs.alt4": "Les globes du Daily Planet au cinéma",
+    "pc-iso.alt": "Le photocall en volume : sol rouge, panneaux en explosion, globe doré",
+    "pc-1.alt": "Des invités costumés posent devant l’explosion du photocall",
+    "pc-2.alt": "Le photocall vu par un photographe",
+    "bf-txt.alt": "Points Ben Day, détail d’une toile de Roy Lichtenstein",
+    "bf-room.alt": "La grande salle en cocktail : mange-debout, explosion jaune au mur, onomatopées",
+    "bf-room.alt2": "La même salle en mode festif, lumières de fête",
+    "bf-buffet.alt": "Le buffet le long de la salle, invités costumés, onomatopées aux murs",
+    "geo-sc.alt": "Géométral de la scène : plateau, praticables et éclats, cotés",
+    "geo-pc.alt": "Géométral du photocall : sol rouge, panneaux découpés, sphère",
+    "fr-room.alt": "La fresque murale le long du Ballroom Zurich, avec lounges et bar",
+    "fr-1.alt": "Genève en comic : le jet d’eau, la rade, des super-héros dans le ciel",
+    "fr-2.alt": "Genève vue du ciel en comic, foisonnante de détails",
+    "fr-3.alt": "Genève et le jet d’eau en comic, vue aérienne"
+  }
+}

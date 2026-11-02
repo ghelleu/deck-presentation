@@ -36,6 +36,7 @@ Ce qui sert à plusieurs decks vit dans `shared/`, à la racine, et n'est pas re
 | `shared/gate.js` | Écran d'accès à 5 chiffres. Lit `GATE` (empreinte SHA-256) dans le `config.js` du deck ; `null` : pas d'écran. Sauté pour `?print` et l'aperçu local (`?gate` le force). Le bon code est retenu par l'onglet jusqu'à sa fermeture (`sessionStorage`, par deck) : changer de langue ou recharger la page ne le redemande pas. |
 | `shared/gate.css` | Structure de cet écran. Chaque deck règle son apparence dans son `styles.css` avec les variables `--gate-*` posées sur `.gate`, et masque ses propres commandes avec `html.gated …`. |
 | `shared/controls.js` | La barre de commandes, identique sur tous les decks : **plein écran (F) · revenir au début (R) · toutes les slides (O) · langue · télécharger le PDF**, dans cet ordre, rien d'autre. Le bouton langue n'apparaît que si `DECK_CONFIG.LANGS` compte au moins deux langues. Clavier : flèches, espace, Entrée, retour arrière, Page préc./suiv., Début/Fin, plus F, R, O et Échap (ouvre et ferme les vignettes). Aucune autre touche, aucun bouton propre à un deck. |
+| `shared/controls.css` | L’apparence de cette barre, qui appartient au lecteur et non au deck : une bande au pied de la fenêtre, dans la typo de l’accueil (Helvetica Neue), visible quand la souris bouge (`body.show-hud`, posé par le moteur du deck), avec le trait de progression dessous (`--p`, de 0 à 1). Un deck la charge avant son `styles.css` et ne peut que la teinter : `--hud-ink`, `--hud-accent`, `--hud-shade`. En place sur TOT ; ALS, HOW et BIX ont encore leur copie de ce style, TDP et MAG une barre en haut, à passer sur ce fichier à leur prochaine republication. |
 
 La plateforme est un lecteur de decks : chaque deck fait le travail derrière ces cinq commandes (son PDF, ses langues, ses vignettes), mais n'en ajoute pas. Dans le `index.html` du deck, la barre est une boîte vide que `controls.js` remplit :
 
@@ -61,6 +62,7 @@ Dans le `index.html` du deck :
 
 ```html
 <link rel="stylesheet" href="../shared/gate.css">   <!-- avant styles.css -->
+<link rel="stylesheet" href="../shared/controls.css">   <!-- avant styles.css -->
 <link rel="stylesheet" href="styles.css">
 …
 <script src="config.js"></script>

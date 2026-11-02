@@ -238,7 +238,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 - l'écran d'accès s'affiche sur ALS, HOW et BIX ;
-- la barre a 5 boutons (4 sur BIX, TDP, MAG et TOT, qui n'ont qu'une langue) ;
+- la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
 - la console du navigateur n'affiche aucune erreur.
@@ -303,3 +303,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | TDP et MAG publiés (par leurs sessions). Accueil : Bixler's devient BIX (adresse `/biw/` inchangée) ; nouvelle colonne Project. |
 | 02.11.2026 | BIX : écran d'accès à 5 chiffres sur le deck et le livret. |
 | 02.11.2026 | TOT publié (« Powerded by Superheros », soirée TotalEnergies, Hilton Genève), sans code d'accès. Source `~/Projects/totalenergies-deck`, git local sans dépôt GitHub. |
+| 02.11.2026 | `shared/controls.css` : l’apparence de la barre devient commune (au pied de la fenêtre, typo de l’accueil). TOT l’adopte, passe en FR/EN et a un PDF par langue. |
