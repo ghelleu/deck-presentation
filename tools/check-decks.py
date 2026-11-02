@@ -58,9 +58,9 @@ def css_bar_rules(css):
     return found
 
 
-def check(deck, home):
+def check(deck, home, file="index.html"):
     d = os.path.join(ROOT, deck)
-    page = open(os.path.join(d, "index.html"), encoding="utf-8").read()
+    page = open(os.path.join(d, file), encoding="utf-8").read()
     err, note = [], []
 
     # 1. the platform's files, in order
@@ -89,8 +89,27 @@ def check(deck, home):
             err.append(f"ne charge pas {name}")
     if min(cfg, g_js, c_js) >= 0 and not cfg < g_js < c_js:
         err.append("ordre des scripts : config.js, puis shared/gate.js, puis shared/controls.js")
-    if pos(js, "viewer.js") < 0 or pos(css, "viewer.css") < 0:
-        note.append("pas encore sur le lecteur commun (shared/viewer.js + viewer.css) : touches et vignettes propres au deck")
+    # the viewer: keys, overview, ticks and PDF are the platform's; the engine hands it the slides
+    for name, k in (("shared/viewer.css", pos(css, "viewer.css")), ("shared/viewer.js", pos(js, "viewer.js"))):
+        if k < 0:
+            err.append(f"ne charge pas {name} (le lecteur commun : touches, vignettes, coches, PDF)")
+    if 0 <= pos(js, "viewer.js") < c_js:
+        err.append("shared/viewer.js doit venir après shared/controls.js")
+    local = [h.split("?")[0] for h in js
+             if not h.startswith(("http", "/")) and not re.match(r"\.\./shared/", h) and h.split("?")[0] != "config.js"]
+    code = {h: open(os.path.join(d, h), encoding="utf-8").read() for h in local if os.path.exists(os.path.join(d, h))}
+    if not any("DeckViewer.mount" in c for c in code.values()):
+        err.append("le moteur ne confie pas ses slides au lecteur (DeckViewer.mount)")
+    for h, c in code.items():
+        for line in c.split("\n"):
+            if re.search(r"(?<![\w.])(?:window\.|document\.)?addEventListener\(\s*[\"']keydown", line) and "!VIEWER" not in line:
+                err.append(f"{h} écoute lui-même le clavier (les touches sont celles du lecteur)")
+                break
+        if re.search(r"function\s+(overview|openOverview|buildOverview)\b", c):
+            (note if "VIEWER" in c else err).append(
+                f"{h} a encore ses propres vignettes" + (" (gardées pour ses autres pistes, inactives ici)" if "VIEWER" in c else ""))
+    if re.search(r'class="picks"', page):
+        err.append("la page a encore sa propre barre de sélection (.picks)")
     if c_js >= 0 and c_js == len(js) - 1:
         err.append("shared/controls.js doit venir avant le moteur du deck")
 
@@ -140,9 +159,14 @@ def check(deck, home):
             pdf = m.group(1).replace("{lang}", l or "")
             if not os.path.exists(os.path.join(d, pdf)):
                 err.append(f"PDF absent : {deck}/{pdf}")
+        box = re.search(r'<div class="hud-r"[^>]*data-controls[^>]*>', page)
+        mp = box and re.search(r'data-pages="([^"]*)"', box.group(0))
+        pages = mp.group(1) if mp else os.path.join(os.path.dirname(m.group(1)), "pages.json")
+        if pages and not os.path.exists(os.path.join(d, pages)):
+            note.append(f"pas de {pages} : le PDF des slides cochées sera le PDF entier")
     else:
         err.append("pas de data-pdf sur la barre")
-    if deck not in UNLISTED and f'href="/{deck}/"' not in home:
+    if file == "index.html" and deck not in UNLISTED and f'href="/{deck}/"' not in home:
         note.append("pas de ligne cliquable sur l'accueil")
 
     return err, note, (langs, gate)
@@ -155,16 +179,24 @@ def main():
         if e not in NOT_DECKS and os.path.isfile(os.path.join(ROOT, e, "index.html"))
     )
     bad = 0
+    # every page of a deck that shows the toolbar (the deck itself, a book beside it…)
+    pages = []
     for deck in decks:
-        err, note, (langs, gate) = check(deck, home)
+        pages.append((deck, "index.html"))
+        for f in sorted(os.listdir(os.path.join(ROOT, deck))):
+            if f.endswith(".html") and f != "index.html" and "data-controls" in open(os.path.join(ROOT, deck, f), encoding="utf-8").read():
+                pages.append((deck, f))
+    for deck, f in pages:
+        err, note, (langs, gate) = check(deck, home, f)
         bad += bool(err)
+        name = deck if f == "index.html" else f"{deck}/{f}"
         info = f"langues {'/'.join(langs or ['?'])} · code {'oui' if gate and gate != 'null' else 'non'}"
-        print(f"{'OK     ' if not err else 'ERREUR '} {deck:8} {info}")
+        print(f"{'OK     ' if not err else 'ERREUR '} {name:16} {info}")
         for e in err:
             print(f"          ✗ {e}")
         for n in note:
             print(f"          · {n}")
-    print(f"\n{len(decks) - bad}/{len(decks)} decks sous l'interface commune.")
+    print(f"\n{len(pages) - bad}/{len(pages)} pages de deck sous l'interface commune.")
     sys.exit(1 if bad else 0)
 
 

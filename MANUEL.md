@@ -103,9 +103,19 @@ Elle est identique sur tous les decks. Cinq commandes, dans cet ordre, rien d'au
 
 Navigation : flèches, espace, Entrée, retour arrière, Page préc./suiv., Début/Fin. Aucune autre touche.
 
-Les vignettes fonctionnent ainsi : un clic sur une vignette ouvre la slide, et la coche en haut à droite masque ou réaffiche la slide. Il n'y a pas de bouton Annuler ni Terminer.
+Fonctionnement : `controls.js` remplit une boîte vide de la page avec les boutons, en français ou en anglais selon la langue du deck. Le lecteur (§3.3 bis) les fait marcher.
 
-Fonctionnement : `controls.js` remplit une boîte vide de la page avec les boutons. Les libellés sont en français ou en anglais selon la langue du deck. Le moteur du deck branche ensuite chaque bouton par son attribut `data-act` (`fullscreen`, `restart`, `overview`, `lang`, et le lien `pdf`).
+### 3.3 bis Le lecteur (`shared/viewer.js` + `viewer.css`)
+
+Tout ce qui se passe quand on regarde un deck est commun à tous les decks : **une modification ici s'applique d'elle-même à tous les decks, présents et futurs.**
+
+- **Les touches**, toutes et rien d'autre, et le balayage au doigt.
+- **Les vignettes (O)** : la slide recule dans une grille de 4 colonnes ; flèches pour choisir, Entrée ou clic pour ouvrir (la slide revient en plein écran), O ou Échap pour refermer, la molette pour défiler. En haut, la barre « Slides à présenter » : le compte et « Tout réafficher ».
+- **Les coches** : la coche en haut à droite d'une vignette masque ou réaffiche la slide. Une slide masquée est voilée (« Masquée ») et la présentation la saute ; il en reste toujours une. Le choix est gardé par le navigateur, page par page. Un deck peut décocher des slides par défaut.
+- **Le PDF** : seulement les slides cochées, d'après `export/pages.json` (quelles pages du PDF pour chaque slide). Sans ce fichier, ou tout coché : le PDF entier.
+- **La barre** qui apparaît quand la souris bouge, le compteur, le trait de progression, l'adresse de chaque slide (`#id`).
+
+Le moteur d'un deck ne garde que ce qui lui est propre : ses slides, ses animations, ses transitions, ses étapes dans une slide. Il les confie au lecteur par `DeckViewer.mount({ slides, show, step, thumb })` (voir `modele/engine.js`). Les vignettes montrent chaque slide au repos, sans animation.
 
 ### 3.4 Le contrat qu'un deck doit respecter
 
@@ -280,8 +290,8 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
 | 6 | Corrigé | **BIX n'avait pas d'écran d'accès.** | Fait le 02.11.2026 : `config.js` avec `GATE`, et `/shared/gate.*` chargés dans le deck et le livret. CBM et TOT ont reçu le leur le même jour. TDP et MAG n'en ont pas (`GATE: null`). |
 | 7 | Faible | BIW charge la barre par un chemin absolu (`/shared/controls.js`). C'est correct sur le domaine, mais ça casserait si le site était servi sous un sous-dossier. | Rien à faire tant que le domaine ne change pas. |
-| 8 | Faible | Seules la barre et l'écran d'accès sont communs. La navigation et les vignettes sont réécrites dans chacun des trois moteurs. | Si un 4ᵉ deck arrive, envisager un moteur de vignettes commun dans `shared/`. |
-| 9 | Faible | Il n'y a ni vérification automatique ni page 404. | Script de vérification du §6.5 ; une `404.html` sobre à la racine. |
+| 8 | Corrigé | La navigation et les vignettes étaient réécrites dans chaque moteur. | Fait le 02.11.2026 : le lecteur commun (`shared/viewer.js`) les porte pour tous les decks ; `tools/check-decks.py` refuse un deck qui les referait. |
+| 9 | Faible | Pas de page 404. | Une `404.html` sobre à la racine. (La vérification automatique existe : `tools/check-decks.py`.) |
 
 ---
 
@@ -319,3 +329,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | `shared/viewer.js` + `viewer.css` : le lecteur commun (touches, vignettes en grille façon ALS, coches gardées par le navigateur, PDF des slides cochées). En place sur `modele/` ; TDP, MAG, TOT, CBM, puis ALS, HOW, BIX y passent ensuite. |
 | 02.11.2026 | CBM, TDP, MAG et TOT passent sur le lecteur commun : grille des vignettes façon ALS, coches gardées par le navigateur, PDF des slides cochées (`export/pages.json` ajouté à chacun, à refaire si le nombre de pages du PDF change). |
 | 02.11.2026 | ALS, HOW et BIX (deck et livret) passent sur le lecteur commun : tous les decks ont maintenant les mêmes touches, la même grille, les mêmes coches et le PDF des slides cochées. Les vignettes montrent chaque slide au repos (sans animation). |
+| 02.11.2026 | `tools/check-decks.py` devient strict : un deck (et toute page avec la barre, comme le livret de BIX) doit charger le lecteur, lui confier ses slides, et n'écouter aucune touche ni construire ses propres vignettes. 9 pages sur 9 conformes. |
