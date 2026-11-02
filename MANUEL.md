@@ -210,6 +210,8 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 - **Aperçu** : `python3 tools/serve.py 4192`, puis http://127.0.0.1:4192/ (avec le lien `shared` vers la plateforme).
 - **Publier** : copier le deck dans `~/Projects/deck-presentation/cbm/`, sans `shared`, `_src`, `tools`, `.claude` ni `README.md`. Ensuite : `git add cbm && git commit && git push`.
 
+---
+
 ## 6. Recettes
 
 ### 6.1 Ajouter un nouveau deck
