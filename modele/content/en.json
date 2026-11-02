@@ -1,0 +1,13 @@
+{
+  "ui": { "title": "Deck template · deck-presentation.com", "pdfName": "Template.pdf" },
+  "text": {
+    "couverture.kicker": "Client × Project",
+    "couverture.titre": "Deck title",
+    "couverture.sous": "Place · month year",
+    "idee.kicker": "01",
+    "idee.titre": "The idea",
+    "idee.texte": "One sentence that says it all. The rest of the deck unfolds it.",
+    "merci.titre": "Thank you"
+  },
+  "labels": { "couverture": "Cover", "idee": "The idea", "merci": "Thank you" }
+}

@@ -92,6 +92,16 @@ body.show-hud .hud,
   outline: 1px solid var(--hud-accent, currentColor);
   outline-offset: 2px;
 }
+/* the PDF of the ticked slides is being put together (the engine sets .busy on the link) */
+.hud a.busy {
+  pointer-events: none;
+  animation: hud-busy 0.8s ease-in-out infinite alternate;
+}
+@keyframes hud-busy {
+  to {
+    opacity: 0.3;
+  }
+}
 .progress {
   position: fixed;
   left: 0;

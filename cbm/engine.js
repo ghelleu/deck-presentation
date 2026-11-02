@@ -283,7 +283,7 @@
     history.replaceState(null, "", "#" + s.id + (step ? "/" + step : ""));
     hudCount.textContent = String(cur + 1).padStart(2, "0") + " / " + SLIDES.length;
     hudTitle.textContent = s.dataset.label || "";
-    bar.style.width = ((cur + (s._steps ? step / (s._steps + 1) : 0) + 1) / SLIDES.length) * 100 + "%";
+    bar.style.setProperty("--p", (cur + (s._steps ? step / (s._steps + 1) : 0) + 1) / SLIDES.length);
     document.body.dataset.kind = s.classList.contains("chapter") ? "chapter" : s.classList.contains("full") ? "full" : "page";
     folioCh.textContent = s.dataset.chapter || "";
     if (entered) $$("video", s).forEach((v) => { v.currentTime = 0; v.play().catch(() => {}); });
@@ -376,7 +376,7 @@
     touch = null;
   });
   let hudTimer = 0;
-  addEventListener("mousemove", () => { document.body.classList.add("hud-on"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("hud-on"), 2200); });
+  addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
   addEventListener("resize", resize);
 
   resize();

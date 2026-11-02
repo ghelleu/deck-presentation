@@ -8,11 +8,11 @@
 
 deck-presentation.com est une **plateforme de visionnage de présentations** (des « decks »). Elle est faite de deux projets distincts, qui ne se modifient pas au même endroit ni par les mêmes personnes :
 
-| | **Projet 1 : la plateforme** | **Projet 2 : les decks** |
+| | **Projet 1 : l'interface (la plateforme)** | **Projet 2 : les decks** |
 |---|---|---|
-| Ce que c'est | Le lecteur : la page d'accueil, l'écran d'accès, la barre de commandes commune, le domaine, l'hébergement | Le contenu : chaque présentation (textes, images, mise en page, PDF), une par client |
+| Ce que c'est | Le lecteur : la page d'accueil, l'écran d'accès, la barre de commandes (boutons **et** apparence), les langues, le modèle de nouveau deck, le domaine, l'hébergement | Le contenu : chaque présentation (textes, images, mise en page, PDF), une par client, qui vient se glisser sous l'interface |
 | Où on travaille | Le dépôt `ghelleu/deck-presentation`, dans `~/Projects/deck-presentation` | Le dossier source de chaque deck (voir §5), **pas** dans le dépôt de la plateforme |
-| Ce qu'on y touche | `index.html` (accueil), `shared/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) |
+| Ce qu'on y touche | `index.html` (accueil), `shared/`, `modele/`, `tools/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) |
 | Session Claude | « DECK HOME » | Une session par deck (ALS, HOW, BIX, TDP, MAG…) |
 
 Règle d'or : **la plateforme définit les commandes, les decks les respectent.** Un deck ne rajoute ni bouton ni raccourci clavier à lui.
@@ -109,9 +109,12 @@ Fonctionnement : `controls.js` remplit une boîte vide de la page avec les bouto
 
 ### 3.4 Le contrat qu'un deck doit respecter
 
+Le plus simple : partir de [`modele/`](modele/README.md), qui le respecte déjà. Puis `python3 tools/check-decks.py <code>` le vérifie.
+
 ```html
-<link rel="stylesheet" href="../shared/gate.css">   <!-- avant styles.css -->
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../shared/gate.css">     <!-- avant styles.css -->
+<link rel="stylesheet" href="../shared/controls.css"> <!-- avant styles.css : l'allure de la barre -->
+<link rel="stylesheet" href="styles.css">             <!-- le deck ; la barre n'y est que teintée (--hud-*) -->
 …
 <div class="hud" role="toolbar">
   <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
@@ -121,12 +124,13 @@ Fonctionnement : `controls.js` remplit une boîte vide de la page avec les bouto
 <script src="config.js"></script>            <!-- window.DECK_CONFIG : LANG, LANGS, GATE -->
 <script src="../shared/gate.js"></script>
 <script src="../shared/controls.js"></script> <!-- avant le moteur -->
+<script src="../shared/i18n.js"></script>     <!-- les langues (content/<lang>.json) -->
 <script src="engine.js"></script>
 ```
 
 Il faut aussi `<meta name="robots" content="noindex, nofollow">` dans la page du deck.
 
-Exception BIW : le deck a son propre dossier `biw/shared/`, donc il charge la barre par un chemin absolu, `/shared/controls.js`.
+Exception BIX : le deck a son propre dossier `biw/shared/`, donc il charge les fichiers de la plateforme par un chemin absolu (`/shared/gate.css`, `/shared/controls.css`, `/shared/gate.js`, `/shared/controls.js`). Son `base.css`, partagé avec ses autres pistes de travail, garde d'anciennes règles de barre : `controls.css`, chargé après, l'emporte.
 
 Aperçu local d'un deck depuis sa source : un lien `shared`, ignoré par git, pointe vers `~/Projects/deck-presentation/shared` (`ln -s ~/Projects/deck-presentation/shared shared`). Il est en place pour ALS et BIW.
 
@@ -150,7 +154,8 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 
 - Chaque deck est une page web plein écran, fabriquée et testée dans son propre dossier source. Le résultat est ensuite recopié dans `deck-presentation/<code>/` et poussé.
 - Un deck fournit lui-même ce qu'il y a derrière les cinq commandes : son PDF (`export/`), ses langues (`content/fr.json`, `content/en.json`), ses vignettes.
-- Il ne touche à rien en dehors de son dossier publié : ni à l'accueil, ni à `shared/`.
+- Il ne touche à rien en dehors de son dossier publié : ni à l'accueil, ni à `shared/`. Il ne redessine pas la barre, il la teinte seulement.
+- Un nouveau deck part de `modele/`. Une fonction commune qui manque se demande à la session de l'interface (« DECK HOME »), qui l'ajoute pour tous.
 - Les notes du présentateur ne sont pas publiées. On présente avec les notes depuis la copie locale.
 - Ajouter le deck à l'accueil (une ligne du tableau) est une tâche de la plateforme.
 
@@ -215,24 +220,26 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 ## 6. Recettes
 
 ### 6.1 Ajouter un nouveau deck
-1. **Deck** : créer sa source dans un dépôt privé et respecter le contrat du §3.4 (avec le lien `shared` pour l'aperçu local).
-2. **Deck** : fabriquer la copie publique dans `deck-presentation/<code>/`, avec un code en minuscules, sans espace.
-3. **Plateforme** : ajouter la ligne `tr.lien` sur l'accueil, ou passer la ligne `attente` en `lien`.
-4. Pousser, puis vérifier (§6.5).
+1. **Deck** : copier `modele/` dans un nouveau dossier de travail (dépôt privé), avec le lien `shared` pour l'aperçu local. Le mode d'emploi est dans `modele/README.md`.
+2. **Deck** : faire les slides, le style et les langues ; régler `config.js` ; exporter les PDF.
+3. **Deck** : fabriquer la copie publique dans `deck-presentation/<code>/`, avec un code en minuscules, sans espace.
+4. **Plateforme** : `python3 tools/check-decks.py <code>` doit afficher OK. Ajouter la ligne `tr.lien` sur l'accueil, ou passer la ligne `attente` en `lien`.
+5. Pousser (avec l'accord de la personne), puis vérifier (§6.5).
 
 ### 6.2 Mettre à jour un deck
 On travaille dans la source du deck, on refabrique sa copie, puis on fait `git add <code>` seulement.
 
 ### 6.3 Modifier une fonction commune
 1. Modifier `shared/`, puis mettre à jour le README et ce manuel si le contrat change.
-2. Si le contrat HTML change, adapter **aussi les sources des decks** (le gabarit HOW, `index.html` d'ALS, `directions/full/index.html` de BIW). Sinon, la prochaine publication d'un deck remet l'ancienne version.
-3. Vérifier les trois decks.
+2. Si le contrat HTML change, adapter **aussi `modele/` et les sources des decks** (le gabarit HOW, `index.html` d'ALS, `directions/full/index.html` de BIX, et ceux de TDP, MAG, TOT, CBM). Sinon, la prochaine publication d'un deck remet l'ancienne version.
+3. `python3 tools/check-decks.py` : tous les decks doivent afficher OK. Puis les vérifier en ligne.
 
 ### 6.4 Changer ou retirer un code d'accès
 `printf 54321 | shasum -a 256` → `GATE: "<empreinte>"` dans le `config.js` de la **source** du deck, puis republier. `GATE: null` retire l'écran.
 
 ### 6.5 Vérifier après un changement
 ```bash
+python3 tools/check-decks.py      # chaque deck est-il sous l'interface ?
 for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
   printf "%s /%s\n" "$(curl -s -o /dev/null -w '%{http_code}' https://deck-presentation.com/$u)" "$u"; done
 ```
@@ -306,3 +313,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | CBM et TOT : écran d'accès à 5 chiffres. |
 | 02.11.2026 | `shared/controls.css` : l’apparence de la barre devient commune (au pied de la fenêtre, typo de l’accueil). TOT l’adopte, passe en FR/EN et a un PDF par langue. |
 | 02.11.2026 | `shared/i18n.js` : les langues deviennent communes (`content/<lang>.json`, `?lang=`). TOT, TDP et MAG l’utilisent avec la barre commune, en FR/EN, un PDF par langue. |
+| 02.11.2026 | Tous les decks sous l'interface : ALS, HOW, BIX et CBM passent sur `shared/controls.css` (barre teintée seulement). Nouveau : `modele/` (point de départ de tout deck) et `tools/check-decks.py`. Seule la session « DECK HOME » modifie `shared/`. |

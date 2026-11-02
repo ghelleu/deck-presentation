@@ -2393,17 +2393,6 @@ body:has(.stage.overview) .picks {
 .picks button:hover {
   background: rgba(249, 248, 240, 0.1);
 }
-/* the PDF of the ticked slides is being put together */
-.hud a.icon.busy {
-  pointer-events: none;
-  animation: busy 0.8s ease-in-out infinite alternate;
-}
-@keyframes busy {
-  to {
-    opacity: 0.3;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .room-photo,
   #museum .room-evening {
@@ -2483,8 +2472,12 @@ body:has(.stage.overview) .picks {
 }
 
 /* the menu's download link sits with the icon buttons, without the link frame */
-.hud a.icon {
-  border: 0;
+
+/* Toolbar: the platform's (/shared/controls.css), tinted */
+:root {
+  --hud-ink: #f9f8f0;
+  --hud-accent: #d0d3c7;
+  --hud-shade: rgba(15, 27, 24, 0.82);
 }
 
 /* Access screen (structure in /shared/gate.css, from deck-presentation.com): Bixler's look */

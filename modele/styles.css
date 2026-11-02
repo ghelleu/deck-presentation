@@ -1,0 +1,86 @@
+/* The deck's own look. The toolbar and the access screen belong to the platform (../shared/):
+   here they are only tinted, never redrawn. */
+:root {
+  --paper: #0e0e0d;
+  --ink: #f2f0ea;
+  --accent: #d9b77a;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* toolbar tint (../shared/controls.css) */
+  --hud-ink: var(--ink);
+  --hud-accent: var(--accent);
+  --hud-shade: rgba(14, 14, 13, 0.86);
+}
+/* access screen tint (../shared/gate.css) */
+.gate {
+  --gate-bg: var(--paper);
+  --gate-caret: var(--accent);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { color: var(--ink); font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body.idle { cursor: none; }
+
+/* ------------------------------------------------ the page: 1920 × 1080, scaled to the window by the engine (--k) */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--k, 1));
+  background: var(--paper);
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 140px 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s var(--ease), visibility 0s 0.6s;
+}
+.slide.on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s var(--ease);
+}
+
+/* ------------------------------------------------ type */
+.kicker { margin: 0 0 32px; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 0; font-size: 160px; font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; }
+h2 { margin: 0; font-size: 110px; font-weight: 300; line-height: 1; }
+.sub { margin: 40px 0 0; font-size: 30px; opacity: 0.7; }
+.body { max-width: 1100px; margin: 48px 0 0; font-size: 40px; line-height: 1.3; }
+
+/* ------------------------------------------------ all slides (O): a grid of thumbnails built by the engine */
+.overview {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  overflow-y: auto;
+  padding: 48px 48px 96px;
+  background: rgba(8, 8, 8, 0.96);
+}
+body.ov .overview { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; align-content: start; }
+.thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; cursor: pointer; outline: 1px solid rgba(242, 240, 234, 0.12); background: var(--paper); }
+.thumb .page { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; pointer-events: none; }
+.thumb .page .slide { opacity: 1; visibility: visible; transition: none; }
+.thumb.cur { outline: 2px solid var(--accent); }
+.thumb.off .page { opacity: 0.25; }
+.thumb figcaption { position: absolute; left: 10px; bottom: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 2px #000; }
+/* the tick, top right: hides or shows the slide in the presentation */
+.thumb .tick { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border: 1px solid var(--ink); border-radius: 50%; background: var(--accent); cursor: pointer; padding: 0; }
+.thumb.off .tick { background: transparent; }
+
+/* ------------------------------------------------ ?print: one slide per page, for the PDF export */
+html.print, html.print body { overflow: visible; height: auto; background: var(--paper); }
+html.print .stage { position: static; transform: none; height: auto; overflow: visible; }
+html.print .slide { position: relative; height: 1080px; opacity: 1; visibility: visible; break-after: page; }
+html.print .hud, html.print .progress { display: none; }
+@page { size: 1920px 1080px; margin: 0; }

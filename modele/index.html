@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Modèle de deck · deck-presentation.com</title>
+  <!-- 1. The platform: access screen and toolbar. Always these two, always before the deck's styles. -->
+  <link rel="stylesheet" href="../shared/gate.css">
+  <link rel="stylesheet" href="../shared/controls.css">
+  <!-- 2. The deck: its own look (fonts, colours, slides). Never the toolbar's shape. -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- The deck: one <section class="slide"> per slide, drawn on a 1920 × 1080 page.
+     id: the slide's address (#id) · data-label: its title in the toolbar and the thumbnails
+     data-t / data-t-label: keys of its texts in content/<lang>.json (other languages). -->
+<main class="stage" id="stage" aria-roledescription="présentation">
+
+  <section class="slide cover" id="couverture" data-label="Couverture" data-t-label="couverture">
+    <p class="kicker" data-t="couverture.kicker">Client × Projet</p>
+    <h1 data-t="couverture.titre">Titre du deck</h1>
+    <p class="sub" data-t="couverture.sous">Lieu · mois année</p>
+  </section>
+
+  <section class="slide" id="idee" data-label="L’idée" data-t-label="idee">
+    <p class="kicker" data-t="idee.kicker">01</p>
+    <h2 data-t="idee.titre">L’idée</h2>
+    <p class="body" data-t="idee.texte">Une phrase qui dit tout. Le reste du deck la déplie.</p>
+  </section>
+
+  <section class="slide" id="merci" data-label="Merci" data-t-label="merci">
+    <h2 data-t="merci.titre">Merci</h2>
+  </section>
+
+</main>
+
+<!-- 3. The toolbar: an empty box that ../shared/controls.js fills (fullscreen, restart, all slides, language, PDF).
+     data-pdf: the exported deck; {lang} is replaced by the current language. Nothing else goes in here. -->
+<div class="hud" role="toolbar">
+  <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
+  <div class="hud-r" data-controls data-pdf="export/modele-{lang}.pdf" data-pdf-name="Modele.pdf"></div>
+</div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- 4. Scripts, in this order: settings, platform, then the deck's engine. -->
+<script src="config.js"></script>
+<script src="../shared/gate.js"></script>
+<script src="../shared/controls.js"></script>
+<script src="../shared/i18n.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
