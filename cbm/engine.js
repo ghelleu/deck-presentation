@@ -4,7 +4,7 @@
    Slides: section.slide in #stage, 1920 × 1080, scaled to fit.
    Steps: [data-step="n"] is on from step n, [data-only="n m"] on those steps; the slide carries data-s.
    Transitions (data-transition): pan (default, with [data-depth] layers and [data-reveal] pictures) · fade · chapter.
-   Platform contract: ../shared/controls.js fills the .hud box, this engine wires its buttons by data-act. */
+   Platform contract: ../shared/viewer.js owns the keys, the toolbar, the overview and the ticks; this engine hands it the slides. */
 (() => {
   "use strict";
   const Q = new URLSearchParams(location.search);
@@ -189,7 +189,6 @@
     fit = Math.min(innerWidth / 1920, innerHeight / 1080);
     stage.style.transform = `translate(${(innerWidth - 1920 * fit) / 2}px, ${(innerHeight - 1080 * fit) / 2}px) scale(${fit})`;
     root.style.setProperty("--fit", fit);
-    if (overviewOpen()) scaleThumbs();
   }
 
   /* ================================================================ the live ball (chapters only) */
@@ -271,19 +270,14 @@
     Promise.all(anims.map((a) => a.finished)).then(() => ending && ending(), () => {});
   }
 
-  /* ================================================================ navigation */
-  const hudCount = $("#hudCount"), hudTitle = $("#hudTitle"), bar = $("#progress"), folioCh = $("#folioChapter");
+  /* ================================================================ navigation
+     The platform's viewer (../shared/viewer.js) owns the keys, the swipe, the toolbar, the overview, the ticks,
+     the slide count and the PDF; this engine shows a slide, its steps and its transition. */
+  const folioCh = $("#folioChapter");
   let cur = -1, step = 0;
-  let skipped = new Set();
-  try { skipped = new Set(JSON.parse(sessionStorage.getItem("cbm-skip") || "[]")); } catch (e) { /* private mode */ }
-  const saveSkip = () => { try { sessionStorage.setItem("cbm-skip", JSON.stringify([...skipped])); } catch (e) { /* ignore */ } };
 
   function changed(entered) {
     const s = SLIDES[cur];
-    history.replaceState(null, "", "#" + s.id + (step ? "/" + step : ""));
-    hudCount.textContent = String(cur + 1).padStart(2, "0") + " / " + SLIDES.length;
-    hudTitle.textContent = s.dataset.label || "";
-    bar.style.setProperty("--p", (cur + (s._steps ? step / (s._steps + 1) : 0) + 1) / SLIDES.length);
     document.body.dataset.kind = s.classList.contains("chapter") ? "chapter" : s.classList.contains("full") ? "full" : "page";
     folioCh.textContent = s.dataset.chapter || "";
     if (entered) $$("video", s).forEach((v) => { v.currentTime = 0; v.play().catch(() => {}); });
@@ -307,82 +301,23 @@
     applyStep(s, step);
     changed(false);
   }
-  const nextSlide = (d) => { let i = cur + d; while (i >= 0 && i < SLIDES.length && skipped.has(SLIDES[i].id)) i += d; return i; };
-  function next() { const s = SLIDES[cur]; if (step < s._steps) setStep(step + 1); else { const i = nextSlide(1); if (i < SLIDES.length) go(i, 0); } }
-  function prev() { if (step > 0) setStep(step - 1); else { const i = nextSlide(-1); if (i >= 0) go(i, SLIDES[i]._steps, { back: true }); } }
 
-  /* ================================================================ overview */
-  let ov = null;
-  function buildOverview() {
-    ov = document.createElement("div");
-    ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "Toutes les slides");
-    SLIDES.forEach((s, i) => {
-      const card = document.createElement("div"); card.className = "ov-card"; card.dataset.i = i;
-      const thumb = document.createElement("div"); thumb.className = "ov-thumb";
-      thumb.appendChild(snapshot(s, s.dataset.pages === "steps" ? 0 : s._steps));
-      const cap = document.createElement("div"); cap.className = "ov-cap";
-      cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${s.dataset.label || ""}</span>`;
-      const chk = document.createElement("button"); chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-      chk.setAttribute("aria-label", "Montrer ou masquer cette slide");
-      chk.addEventListener("click", (e) => { e.stopPropagation(); skipped.has(s.id) ? skipped.delete(s.id) : skipped.add(s.id); card.classList.toggle("skipped", skipped.has(s.id)); saveSkip(); });
-      card.classList.toggle("skipped", skipped.has(s.id));
-      card.append(thumb, cap, chk);
-      card.addEventListener("click", () => { closeOverview(); go(i); });
-      ov.appendChild(card);
-    });
-    document.body.appendChild(ov);
-  }
-  function scaleThumbs() { $$(".ov-thumb", ov).forEach((t) => (t.firstChild.style.transform = `scale(${t.clientWidth / 1920})`)); }
-  function openOverview() {
-    if (!ov) buildOverview();
-    ov.classList.add("open"); scaleThumbs();
-    $$(".ov-card", ov).forEach((c) => c.classList.toggle("current", +c.dataset.i === cur));
-    const here = ov.children[cur]; if (here) here.scrollIntoView({ block: "center" });
-  }
-  function closeOverview() { if (ov) ov.classList.remove("open"); }
-  function overviewOpen() { return !!ov && ov.classList.contains("open"); }
-  const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
-
-  /* ================================================================ controls */
-  function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(() => {}); }
-  const restart = () => { closeOverview(); go(0); };
-  document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-act]");
-    if (!b) return;
-    const a = b.dataset.act;
-    if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview();
-    if (a !== "pdf") b.blur();
-  });
-  addEventListener("keydown", (e) => {
-    if (root.classList.contains("gated") || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
-    const k = e.key;
-    if (k === "Escape") { toggleOverview(); e.preventDefault(); return; }
-    if (k === "o" || k === "O") return toggleOverview();
-    if (k === "f" || k === "F") return fullscreen();
-    if (k === "r" || k === "R") return restart();
-    if (overviewOpen()) return;
-    if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { next(); e.preventDefault(); }
-    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { prev(); e.preventDefault(); }
-    else if (k === "Home") { go(0); e.preventDefault(); }
-    else if (k === "End") { go(SLIDES.length - 1); e.preventDefault(); }
-  });
-  let touch = null;
-  addEventListener("touchstart", (e) => (touch = [e.touches[0].clientX, e.touches[0].clientY]), { passive: true });
-  addEventListener("touchend", (e) => {
-    if (!touch || overviewOpen()) return;
-    const dx = e.changedTouches[0].clientX - touch[0], dy = e.changedTouches[0].clientY - touch[1];
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
-    touch = null;
-  });
-  let hudTimer = 0;
-  addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
   addEventListener("resize", resize);
-
   resize();
-  const [hid, hst] = location.hash.slice(1).split("/");
-  const start = Math.max(0, SLIDES.findIndex((s) => s.id === hid));
-  go(start, Math.min(+hst || 0, SLIDES[start]._steps), { instant: true });
   requestAnimationFrame(tick);
-  window.deck = { go: (id, st = 0) => go(typeof id === "number" ? id : SLIDES.findIndex((s) => s.id === id), st), next, prev, state: () => ({ slide: SLIDES[cur].id, step }) };
+  const V = DeckViewer.mount({
+    stage,
+    slides: SLIDES.map((s) => ({ id: s.id, label: s.dataset.label || s.id })),
+    show(i, st, instant) {
+      go(i, st === "end" ? SLIDES[i]._steps : st, { instant, back: i < cur });
+    },
+    step(d) {
+      const s = SLIDES[cur];
+      if (d > 0 && step < s._steps) { setStep(step + 1); return true; }
+      if (d < 0 && step > 0) { setStep(step - 1); return true; }
+      return false;
+    },
+    thumb: (i) => snapshot(SLIDES[i], SLIDES[i].dataset.pages === "steps" ? 0 : SLIDES[i]._steps),
+  });
+  window.deck = { go: (id, st = 0) => (typeof id === "number" ? V.go(id, st) : V.goId(id, st)), next: V.next, prev: V.prev, state: () => ({ slide: SLIDES[cur].id, step }) };
 })();

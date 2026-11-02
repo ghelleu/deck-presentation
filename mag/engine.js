@@ -2,8 +2,8 @@
    One plane, a camera, a magnetic field whose poles are the content (the plan is the JSON in index.html).
    Each view is a camera position and a set of charges; objects light up in the views they list (data-view).
    Line drawings are built here (data-draw). Platform contract: ../shared/controls.js fills the .hud box (styled by
-   ../shared/controls.css), ../shared/i18n.js puts in the texts of the language (content/<lang>.json); this engine waits
-   for it, then wires the buttons by data-act (fullscreen, restart, overview, lang, pdf). No other control. */
+   ../shared/controls.css), ../shared/i18n.js puts in the texts of the language (content/<lang>.json), ../shared/viewer.js
+   owns the keys, the toolbar's buttons, the overview, the ticks and the PDF: this engine hands it the views. */
 (async () => {
   "use strict";
   const I18N = await window.DECK_I18N, UI = I18N.ui;
@@ -238,7 +238,6 @@
     root.style.setProperty("--fit", fit);
     for (const c of [back, front]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
     bctx.setTransform(1, 0, 0, 1, 0, 0); bctx.fillStyle = "#08080d"; bctx.fillRect(0, 0, back.width, back.height);
-    if (overviewOpen()) scaleThumbs();
   }
   const liveBox = () => viewBox(cam, cam.z * fit, W, H);
 
@@ -277,12 +276,10 @@
   }
   function frame(now) { step(now); requestAnimationFrame(frame); }
 
-  /* ================================================================ navigation */
+  /* ================================================================ navigation
+     The platform's viewer (../shared/viewer.js) owns the keys, the swipe, the toolbar, the overview, the ticks,
+     the slide count and the PDF; this engine moves the camera to a view. */
   const kicker = document.getElementById("kicker");
-  const hudCount = document.getElementById("hudCount"), hudTitle = document.getElementById("hudTitle"), bar = document.getElementById("progress");
-  let skipped = new Set();
-  try { skipped = new Set(JSON.parse(sessionStorage.getItem("mag-skip") || "[]")); } catch (e) { /* private mode */ }
-  const saveSkip = () => { try { sessionStorage.setItem("mag-skip", JSON.stringify([...skipped])); } catch (e) { /* ignore */ } };
 
   function go(i, instant) {
     i = Math.max(0, Math.min(VIEWS.length - 1, i));
@@ -301,87 +298,10 @@
     if (v.id === "couverture" || v.id === "contact") setTimeout(() => logo.classList.add("lock"), instant ? 0 : 250);
     kicker.classList.add("swap");
     setTimeout(() => { kicker.textContent = v.kicker || ""; kicker.classList.remove("swap"); }, instant ? 0 : 500);
-    history.replaceState(null, "", "#" + v.id);
-    hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + VIEWS.length;
-    hudTitle.textContent = v.label || "";
-    bar.style.setProperty("--p", (i + 1) / VIEWS.length);
   }
-  function nextIndex(d) {
-    let i = cur + d;
-    while (i >= 0 && i < VIEWS.length && skipped.has(VIEWS[i].id)) i += d;
-    return i >= 0 && i < VIEWS.length ? i : cur;
-  }
-  const next = () => go(nextIndex(1)), prev = () => go(nextIndex(-1));
 
-  /* ================================================================ overview */
-  let ov = null;
-  function buildOverview() {
-    ov = document.createElement("div");
-    ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", UI.overview || "Toutes les vues");
-    VIEWS.forEach((v, i) => {
-      const card = document.createElement("div"); card.className = "ov-card"; card.dataset.i = i;
-      const thumb = document.createElement("div"); thumb.className = "ov-thumb";
-      thumb.appendChild(snapshot(i));
-      const cap = document.createElement("div"); cap.className = "ov-cap";
-      cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${v.label || ""}</span>`;
-      const chk = document.createElement("button"); chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-      chk.setAttribute("aria-label", UI.check || "Montrer ou masquer cette vue");
-      chk.addEventListener("click", (e) => { e.stopPropagation(); skipped.has(v.id) ? skipped.delete(v.id) : skipped.add(v.id); card.classList.toggle("skipped", skipped.has(v.id)); saveSkip(); });
-      card.classList.toggle("skipped", skipped.has(v.id));
-      card.append(thumb, cap, chk);
-      card.addEventListener("click", () => { closeOverview(); go(i); });
-      ov.appendChild(card);
-    });
-    document.body.appendChild(ov);
-  }
-  function scaleThumbs() { $$(".ov-thumb", ov).forEach((t) => (t.firstChild.style.transform = `scale(${t.clientWidth / 1920})`)); }
-  function openOverview() {
-    if (!ov) buildOverview();
-    ov.classList.add("open"); scaleThumbs();
-    $$(".ov-card", ov).forEach((c) => c.classList.toggle("current", +c.dataset.i === cur));
-    const here = ov.children[cur]; if (here) here.scrollIntoView({ block: "center" });
-  }
-  function closeOverview() { if (ov) ov.classList.remove("open"); }
-  function overviewOpen() { return !!ov && ov.classList.contains("open"); }
-  const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
-
-  /* ================================================================ controls */
-  function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(() => {}); }
-  const restart = () => { closeOverview(); go(0); };
-  document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-act]");
-    if (!b) return;
-    const a = b.dataset.act;
-    if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") I18N.switchLang();
-    if (a !== "pdf") b.blur();
-  });
-  addEventListener("keydown", (e) => {
-    if (root.classList.contains("gated") || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
-    const k = e.key;
-    if (k === "Escape") { toggleOverview(); e.preventDefault(); return; }
-    if (k === "o" || k === "O") return toggleOverview();
-    if (k === "f" || k === "F") return fullscreen();
-    if (k === "r" || k === "R") return restart();
-    if (overviewOpen()) return;
-    if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { next(); e.preventDefault(); }
-    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { prev(); e.preventDefault(); }
-    else if (k === "Home") { go(0); e.preventDefault(); }
-    else if (k === "End") { go(VIEWS.length - 1); e.preventDefault(); }
-  });
-  let touch = null;
-  addEventListener("touchstart", (e) => (touch = [e.touches[0].clientX, e.touches[0].clientY]), { passive: true });
-  addEventListener("touchend", (e) => {
-    if (!touch || overviewOpen()) return;
-    const dx = e.changedTouches[0].clientX - touch[0], dy = e.changedTouches[0].clientY - touch[1];
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
-    touch = null;
-  });
-  let hudTimer = 0;
-  addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
   addEventListener("resize", resize);
   addEventListener("scroll", () => { if (scrollX || scrollY) scrollTo(0, 0); });
-  addEventListener("hashchange", () => { const i = VIEWS.findIndex((v) => "#" + v.id === location.hash); if (i >= 0 && i !== cur) go(i); });
 
   resize();
   const start = Math.max(0, VIEWS.findIndex((v) => "#" + v.id === location.hash));
@@ -390,10 +310,15 @@
   Object.assign(charge, v0.q);
   pts = Array.from({ length: 1700 }, () => { const p = {}; cur = start; spawn(p, v0.q, liveBox(), Rl); p.age = Rl() * p.life; return p; });
   cur = -1;
-  go(start, true);
   requestAnimationFrame(frame);
+  const V = DeckViewer.mount({
+    stage: document.getElementById("viewport"),
+    slides: VIEWS.map((v) => ({ id: v.id, label: v.label || v.id })),
+    show: (i, st, instant) => go(i, instant),
+    thumb: snapshot,
+  });
 
   // settle(): advance the field without animation frames (checks, stills); state(): where we are
-  window.deck = { go: (id) => go(typeof id === "number" ? id : VIEWS.findIndex((v) => v.id === id)), next, prev,
+  window.deck = { go: (id) => (typeof id === "number" ? V.go(id) : V.goId(id)), next: V.next, prev: V.prev,
     state: () => ({ view: VIEWS[cur].id }), settle: (n = 240) => { const t = performance.now() + 1e5; for (let i = 0; i < n; i++) step(t); } };
 })();

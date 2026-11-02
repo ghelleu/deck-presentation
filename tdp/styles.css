@@ -361,33 +361,20 @@ svg.tower-svg { width: 100%; height: 100%; overflow: visible; }
   text-shadow: 0 0 1px #fffaf0, 0 0 30px rgba(255, 240, 215, 0.4), 0 0 120px rgba(220, 230, 255, 0.2); }
 
 /* ------------------------------------------------------------ the controls: the viewer's bar (../shared/controls.css), tinted */
-:root { --hud-ink: #f4f5f7; --hud-accent: #ffe6bd; --hud-shade: rgba(7, 8, 10, 0.88); }
+:root { --hud-ink: #f4f5f7; --hud-accent: #ffe6bd; --hud-shade: rgba(7, 8, 10, 0.88); --vw-ground: #07080a; --vw-page: #07080a; }
 .gate { --gate-bg: #07080a; --gate-caret: #ffe6bd; --gate-code-color: #fffdf8; --gate-label-color: rgba(220, 230, 255, 0.6); }
 
-/* ------------------------------------------------------------ overview (O, Esc) */
-.overview { position: fixed; inset: 0; z-index: 60; overflow-y: auto; padding: 72px 48px 48px; background: rgba(7, 8, 10, 0.96);
-  display: none; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 28px 22px; align-content: start; }
-.overview.open { display: grid; }
-.ov-card { position: relative; cursor: pointer; }
-.ov-thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--rule); background: var(--night); }
-.ov-thumb .slide { transform-origin: 0 0; }
-.ov-card:hover .ov-thumb, .ov-card.current .ov-thumb { border-color: var(--glow); }
-.ov-card.skipped .ov-thumb { opacity: 0.25; }
-.ov-cap { display: flex; gap: 10px; margin-top: 9px; font: 500 11px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.ov-cap b { color: var(--glow); font-weight: 500; }
-.ov-check { position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--muted);
-  background: rgba(7, 8, 10, 0.7); color: var(--warm); cursor: pointer; display: grid; place-items: center; font-size: 13px; }
-.ov-card.skipped .ov-check { color: transparent; }
+/* ------------------------------------------------------------ overview: the platform's (../shared/viewer.css), tinted */
 /* thumbnails show each slide at its last step, still */
-.static .slide, .ov-thumb .slide { opacity: 1; visibility: visible; transform: none; filter: none; transition: none; }
-.static .in, .static [data-step], .ov-thumb .in, .ov-thumb [data-step] { opacity: 1 !important; transform: none !important; animation: none !important; }
-.static figure img, .ov-thumb figure img { opacity: 1; transform: none; transition: none; }
-.static .hl, .ov-thumb .hl { background-size: 100% 1.5px; transition: none; }
-.static .d, .ov-thumb .d, .static .ln, .ov-thumb .ln { animation: none !important; stroke-dashoffset: 0 !important; }
-.static .led, .ov-thumb .led, .static .globe, .ov-thumb .globe, .static .st, .ov-thumb .st, .static .gl, .ov-thumb .gl,
-.static .note, .ov-thumb .note, .static .lone-star, .ov-thumb .lone-star { animation: none !important; opacity: 1 !important; }
-.static .halo, .ov-thumb .halo { animation: none !important; opacity: 0.9; }
-.static .shoot, .ov-thumb .shoot, .static .pulse, .ov-thumb .pulse, .static .beam, .ov-thumb .beam { display: none; }
+.static .slide, .vw-page .slide { opacity: 1; visibility: visible; transform: none; filter: none; transition: none; }
+.static .in, .static [data-step], .vw-page .in, .vw-page [data-step] { opacity: 1 !important; transform: none !important; animation: none !important; }
+.static figure img, .vw-page figure img { opacity: 1; transform: none; transition: none; }
+.static .hl, .vw-page .hl { background-size: 100% 1.5px; transition: none; }
+.static .d, .vw-page .d, .static .ln, .vw-page .ln { animation: none !important; stroke-dashoffset: 0 !important; }
+.static .led, .vw-page .led, .static .globe, .vw-page .globe, .static .st, .vw-page .st, .static .gl, .vw-page .gl,
+.static .note, .vw-page .note, .static .lone-star, .vw-page .lone-star { animation: none !important; opacity: 1 !important; }
+.static .halo, .vw-page .halo { animation: none !important; opacity: 0.9; }
+.static .shoot, .vw-page .shoot, .static .pulse, .vw-page .pulse, .static .beam, .vw-page .beam { display: none; }
 
 /* ------------------------------------------------------------ reduced motion: fades only */
 @media (prefers-reduced-motion: reduce) {

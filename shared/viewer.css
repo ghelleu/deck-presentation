@@ -31,7 +31,8 @@ html.vw-open body {
 /* a slide in the grid: the page drawn by the deck (1920 × 1080), scaled to its place */
 .vw-tile {
   position: relative;
-  aspect-ratio: 16 / 9;
+  height: 0;
+  padding-top: 56.25%; /* 16:9, a height the grid's rows can rely on */
   overflow: hidden;
   cursor: pointer;
   background: var(--vw-page, #000);

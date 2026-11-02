@@ -1,11 +1,11 @@
 /* La Tour des Possibles · deck engine
-   Navigation by slides and steps, transitions, overview, print, the sky behind the stage,
+   Slides and steps, transitions, print, the sky behind the stage,
    and the drawings built in code: the seven chapters as a constellation, the tower,
    the constellation of the tower, the route of the cities, the graph of wishes,
    the receipt screen and the ledger of the test base.
    Contract of the platform: ../shared/controls.js fills the .hud box (styled by ../shared/controls.css);
-   ../shared/i18n.js puts in the texts of the language (content/<lang>.json); this engine waits for it,
-   then wires the buttons by data-act (fullscreen, restart, overview, lang, pdf). No other control. */
+   ../shared/i18n.js puts in the texts of the language (content/<lang>.json); ../shared/viewer.js owns the
+   keys, the toolbar's buttons, the overview, the ticks and the PDF: this engine hands it the slides. */
 (async () => {
   "use strict";
   const cfg = window.DECK_CONFIG || {};
@@ -546,15 +546,11 @@
     return;
   }
 
-  /* ================================================================ navigation */
-  const SKIP_KEY = "tdp-skip";
-  let skipped = new Set();
-  try { skipped = new Set(JSON.parse(sessionStorage.getItem(SKIP_KEY) || "[]")); } catch (e) { /* private mode */ }
-  const saveSkip = () => { try { sessionStorage.setItem(SKIP_KEY, JSON.stringify([...skipped])); } catch (e) { /* ignore */ } };
-
+  /* ================================================================ navigation
+     The platform's viewer (../shared/viewer.js) owns the keys, the swipe, the toolbar, the overview, the ticks,
+     the slide count and the PDF; this engine shows a slide, its steps and its widgets. */
   const maxStep = (s) => +s.dataset.steps || Math.max(0, ...$$("[data-step]", s).map((e) => +e.dataset.step));
   let cur = -1, step = 0;
-  const hudCount = document.getElementById("hudCount"), hudTitle = document.getElementById("hudTitle"), bar = document.getElementById("progress");
 
   function applyStep(s) {
     $$("[data-step]", s).forEach((e) => e.classList.toggle("on", step >= +e.dataset.step));
@@ -583,154 +579,47 @@
     s.classList.add("active");
     applyStep(s);
     widgetsOf.get(s).forEach((w) => w.start());
-    history.replaceState(null, "", "#" + s.id);
-    const total = slides.length;
-    hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + total;
-    hudTitle.textContent = s.dataset.label || "";
-    bar.style.setProperty("--p", (i + 1) / total);
   }
 
-  function nextIndex(from, d) {
-    let i = from + d;
-    while (i >= 0 && i < slides.length && skipped.has(slides[i].id)) i += d;
-    return i >= 0 && i < slides.length ? i : from;
-  }
-  function next() {
-    const s = slides[cur];
-    if (step < maxStep(s)) { step++; applyStep(s); return; }
-    const i = nextIndex(cur, 1); if (i !== cur) go(i, 0, 1);
-  }
-  function prev() {
-    const s = slides[cur];
-    if (step > 0) { step--; applyStep(s); return; }
-    const i = nextIndex(cur, -1); if (i !== cur) go(i, maxStep(slides[i]), -1);
-  }
-
-  /* ================================================================ overview */
-  let ov = null, bgThumb = null;
-  function buildOverview() {
-    ov = document.createElement("div");
-    ov.className = "overview";
-    ov.setAttribute("role", "dialog");
-    ov.setAttribute("aria-label", UI.overview || "Toutes les slides");
+  // a slide as a page for the overview: every step on, over a still sky
+  let bgThumb = null;
+  function thumb(i) {
     bgThumb = bgThumb || stillSky();
-    slides.forEach((s, i) => {
-      const card = document.createElement("div");
-      card.className = "ov-card";
-      card.dataset.i = i;
-      const thumb = document.createElement("div");
-      thumb.className = "ov-thumb";
-      thumb.style.backgroundImage = `url(${bgThumb})`; thumb.style.backgroundSize = "cover";
-      const c = s.cloneNode(true);
-      c.removeAttribute("id"); $$("[id]", c).forEach((e) => e.removeAttribute("id"));
-      c.classList.remove("active", "leaving");
-      c.classList.add("active");
-      c.style.cssText = "position:absolute;left:0;top:0;width:1920px;height:1080px;inset:auto;";
-      $$("img[data-src]", c).forEach((im) => { im.src = im.dataset.src; im.classList.add("ready"); });
-      $$("[data-step]", c).forEach((e) => e.classList.add("on"));
-      $$(".note", c).forEach((e) => e.classList.add("on"));
-      thumb.appendChild(c);
-      const cap = document.createElement("div");
-      cap.className = "ov-cap";
-      cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${s.dataset.label || ""}</span>`;
-      const chk = document.createElement("button");
-      chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-      chk.setAttribute("aria-label", UI.check || "Montrer ou masquer cette slide");
-      chk.addEventListener("click", (e) => {
-        e.stopPropagation();
-        skipped.has(s.id) ? skipped.delete(s.id) : skipped.add(s.id);
-        card.classList.toggle("skipped", skipped.has(s.id)); saveSkip();
-      });
-      card.append(thumb, cap, chk);
-      card.classList.toggle("skipped", skipped.has(s.id));
-      card.addEventListener("click", () => { closeOverview(); go(i, 0); });
-      ov.appendChild(card);
-    });
-    document.body.appendChild(ov);
+    const c = slides[i].cloneNode(true);
+    c.classList.remove("leaving");
+    c.classList.add("active");
+    c.style.backgroundImage = `url(${bgThumb})`; c.style.backgroundSize = "cover";
+    $$("img[data-src]", c).forEach((im) => { im.src = im.dataset.src; im.classList.add("ready"); });
+    $$("[data-step]", c).forEach((e) => e.classList.add("on"));
+    $$(".note", c).forEach((e) => e.classList.add("on"));
+    for (let k = 1; k <= 6; k++) c.classList.add("s" + k);
+    return c;
   }
-  function scaleThumbs() {
-    $$(".ov-thumb", ov).forEach((t) => {
-      const k = t.clientWidth / 1920;
-      const c = t.firstChild; c.style.transform = `scale(${k})`; c.style.transformOrigin = "0 0";
-    });
-  }
-  function openOverview() {
-    if (!ov) buildOverview();
-    ov.classList.add("open");
-    scaleThumbs();
-    if (!ov._drawn) { ov._drawn = true; $$(".ov-thumb", ov).forEach((t) => bindWidgets(t).forEach((w) => w.final())); }
-    $$(".ov-card", ov).forEach((c) => c.classList.toggle("current", +c.dataset.i === cur));
-    const here = ov.children[cur]; if (here) here.scrollIntoView({ block: "center" });
-  }
-  function closeOverview() { if (ov) ov.classList.remove("open"); }
-  const overviewOpen = () => ov && ov.classList.contains("open");
-  const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
-
-  /* ================================================================ controls */
-  function fullscreen() {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else root.requestFullscreen && root.requestFullscreen().catch(() => {});
-  }
-  const restart = () => { closeOverview(); go(nextIndex(-1, 1), 0, -1); };
-  document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-act]");
-    if (!b) return;
-    const a = b.dataset.act;
-    if (a === "fullscreen") fullscreen();
-    else if (a === "restart") restart();
-    else if (a === "overview") toggleOverview();
-    else if (a === "lang") I18N.switchLang();
-    if (a !== "pdf") b.blur();
-  });
-
-  addEventListener("keydown", (e) => {
-    if (root.classList.contains("gated") || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (/input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
-    const k = e.key;
-    if (k === "Escape") { toggleOverview(); e.preventDefault(); return; }
-    if (k === "o" || k === "O") { toggleOverview(); return; }
-    if (k === "f" || k === "F") { fullscreen(); return; }
-    if (k === "r" || k === "R") { restart(); return; }
-    if (overviewOpen()) return;
-    if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { next(); e.preventDefault(); }
-    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { prev(); e.preventDefault(); }
-    else if (k === "Home") { go(0, 0, -1); e.preventDefault(); }
-    else if (k === "End") { go(slides.length - 1, 0, 1); e.preventDefault(); }
-  });
-
-  let touch = null;
-  addEventListener("touchstart", (e) => (touch = [e.touches[0].clientX, e.touches[0].clientY]), { passive: true });
-  addEventListener("touchend", (e) => {
-    if (!touch || overviewOpen()) return;
-    const dx = e.changedTouches[0].clientX - touch[0], dy = e.changedTouches[0].clientY - touch[1];
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
-    touch = null;
-  });
-
-  let hudTimer = 0;
-  addEventListener("mousemove", () => {
-    document.body.classList.add("show-hud");
-    clearTimeout(hudTimer);
-    hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200);
-  });
 
   function fit() {
     const k = Math.min(innerWidth / 1920, innerHeight / 1080);
     root.style.setProperty("--scale", k);
-    if (overviewOpen()) scaleThumbs();
   }
   addEventListener("resize", fit);
   // anchors (#id) must never scroll the page: the stage is fixed
   addEventListener("scroll", () => { if (scrollX || scrollY) scrollTo(0, 0); });
-  addEventListener("hashchange", () => {
-    const i = slides.findIndex((s) => "#" + s.id === location.hash);
-    if (i >= 0 && i !== cur) go(i, 0);
-  });
-
   fit();
   sky.start();
-  const startAt = Math.max(0, slides.findIndex((s) => "#" + s.id === location.hash));
-  go(startAt, 0, 1);
+  const V = DeckViewer.mount({
+    stage,
+    slides: slides.map((s) => ({ id: s.id, label: s.dataset.label || s.id })),
+    show(i, st) {
+      go(i, st === "end" ? maxStep(slides[i]) : st);
+    },
+    step(d) {
+      const s = slides[cur];
+      if (d > 0 && step < maxStep(s)) { step++; applyStep(s); return true; }
+      if (d < 0 && step > 0) { step--; applyStep(s); return true; }
+      return false;
+    },
+    thumb,
+    ready: (pages) => pages.forEach((p) => bindWidgets(p).forEach((w) => w.final())),
+  });
 
-  window.deck = { go: (id, st = 0) => go(typeof id === "number" ? id : slides.findIndex((s) => s.id === id), st), next, prev, state: () => ({ slide: slides[cur].id, step }), reduced: REDUCED };
+  window.deck = { go: (id, st = 0) => (typeof id === "number" ? V.go(id, st) : V.goId(id, st)), next: V.next, prev: V.prev, state: () => ({ slide: slides[cur].id, step }), reduced: REDUCED };
 })();

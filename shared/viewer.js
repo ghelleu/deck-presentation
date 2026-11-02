@@ -15,6 +15,7 @@
                                            //   current slide; return false at its first/last step
        thumb(i) { … return el; },          // a 1920 × 1080 element: slide i as a page, every step shown
        stage: element,                     // optional: a click on it moves on (not on links or buttons)
+       ready(pages) { … },                 // optional: once the thumbnails are in the grid (to draw canvases)
        lang() { … },                       // optional: when the deck switches languages itself
      });
      V.go(i) · V.goId(id) · V.next() · V.prev() · V.current() · V.hidden(id)
@@ -127,6 +128,7 @@
         tiles.push(t);
       });
       fit();
+      if (deck.ready) deck.ready(tiles.map((t) => $(".vw-page", t).firstElementChild).filter(Boolean));
     }
     function fit() {
       if (!built) return;

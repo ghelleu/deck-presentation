@@ -3,7 +3,8 @@
    the panel in focus is revealed in colour, the others stay printed. Drawings are built here (data-draw):
    rays and bursts, the speech balloon, the floor plan in Ben Day screens, the labelled axonometry,
    and « ceci devient cela », where the dots of a Pop Art painting re-ink themselves into the plan of the room.
-   Platform contract: ../shared/controls.js fills the .hud box, this engine wires its buttons by data-act. No other control. */
+   Platform contract: ../shared/controls.js fills the .hud box; ../shared/viewer.js owns the keys, the toolbar's buttons, the overview,
+   the ticks and the PDF: this engine hands it the views. */
 (async () => {
   "use strict";
   const Q = new URLSearchParams(location.search);
@@ -203,8 +204,7 @@
       W = innerWidth; H = innerHeight; fit = Math.min(W / 1920, H / 1080);
       root.style.setProperty("--fit", fit);
       if (!moving) paint();
-      if (overviewOpen()) scaleThumbs();
-    }
+      }
     function paint() {
       const z = cam.z * fit;
       world.style.transform = `translate(${W / 2 - cam.x * z}px, ${H / 2 - cam.y * z}px) scale(${z})`;
@@ -273,12 +273,10 @@
       return { play, stop };
     })();
 
-    /* ---------------------------------------------------------- navigation */
+    /* ---------------------------------------------------------- navigation
+       The platform's viewer (../shared/viewer.js) owns the keys, the swipe, the toolbar, the overview, the ticks,
+       the slide count and the PDF; this engine moves the camera to a view. */
     const kicker = document.getElementById("kicker");
-    const hudCount = document.getElementById("hudCount"), hudTitle = document.getElementById("hudTitle"), bar = document.getElementById("progress");
-    let skipped = new Set();
-    try { skipped = new Set(JSON.parse(sessionStorage.getItem("te-skip") || "[]")); } catch (e) { /* private mode */ }
-    const saveSkip = () => { try { sessionStorage.setItem("te-skip", JSON.stringify([...skipped])); } catch (e) { /* ignore */ } };
 
     function go(i, instant) {
       i = Math.max(0, Math.min(VIEWS.length - 1, i));
@@ -296,17 +294,7 @@
       if (v.id === "cela") M.play(); else M.stop();
       kicker.classList.add("swap");
       setTimeout(() => { kicker.textContent = v.kicker || ""; kicker.classList.remove("swap"); }, instant ? 0 : 420);
-      history.replaceState(null, "", "#" + v.id);
-      hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + VIEWS.length;
-      hudTitle.textContent = v.label || "";
-      bar.style.setProperty("--p", (i + 1) / VIEWS.length);
     }
-    function nextIndex(d) {
-      let i = cur + d;
-      while (i >= 0 && i < VIEWS.length && skipped.has(VIEWS[i].id)) i += d;
-      return i >= 0 && i < VIEWS.length ? i : cur;
-    }
-    const next = () => go(nextIndex(1)), prev = () => go(nextIndex(-1));
 
     // the rest of the book, printed in the background, a few pictures at a time
     function preloadAll() {
@@ -316,82 +304,20 @@
       pump();
     }
 
-    /* ---------------------------------------------------------- overview */
-    let ov = null;
-    function buildOverview() {
-      ov = document.createElement("div");
-      ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", UI.overview);
-      VIEWS.forEach((v, i) => {
-        const card = document.createElement("div"); card.className = "ov-card"; card.dataset.i = i;
-        const thumb = document.createElement("div"); thumb.className = "ov-thumb";
-        thumb.appendChild(snapshot(i));
-        const cap = document.createElement("div"); cap.className = "ov-cap";
-        cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${v.label || ""}</span>`;
-        const chk = document.createElement("button"); chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-        chk.setAttribute("aria-label", UI.check);
-        chk.addEventListener("click", (e) => { e.stopPropagation(); skipped.has(v.id) ? skipped.delete(v.id) : skipped.add(v.id); card.classList.toggle("skipped", skipped.has(v.id)); saveSkip(); });
-        card.classList.toggle("skipped", skipped.has(v.id));
-        card.append(thumb, cap, chk);
-        card.addEventListener("click", () => { closeOverview(); go(i); });
-        ov.appendChild(card);
-      });
-      document.body.appendChild(ov);
-    }
-    function scaleThumbs() { $$(".ov-thumb", ov).forEach((t) => (t.firstChild.style.transform = `scale(${t.clientWidth / 1920})`)); }
-    function openOverview() {
-      if (!ov) buildOverview();
-      ov.classList.add("open"); scaleThumbs();
-      $$(".ov-card", ov).forEach((c) => c.classList.toggle("current", +c.dataset.i === cur));
-      const here = ov.children[cur]; if (here) here.scrollIntoView({ block: "center" });
-    }
-    function closeOverview() { if (ov) ov.classList.remove("open"); }
-    function overviewOpen() { return !!ov && ov.classList.contains("open"); }
-    const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
-
-    /* ---------------------------------------------------------- controls */
-    function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(() => {}); }
-    const restart = () => { closeOverview(); go(0); };
-    document.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-act]");
-      if (!b) return;
-      const a = b.dataset.act;
-      if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") I18N.switchLang();
-      if (a !== "pdf") b.blur();
-    });
-    addEventListener("keydown", (e) => {
-      if (root.classList.contains("gated") || e.metaKey || e.ctrlKey || e.altKey) return;
-      if (/input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
-      const k = e.key;
-      if (k === "Escape") { toggleOverview(); e.preventDefault(); return; }
-      if (k === "o" || k === "O") return toggleOverview();
-      if (k === "f" || k === "F") return fullscreen();
-      if (k === "r" || k === "R") return restart();
-      if (overviewOpen()) return;
-      if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { next(); e.preventDefault(); }
-      else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { prev(); e.preventDefault(); }
-      else if (k === "Home") { go(0); e.preventDefault(); }
-      else if (k === "End") { go(VIEWS.length - 1); e.preventDefault(); }
-    });
-    let touch = null;
-    addEventListener("touchstart", (e) => (touch = [e.touches[0].clientX, e.touches[0].clientY]), { passive: true });
-    addEventListener("touchend", (e) => {
-      if (!touch || overviewOpen()) return;
-      const dx = e.changedTouches[0].clientX - touch[0], dy = e.changedTouches[0].clientY - touch[1];
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
-      touch = null;
-    });
-    let hudTimer = 0;
-    addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
     addEventListener("resize", resize);
     addEventListener("scroll", () => { if (scrollX || scrollY) scrollTo(0, 0); });
-    addEventListener("hashchange", () => { const i = VIEWS.findIndex((v) => "#" + v.id === location.hash); if (i >= 0 && i !== cur) go(i); });
 
     resize();
     const s0 = Math.max(0, VIEWS.findIndex((v) => "#" + v.id === location.hash));
     Object.assign(cam, CAMS[s0]);
-    go(s0, true);
+    const V = DeckViewer.mount({
+      stage: document.getElementById("viewport") || undefined,
+      slides: VIEWS.map((v) => ({ id: v.id, label: v.label || v.id })),
+      show: (i, st, instant) => go(i, instant),
+      thumb: snapshot,
+    });
     setTimeout(preloadAll, 1800);
 
-    window.deck = { go: (id) => go(typeof id === "number" ? id : VIEWS.findIndex((v) => v.id === id)), next, prev, state: () => ({ view: VIEWS[cur].id }) };
+    window.deck = { go: (id) => (typeof id === "number" ? V.go(id) : V.goId(id)), next: V.next, prev: V.prev, state: () => ({ view: VIEWS[cur].id }) };
   }
 })();

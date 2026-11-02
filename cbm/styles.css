@@ -189,7 +189,7 @@ body[data-kind="full"] .folio span:nth-child(2), .snap.full .folio span:nth-chil
 .salon .ours figcaption { color: var(--rouge); }
 
 /* ------------------------------------------------------------ toolbar: the platform's (../shared/controls.css), tinted */
-:root { --hud-ink: #F1EFE9; --hud-accent: #DA291C; --hud-shade: rgba(21, 22, 28, 0.85); }
+:root { --hud-ink: #F1EFE9; --hud-accent: #DA291C; --hud-shade: rgba(21, 22, 28, 0.85); --vw-ground: #15161C; --vw-page: var(--neige); }
 html.gated .hud, html.gated .progress { display: none !important; }
 .gate { --gate-bg: #15161C; --gate-caret: #DA291C; --gate-code-color: #F1EFE9; }
 
@@ -203,18 +203,6 @@ html.gated .hud, html.gated .progress { display: none !important; }
 .snap .specks, .snap .ball-live { display: none; }
 .snap .ball-still { visibility: visible !important; }
 
-.overview { position: fixed; inset: 0; z-index: 60; overflow-y: auto; padding: 48px 48px 72px; background: rgba(21, 22, 28, 0.97);
-  display: none; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 22px; align-content: start; }
-.overview.open { display: grid; }
-.ov-card { position: relative; cursor: pointer; }
-.ov-thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(241, 239, 233, 0.15); background: var(--neige); }
-.ov-thumb .snap { position: absolute !important; left: 0; top: 0; transform-origin: 0 0; }
-.ov-card:hover .ov-thumb, .ov-card.current .ov-thumb { border-color: var(--rouge); }
-.ov-card.skipped .ov-thumb { opacity: 0.25; }
-.ov-cap { display: flex; gap: 10px; margin-top: 9px; font: 600 11px/1.3 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(241, 239, 233, 0.75); }
-.ov-cap b { color: var(--rouge); font-weight: 700; }
-.ov-check { position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(241, 239, 233, 0.6); background: rgba(21, 22, 28, 0.7); color: #fff; cursor: pointer; display: grid; place-items: center; font-size: 13px; }
-.ov-card.skipped .ov-check { color: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active .in, .slide.is-active .sw, .slide.is-active .sw > * { animation-duration: 0.01s !important; }
