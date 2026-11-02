@@ -3,166 +3,201 @@
   "cover": [
    0
   ],
-  "intro": [
+  "agenda": [
    1
   ],
-  "reality": [
-   2,
-   3
+  "intro": [
+   2
   ],
-  "why": [
+  "reality": [
+   3,
    4
   ],
+  "why": [
+   5
+  ],
   "opportunity": [
-   5,
-   6
+   6,
+   7
   ],
   "challenge": [
-   7,
-   8
-  ],
-  "territories": [
+   8,
    9
   ],
-  "c1": [
+  "territories": [
    10
   ],
-  "c1-promise": [
+  "c1": [
    11
   ],
-  "c1-scen": [
+  "c1-promise": [
    12
   ],
+  "c1-scen": [
+   13
+  ],
   "c1-moods": [
-   13,
    14,
    15,
    16,
    17,
-   18
-  ],
-  "sand": [
+   18,
    19
   ],
-  "aura": [
+  "sand": [
    20
   ],
-  "marb": [
+  "aura": [
    21
   ],
-  "tastem": [
+  "marb": [
    22
   ],
-  "c2": [
+  "tastem": [
    23
   ],
-  "c2-promise": [
+  "c2": [
    24
   ],
-  "c2-scen": [
+  "c2-promise": [
    25
   ],
+  "c2-scen": [
+   26
+  ],
   "c2-moods": [
-   26,
    27,
    28,
    29,
-   30
-  ],
-  "walk": [
+   30,
    31
   ],
-  "dinner": [
-   32,
-   33,
-   34
+  "walk": [
+   32
   ],
-  "runway": [
+  "dinner": [
+   33,
+   34,
    35
   ],
-  "silk": [
+  "runway": [
    36
   ],
-  "c3": [
+  "silk": [
    37
   ],
-  "c3-promise": [
+  "c3": [
    38
   ],
-  "c3-scen": [
+  "c3-promise": [
    39
   ],
+  "c3-scen": [
+   40
+  ],
   "c3-moods": [
-   40,
    41,
    42,
-   43
-  ],
-  "photo": [
+   43,
    44
   ],
-  "museo": [
+  "photo": [
    45
   ],
-  "master": [
+  "museo": [
    46
   ],
-  "c4": [
+  "master": [
    47
   ],
-  "c4-promise": [
+  "c4": [
    48
   ],
-  "c4-scen": [
+  "c4-promise": [
    49
   ],
+  "c4-scen": [
+   50
+  ],
   "c4-moods": [
-   50,
    51,
    52,
-   53
-  ],
-  "reveal": [
+   53,
    54
   ],
-  "uniform": [
+  "reveal": [
    55
   ],
-  "tasteuv": [
+  "uniform": [
    56
   ],
-  "additional": [
+  "tasteuv": [
    57
   ],
-  "activation": [
+  "additional": [
    58
   ],
-  "act-sky": [
+  "wrapup": [
    59
   ],
-  "act-violet": [
+  "wrap": [
    60
   ],
-  "act-mobility": [
+  "activation": [
    61
   ],
-  "act-street": [
+  "act-intro": [
    62
   ],
-  "act-ooh": [
+  "act-signal": [
    63
   ],
-  "venues": [
+  "act-roaming": [
    64
   ],
-  "wrapup": [
+  "act-mobile": [
    65
   ],
-  "wrap": [
+  "act-ooh": [
    66
   ],
-  "end": [
+  "venues": [
    67
+  ],
+  "ven-dunia": [
+   68,
+   69,
+   70
+  ],
+  "ven-maxime": [
+   71,
+   72
+  ],
+  "ven-vollandes": [
+   73,
+   74
+  ],
+  "ven-appart": [
+   75,
+   76
+  ],
+  "ven-hamlet": [
+   77,
+   78
+  ],
+  "ven-arno": [
+   79,
+   80
+  ],
+  "ven-calamart": [
+   81,
+   82
+  ],
+  "ven-more": [
+   83
+  ],
+  "end": [
+   84
   ]
  }
 }

@@ -3,6 +3,18 @@
   "left": "PRESS AND RETAILERS EVENT 2027",
   "right": "BLACK FLOWER AGENCY"
  },
+ "foot": {
+  "event": "PRESS AND RETAILERS EVENT 2027",
+  "agency": "BLACK FLOWER AGENCY"
+ },
+ "agenda": {
+  "label": "AGENDA",
+  "i1": "I. Introduction",
+  "i2": "II. Creative territories",
+  "i3": "III. Wrap up",
+  "i4": "IV. Activation mechanics",
+  "i5": "V. Venues"
+ },
  "div1": {
   "num": "I",
   "title": "INTRODUCTION"
@@ -13,20 +25,20 @@
  },
  "div3": {
   "num": "III",
-  "title": "ACTIVATION MECHANICS"
+  "title": "wrap up"
  },
  "div4": {
   "num": "IV",
-  "title": "venues"
+  "title": "ACTIVATION MECHANICS"
  },
  "div5": {
-  "num": "v",
-  "title": "wrap up"
+  "num": "V",
+  "title": "venues"
  },
  "reality": {
   "a": "Watches and Wonders is **the most**\n**competitive week** in watchmaking.",
   "label": "THE REALITY",
-  "b": "It’s also the hardest time of year\nto break away from industry conventions."
+  "b": "It’s also the **hardest** time of year\nto break away from industry conventions."
  },
  "why": {
   "label": "WHY",
@@ -151,7 +163,7 @@
   "t": "**THE WUNDERFLOW DINNER**",
   "p": [
    "An immersive dinner inside a soft, enveloping set: walls that breathe, textures you want to touch, light that moves like skin.",
-   "Each course is choreographed with projection on fabrics and the pieces appear on waiter’s hands."
+   "Each course is choreographed with projection on the walls and the pieces appear on waiter’s hands."
   ]
  },
  "table": {
@@ -223,13 +235,6 @@
   "label": "ADDITIONAL THOUGHT",
   "p": "This concept also offers a flexible creative framework, allowing all the other proposed themes to come to life within its different rooms."
  },
- "act": {
-  "sky": "SKY SIGNAL",
-  "violet": "VIOLET FIGURES",
-  "mobility": "MOBILITY",
-  "street": "STREET",
-  "ooh": "FAKE OOH"
- },
  "wrap": {
   "t": "**WRAP UP**",
   "n1": "MYSTICAL MALLORCA",
@@ -237,8 +242,95 @@
   "n3": "BORN TO BE ART",
   "n4": "THE ULTRAVIOLET CLUB"
  },
+ "act": {
+  "intro": "These activation and communication mechanics build excitement around the event and create the “worth it” factor: a reason for journalists and retailers to choose this evening over every other invitation during Watches & Wonders. They also give the brand a strong presence across the city.",
+  "signal": "SIGNAL IN THE CITY",
+  "signalp": [
+   "Signals in the city. Mysterious visual elements appear in public space: a projection on a façade, light beams, traces on the ground, hidden QR codes. They come back at a set time or in specific places, with no explanation beyond the brand’s logo or colour. Passers-by notice them, wonder what they are and photograph them. Scanning a QR code unlocks exclusive content, such as a clue, a video or an invitation, which pulls people into the story."
+  ],
+  "roaming": "ROAMING CHARACTERS",
+  "roamingp": [
+   "A small group of performers in recognisable outfits (purple hooded capes, logo on the back) moves through the city along a planned route. They don’t speak and don’t sell anything. They stand out through their presence, their slow pace and their ritual gestures. Now and then they interact with someone, for example by handing over an invitation or an object."
+  ],
+  "mobile": "MOBILE EXPERIENCE",
+  "mobilep": [
+   "A temporary physical space that changes location every day. It doesn’t replace the showroom or the launch evening; it sits alongside as a more intimate touchpoint. It allows closer, more personal encounters, for instance meeting the CEO in a small group or one-to-one. Access is limited: by invitation, at certain hours, or after following the clues."
+  ],
+  "ooh": "FAKE OOH",
+  "oohp": [
+   "Short CGI videos are set realistically in real, recognisable places such as the Jet d’eau, the harbour or a Geneva facade. They show impossible scenes like a famous statue that comes to life wearing House of Wunder pieces."
+  ]
+ },
+ "ven": {
+  "dunia": "DUNIA",
+  "duniap": [
+   "Former furniture showroom with a contemporary and industrial style, with modern and clean lines. The place benefits from a lot of natural light and high ceilings.",
+   "4 bright and modular rooms. Professional equipped kitchen.",
+   "**Capacity: 590m2**",
+   "**Budget: 3k per day**"
+  ],
+  "duniaa": "**12, chemin Frank-Thomas, 1208 Geneva**",
+  "maxime": "LE MAXIME",
+  "maximep": [
+   "A place in the heart of Geneva, with an elegant, hushed and contemporary atmosphere, with a chic and intimate club spirit.",
+   "Versatile and modular spaces, including a track and a bar.",
+   "**Capacity: 350M2, 400pax**",
+   "**Budget: 25k/week**"
+  ],
+  "maximea": "**Rue Sigismond-Thalberg 2, 1201 Geneva**",
+  "vollandes": "CAVE DES VOLLANDES",
+  "vollandesp": [
+   "Seventeenth-century cellars with a historic character, with vaulted rooms and stone walls. Authentic, warm and atypical setting, 400m².",
+   "**Capacity: 400m2, 150 pax**",
+   "**Budget: 140k (F&B and dj included)​ for 5 days**"
+  ],
+  "vollandesa": "**Rue des Vollandes 73, 1207 Geneva**",
+  "appart": "L’APPARTEMENT",
+  "appartp": [
+   "Art gallery located in Les Eaux-Vives, designed as an intimate and warm space, in the spirit of an apartment rather than a traditional gallery.",
+   "**Capacity: 150m2**",
+   "**Budget: 60k**"
+  ],
+  "apparta": "**5, rue Pierre-Fatio, 1204 Geneva.**",
+  "hamlet": "THE HAMLET",
+  "hamletp": [
+   "Contemporary and elegant space located in the heart of Geneva’s Old Town. The venue combines historic character with contemporary design, featuring natural materials and carefully selected furnishings.",
+   "**Capacity: 120m2**",
+   "**Budget: 28k per day**"
+  ],
+  "hamleta": "**Rue Etienne-Dumont 12-14, 1204 Genève**",
+  "arno": "ARNO",
+  "arnop": [
+   "Seventeenth-century cellars with a historic character, with vaulted rooms and stone walls. Authentic, warm and atypical setting, 400m².",
+   "**Capacity: TBC**",
+   "**Budget: 6k per day, F&B included​**"
+  ],
+  "arnoa": "**Grand-Rue 26, 1204 Geneva**",
+  "calamart": "CALAMART",
+  "calamartp": [
+   "Calamart is an urban and contemporary art gallery in Geneva. It shows a constantly changing selection of artists with very different styles, all sharing the same attention to aesthetics.",
+   "**Capacity: 125m2**",
+   "**Budget: 10k/week**"
+  ],
+  "calamarta": "**Grand-Rue 13, 1204 Geneva**",
+  "tbc": "TO BE CONFIRMED",
+  "tbcl": [
+   "Fonderie Kugler",
+   "Le Scandale",
+   "Ultima Rooftop",
+   "Galerie Calamart",
+   "Circus",
+   "Alhambar"
+  ],
+  "na": "NOT AVAILABLE",
+  "nal": [
+   "Ice Bergues",
+   "Galerie Polo Marco",
+   "Swiss luxury appartement"
+  ]
+ },
  "end": {
-  "t": "WHICH WILD IS YOURS?",
+  "t": "LET’S TALK.",
   "agency": "BLACK FLOWER AGENCY"
  },
  "meta": {
@@ -321,6 +413,7 @@
  },
  "lbl": {
   "cover": "House of Wunder",
+  "agenda": "Agenda",
   "intro": "I · INTRODUCTION",
   "reality": "The reality",
   "why": "Why",
@@ -358,20 +451,31 @@
   "uniform": "Purple Uniform",
   "tasteuv": "A Taste Of Ultraviolet",
   "additional": "Additional thought",
-  "activation": "III · ACTIVATION MECHANICS",
-  "act-sky": "Sky Signal",
-  "act-violet": "Violet Figures",
-  "act-mobility": "Mobility",
-  "act-street": "Street",
-  "act-ooh": "Fake Ooh",
-  "venues": "IV · VENUES",
-  "wrapup": "V · WRAP UP",
+  "wrapup": "III · WRAP UP",
   "wrap": "Wrap up",
-  "end": "Which wild is yours?"
+  "activation": "IV · ACTIVATION MECHANICS",
+  "act-intro": "Activation mechanics",
+  "act-signal": "Signal In The City",
+  "act-roaming": "Roaming Characters",
+  "act-mobile": "Mobile Experience",
+  "act-ooh": "Fake OOH",
+  "venues": "V · VENUES",
+  "ven-dunia": "Dunia",
+  "ven-maxime": "Le Maxime",
+  "ven-vollandes": "Cave des Vollandes",
+  "ven-appart": "L’appartement",
+  "ven-hamlet": "The Hamlet",
+  "ven-arno": "Arno",
+  "ven-calamart": "Calamart",
+  "ven-more": "Other venues",
+  "end": "Let’s talk."
  },
  "notes": {
   "cover": [
    "Four creative directions for the House of Wunder activation at Watches and Wonders Geneva 2027, built for the conversation with Michael. Not four rival ideas: four ways to live the same conviction."
+  ],
+  "agenda": [
+   "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
   ],
   "intro": [
    "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
@@ -481,19 +585,25 @@
   "additional": [
    "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
   ],
+  "wrapup": [
+   "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
+  ],
+  "wrap": [
+   "Gold bars show the boldness level: Palma medium, Body and Movement medium-high, The Link high on concept and flexible on execution, The Rite of Passage the highest."
+  ],
   "activation": [
    "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
   ],
-  "act-sky": [
+  "act-intro": [
+   "Our shared answer to the real challenge of the brief: showing and selling EUR 7k to 90k pieces without a traditional showroom, during the most competitive week of the year in Geneva."
+  ],
+  "act-signal": [
    "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
   ],
-  "act-violet": [
+  "act-roaming": [
    "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
   ],
-  "act-mobility": [
-   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
-  ],
-  "act-street": [
+  "act-mobile": [
    "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
   ],
   "act-ooh": [
@@ -502,11 +612,29 @@
   "venues": [
    "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
   ],
-  "wrapup": [
-   "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."
+  "ven-dunia": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
   ],
-  "wrap": [
-   "Gold bars show the boldness level: Palma medium, Body and Movement medium-high, The Link high on concept and flexible on execution, The Rite of Passage the highest."
+  "ven-maxime": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-vollandes": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-appart": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-hamlet": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-arno": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-calamart": [
+   "These are not four rival ideas. Each territory holds on its own, and some signature moments can travel between them. Locate your own appetite for boldness as you go."
+  ],
+  "ven-more": [
+   "Our shared answer to the real challenge of the brief: showing and selling EUR 7k to 90k pieces without a traditional showroom, during the most competitive week of the year in Geneva."
   ],
   "end": [
    "Once Michael leans toward one direction or a hybrid, we write a Statement of Intent that locks a single stance, then a pitch deck to bring the chosen world to life visually."

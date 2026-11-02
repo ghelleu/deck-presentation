@@ -12,21 +12,33 @@
   "num": "II"
  },
  "div3": {
-  "title": "MÉCANIQUES D’ACTIVATION",
+  "title": "synthèse",
   "num": "III"
  },
  "div4": {
-  "title": "lieux",
+  "title": "MÉCANIQUES D’ACTIVATION",
   "num": "IV"
  },
  "div5": {
-  "title": "synthèse",
-  "num": "v"
+  "title": "lieux",
+  "num": "V"
+ },
+ "foot": {
+  "event": "ÉVÉNEMENT PRESSE ET DÉTAILLANTS 2027",
+  "agency": "BLACK FLOWER AGENCY"
+ },
+ "agenda": {
+  "label": "SOMMAIRE",
+  "i1": "I. Introduction",
+  "i2": "II. Territoires créatifs",
+  "i3": "III. Synthèse",
+  "i4": "IV. Mécaniques d’activation",
+  "i5": "V. Lieux"
  },
  "reality": {
   "a": "Watches and Wonders est **la semaine**\n**la plus concurrentielle** de l’horlogerie.",
   "label": "LA RÉALITÉ",
-  "b": "C’est aussi le moment de l’année où il est le plus difficile\nde s’affranchir des conventions du secteur."
+  "b": "C’est aussi le moment de l’année où il est **le plus difficile**\nde s’affranchir des conventions du secteur."
  },
  "why": {
   "label": "POURQUOI",
@@ -151,7 +163,7 @@
   "t": "LE DÎNER WUNDERFLOW",
   "p": [
    "Un dîner immersif dans un décor doux et enveloppant : des murs qui respirent, des textures qu’on a envie de toucher, une lumière qui bouge comme une peau.",
-   "Chaque plat est chorégraphié avec des projections sur les tissus, et les pièces apparaissent sur les mains des serveurs."
+   "Chaque plat est chorégraphié avec des projections sur les murs, et les pièces apparaissent sur les mains des serveurs."
   ]
  },
  "table": {
@@ -224,11 +236,91 @@
   "l4": "Ultraviolet club"
  },
  "act": {
-  "sky": "SIGNAL DANS LE CIEL",
-  "violet": "SILHOUETTES VIOLETTES",
-  "mobility": "MOBILITÉ",
-  "street": "RUE",
-  "ooh": "FAUX AFFICHAGE"
+  "intro": "Ces mécaniques d’activation et de communication font monter l’attente autour de l’événement et créent le facteur « ça vaut le détour » : une raison pour les journalistes et les détaillants de choisir cette soirée plutôt que toutes les autres invitations de Watches & Wonders. Elles donnent aussi à la marque une forte présence dans toute la ville.",
+  "signal": "SIGNAL DANS LA VILLE",
+  "signalp": [
+   "Des signaux dans la ville. Des éléments visuels mystérieux apparaissent dans l’espace public : une projection sur une façade, des faisceaux lumineux, des traces au sol, des QR codes cachés. Ils reviennent à heure fixe ou à des endroits précis, sans autre explication que le logo ou la couleur de la marque. Les passants les remarquent, se demandent de quoi il s’agit et les photographient. Scanner un QR code débloque un contenu exclusif, comme un indice, une vidéo ou une invitation, qui fait entrer le public dans l’histoire."
+  ],
+  "roaming": "PERSONNAGES ITINÉRANTS",
+  "roamingp": [
+   "Un petit groupe de performeurs aux tenues reconnaissables (capes violettes à capuche, logo dans le dos) traverse la ville selon un parcours prévu. Ils ne parlent pas et ne vendent rien. Ils se distinguent par leur présence, leur lenteur et leurs gestes rituels. De temps en temps, ils interagissent avec quelqu’un, par exemple en lui remettant une invitation ou un objet."
+  ],
+  "mobile": "EXPÉRIENCE MOBILE",
+  "mobilep": [
+   "Un espace physique éphémère qui change de lieu chaque jour. Il ne remplace ni le showroom ni la soirée de lancement ; il les accompagne comme un point de contact plus intime. Il permet des rencontres plus proches et plus personnelles, par exemple rencontrer le CEO en petit groupe ou en tête-à-tête. L’accès est limité : sur invitation, à certaines heures, ou après avoir suivi les indices."
+  ],
+  "ooh": "FAUX AFFICHAGE",
+  "oohp": [
+   "De courtes vidéos en images de synthèse sont intégrées de façon réaliste dans des lieux réels et reconnaissables, comme le Jet d’eau, le port ou une façade genevoise. Elles montrent des scènes impossibles, comme une statue célèbre qui prend vie en portant des pièces House of Wunder."
+  ]
+ },
+ "ven": {
+  "dunia": "DUNIA",
+  "duniap": [
+   "Ancien showroom de mobilier au style contemporain et industriel, aux lignes modernes et épurées. Le lieu bénéficie de beaucoup de lumière naturelle et de grandes hauteurs sous plafond.",
+   "4 salles lumineuses et modulables. Cuisine professionnelle équipée.",
+   "**Capacité : 590m2**",
+   "**Budget : 3k par jour**"
+  ],
+  "duniaa": "**12, chemin Frank-Thomas, 1208 Genève**",
+  "maxime": "LE MAXIME",
+  "maximep": [
+   "Un lieu au cœur de Genève, à l’atmosphère élégante, feutrée et contemporaine, dans un esprit de club chic et intime.",
+   "Des espaces polyvalents et modulables, dont une piste et un bar.",
+   "**Capacité : 350M2, 400pax**",
+   "**Budget : 25k/semaine**"
+  ],
+  "maximea": "**Rue Sigismond-Thalberg 2, 1201 Genève**",
+  "vollandes": "CAVE DES VOLLANDES",
+  "vollandesp": [
+   "Caves du XVIIe siècle au caractère historique, avec des salles voûtées et des murs en pierre. Un cadre authentique, chaleureux et atypique, 400m².",
+   "**Capacité : 400m2, 150 pax**",
+   "**Budget : 140k (F&B et dj inclus) pour 5 jours**"
+  ],
+  "vollandesa": "**Rue des Vollandes 73, 1207 Genève**",
+  "appart": "L’APPARTEMENT",
+  "appartp": [
+   "Galerie d’art située aux Eaux-Vives, pensée comme un espace intime et chaleureux, dans l’esprit d’un appartement plutôt que d’une galerie traditionnelle.",
+   "**Capacité : 150m2**",
+   "**Budget : 60k**"
+  ],
+  "apparta": "**5, rue Pierre-Fatio, 1204 Genève.**",
+  "hamlet": "THE HAMLET",
+  "hamletp": [
+   "Espace contemporain et élégant situé au cœur de la Vieille-Ville de Genève. Le lieu associe caractère historique et design contemporain, avec des matériaux naturels et un mobilier soigneusement choisi.",
+   "**Capacité : 120m2**",
+   "**Budget : 28k par jour**"
+  ],
+  "hamleta": "**Rue Etienne-Dumont 12-14, 1204 Genève**",
+  "arno": "ARNO",
+  "arnop": [
+   "Caves du XVIIe siècle au caractère historique, avec des salles voûtées et des murs en pierre. Un cadre authentique, chaleureux et atypique, 400m².",
+   "**Capacité : à confirmer**",
+   "**Budget : 6k par jour, F&B inclus**"
+  ],
+  "arnoa": "**Grand-Rue 26, 1204 Genève**",
+  "calamart": "CALAMART",
+  "calamartp": [
+   "Calamart est une galerie d’art urbain et contemporain à Genève. Elle présente une sélection sans cesse renouvelée d’artistes aux styles très différents, qui partagent tous la même attention à l’esthétique.",
+   "**Capacité : 125m2**",
+   "**Budget : 10k/semaine**"
+  ],
+  "calamarta": "**Grand-Rue 13, 1204 Genève**",
+  "tbc": "À CONFIRMER",
+  "tbcl": [
+   "Fonderie Kugler",
+   "Le Scandale",
+   "Ultima Rooftop",
+   "Galerie Calamart",
+   "Circus",
+   "Alhambar"
+  ],
+  "na": "NON DISPONIBLES",
+  "nal": [
+   "Ice Bergues",
+   "Galerie Polo Marco",
+   "Appartement de luxe suisse"
+  ]
  },
  "wrap": {
   "t": "**SYNTHÈSE**",
@@ -238,7 +330,7 @@
   "n4": "THE ULTRAVIOLET CLUB"
  },
  "end": {
-  "t": "QUELLE EST VOTRE PART SAUVAGE ?",
+  "t": "PARLONS-EN.",
   "agency": "BLACK FLOWER AGENCY"
  },
  "meta": {
@@ -321,6 +413,7 @@
  },
  "lbl": {
   "cover": "House of Wunder",
+  "agenda": "Sommaire",
   "intro": "I · INTRODUCTION",
   "reality": "La réalité",
   "why": "Pourquoi",
@@ -358,20 +451,31 @@
   "uniform": "Uniforme violet",
   "tasteuv": "Un goût d’ultraviolet",
   "additional": "Pour aller plus loin",
-  "activation": "III · MÉCANIQUES D’ACTIVATION",
-  "act-sky": "Signal dans le ciel",
-  "act-violet": "Silhouettes violettes",
-  "act-mobility": "Mobilité",
-  "act-street": "Rue",
-  "act-ooh": "Faux affichage",
-  "venues": "IV · LIEUX",
-  "wrapup": "V · SYNTHÈSE",
+  "wrapup": "III · SYNTHÈSE",
   "wrap": "Synthèse",
-  "end": "Quelle est votre part sauvage ?"
+  "activation": "IV · MÉCANIQUES D’ACTIVATION",
+  "act-intro": "Mécaniques d’activation",
+  "act-signal": "Signal dans la ville",
+  "act-roaming": "Personnages itinérants",
+  "act-mobile": "Expérience mobile",
+  "act-ooh": "Faux affichage",
+  "venues": "V · LIEUX",
+  "ven-dunia": "Dunia",
+  "ven-maxime": "Le Maxime",
+  "ven-vollandes": "Cave des Vollandes",
+  "ven-appart": "L’appartement",
+  "ven-hamlet": "The Hamlet",
+  "ven-arno": "Arno",
+  "ven-calamart": "Calamart",
+  "ven-more": "Autres lieux",
+  "end": "Parlons-en."
  },
  "notes": {
   "cover": [
    "Quatre directions créatives pour l’activation House of Wunder à Watches and Wonders Genève 2027, conçues pour la conversation avec Michael. Non pas quatre idées rivales : quatre façons de vivre la même conviction."
+  ],
+  "agenda": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
   ],
   "intro": [
    "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
@@ -481,19 +585,25 @@
   "additional": [
    "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
   ],
+  "wrapup": [
+   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  ],
+  "wrap": [
+   "Les barres dorées indiquent le niveau d’audace : Palma moyen, Body and Movement moyen-élevé, The Link élevé sur le concept et souple dans l’exécution, The Rite of Passage le plus élevé."
+  ],
   "activation": [
    "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
   ],
-  "act-sky": [
+  "act-intro": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
+  ],
+  "act-signal": [
    "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
   ],
-  "act-violet": [
+  "act-roaming": [
    "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
   ],
-  "act-mobility": [
-   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
-  ],
-  "act-street": [
+  "act-mobile": [
    "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
   ],
   "act-ooh": [
@@ -502,11 +612,29 @@
   "venues": [
    "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
   ],
-  "wrapup": [
-   "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."
+  "ven-dunia": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
   ],
-  "wrap": [
-   "Les barres dorées indiquent le niveau d’audace : Palma moyen, Body and Movement moyen-élevé, The Link élevé sur le concept et souple dans l’exécution, The Rite of Passage le plus élevé."
+  "ven-maxime": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-vollandes": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-appart": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-hamlet": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-arno": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-calamart": [
+   "Ce ne sont pas quatre idées rivales. Chaque territoire tient seul, et certains moments signature peuvent circuler de l’un à l’autre. Situez votre propre appétit d’audace au fil de la présentation."
+  ],
+  "ven-more": [
+   "Notre réponse commune au véritable enjeu du brief : montrer et vendre des pièces de 7 000 à 90 000 EUR sans showroom traditionnel, pendant la semaine la plus concurrentielle de l’année à Genève."
   ],
   "end": [
    "Dès que Michael penche pour une direction ou un hybride, nous rédigeons une note d’intention qui fixe une position unique, puis un deck de pitch pour donner vie visuellement à l’univers choisi."

@@ -176,6 +176,9 @@ body.is-black .stage {
   letter-spacing: 0.32em;
   color: var(--mist);
 }
+.foot-r {
+  bottom: 96px; /* the agency, just above the event: the pictures on the right stay clear */
+}
 .statement {
   font: 400 44px/1.5 var(--text);
   font-stretch: 125%;
@@ -1258,13 +1261,132 @@ body.is-black .stage {
   padding: 6px 10px;
 }
 
-/* activation mechanics (hidden in the PowerPoint, unticked by default) */
-.act-txt {
+/* activation mechanics: an introduction, then each mechanic (title, text, pictures) */
+.act-intro .center {
+  padding: 0 260px;
+}
+.act-intro .statement {
+  font-size: 36px;
+  line-height: 1.6;
+  color: var(--ivory);
+}
+.act-txt,
+.vn-txt {
+  position: absolute;
+  left: var(--x);
+  top: 0;
+  bottom: 0;
+  width: 600px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.act .ideap p {
+  color: rgba(246, 244, 241, 0.8);
+}
+.slide.is-active .act-txt,
+.slide.is-active .vn-txt,
+.slide.is-active .vn-head {
+  animation: rise 1300ms var(--ease) both;
+  animation-delay: 500ms;
+}
+.slide.is-active .vn-head {
+  animation-delay: 350ms;
+}
+
+/* venues: name and address, description, pictures; then the venue's photographs */
+.vn-head {
+  position: absolute;
+  left: var(--x);
+  top: 118px;
+  width: 640px;
+  z-index: 4;
+}
+.vn-name {
+  font: 700 30px/1.3 var(--text);
+  font-stretch: 125%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.vn-addr {
+  margin-top: 14px;
+  font: 400 15px/1.6 var(--text);
+  font-stretch: 125%;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+}
+.vn-txt .ideap p + p {
+  margin-top: 14px;
+}
+.slide .vn-photo[data-only] {
   position: absolute;
   inset: 0;
+  z-index: 6;
+  transform: none;
+  filter: none;
+  transition: opacity 1200ms var(--ease);
 }
-.act-t {
-  font-size: 20px;
+.vn-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 23, 38, 0.6) 0%, rgba(28, 23, 38, 0) 32%);
+}
+.venues-more .vm-col {
+  position: absolute;
+  left: 223px;
+  top: 330px;
+  width: 700px;
+}
+.venues-more .vm-r {
+  left: 973px;
+}
+.vm-list {
+  margin-top: 34px;
+}
+.vm-list p {
+  font: 300 25px/1.9 var(--text);
+  font-stretch: 125%;
+  color: var(--ink);
+}
+.slide.is-active .vm-col {
+  animation: rise 1300ms var(--ease) both 350ms;
+}
+.slide.is-active .vm-r {
+  animation-delay: 550ms;
+}
+
+/* agenda: the five chapters, a way in to each */
+.ag-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.ag-i {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  cursor: pointer;
+  font: 400 44px/1.15 var(--display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: color 0.4s var(--ease);
+}
+.ag-i:hover {
+  color: var(--ivory);
+}
+.slide.is-active .ag-i {
+  animation: rise 1300ms var(--ease) both;
+  animation-delay: calc(var(--i) * 140ms + 300ms);
 }
 
 /* ------------------------------------------------------------- Wrap up */

@@ -110,7 +110,7 @@
 
   // For the PDF export (?print) the opaque pictures come as JPEG (assets/img/print/), which
   // Chrome embeds as they are: the PDF stays light. A picture without a JPEG keeps its WebP.
-  const WITH_ALPHA = /\/(i2|i53)\.webp$/; // transparent pictures: no JPEG for them
+  const WITH_ALPHA = /\/(i2|i53-b803)\.webp$/; // transparent pictures: no JPEG for them
   const printSrc = (src) =>
     WITH_ALPHA.test(src) ? src : src.replace(/assets\/img\/([^/]+)\.webp$/, "assets/img/print/$1.jpg");
   function setSrc(img, src) {
