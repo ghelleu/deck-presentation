@@ -27,7 +27,7 @@ En ligne aujourd'hui :
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
 | MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | https://deck-presentation.com/mag/ |
 | TOT | Powerded by Superheros | TotalEnergies | Soirée | — | Nov. 2026 | https://deck-presentation.com/tot/ |
-| CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
+| CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | https://deck-presentation.com/cbm/ |
 
 ---
 
@@ -203,11 +203,12 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 - **Aperçu** : `python3 tools/serve.py 4191`, puis http://127.0.0.1:4191/ (avec le lien `shared` vers la plateforme).
 - **Publier** : copier le deck dans `~/Projects/deck-presentation/mag/`, sans `shared`, `_src` ni `tools`. Ensuite : `git add mag && git commit && git push`.
 
-### CBM : Caroline Barbier Muller (Swiss Disco)
+### CBM : Caroline Barbier Muller (Swiss Disco, « Le Chalet Disco »)
 
-Pas encore de deck. Il y a seulement une ligne grisée sur l'accueil.
-
----
+- **Source** : `~/Projects/cbm-chalet-disco`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub.
+- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Aperçu** : `python3 tools/serve.py 4192`, puis http://127.0.0.1:4192/ (avec le lien `shared` vers la plateforme).
+- **Publier** : copier le deck dans `~/Projects/deck-presentation/cbm/`, sans `shared`, `_src`, `tools`, `.claude` ni `README.md`. Ensuite : `git add cbm && git commit && git push`.
 
 ## 6. Recettes
 
