@@ -4,7 +4,7 @@ Lire d'abord [MANUEL.md](MANUEL.md) (vue d'ensemble, recettes, audit), puis [REA
 
 ## Deux projets, deux endroits
 - **La plateforme** (ce dépôt) : `index.html` (accueil), `shared/` (écran d'accès, barre de commandes), `README.md`, `MANUEL.md`, `CNAME`. Elle définit les commandes de tous les decks.
-- **Les decks** (`als/`, `how/`, `biw/`) : ce sont des copies publiées. Leur source est ailleurs : ALS dans `~/Projects/als-century-of-exchange`, BIW dans `~/Projects/bixter`, HOW dans `~/HOW-sources` (gabarit et outils ; `how/engine.js` et `how/styles.css` se modifient ici). Une demande sur le contenu d'un deck se traite dans la source de ce deck, pas ici.
+- **Les decks** (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) : ce sont des copies publiées. Leur source est ailleurs : ALS dans `~/Projects/als-century-of-exchange`, BIX (dossier `biw/`) dans `~/Projects/bixter`, TDP dans `~/Projects/tour-des-possibles`, MAG dans `~/Projects/magnetic-deck`, HOW dans `~/HOW-sources` (gabarit et outils ; `how/engine.js` et `how/styles.css` se modifient ici). Une demande sur le contenu d'un deck se traite dans la source de ce deck, pas ici.
 
 ## Règles
 1. `git pull --ff-only` avant de commencer. Ajouter les fichiers par chemin (`git add shared index.html`, `git add als`), jamais `git add -A` : plusieurs sessions travaillent dans cette même copie.

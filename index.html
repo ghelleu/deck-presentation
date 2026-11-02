@@ -27,7 +27,7 @@
     }
     main { max-width: 980px; margin: 0 auto; padding: 12vh 24px 96px; }
     .tableau { overflow-x: auto; }
-    table { width: 100%; min-width: 620px; border-collapse: collapse; }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
     th, td { padding: 14px 12px; text-align: center; white-space: nowrap; }
     th {
       font-size: 12px;
@@ -48,7 +48,7 @@
     /* not online yet */
     tr.attente td { color: var(--encre-2); }
 
-    /* phone: each row becomes a card (code and date, client, type and context) */
+    /* phone: each row becomes a card (code and date, project, client, type and context) */
     @media (max-width: 640px) {
       main {
         padding: calc(8vh + env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) calc(64px + env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
@@ -60,7 +60,7 @@
       tbody tr {
         display: grid;
         grid-template-columns: auto 1fr auto;
-        grid-template-areas: "code . date" "client client client" "type context context";
+        grid-template-areas: "code . date" "project project project" "client client client" "type context context";
         column-gap: 0;
         row-gap: 4px;
         padding: 16px 4px;
@@ -70,11 +70,12 @@
       th, td { padding: 0; border: 0; text-align: left; white-space: normal; }
       tbody tr:last-child td { border: 0; }
       td:nth-child(1) { grid-area: code; font-size: .8rem; letter-spacing: .12em; }
-      td:nth-child(2) { grid-area: client; font-size: 1.15rem; font-weight: 500; }
-      td:nth-child(3) { grid-area: type; font-size: .9rem; color: var(--encre-2); }
-      td:nth-child(4) { grid-area: context; font-size: .9rem; color: var(--encre-2); }
-      td:nth-child(4)::before { content: "\00a0·\00a0"; }
-      td:nth-child(5) { grid-area: date; font-size: .8rem; color: var(--encre-2); text-align: right; }
+      td:nth-child(2) { grid-area: project; font-size: 1.15rem; font-weight: 500; }
+      td:nth-child(3) { grid-area: client; font-size: .95rem; }
+      td:nth-child(4) { grid-area: type; font-size: .9rem; color: var(--encre-2); }
+      td:nth-child(5) { grid-area: context; font-size: .9rem; color: var(--encre-2); }
+      td:nth-child(5)::before { content: "\00a0·\00a0"; }
+      td:nth-child(6) { grid-area: date; font-size: .8rem; color: var(--encre-2); text-align: right; }
       tr.lien:hover td, tr.lien:focus-within td { background: none; }
       tr.lien:active { background: color-mix(in srgb, var(--encre) 6%, transparent); }
     }
@@ -85,17 +86,17 @@
     <div class="tableau">
       <table>
         <thead>
-          <tr><th>Code</th><th>Client</th><th>Type</th><th>Context</th><th>Date</th></tr>
+          <tr><th>Code</th><th>Project</th><th>Client</th><th>Type</th><th>Context</th><th>Date</th></tr>
         </thead>
         <tbody>
-          <!-- Une présentation en ligne : <tr class="lien"><td class="code"><a href="/code/">CODE</a></td>…
+          <!-- Une présentation en ligne : <tr class="lien"><td class="code"><a href="/code/">CODE</a></td><td>Projet</td><td>Client</td>…
                Pas encore en ligne : <tr class="attente"><td class="code">CODE</td>… -->
-          <tr class="lien"><td class="code"><a href="/als/">ALS</a></td><td>A. Lange &amp; Söhne</td><td>Inauguration</td><td>MCI</td><td>Nov. 2026</td></tr>
-          <tr class="lien"><td class="code"><a href="/how/">HOW</a></td><td>House of Wunder</td><td>Événementiel</td><td>MCI</td><td>Nov. 2026</td></tr>
-          <tr class="lien"><td class="code"><a href="/biw/">BIX</a></td><td>Bixler's</td><td>Retail</td><td>Downtown studio</td><td>Oct. 2026</td></tr>
-          <tr class="lien"><td class="code"><a href="/tdp/">TDP</a></td><td>Geneva Lux</td><td>Installation</td><td>Magnetic</td><td>Nov. 2026</td></tr>
-          <tr class="lien"><td class="code"><a href="/mag/">MAG</a></td><td>Magnetic</td><td>Association</td><td>Magnetic</td><td>Nov. 2026</td></tr>
-          <tr class="attente"><td class="code">CBM</td><td>Caroline Barbier Muller</td><td>Soirée</td><td>MCI</td><td>Nov. 2026</td></tr>
+          <tr class="lien"><td class="code"><a href="/als/">ALS</a></td><td>The century of a Memory</td><td>A. Lange &amp; Söhne</td><td>Inauguration</td><td>MCI</td><td>Nov. 2026</td></tr>
+          <tr class="lien"><td class="code"><a href="/how/">HOW</a></td><td>Press &amp; Retailers Event 2027</td><td>House of Wunder</td><td>Événementiel</td><td>MCI</td><td>Nov. 2026</td></tr>
+          <tr class="lien"><td class="code"><a href="/biw/">BIX</a></td><td>Refonte de Deck</td><td>Bixler's</td><td>Retail</td><td>Downtown studio</td><td>Oct. 2026</td></tr>
+          <tr class="lien"><td class="code"><a href="/tdp/">TDP</a></td><td>La Tour des Possibles</td><td>Geneva Lux</td><td>Installation</td><td>Magnetic</td><td>Nov. 2026</td></tr>
+          <tr class="lien"><td class="code"><a href="/mag/">MAG</a></td><td>Pour que la créativité impact le monde</td><td>Magnetic</td><td>Association</td><td>Magnetic</td><td>Nov. 2026</td></tr>
+          <tr class="attente"><td class="code">CBM</td><td>Swiss Disco</td><td>Caroline Barbier Muller</td><td>Soirée</td><td>MCI</td><td>Nov. 2026</td></tr>
         </tbody>
       </table>
     </div>

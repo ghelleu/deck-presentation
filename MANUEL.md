@@ -12,19 +12,21 @@ deck-presentation.com est une **plateforme de visionnage de présentations** (de
 |---|---|---|
 | Ce que c'est | Le lecteur : la page d'accueil, l'écran d'accès, la barre de commandes commune, le domaine, l'hébergement | Le contenu : chaque présentation (textes, images, mise en page, PDF), une par client |
 | Où on travaille | Le dépôt `ghelleu/deck-presentation`, dans `~/Projects/deck-presentation` | Le dossier source de chaque deck (voir §5), **pas** dans le dépôt de la plateforme |
-| Ce qu'on y touche | `index.html` (accueil), `shared/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `biw/`) |
-| Session Claude | « DECK HOME » | Une session par deck (ALS, HOW, BIW…) |
+| Ce qu'on y touche | `index.html` (accueil), `shared/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) |
+| Session Claude | « DECK HOME » | Une session par deck (ALS, HOW, BIX, TDP, MAG…) |
 
 Règle d'or : **la plateforme définit les commandes, les decks les respectent.** Un deck ne rajoute ni bouton ni raccourci clavier à lui.
 
 En ligne aujourd'hui :
 
-| Code | Client | Type | Contexte | Date | Adresse |
-|---|---|---|---|---|---|
-| ALS | A. Lange & Söhne | Inauguration | MCI | Nov. 2026 | https://deck-presentation.com/als/ |
-| HOW | House of Wunder | Événementiel | MCI | Nov. 2026 | https://deck-presentation.com/how/ |
-| BIX | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
-| CBM | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
+| Code | Projet | Client | Type | Contexte | Date | Adresse |
+|---|---|---|---|---|---|---|
+| ALS | The century of a Memory | A. Lange & Söhne | Inauguration | MCI | Nov. 2026 | https://deck-presentation.com/als/ |
+| HOW | Press & Retailers Event 2027 | House of Wunder | Événementiel | MCI | Nov. 2026 | https://deck-presentation.com/how/ |
+| BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
+| TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
+| MAG | Pour que la créativité impact le monde | Magnetic | Association | Magnetic | Nov. 2026 | https://deck-presentation.com/mag/ |
+| CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
 
 ---
 
@@ -55,7 +57,9 @@ deck-presentation/
 ├── robots.txt        interdit l'indexation de tout le site            ← plateforme
 ├── als/              copie publiée du deck ALS                       ← deck (recopié depuis sa source)
 ├── how/              copie publiée du deck HOW                       ← deck (fabriqué par build.py)
-└── biw/              copie publiée du deck BIW                       ← deck (recopié depuis bixter)
+├── biw/              copie publiée du deck BIX                       ← deck (recopié depuis bixter)
+├── tdp/              copie publiée du deck TDP                       ← deck (recopié depuis tour-des-possibles)
+└── mag/              copie publiée du deck MAG                       ← deck (recopié depuis magnetic-deck)
 ```
 
 ---
@@ -64,11 +68,11 @@ deck-presentation/
 
 ### 3.1 La page d'accueil (`index.html`)
 
-Un tableau sobre (Code, Client, Type, Context, Date), en clair et en sombre selon le système, qui devient une liste de cartes sur téléphone. Tout le style est dans la page, sans dépendance externe.
+Un tableau sobre (Code, Project, Client, Type, Context, Date), en clair et en sombre selon le système, qui devient une liste de cartes sur téléphone. Tout le style est dans la page, sans dépendance externe.
 
 - Un deck en ligne : la ligne entière est cliquable.
   ```html
-  <tr class="lien"><td class="code"><a href="/code/">CODE</a></td><td>Client</td><td>Type</td><td>Contexte</td><td>Nov. 2026</td></tr>
+  <tr class="lien"><td class="code"><a href="/code/">CODE</a></td><td>Titre du projet</td><td>Client</td><td>Type</td><td>Contexte</td><td>Nov. 2026</td></tr>
   ```
 - Un deck à venir : `<tr class="attente">`, le code sans lien, la ligne en gris.
 
@@ -182,7 +186,22 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 - **Publier** : copier `directions/full/` dans `biw/` et `directions/shared/` dans `biw/shared/`. Dans `index.html` et `book.html`, remplacer `"../shared/` par `"shared/`, mais laisser `/shared/controls.js` tel quel. Ensuite : `git add biw && git commit && git push`.
 - Le remote `hint3rland` est configuré pour ne pas télécharger les gros fichiers (`blob:none`). Ne pas le récupérer en entier : il pèse plusieurs gigaoctets de films.
 
-### CBM : Caroline Barbier Muller
+### TDP : La Tour des Possibles (Magnetic × Geneva Lux 2027)
+
+- **Source** : `~/Projects/tour-des-possibles`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub, donc pas de sauvegarde.
+- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Aperçu** : `tools/serve.py`, puis http://127.0.0.1:4190/ (avec le lien `shared` vers la plateforme).
+- **Publier** : copier le deck dans `~/Projects/deck-presentation/tdp/`, sans `shared`, `_src`, `tools` ni `.claude`. Ensuite : `git add tdp && git commit && git push`.
+- Structure comme ALS : `config.js`, `engine.js`, `styles.css`, et le PDF dans `export/`.
+
+### MAG : Magnetic, présentation de l'association (Deck 2026)
+
+- **Source** : `~/Projects/magnetic-deck`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub.
+- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Aperçu** : `python3 tools/serve.py 4191`, puis http://127.0.0.1:4191/ (avec le lien `shared` vers la plateforme).
+- **Publier** : copier le deck dans `~/Projects/deck-presentation/mag/`, sans `shared`, `_src` ni `tools`. Ensuite : `git add mag && git commit && git push`.
+
+### CBM : Caroline Barbier Muller (Swiss Disco)
 
 Pas encore de deck. Il y a seulement une ligne grisée sur l'accueil.
 
@@ -214,7 +233,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 - l'écran d'accès s'affiche sur ALS et HOW ;
-- la barre a 5 boutons (4 sur BIW) ;
+- la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
 - la console du navigateur n'affiche aucune erreur.
@@ -224,7 +243,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 ## 7. Audit (31.10.2026)
 
 ### 7.1 Ce qui fonctionne
-- Le site, les trois decks, les fichiers `shared/` et les PDF répondent tous en `200`. HTTPS est forcé et `www` redirige.
+- Le site, les decks, les fichiers `shared/` et les PDF répondent tous en `200`. HTTPS est forcé et `www` redirige.
 - La barre commune est en place sur les trois decks publiés **et** dans leurs sources (gabarit HOW, ALS, BIW). Les anciens boutons (annexes, notes, aide) et les anciennes touches ont disparu partout.
 - L'écran d'accès commun est actif sur ALS et HOW. Plus aucun deck n'embarque sa propre copie.
 - Les dépôts sources ALS et BIW sont propres et synchronisés avec GitHub.
@@ -241,7 +260,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | # | Niveau | Constat | Recommandation |
 |---|---|---|---|
 | 1 | **Élevé** | **Confidentialité.** Le dépôt de la plateforme est public : textes (`content/*.json`), images et PDF sont lisibles sans code, sur GitHub comme par leur adresse directe. Le code à 5 chiffres ne fait que 100 000 combinaisons et son empreinte est dans `config.js` : on le retrouve en moins d'une seconde. | Le considérer comme une politesse. Pour un deck vraiment confidentiel, il faut une protection côté serveur, par exemple Cloudflare Access devant le domaine, ou un hébergeur avec mot de passe. Un site GitHub Pages reste public même depuis un dépôt privé. |
-| 2 | **Élevé** | **HOW n'est pas versionné.** `~/HOW-sources`, avec le PowerPoint d'origine et les outils, n'a ni git ni sauvegarde. Une perte du disque perd la source. | En faire un dépôt privé (`ghelleu/how-sources`). C'est à décider dans le canal HOW. |
+| 2 | **Élevé** | **Des sources sans sauvegarde.** `~/HOW-sources`, avec le PowerPoint d'origine et les outils, n'a ni git ni sauvegarde. `~/Projects/tour-des-possibles` (TDP) et `~/Projects/magnetic-deck` (MAG) ont un git local mais aucun dépôt GitHub. Une perte du disque perd ces sources. | En faire des dépôts privés (`ghelleu/how-sources`, `ghelleu/tour-des-possibles`, `ghelleu/magnetic-deck`). C'est à décider dans les canaux de ces decks. |
 | 3 | ~~Moyen~~ Corrigé | **Indexation.** L'accueil, avec les noms des clients, pouvait être indexé. Les `robots.txt` placés dans les dossiers des decks sont ignorés : seul celui de la racine compte. | Fait le 31.10.2026 : `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. Ne pas les retirer. |
 | 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIW : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
@@ -255,7 +274,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 ## 8. Règles de travail (personnes et agents)
 
 1. **Savoir dans quel projet on est.** Plateforme : accueil, `shared/`, docs, domaine. Deck : tout le reste. Une demande sur le contenu d'un deck se traite dans la session de ce deck.
-2. **Ne modifier un dossier de deck (`als/`, `how/`, `biw/`) depuis la plateforme** que si une fonction commune l'exige, et reporter le même changement dans la source du deck.
+2. **Ne modifier un dossier de deck (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) depuis la plateforme** que si une fonction commune l'exige, et reporter le même changement dans la source du deck.
 3. **Git dans `~/Projects/deck-presentation`** : `git pull --ff-only` avant de commencer ; ajouter les fichiers par chemin (`git add als`), jamais `git add -A` ; ne pas changer de branche ; pour une branche, utiliser `git worktree add`.
 4. **Ne jamais publier de notes du présentateur** ni de contenu sous arbitrage. Passer par les outils de publication des decks.
 5. **Aucun bouton ni raccourci propre à un deck.** Une nouvelle commande se décide au niveau de la plateforme, pour tous les decks.
@@ -276,3 +295,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 31.10.2026 | Audit : source ALS régularisée, commande de publication sécurisée, ce manuel et `AGENTS.md`. |
 | 31.10.2026 | Indexation bloquée : `robots.txt` à la racine, `noindex` sur l'accueil. |
 | 01.11.2026 | Écran d'accès : le code est retenu par l'onglet ; changer de langue ou actualiser ne le redemande plus. |
+| 02.11.2026 | TDP et MAG publiés (par leurs sessions). Accueil : Bixler's devient BIX (adresse `/biw/` inchangée) ; nouvelle colonne Project. |

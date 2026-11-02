@@ -20,7 +20,7 @@ Vue d'ensemble, recettes et audit : [MANUEL.md](MANUEL.md). Consignes pour les a
 2. Y déposer un `index.html` (le deck), avec ses images et ses polices en chemins relatifs.
 3. Ajouter une ligne au tableau de `index.html` à la racine (toute la ligne ouvre le deck) :
    ```html
-   <tr class="lien"><td class="code"><a href="/mon-deck/">CODE</a></td><td>Client</td><td>Type</td><td>MCI</td><td>Nov. 2026</td></tr>
+   <tr class="lien"><td class="code"><a href="/mon-deck/">CODE</a></td><td>Titre du projet</td><td>Client</td><td>Type</td><td>MCI</td><td>Nov. 2026</td></tr>
    ```
    Une présentation pas encore en ligne : `<tr class="attente">` et le code sans lien.
 4. Pousser sur `main`. GitHub Pages reconstruit en une minute environ.
