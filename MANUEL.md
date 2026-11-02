@@ -26,6 +26,7 @@ En ligne aujourd'hui :
 | BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
 | MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | https://deck-presentation.com/mag/ |
+| TOT | Powerded by Superheros | TotalEnergies | Soirée | — | Nov. 2026 | https://deck-presentation.com/tot/ |
 | CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
 
 ---
@@ -59,7 +60,8 @@ deck-presentation/
 ├── how/              copie publiée du deck HOW                       ← deck (fabriqué par build.py)
 ├── biw/              copie publiée du deck BIX                       ← deck (recopié depuis bixter)
 ├── tdp/              copie publiée du deck TDP                       ← deck (recopié depuis tour-des-possibles)
-└── mag/              copie publiée du deck MAG                       ← deck (recopié depuis magnetic-deck)
+├── mag/              copie publiée du deck MAG                       ← deck (recopié depuis magnetic-deck)
+└── tot/              copie publiée du deck TOT                       ← deck (recopié depuis totalenergies-deck)
 ```
 
 ---
@@ -233,7 +235,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 - l'écran d'accès s'affiche sur ALS, HOW et BIX ;
-- la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
+- la barre a 5 boutons (4 sur BIX, TDP, MAG et TOT, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
 - la console du navigateur n'affiche aucune erreur.
@@ -297,3 +299,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 01.11.2026 | Écran d'accès : le code est retenu par l'onglet ; changer de langue ou actualiser ne le redemande plus. |
 | 02.11.2026 | TDP et MAG publiés (par leurs sessions). Accueil : Bixler's devient BIX (adresse `/biw/` inchangée) ; nouvelle colonne Project. |
 | 02.11.2026 | BIX : écran d'accès à 5 chiffres sur le deck et le livret. |
+| 02.11.2026 | TOT publié (« Powerded by Superheros », soirée TotalEnergies, Hilton Genève), sans code d'accès. Source `~/Projects/totalenergies-deck`, git local sans dépôt GitHub. |

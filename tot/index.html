@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#16171C">
+  <title>Powerded by Superheros · Soirée TotalEnergies</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 0l1.6 4.4L14 2.6l-2 4.1L16 8l-4 1.3 2 4.1-4.4-1.8L8 16l-1.6-4.4L2 13.4l2-4.1L0 8l4-1.3-2-4.1 4.4 1.8z' fill='%23FFD60A' stroke='%2317161A'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/bangers-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/shantell-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="../shared/gate.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- The deck is a comic book. The pages lie on a table; a camera reads them panel by panel.
+     Each view frames one or more panels (fit: ids). Objects with data-view show only in the views they list.
+     Photographs are printed twice: in four-colour halftone (.ht) and in colour (.ph), which the Ben Day dots reveal
+     when the camera lands on the panel. -->
+<script type="application/json" id="views">
+[
+  { "id": "couverture",   "label": "Powerded by Superheros",       "kicker": "",                           "fit": ["cover"] },
+
+  { "id": "etat",         "label": "État des lieux",               "kicker": "01 · État des lieux",        "fit": ["pg-1"] },
+  { "id": "zurich-1",     "label": "Ballroom Zurich, vue 01",      "kicker": "01 · État des lieux",        "fit": ["z1"] },
+  { "id": "zurich-2",     "label": "Ballroom Zurich, vue 02",      "kicker": "01 · État des lieux",        "fit": ["z2"] },
+  { "id": "zurich-3",     "label": "Ballroom Zurich, vue 03",      "kicker": "01 · État des lieux",        "fit": ["z3"] },
+  { "id": "zurich-4",     "label": "Ballroom Zurich, vue 04",      "kicker": "01 · État des lieux",        "fit": ["z4"] },
+  { "id": "geneva-1",     "label": "Ballroom Geneva, vue 01",      "kicker": "01 · État des lieux",        "fit": ["g1"] },
+  { "id": "geneva-2",     "label": "Ballroom Geneva, vue 02",      "kicker": "01 · État des lieux",        "fit": ["g2"] },
+
+  { "id": "espace",       "label": "Étude de l’espace",            "kicker": "02 · Étude de l’espace",     "fit": ["pg-2"] },
+  { "id": "surfaces",     "label": "Des surfaces morcelées",       "kicker": "02 · Étude de l’espace",     "fit": ["s1"] },
+  { "id": "zones",        "label": "Cinq zones",                   "kicker": "02 · Étude de l’espace",     "fit": ["s2"] },
+  { "id": "salles",       "label": "Deux salles éloignées",        "kicker": "02 · Étude de l’espace",     "fit": ["s3"] },
+  { "id": "servant-servi","label": "Servant / servi",              "kicker": "02 · Étude de l’espace",     "fit": ["s4"] },
+
+  { "id": "concept",      "label": "Concept visuel",               "kicker": "03 · Concept visuel",        "fit": ["pg-3"] },
+  { "id": "titre",        "label": "Powerded by Superheros",       "kicker": "03 · Concept visuel",        "fit": ["quote"] },
+  { "id": "planche",      "label": "Références",                   "kicker": "03 · Concept visuel",        "fit": ["mood"] },
+  { "id": "annees-50",    "label": "Les super-héros",              "kicker": "03 · Concept visuel",        "fit": ["h1"] },
+  { "id": "comic-book",   "label": "Le comic book",                "kicker": "03 · Concept visuel",        "fit": ["h2"] },
+  { "id": "trame",        "label": "La trame de points",           "kicker": "03 · Concept visuel",        "fit": ["h3"] },
+  { "id": "lichtenstein", "label": "Roy Lichtenstein",             "kicker": "03 · Concept visuel",        "fit": ["h4"] },
+  { "id": "vocabulaire",  "label": "Un vocabulaire",               "kicker": "03 · Concept visuel",        "fit": ["h5"] },
+
+  { "id": "traduction",   "label": "Traduction spatiale",          "kicker": "04 · Traduction spatiale",   "fit": ["pg-4"] },
+  { "id": "densite",      "label": "Un univers dense",             "kicker": "04 · Traduction spatiale",   "fit": ["dens"] },
+  { "id": "big-picture",  "label": "The big picture",              "kicker": "04 · Traduction spatiale",   "fit": ["big"] },
+  { "id": "ceci",         "label": "Ceci",                         "kicker": "04 · Traduction spatiale",   "fit": ["morph"] },
+  { "id": "cela",         "label": "devient cela",                 "kicker": "04 · Traduction spatiale",   "fit": ["morph"] },
+  { "id": "composition",  "label": "La composition",               "kicker": "04 · Traduction spatiale",   "fit": ["axo"] },
+  { "id": "volume",       "label": "En volume",                    "kicker": "04 · Traduction spatiale",   "fit": ["iso"] },
+  { "id": "plan",         "label": "En plan",                      "kicker": "04 · Traduction spatiale",   "fit": ["top"] },
+
+  { "id": "scene",        "label": "La scène",                     "kicker": "04 · La scène",              "fit": ["sc-txt"] },
+  { "id": "scene-refs",   "label": "La scène, références",         "kicker": "04 · La scène",              "fit": ["sc-refs"] },
+  { "id": "scene-maquette","label": "La scène, maquette",          "kicker": "04 · La scène",              "fit": ["sc-model"] },
+  { "id": "scene-concert","label": "La scène, le concert",         "kicker": "04 · La scène",              "fit": ["sc-render"] },
+
+  { "id": "photocall",    "label": "Le photocall",                 "kicker": "04 · Le photocall",          "fit": ["pc-txt"] },
+  { "id": "photocall-refs","label": "Le Daily Planet",             "kicker": "04 · Le photocall",          "fit": ["pc-refs"] },
+  { "id": "photocall-volume","label": "Le photocall en volume",    "kicker": "04 · Le photocall",          "fit": ["pc-iso"] },
+  { "id": "photocall-1",  "label": "Our Daily Planet",             "kicker": "04 · Le photocall",          "fit": ["pc-1"] },
+  { "id": "photocall-2",  "label": "Our Daily Planet",             "kicker": "04 · Le photocall",          "fit": ["pc-2"] },
+
+  { "id": "buffet",       "label": "The halftone buffet",          "kicker": "04 · The halftone buffet",   "fit": ["bf-txt"] },
+  { "id": "salle",        "label": "La grande salle",              "kicker": "04 · The halftone buffet",   "fit": ["bf-room"] },
+  { "id": "salle-fete",   "label": "La grande salle, en fête",     "kicker": "04 · The halftone buffet",   "fit": ["bf-room"] },
+  { "id": "buffet-salle", "label": "Le buffet",                    "kicker": "04 · The halftone buffet",   "fit": ["bf-buffet"] },
+
+  { "id": "geometraux",   "label": "Géométraux",                   "kicker": "05 · Géométraux",            "fit": ["pg-5"] },
+  { "id": "geo-scene",    "label": "La scène",                     "kicker": "05 · Géométraux",            "fit": ["geo-sc"] },
+  { "id": "geo-photocall","label": "Le photocall",                 "kicker": "05 · Géométraux",            "fit": ["geo-pc"] },
+  { "id": "fresque",      "label": "La fresque murale",            "kicker": "05 · Géométraux",            "fit": ["fr-room"] },
+  { "id": "fresque-1",    "label": "Fresque, exemple 1",           "kicker": "05 · Géométraux",            "fit": ["fr-1"] },
+  { "id": "fresque-2",    "label": "Fresque, exemple 2",           "kicker": "05 · Géométraux",            "fit": ["fr-2"] },
+  { "id": "fresque-3",    "label": "Fresque, exemple 3",           "kicker": "05 · Géométraux",            "fit": ["fr-3"] },
+  { "id": "mobiliers",    "label": "Mobiliers",                    "kicker": "05 · Géométraux",            "fit": ["mob"] },
+
+  { "id": "contact",      "label": "Contact",                      "kicker": "",                           "fit": ["back"] }
+]
+</script>
+
+<main class="viewport" id="viewport" aria-roledescription="présentation">
+  <div class="world" id="world">
+
+    <!-- ===================================================================== COVER -->
+    <section class="page cover-page" id="pg-0">
+      <div class="panel cover" id="cover" style="--w:1600;--h:900">
+        <div class="rays" data-draw="rays"></div>
+        <div class="burst-bg" data-draw="burst" data-seed="7" data-fill="#FFD60A"></div>
+        <p class="issue"><b>V3</b><span>Concept<br>scénographique</span></p>
+        <h1 class="title" data-draw="letters">Powerded<br>by Superheros</h1>
+        <p class="cap cover-cap">Soirée TotalEnergies · Hilton Genève</p>
+      </div>
+    </section>
+
+    <!-- ===================================================================== 01 · ÉTAT DES LIEUX -->
+    <section class="page" id="pg-1">
+      <div class="row">
+        <div class="panel head head-yellow" id="h-1" style="--w:3240;--h:460">
+          <div class="burst-num" data-draw="burst" data-seed="11" data-fill="#E8262B"></div>
+          <p class="num">01</p><h2 class="chap">État des lieux</h2>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="z1" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/zurich-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/zurich-1.jpg" alt="Ballroom Zurich, vue 01 : un long volume sous verrière, murs gris et bois"><figcaption class="tab">Ballroom Zurich <i>Vue 01</i></figcaption></figure>
+        <figure class="panel pic" id="z2" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/zurich-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/zurich-2.jpg" alt="Ballroom Zurich, vue 02 : la salle dressée en tables rondes"><figcaption class="tab">Ballroom Zurich <i>Vue 02</i></figcaption></figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="z3" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/zurich-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/zurich-3.jpg" alt="Ballroom Zurich, vue 03"><figcaption class="tab">Ballroom Zurich <i>Vue 03</i></figcaption></figure>
+        <figure class="panel pic" id="z4" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/zurich-4.ht.jpg" alt=""><img class="ph" data-src="assets/img/zurich-4.jpg" alt="Ballroom Zurich, vue 04 : mange-debout sous la verrière"><figcaption class="tab">Ballroom Zurich <i>Vue 04</i></figcaption></figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="g1" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/geneva-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/geneva-1.jpg" alt="Ballroom Geneva, vue 01 : grande salle à plafond bas"><figcaption class="tab">Ballroom Geneva <i>Vue 01</i></figcaption></figure>
+        <figure class="panel pic" id="g2" style="--w:1600;--h:672"><img class="ht" data-src="assets/img/geneva-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/geneva-2.jpg" alt="Ballroom Geneva, vue 02"><figcaption class="tab">Ballroom Geneva <i>Vue 02</i></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ===================================================================== 02 · ÉTUDE DE L'ESPACE -->
+    <section class="page" id="pg-2">
+      <div class="row">
+        <div class="panel head head-blue" id="h-2" style="--w:3240;--h:460">
+          <div class="burst-num" data-draw="burst" data-seed="5" data-fill="#FFD60A"></div>
+          <p class="num">02</p><h2 class="chap">Étude de l’espace</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel plan-panel grey" id="s1" style="--w:1600;--h:1000">
+          <img class="plan-img" data-src="assets/img/surfaces.jpg" alt="Plan d’architecte du niveau événementiel du Hilton">
+          <p class="cap" style="left:36px;top:36px">Les surfaces disponibles pour la soirée<br>sont généreuses. Leur organisation,<br>elle, reste très morcelée.</p>
+        </div>
+        <div class="panel plan-panel" id="s2" style="--w:1600;--h:1000">
+          <div class="plan" data-draw="plan" data-layer="zones"></div>
+          <p class="cap" style="left:36px;top:36px">Elles se répartissent en cinq zones<br>principales, chacune isolée des autres.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel plan-panel" id="s3" style="--w:1600;--h:1000">
+          <div class="plan" data-draw="plan" data-layer="salles"></div>
+          <p class="cap" style="left:36px;top:36px">À cette fragmentation s’ajoute<br>l’éloignement des deux salles de bal,<br>Zurich et Geneva, situées à distance<br>l’une de l’autre.</p>
+        </div>
+        <div class="panel plan-panel" id="s4" style="--w:1600;--h:1000">
+          <div class="plan" data-draw="plan" data-layer="flux"></div>
+          <p class="cap" style="left:36px;top:36px">L’enjeu majeur devient donc la circulation<br>entre ces deux salles : elle doit rester<br>la plus fluide possible. Nous adoptons<br>pour cela une logique <b>servant / servi</b>.</p>
+          <div class="cap cap-list" style="left:36px;bottom:36px">
+            <p><b class="k-blue">À droite,</b> les circulations principales<br>des invités.</p>
+            <p><b class="k-red">À gauche,</b> les circulations de service :<br>vestiaire, sanitaires, accès techniques.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== 03 · CONCEPT VISUEL -->
+    <section class="page" id="pg-3">
+      <div class="row">
+        <div class="panel head head-red" id="h-3" style="--w:3960;--h:460">
+          <div class="burst-num" data-draw="burst" data-seed="3" data-fill="#FFD60A"></div>
+          <p class="num">03</p><h2 class="chap">Concept visuel</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel quote dots-blue" id="quote" style="--w:1960;--h:1100">
+          <div class="balloon" data-draw="balloon"></div>
+          <p class="say">Powerded<br>by Superheros</p>
+        </div>
+        <div class="panel grp mood" id="mood" style="--w:1960;--h:1100">
+          <figure class="sub pic" style="grid-area:a"><img class="ht" data-src="assets/img/mood-5.ht.jpg" alt=""><img class="ph" data-src="assets/img/mood-5.jpg" alt="Onomatopées BOOM, POP, BANG en patchwork"></figure>
+          <figure class="sub pic" style="grid-area:b"><img class="ht" data-src="assets/img/mood-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/mood-1.jpg" alt="Décor d’explosion rouge et jaune autour d’invités"></figure>
+          <figure class="sub pic" style="grid-area:c"><img class="ht" data-src="assets/img/mood-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/mood-3.jpg" alt="Lounge pop aux murs couverts de cases de comic"></figure>
+          <figure class="sub pic" style="grid-area:d"><img class="ht" data-src="assets/img/mood-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/mood-2.jpg" alt="Installation pop lumineuse"></figure>
+          <figure class="sub pic" style="grid-area:e"><img class="ht" data-src="assets/img/mood-4.ht.jpg" alt=""><img class="ph" data-src="assets/img/mood-4.jpg" alt="Scène habillée d’une explosion de comic"></figure>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic story" id="h1" style="--w:760;--h:980"><div class="frame"><img class="ht" data-src="assets/img/fantomen.ht.jpg" alt=""><img class="ph" data-src="assets/img/fantomen.jpg" alt="Couverture de Fantomen, 1950"></div>
+          <figcaption class="cap">Dans les années 1950 et 1960,<br>les super-héros s’imposent<br>comme des icônes de la culture<br>populaire américaine.</figcaption></figure>
+        <figure class="panel pic story" id="h2" style="--w:760;--h:980"><div class="frame"><img class="ht" data-src="assets/img/comics.ht.jpg" alt=""><img class="ph" data-src="assets/img/comics.jpg" alt="Une pile de comic books"></div>
+          <figcaption class="cap">Le comic book devient leur<br>territoire naturel. Il y invente<br>un langage visuel pensé pour être<br>direct, populaire et spectaculaire.</figcaption></figure>
+        <figure class="panel pic story" id="h3" style="--w:760;--h:980"><div class="frame"><img class="ht" data-src="assets/img/trame.ht.jpg" alt=""><img class="ph" data-src="assets/img/trame.jpg" alt="Détail d’impression de comic : la trame de points"></div>
+          <figcaption class="cap">Imprimés vite et à bas coût,<br>ces comics transforment la trame<br>de points en signature visuelle,<br>iconique presque par accident.</figcaption></figure>
+        <figure class="panel pic story" id="h4" style="--w:760;--h:980"><div class="frame"><img class="ht" data-src="assets/img/lichtenstein.ht.jpg" alt=""><img class="ph" data-src="assets/img/lichtenstein.jpg" alt="Détail d’une toile de Roy Lichtenstein, points Ben Day"></div>
+          <figcaption class="cap">Dans les années 1960, Roy Lichtenstein<br>isole et agrandit ces codes. La trame<br>de points, ou points Ben Day, devient<br>sa signature et fait entrer le comic<br>book dans le champ du Pop Art.</figcaption></figure>
+        <figure class="panel pic story" id="h5" style="--w:760;--h:980"><div class="frame"><img class="ht" data-src="assets/img/sweet-dreams.ht.jpg" alt=""><img class="ph" data-src="assets/img/sweet-dreams.jpg" alt="Sweet Dreams, Baby! de Roy Lichtenstein, 1965"></div>
+          <figcaption class="cap">Explosions, impacts, éclairs<br>et onomatopées deviennent alors<br>des signes graphiques immédiatement<br>lisibles. <b>C’est ce vocabulaire<br>que nous faisons nôtre pour la soirée.</b></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ===================================================================== 04 · TRADUCTION SPATIALE -->
+    <section class="page" id="pg-4">
+      <div class="row">
+        <div class="panel head head-yellow" id="h-4" style="--w:3240;--h:460">
+          <div class="burst-num" data-draw="burst" data-seed="9" data-fill="#1C5BD6"></div>
+          <p class="num">04</p><h2 class="chap">Traduction spatiale</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel text-panel dots-red" id="dens" style="--w:1600;--h:1000">
+          <h3 class="ttl">Un univers qui demande<br>de la densité</h3>
+          <p class="cap" style="--i:0">Le Pop Art fonctionne par accumulation, saturation et impact.<br>Pour être convaincant, son univers doit être généreux, dense, immersif.</p>
+          <p class="cap" style="--i:1">Le contexte impose une équation particulièrement contrainte :<br>un espace immense à habiller, <b>800 à 850 invités</b>, un plafond bas,<br>de nombreux éléments fonctionnels à intégrer (scène, bars, buffets,<br>mange-debout, lounges), et un budget décoration limité à <b>40 k€</b>.</p>
+          <p class="cap" style="--i:2">Vouloir décorer tout l’espace reviendrait à diluer ce budget,<br>et avec lui l’impact visuel.</p>
+        </div>
+        <div class="panel text-panel dots-blue" id="big" style="--w:1600;--h:1000">
+          <h3 class="ttl">The big picture</h3>
+          <p class="cap strong" style="--i:0">Les éléments indispensables à l’événement<br>deviennent la scénographie elle-même.</p>
+          <p class="cap" style="--i:1">Vue en plan, la salle se lit comme un tableau Pop Art monumental<br>à la Lichtenstein : l’explosion devient la scène, les étincelles<br>se déploient en linéaires de bars et de buffets, la trame de points<br>se matérialise en alignements de mange-debout et de mobilier.</p>
+          <p class="cap" style="--i:2">À mesure que la salle se remplit, les invités complètent la composition<br>et lui donnent vie. <b>Ils sont dans l’image, ils la composent.</b></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel morph" id="morph" style="--w:1600;--h:1000">
+          <img class="m-a" data-view="ceci" data-src="assets/img/ceci.jpg" alt="Une toile Pop Art : POP! au cœur d’une explosion">
+          <img class="m-b" data-view="cela" data-src="assets/img/cela.jpg" alt="Le plan de la grande salle composé comme cette toile">
+          <canvas class="m-dots" aria-hidden="true"></canvas>
+          <p class="cap m-cap" data-view="ceci">Ceci</p>
+          <p class="cap m-cap2" data-view="cela">devient cela</p>
+        </div>
+        <div class="panel axo dark" id="axo" style="--w:1600;--h:1000">
+          <div class="pdf" data-draw="axo">
+            <img data-src="assets/img/axo.jpg" alt="Axonométrie du niveau : scène, mange-debout, bars, lounges, photocall, vestiaire, fresque" style="left:13px;top:90px;width:1740px">
+          </div>
+          <p class="cap" style="left:30px;top:30px">La composition organise aussi les flux. La scène ancre<br>le fond de la grande salle, la trame de mange-debout guide<br>la circulation des invités, bars et lounges s’installent<br>en périphérie, le vestiaire et les services restent<br>en retrait selon la logique servant / servi.</p>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic dark" id="iso" style="--w:1600;--h:912"><img class="ph plain" data-src="assets/img/iso.jpg" alt="Le niveau en volume, vu de biais"></figure>
+        <figure class="panel pic dark" id="top" style="--w:1600;--h:912"><img class="ph plain" data-src="assets/img/top.jpg" alt="Le niveau vu de dessus"></figure>
+      </div>
+    </section>
+
+    <!-- 04 · La scène -->
+    <section class="page" id="pg-4b">
+      <div class="row">
+        <div class="panel split" id="sc-txt" style="--w:1600;--h:1000">
+          <div class="split-text">
+            <h3 class="ttl">La scène</h3>
+            <p class="cap">Une scénographie explosive pour porter<br>le temps fort de la soirée : le concert live<br>de 90 minutes joué par les équipes.</p>
+            <p class="cap">La même scène accueille ensuite le DJ<br>pour faire basculer la soirée en mode festif.</p>
+            <p class="cap">Une explosion Pop Art jaillit du sol<br>et des murs et fait de la scène<br>le point de mire de toute la salle.</p>
+          </div>
+          <div class="split-pic pic"><img class="ht" data-src="assets/img/scene-burst.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-burst.jpg" alt="Une explosion façon Lichtenstein"></div>
+        </div>
+        <div class="panel grp refs" id="sc-refs" style="--w:1600;--h:1000">
+          <figure class="sub pic" style="grid-area:a"><img class="ht" data-src="assets/img/scene-ref-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-ref-3.jpg" alt="Explosion jaune posée dans une rue"></figure>
+          <figure class="sub pic" style="grid-area:b"><img class="ht" data-src="assets/img/scene-ref-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-ref-2.jpg" alt="Musiciens devant une explosion jaune"></figure>
+          <figure class="sub pic" style="grid-area:c"><img class="ht" data-src="assets/img/scene-ref-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-ref-1.jpg" alt="Cuivres devant une explosion jaune"></figure>
+          <figure class="sub pic" style="grid-area:d"><img class="ht" data-src="assets/img/scene-ref-4.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-ref-4.jpg" alt="Explosion jaune en volume dans la rue"></figure>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="sc-model" style="--w:1600;--h:900"><img class="ht" data-src="assets/img/scene-model.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-model.jpg" alt="Maquette blanche de l’explosion de scène"></figure>
+        <figure class="panel pic" id="sc-render" style="--w:1600;--h:900"><img class="ht" data-src="assets/img/scene-render.ht.jpg" alt=""><img class="ph" data-src="assets/img/scene-render.jpg" alt="Le concert sur la scène en explosion jaune"></figure>
+      </div>
+    </section>
+
+    <!-- 04 · Le photocall -->
+    <section class="page" id="pg-4c">
+      <div class="row">
+        <div class="panel split" id="pc-txt" style="--w:1600;--h:1000">
+          <div class="split-text">
+            <h3 class="ttl">Le photocall<br><span>« Our Daily Planet »</span></h3>
+            <p class="cap">Revivre de l’intérieur l’âge d’or des super-héros,<br>au pied du Daily Planet rebaptisé pour<br>l’occasion : « Our Daily Planet ».</p>
+            <p class="cap">Un photocall immersif où chaque invité<br>entre dans la case du comic,<br>au cœur de l’explosion.</p>
+          </div>
+          <div class="split-pic pic"><img class="ht" data-src="assets/img/planet.ht.jpg" alt=""><img class="ph" data-src="assets/img/planet.jpg" alt="Le globe du Daily Planet dessiné en comic"></div>
+        </div>
+        <div class="panel grp refs" id="pc-refs" style="--w:1600;--h:1000">
+          <figure class="sub pic" style="grid-area:a"><img class="ht" data-src="assets/img/planet-ref-4.ht.jpg" alt=""><img class="ph" data-src="assets/img/planet-ref-4.jpg" alt="Le Daily Planet en dessin"></figure>
+          <figure class="sub pic" style="grid-area:b"><img class="ht" data-src="assets/img/planet-ref-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/planet-ref-2.jpg" alt="Le globe du Daily Planet"></figure>
+          <figure class="sub pic" style="grid-area:c"><img class="ht" data-src="assets/img/planet-ref-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/planet-ref-3.jpg" alt="Le Daily Planet de nuit"></figure>
+          <figure class="sub pic" style="grid-area:d"><img class="ht" data-src="assets/img/planet-ref-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/planet-ref-1.jpg" alt="Les globes du Daily Planet au cinéma"></figure>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="pc-iso" style="--w:3240;--h:1684"><img class="ht" data-src="assets/img/photocall-iso.ht.jpg" alt=""><img class="ph" data-src="assets/img/photocall-iso.jpg" alt="Le photocall en volume : sol rouge, panneaux en explosion, globe doré"></figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="pc-1" style="--w:1600;--h:912"><img class="ht" data-src="assets/img/photocall-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/photocall-1.jpg" alt="Des invités costumés posent devant l’explosion du photocall"></figure>
+        <figure class="panel pic" id="pc-2" style="--w:1600;--h:912"><img class="ht" data-src="assets/img/photocall-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/photocall-2.jpg" alt="Le photocall vu par un photographe"></figure>
+      </div>
+    </section>
+
+    <!-- 04 · The halftone buffet -->
+    <section class="page" id="pg-4d">
+      <div class="row">
+        <div class="panel split" id="bf-txt" style="--w:1600;--h:900">
+          <div class="split-text center"><h3 class="ttl big">The<br>halftone<br>buffet</h3></div>
+          <div class="split-pic pic"><img class="ht" data-src="assets/img/lichtenstein.ht.jpg" alt=""><img class="ph" data-src="assets/img/lichtenstein.jpg" alt="Points Ben Day, détail d’une toile de Roy Lichtenstein"></div>
+        </div>
+        <figure class="panel pic swap" id="bf-room" style="--w:1600;--h:900">
+          <img class="ht" data-src="assets/img/buffet-1.ht.jpg" alt="">
+          <img class="ph" data-src="assets/img/buffet-1.jpg" alt="La grande salle en cocktail : mange-debout, explosion jaune au mur, onomatopées">
+          <img class="ph alt" data-view="salle-fete" data-src="assets/img/buffet-2.jpg" alt="La même salle en mode festif, lumières de fête">
+        </figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="bf-buffet" style="--w:3240;--h:1824"><img class="ht" data-src="assets/img/buffet-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/buffet-3.jpg" alt="Le buffet le long de la salle, invités costumés, onomatopées aux murs"></figure>
+      </div>
+    </section>
+
+    <!-- ===================================================================== 05 · GÉOMÉTRAUX -->
+    <section class="page" id="pg-5">
+      <div class="row">
+        <div class="panel head head-red" id="h-5" style="--w:3240;--h:460">
+          <div class="burst-num" data-draw="burst" data-seed="13" data-fill="#FFD60A"></div>
+          <p class="num">05</p><h2 class="chap">Géométraux</h2>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic white" id="geo-sc" style="--w:1600;--h:1000"><img class="ph plain contain" data-src="assets/img/geo-scene.jpg" alt="Géométral de la scène : plateau, praticables et éclats, cotés"><figcaption class="tab">La scène</figcaption></figure>
+        <figure class="panel pic white" id="geo-pc" style="--w:1600;--h:1000"><img class="ph plain contain" data-src="assets/img/geo-photocall.jpg" alt="Géométral du photocall : sol rouge, panneaux découpés, sphère"><figcaption class="tab">Le photocall</figcaption></figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="fr-room" style="--w:3240;--h:1361"><img class="ht" data-src="assets/img/fresque-room.ht.jpg" alt=""><img class="ph" data-src="assets/img/fresque-room.jpg" alt="La fresque murale le long du Ballroom Zurich, avec lounges et bar"><figcaption class="tab">La fresque murale</figcaption></figure>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="fr-1" style="--w:1600;--h:893"><img class="ht" data-src="assets/img/fresque-1.ht.jpg" alt=""><img class="ph" data-src="assets/img/fresque-1.jpg" alt="Genève en comic : le jet d’eau, la rade, des super-héros dans le ciel"><figcaption class="tab">Exemple d’illustration pour la fresque</figcaption></figure>
+        <div class="panel mob" id="mob" style="--w:1600;--h:893" data-draw="none">
+          <h3 class="ttl">Mobiliers</h3>
+          <div class="mob-grid">
+            <section style="grid-area:lounge"><h4>Lounge</h4><dl><dt>6×</dt><dd>Canapé 3 places</dd><dt>6×</dt><dd>Canapé 2 places</dd><dt>24×</dt><dd>Fauteuil lounge</dd><dt>12×</dt><dd>Table basse</dd></dl></section>
+            <section style="grid-area:cat"><h4>Catering</h4><dl><dt>36 ml</dt><dd>Module buffet / bar 2 m</dd><dt>68×</dt><dd>Mange-debout Ø 70–80 cm</dd><dt>40/60×</dt><dd>Tabouret haut</dd><dt>12/16×</dt><dd>Corbeille / poubelle discrète</dd></dl></section>
+            <section style="grid-area:vest"><h4>Vestiaire</h4><dl><dt>18 ml</dt><dd>Portants</dd><dt>6 ml</dt><dd>Module comptoir</dd></dl></section>
+            <section style="grid-area:fresque"><h4>Fresque</h4><dl><dt>1×</dt><dd>Bâche publicitaire 40 × 5 m</dd><dt>—</dt><dd>Système de fixation</dd></dl></section>
+            <section style="grid-area:scene"><h4>Scène</h4><dl><dt>24×</dt><dd>Praticable de scène 100 × 200 × 50 cm</dd><dt>1×</dt><dd>Escalier de scène</dd><dt>5×</dt><dd>« Épine » de scène</dd><dt>48 m²</dt><dd>Revêtement de scène</dd><dt>5×</dt><dd>Panneaux backdrop</dd><dt>5×</dt><dd>Moquette éclats sol</dd><dt>5×</dt><dd>Éclats murs</dd></dl></section>
+            <section style="grid-area:photo"><h4>Photobooth</h4><dl><dt>110 m²</dt><dd>Moquette</dd><dt>2×</dt><dd>Backdrop rigide 450 × 600 cm</dd><dt>1×</dt><dd>Backdrop souple 450 × 600 cm</dd><dt>1×</dt><dd>Sphère « Daily Planet » Ø 150 cm</dd></dl></section>
+            <section style="grid-area:div"><h4>Divers</h4><dl><dt>4 ml</dt><dd>Régie intégrée à l’espace</dd><dt>8×</dt><dd>Stickers d’onomatopées</dd></dl></section>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <figure class="panel pic" id="fr-2" style="--w:1600;--h:686"><img class="ht" data-src="assets/img/fresque-2.ht.jpg" alt=""><img class="ph" data-src="assets/img/fresque-2.jpg" alt="Genève vue du ciel en comic, foisonnante de détails"><figcaption class="tab">Exemple d’illustration pour la fresque</figcaption></figure>
+        <figure class="panel pic" id="fr-3" style="--w:1600;--h:686"><img class="ht" data-src="assets/img/fresque-3.ht.jpg" alt=""><img class="ph" data-src="assets/img/fresque-3.jpg" alt="Genève et le jet d’eau en comic, vue aérienne"><figcaption class="tab">Exemple d’illustration pour la fresque</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ===================================================================== BACK COVER -->
+    <section class="page cover-page" id="pg-6">
+      <div class="panel back dots-red" id="back" style="--w:1600;--h:900">
+        <div class="balloon" data-draw="balloon"></div>
+        <p class="say small">Contact<br><a href="mailto:guillaumehelleu.pro@gmail.com">guillaumehelleu.pro@gmail.com</a></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- the frame of the deck: the chapter, at the scale of the stage. The folio is printed in the margin of each page (engine.js). -->
+<div class="chrome" id="chrome" aria-hidden="true">
+  <p class="kicker" id="kicker"></p>
+</div>
+
+<div class="hud" role="toolbar">
+  <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
+  <div class="hud-r" data-controls data-pdf="export/TotalEnergies_Powerded-by-Superheros.pdf" data-pdf-name="TotalEnergies - Powerded by Superheros.pdf"></div>
+</div>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+<script src="config.js"></script>
+<script src="../shared/gate.js"></script>
+<script src="../shared/controls.js"></script>
+<script src="assets/plan.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
