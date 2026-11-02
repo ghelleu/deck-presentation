@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#08080D">
+  <title>Magnetic · Pour que la créativité impact le monde</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='none' stroke='%232433FF' stroke-width='2.5'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23FF4B2E'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="../shared/gate.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas class="field" id="field" aria-hidden="true"></canvas>
+
+<main class="stage" id="stage" aria-roledescription="présentation">
+
+  <!-- Field poles per slide: data-field="x1 y1 x2 y2" (fractions of the stage), data-glow for the blue statements,
+       data-geneva="x y" draws the red point of Geneva. -->
+
+  <section class="slide cover" id="magnetic" data-transition="fade" data-field="0.22 0.5 0.78 0.5" data-glow="1" data-label="Magnetic" data-folio="no">
+    <h1 class="wordmark big" data-draw="wordmark" aria-label="Magnetic"></h1>
+    <p class="cv-sub in" style="--d:1500">pour que la créativité impact le monde</p>
+    <p class="label cv-foot in" style="--d:1900"><span>Association · Genève</span><span>novembre 2026</span></p>
+  </section>
+
+  <section class="slide poles" id="un-croisement" data-transition="fade" data-field="0.2 0.62 0.8 0.62" data-label="Un croisement">
+    <p class="statement" style="--d:100">Magnetic est né d’un croisement entre <em class="hl">ce qui était déjà là</em> et <em class="hl">ce qui est arrivé</em>.</p>
+    <div class="pole-tags" aria-hidden="true">
+      <p class="pole-tag left in" style="--d:900"><b>Downtown Studio</b><span>ce qui était déjà là</span></p>
+      <p class="pole-tag right in" style="--d:1200"><b>Together</b><span>ce qui est arrivé</span></p>
+    </div>
+  </section>
+
+  <section class="slide split" id="deja-la" data-transition="pan" data-field="0.12 0.75 0.62 0.3" data-label="Ce qui était déjà là">
+    <div class="txt">
+      <p class="kicker label in">01 · Origine</p>
+      <p class="lead in" style="--d:100"><span class="pole-dot n"></span>Ce qui était déjà là,</p>
+      <p class="body in" style="--d:350">c’est <i>Downtown Studio</i>. Un lieu dont les valeurs (<em class="hl">l’individu au cœur du collectif</em>) portaient déjà, sans le savoir, ce que Magnetic allait exploiter.</p>
+    </div>
+    <figure class="media"><img data-src="assets/img/downtown.jpg" alt="L’espace de Downtown Studio, une verrière, des plantes et des tables"></figure>
+  </section>
+
+  <section class="slide split" id="ce-qui-est-arrive" data-transition="pan" data-field="0.62 0.3 0.12 0.75" data-label="Ce qui est arrivé">
+    <div class="txt">
+      <p class="kicker label in">01 · Origine</p>
+      <p class="lead in" style="--d:100"><span class="pole-dot s"></span>Ce qui est arrivé,</p>
+      <p class="body in" style="--d:350">c’est <i>Together</i>, l’expérience immersive du Portail des Nations. En la réalisant, notre créativité a servi à transmettre une idée forte et ce faisant à <em class="hl">impacter le monde positivement</em>.</p>
+    </div>
+    <figure class="media"><img data-src="assets/img/together.jpg" alt="Together : un poste de commande face à des écrans immersifs"></figure>
+  </section>
+
+  <section class="slide split" id="une-evidence" data-transition="pan" data-steps="1" data-field="0.3 0.5 0.7 0.5" data-label="Une évidence">
+    <div class="txt">
+      <p class="kicker label in">01 · Origine</p>
+      <p class="body in" style="--d:100">De cette rencontre est née une évidence :</p>
+      <p class="question" data-step="1">Si la créativité a pu transmettre une idée au monde, ne pourrait-elle pas devenir <em class="hl">une méthode pour agir sur lui</em> ?</p>
+    </div>
+    <figure class="media blue"><img data-src="assets/img/evidence.jpg" alt="Collage : un cerveau, une main levée, une ampoule, une bulle de dialogue"></figure>
+  </section>
+
+  <section class="slide glow" id="pour-que" data-transition="warp" data-field="0.5 0.12 0.5 0.88" data-glow="1" data-label="Pour que la créativité impact le monde">
+    <p class="manifest-line" style="--d:200"><span class="wm-inline">Magnetic</span> : Pour que la créativité impact le monde</p>
+  </section>
+
+  <section class="slide split" id="geneve" data-transition="pan" data-field="0.68 0.48 0.98 0.1" data-geneva="0.66 0.55" data-label="Genève">
+    <div class="txt">
+      <p class="kicker label in">02 · L’Esprit de Genève</p>
+      <p class="lead in" style="--d:100">Depuis des siècles, Genève, ville d’accueil, fait émerger des idées, des institutions et des formes dont la portée <em class="hl">dépasse largement son territoire</em>.</p>
+    </div>
+    <figure class="media"><img data-src="assets/img/europe.jpg" alt="Carte de l’Europe la nuit, une onde rouge partant de Genève"><span class="waves" aria-hidden="true"><i></i><i></i><i></i></span></figure>
+  </section>
+
+  <section class="slide traz" id="l-esprit-de-geneve" data-transition="pan" data-field="0.18 0.5 0.85 0.4" data-label="L’Esprit de Genève">
+    <figure class="book in" style="--d:100"><img data-src="assets/img/traz.jpg" alt="Couverture de L’Esprit de Genève, Robert de Traz, 1929"></figure>
+    <div class="txt">
+      <p class="kicker label in">02 · L’Esprit de Genève</p>
+      <p class="body in" style="--d:200">En 1929, l’écrivain et penseur Robert de Traz donne un nom à cette singularité :</p>
+      <p class="name in" style="--d:500">“L’Esprit de Genève.”</p>
+      <p class="body in" style="--d:800">Une tradition propre à la ville : celle de <em class="hl">faire naître localement des formes capables de déborder sur le monde</em>.</p>
+    </div>
+  </section>
+
+  <section class="slide figures" id="trois-figures" data-transition="pan" data-steps="4" data-field="0.25 0.2 0.25 0.85" data-label="Calvin, Rousseau, Dunant">
+    <div class="portraits">
+      <figure class="pf" data-pf="1"><img data-src="assets/img/calvin.jpg" alt="Portrait de Jean Calvin"><figcaption>Calvin</figcaption></figure>
+      <figure class="pf" data-pf="2"><img data-src="assets/img/rousseau.jpg" alt="Portrait de Jean-Jacques Rousseau"><figcaption>Rousseau</figcaption></figure>
+      <figure class="pf" data-pf="3"><img data-src="assets/img/dunant.jpg" alt="Portrait d’Henry Dunant"><figcaption>Dunant</figcaption></figure>
+    </div>
+    <div class="txt">
+      <p class="kicker label in">02 · L’Esprit de Genève</p>
+      <p class="body in" style="--d:100">Trois figures permettent d’en saisir la logique.</p>
+      <ul class="arrows">
+        <li data-step="1"><b>Calvin</b>, pour la rigueur et l’exigence éthique comme fondement d’une communauté responsable.</li>
+        <li data-step="2"><b>Rousseau</b>, pour l’ouverture au monde à travers une pensée sensible de l’universel.</li>
+        <li data-step="3"><b>Dunant</b>, pour l’invention d’une compassion politique, traduite en droit international.</li>
+      </ul>
+      <p class="coda" data-step="4">Trois manières différentes d’articuler l’universel à partir d’un lieu.</p>
+    </div>
+  </section>
+
+  <section class="slide split commons" id="le-bien-commun" data-transition="pan" data-field="0.1 0.3 0.9 0.6" data-label="Les formes du bien commun">
+    <div class="txt wide">
+      <p class="kicker label in">02 · L’Esprit de Genève</p>
+      <p class="body in" style="--d:100">Cette dynamique a produit des formes majeures du bien commun :</p>
+      <ul class="arrows big">
+        <li class="in" style="--d:300">le Multilatéralisme qui fera naître l’ONU</li>
+        <li class="in" style="--d:450">Le Comité international de la Croix-Rouge.</li>
+        <li class="in" style="--d:600">Les Conventions de Genève.</li>
+        <li class="in" style="--d:750">La Revue de Genève.</li>
+        <li class="in muted" style="--d:900">etc</li>
+      </ul>
+      <p class="body in" style="--d:1200">Dans chaque cas, <em class="hl">une initiative située, capable d’acquérir une portée bien plus vaste qu’elle-même</em>.</p>
+    </div>
+    <div class="media stack">
+      <figure class="in" style="--d:200"><img data-src="assets/img/croix-rouge.jpg" alt="Drapeaux de la Croix-Rouge sur une façade"></figure>
+      <figure class="in" style="--d:400"><img data-src="assets/img/revue.jpg" alt="Couverture de la Revue de Genève, juillet 1927"></figure>
+      <figure class="in" style="--d:600"><img data-src="assets/img/conventions.jpg" alt="Signature d’une convention autour d’une table"></figure>
+    </div>
+  </section>
+
+  <section class="slide essay" id="l-objectif" data-transition="fade" data-steps="3" data-field="0.08 0.92 0.92 0.08" data-label="Notre objectif">
+    <p class="kicker label in">02 · L’Esprit de Genève</p>
+    <div class="essay-col">
+      <p class="lead in" style="--d:100">Jusqu’ici, cet esprit s’est surtout exprimé dans le champ institutionnel.</p>
+      <p class="lead" data-step="1">Notre objectif est de l’activer dans celui de <em class="hl">la création contemporaine</em> pour en prolonger la puissance transformatrice par un autre moyen.</p>
+      <p class="body" data-step="2">Le projet propose de faire de Genève un laboratoire contemporain de cette transposition. Un espace où une tradition historiquement féconde dans le champ politique peut être traduite en pratiques culturelles, artistiques et expérimentales qui œuvrent pour le bien commun.</p>
+      <p class="body strong" data-step="3">L’enjeu est d’éprouver une capacité d’impact par le biais de la création.</p>
+    </div>
+  </section>
+
+  <section class="slide glow" id="reactiver" data-transition="warp" data-field="0.15 0.5 0.85 0.5" data-glow="1" data-label="Réactiver l’Esprit de Genève">
+    <p class="manifest-line" style="--d:200">Réactiver créativement l’Esprit de Genève pour faire de la création un outil pour repenser le commun.</p>
+  </section>
+
+  <section class="slide act" id="le-manifeste" data-transition="warp" data-field="0.5 0.5 0.5 0.5" data-mode="ring" data-label="Le Manifeste">
+    <p class="label in">03</p>
+    <h2 class="act-title in" style="--d:150">Le Manifeste</h2>
+  </section>
+
+  <section class="slide manifesto" id="six-principes" data-transition="fade" data-field="0.05 0.5 0.4 0.5" data-label="Six principes">
+    <p class="kicker label in">03 · Le Manifeste</p>
+    <ol class="principles">
+      <li class="in" style="--d:150"><span class="n">01</span><b>Être rigoureux</b><span class="d">Chercher la justesse plutôt que l’effet. Faire tenir ensemble la forme, l’idée et le geste.</span></li>
+      <li class="in" style="--d:350"><span class="n">02</span><b>Ouvrir le dialogue</b><span class="d">Faire se rencontrer les disciplines, les cultures et les savoirs. La création se construit dans l’échange.</span></li>
+      <li class="in" style="--d:550"><span class="n">03</span><b>Servir le commun</b><span class="d">Concevoir des formes qui ne se referment pas sur elles-mêmes. Faire de la création un espace de relation, d’usage ou de partage.</span></li>
+      <li class="in" style="--d:750"><span class="n">04</span><b>Créer la confiance</b><span class="d">Accueillir la divergence sans chercher à l’effacer. Faire de la neutralité un cadre fertile pour l’expérimentation.</span></li>
+      <li class="in" style="--d:950"><span class="n">05</span><b>Dépasser les frontières</b><span class="d">Partir d’un lieu précis tout en visant plus large. Produire des formes capables de résonner au-delà de leur contexte d’origine.</span></li>
+      <li class="in" style="--d:1150"><span class="n">06</span><b>Partager la connaissance</b><span class="d">Documenter, transmettre, rendre accessible. Une idée gagne en force lorsqu’elle peut circuler.</span></li>
+    </ol>
+  </section>
+
+  <section class="slide phases" id="trois-phases" data-transition="fade" data-steps="3" data-field="0.2 0.62 0.82 0.62" data-label="Trois phases">
+    <p class="kicker label in">04 · La méthode</p>
+    <h2 class="ph-title in" style="--d:100">Un projet en 3 grandes phases</h2>
+    <div class="ph-art art" data-draw="phases" aria-hidden="true"></div>
+    <div class="ph-cols">
+      <div class="ph" data-step="1"><b>Attraction</b><span>partager la vision</span></div>
+      <div class="ph" data-step="2"><b>Collision</b><span>faire se rencontrer les idées</span></div>
+      <div class="ph" data-step="3"><b>Résonance</b><span>diffuser au monde</span></div>
+    </div>
+  </section>
+
+  <section class="slide glow" id="une-maniere-d-agir" data-transition="warp" data-field="0.5 0.9 0.5 0.1" data-glow="1" data-label="Une manière d’agir sur le monde">
+    <p class="manifest-line" style="--d:200">L’Esprit de Genève n’est pas seulement un héritage. C’est une manière singulière d’agir sur le monde et notre ambition est d’en éprouver aujourd’hui toute sa force par la création.</p>
+  </section>
+
+  <section class="slide launch" id="le-lancement" data-transition="pan" data-steps="2" data-field="0.04 0.96 0.96 0.96" data-label="Le lancement">
+    <p class="kicker label in">05 · Le lancement</p>
+    <div class="launch-text">
+      <p class="body in" style="--d:100">Cette idée a été présentée à Laurent Finck, de Lumens 8, qui a tout de suite voulu rejoindre l’initiative, en mettant à disposition ses ressources créatives pour les projets à venir. <em class="hl">Magnetic était lancé.</em></p>
+      <p class="body" data-step="1">Un mois plus tard, François Moncarey, du Geneva Lux, se passionne à son tour et nous offre le premier projet de l’association : <em class="hl">la Tour des Possibles</em>.</p>
+    </div>
+    <div class="chain art" data-draw="chain" aria-hidden="true"></div>
+  </section>
+
+  <section class="slide end" id="contact" data-transition="warp" data-field="0.22 0.5 0.78 0.5" data-glow="1" data-label="Contact" data-folio="no">
+    <p class="wordmark" data-draw="wordmark" aria-label="Magnetic"></p>
+    <p class="contact in" style="--d:1400"><a href="mailto:contact@magnetic.ch">contact@magnetic.ch</a></p>
+  </section>
+
+</main>
+
+<div class="hud" role="toolbar">
+  <div class="hud-l"><span class="hud-count" id="hudCount"></span><span class="hud-title" id="hudTitle"></span></div>
+  <div class="hud-r" data-controls data-pdf="export/Magnetic_Deck-2026.pdf" data-pdf-name="Magnetic - Deck 2026.pdf"></div>
+</div>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+<script src="config.js"></script>
+<script src="../shared/gate.js"></script>
+<script src="../shared/controls.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
