@@ -12,7 +12,7 @@ deck-presentation.com est une **plateforme de visionnage de présentations** (de
 |---|---|---|
 | Ce que c'est | Le lecteur : la page d'accueil, l'écran d'accès, la barre de commandes (boutons **et** apparence), les langues, le modèle de nouveau deck, le domaine, l'hébergement | Le contenu : chaque présentation (textes, images, mise en page, PDF), une par client, qui vient se glisser sous l'interface |
 | Où on travaille | Le dépôt `ghelleu/deck-presentation`, dans `~/Projects/deck-presentation` | Le dossier source de chaque deck (voir §5), **pas** dans le dépôt de la plateforme |
-| Ce qu'on y touche | `index.html` (accueil), `shared/`, `modele/`, `tools/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) |
+| Ce qu'on y touche | `index.html` (accueil), `shared/`, `modele/`, `tools/`, `README.md`, `MANUEL.md`, `CNAME` | Tout le contenu du deck, puis on recopie le résultat dans son dossier publié (`als/`, `how/`, `bix/`, `tdp/`, `mag/`) |
 | Session Claude | « DECK HOME » | Une session par deck (ALS, HOW, BIX, TDP, MAG…) |
 
 Règle d'or : **la plateforme définit les commandes, les decks les respectent.** Un deck ne rajoute ni bouton ni raccourci clavier à lui.
@@ -23,7 +23,7 @@ En ligne aujourd'hui :
 |---|---|---|---|---|---|---|
 | ALS | The century of a Memory | A. Lange & Söhne | Inauguration | MCI | Nov. 2026 | https://deck-presentation.com/als/ |
 | HOW | Press & Retailers Event 2027 | House of Wunder | Événementiel | MCI | Nov. 2026 | https://deck-presentation.com/how/ |
-| BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
+| BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/bix/ |
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
 | MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | https://deck-presentation.com/mag/ |
 | TOT | Powerded by Superheros | TotalEnergies | Soirée | MCI | Nov. 2026 | https://deck-presentation.com/tot/ |
@@ -37,7 +37,7 @@ En ligne aujourd'hui :
 |---|---|---|---|
 | Dépôt de la plateforme | `github.com/ghelleu/deck-presentation` → `~/Projects/deck-presentation` | **Public** | Tout ce qui est servi sur le site, branche `main`, racine |
 | Source ALS | `github.com/ghelleu/als-century-of-exchange` → `~/Projects/als-century-of-exchange` | Privé | Deck ALS complet (notes, outils, références) |
-| Source BIW | `github.com/ghelleu/bixter` → `~/Projects/bixter` | Privé | Copie de `Hint3rland/bixter` sans les médias du film (remote `hint3rland`, en lecture seule) |
+| Source BIX | `github.com/ghelleu/bixter` → `~/Projects/bixter` | Privé | Copie de `Hint3rland/bixter` sans les médias du film (remote `hint3rland`, en lecture seule) |
 | Source HOW | `~/HOW-sources` | **Pas de git** | PowerPoint d'origine, outils de fabrication (`tools/build.py`) |
 | Domaine | Gandi, `deck-presentation.com` | | DNS LiveDNS vers GitHub Pages (`@` A + AAAA, `www` CNAME `ghelleu.github.io`) |
 | Hébergement | GitHub Pages | Toujours public | HTTPS Let's Encrypt, HTTPS forcé, `www` redirige vers le domaine nu |
@@ -58,7 +58,7 @@ deck-presentation/
 ├── robots.txt        interdit l'indexation de tout le site            ← plateforme
 ├── als/              copie publiée du deck ALS                       ← deck (recopié depuis sa source)
 ├── how/              copie publiée du deck HOW                       ← deck (fabriqué par build.py)
-├── biw/              copie publiée du deck BIX                       ← deck (recopié depuis bixter)
+├── bix/              copie publiée du deck BIX                       ← deck (recopié depuis bixter)
 ├── tdp/              copie publiée du deck TDP                       ← deck (recopié depuis tour-des-possibles)
 ├── mag/              copie publiée du deck MAG                       ← deck (recopié depuis magnetic-deck)
 └── tot/              copie publiée du deck TOT                       ← deck (recopié depuis totalenergies-deck)
@@ -142,9 +142,9 @@ Le plus simple : partir de [`modele/`](modele/README.md), qui le respecte déjà
 
 Il faut aussi `<meta name="robots" content="noindex, nofollow">` dans la page du deck.
 
-Exception BIX : le deck a son propre dossier `biw/shared/`, donc il charge les fichiers de la plateforme par un chemin absolu (`/shared/gate.css`, `/shared/controls.css`, `/shared/gate.js`, `/shared/controls.js`). Son `base.css`, partagé avec ses autres pistes de travail, garde d'anciennes règles de barre : `controls.css`, chargé après, l'emporte.
+Exception BIX : le deck a son propre dossier `bix/shared/`, donc il charge les fichiers de la plateforme par un chemin absolu (`/shared/gate.css`, `/shared/controls.css`, `/shared/gate.js`, `/shared/controls.js`). Son `base.css`, partagé avec ses autres pistes de travail, garde d'anciennes règles de barre : `controls.css`, chargé après, l'emporte.
 
-Aperçu local d'un deck depuis sa source : un lien `shared`, ignoré par git, pointe vers `~/Projects/deck-presentation/shared` (`ln -s ~/Projects/deck-presentation/shared shared`). Il est en place pour ALS et BIW.
+Aperçu local d'un deck depuis sa source : un lien `shared`, ignoré par git, pointe vers `~/Projects/deck-presentation/shared` (`ln -s ~/Projects/deck-presentation/shared shared`). Il est en place pour ALS et BIX.
 
 ### 3.5 Publier un changement de la plateforme
 
@@ -197,12 +197,12 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 - `how/engine.js` et `how/styles.css` se modifient **directement dans le dépôt de la plateforme**, qui en est la seule copie.
 - **Publier** : `git add how && git commit && git push` depuis `~/Projects/deck-presentation`.
 
-### BIX : Bixler's × Rolex (adresse /biw/)
+### BIX : Bixler's × Rolex
 
 - **Source** : `~/Projects/bixter` (privé, `ghelleu/bixter`). Elle copie `Hint3rland/bixter` sans les médias du film. Lire son `CLAUDE.md`, et `assets/film/RULES.md` pour tout ce qui touche au film.
 - **Langue** : anglais seulement, donc pas de bouton langue. **Code d'accès** : oui depuis le 02.11.2026, sur le deck et sur le livret (`directions/full/config.js`, clé `GATE`).
 - **Structure différente** des deux autres decks : moteur `full.js`, avec `directions/shared/engine.js` et `base.css`. Son `config.js` ne sert qu'à la plateforme (`LANGS`, `GATE`). Il y a aussi un livret (`book.html`, avec son PDF) et des films (`film/`).
-- **Publier** : copier `directions/full/` dans `biw/` et `directions/shared/` dans `biw/shared/`. Dans `index.html` et `book.html`, remplacer `"../shared/` par `"shared/`, mais laisser tels quels les fichiers de la plateforme (`/shared/gate.css`, `/shared/gate.js`, `/shared/controls.js`, en chemin absolu). Ensuite : `git add biw && git commit && git push`.
+- **Publier** : copier `directions/full/` dans `bix/` et `directions/shared/` dans `bix/shared/`. Dans `index.html` et `book.html`, remplacer `"../shared/` par `"shared/`, mais laisser tels quels les fichiers de la plateforme (`/shared/gate.css`, `/shared/gate.js`, `/shared/controls.js`, en chemin absolu). Ensuite : `git add bix && git commit && git push`.
 - Le remote `hint3rland` est configuré pour ne pas télécharger les gros fichiers (`blob:none`). Ne pas le récupérer en entier : il pèse plusieurs gigaoctets de films.
 
 ### TDP : La Tour des Possibles (Magnetic × Geneva Lux 2027)
@@ -252,7 +252,7 @@ On travaille dans la source du deck, on refabrique sa copie, puis on fait `git a
 ### 6.5 Vérifier après un changement
 ```bash
 python3 tools/check-decks.py      # chaque deck est-il sous l'interface ?
-for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
+for u in "" als/ how/ bix/ shared/controls.js shared/gate.js shared/gate.css; do
   printf "%s /%s\n" "$(curl -s -o /dev/null -w '%{http_code}' https://deck-presentation.com/$u)" "$u"; done
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
@@ -268,9 +268,9 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 
 ### 7.1 Ce qui fonctionne
 - Le site, les decks, les fichiers `shared/` et les PDF répondent tous en `200`. HTTPS est forcé et `www` redirige.
-- La barre commune est en place sur les trois decks publiés **et** dans leurs sources (gabarit HOW, ALS, BIW). Les anciens boutons (annexes, notes, aide) et les anciennes touches ont disparu partout.
+- La barre commune est en place sur les trois decks publiés **et** dans leurs sources (gabarit HOW, ALS, BIX). Les anciens boutons (annexes, notes, aide) et les anciennes touches ont disparu partout.
 - L'écran d'accès commun est actif sur ALS, HOW, BIX, CBM et TOT (depuis le 02.11.2026 pour les trois derniers). Plus aucun deck n'embarque sa propre copie.
-- Les dépôts sources ALS et BIW sont propres et synchronisés avec GitHub.
+- Les dépôts sources ALS et BIX sont propres et synchronisés avec GitHub.
 
 ### 7.2 Corrigé pendant cet audit
 | Constat | Correction |
@@ -286,10 +286,10 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 1 | **Élevé** | **Confidentialité.** Le dépôt de la plateforme est public : textes (`content/*.json`), images et PDF sont lisibles sans code, sur GitHub comme par leur adresse directe. Le code à 5 chiffres ne fait que 100 000 combinaisons et son empreinte est dans `config.js` : on le retrouve en moins d'une seconde. | Le considérer comme une politesse. Pour un deck vraiment confidentiel, il faut une protection côté serveur, par exemple Cloudflare Access devant le domaine, ou un hébergeur avec mot de passe. Un site GitHub Pages reste public même depuis un dépôt privé. |
 | 2 | **Élevé** | **Des sources sans sauvegarde.** `~/HOW-sources`, avec le PowerPoint d'origine et les outils, n'a ni git ni sauvegarde. `~/Projects/tour-des-possibles` (TDP) et `~/Projects/magnetic-deck` (MAG) ont un git local mais aucun dépôt GitHub. Une perte du disque perd ces sources. | En faire des dépôts privés (`ghelleu/how-sources`, `ghelleu/tour-des-possibles`, `ghelleu/magnetic-deck`). C'est à décider dans les canaux de ces decks. |
 | 3 | ~~Moyen~~ Corrigé | **Indexation.** L'accueil, avec les noms des clients, pouvait être indexé. Les `robots.txt` placés dans les dossiers des decks sont ignorés : seul celui de la racine compte. | Fait le 31.10.2026 : `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. Ne pas les retirer. |
-| 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIW : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
+| 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIX : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
 | 6 | Corrigé | **BIX n'avait pas d'écran d'accès.** | Fait le 02.11.2026 : `config.js` avec `GATE`, et `/shared/gate.*` chargés dans le deck et le livret. CBM et TOT ont reçu le leur le même jour. TDP et MAG n'en ont pas (`GATE: null`). |
-| 7 | Faible | BIW charge la barre par un chemin absolu (`/shared/controls.js`). C'est correct sur le domaine, mais ça casserait si le site était servi sous un sous-dossier. | Rien à faire tant que le domaine ne change pas. |
+| 7 | Faible | BIX charge la barre par un chemin absolu (`/shared/controls.js`). C'est correct sur le domaine, mais ça casserait si le site était servi sous un sous-dossier. | Rien à faire tant que le domaine ne change pas. |
 | 8 | Corrigé | La navigation et les vignettes étaient réécrites dans chaque moteur. | Fait le 02.11.2026 : le lecteur commun (`shared/viewer.js`) les porte pour tous les decks ; `tools/check-decks.py` refuse un deck qui les referait. |
 | 9 | Faible | Pas de page 404. | Une `404.html` sobre à la racine. (La vérification automatique existe : `tools/check-decks.py`.) |
 
@@ -298,7 +298,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 ## 8. Règles de travail (personnes et agents)
 
 1. **Savoir dans quel projet on est.** Plateforme : accueil, `shared/`, docs, domaine. Deck : tout le reste. Une demande sur le contenu d'un deck se traite dans la session de ce deck.
-2. **Ne modifier un dossier de deck (`als/`, `how/`, `biw/`, `tdp/`, `mag/`) depuis la plateforme** que si une fonction commune l'exige, et reporter le même changement dans la source du deck.
+2. **Ne modifier un dossier de deck (`als/`, `how/`, `bix/`, `tdp/`, `mag/`) depuis la plateforme** que si une fonction commune l'exige, et reporter le même changement dans la source du deck.
 3. **Git dans `~/Projects/deck-presentation`** : `git pull --ff-only` avant de commencer ; ajouter les fichiers par chemin (`git add als`), jamais `git add -A` ; ne pas changer de branche ; pour une branche, utiliser `git worktree add`.
 4. **Ne jamais publier de notes du présentateur** ni de contenu sous arbitrage. Passer par les outils de publication des decks.
 5. **Aucun bouton ni raccourci propre à un deck.** Une nouvelle commande se décide au niveau de la plateforme, pour tous les decks.
@@ -331,3 +331,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | ALS, HOW et BIX (deck et livret) passent sur le lecteur commun : tous les decks ont maintenant les mêmes touches, la même grille, les mêmes coches et le PDF des slides cochées. Les vignettes montrent chaque slide au repos (sans animation). |
 | 02.11.2026 | `tools/check-decks.py` devient strict : un deck (et toute page avec la barre, comme le livret de BIX) doit charger le lecteur, lui confier ses slides, et n'écouter aucune touche ni construire ses propres vignettes. 9 pages sur 9 conformes. |
 | 02.11.2026 | `HANDOVER.md` : passation exhaustive pour les agents (état, méthodes de création et de mise en place, git, tests, pièges, risques). |
+| 02.11.2026 | BIX : dossier et adresse renommés `bix/` (code BIX partout) ; `/biw/` et `/biw/book.html` redirigent vers `/bix/` pour les liens déjà envoyés. |

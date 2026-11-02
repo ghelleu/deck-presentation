@@ -174,10 +174,11 @@ def check(deck, home, file="index.html"):
 
 def main():
     home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    is_redirect = lambda e: 'http-equiv="refresh"' in open(os.path.join(ROOT, e, "index.html"), encoding="utf-8").read()
     decks = sys.argv[1:] or sorted(
         e for e in os.listdir(ROOT)
-        if e not in NOT_DECKS and os.path.isfile(os.path.join(ROOT, e, "index.html"))
-    )
+        if e not in NOT_DECKS and os.path.isfile(os.path.join(ROOT, e, "index.html")) and not is_redirect(e)
+    )  # a folder that only redirects (e.g. biw/ → bix/) is not a deck
     bad = 0
     # every page of a deck that shows the toolbar (the deck itself, a book beside it…)
     pages = []

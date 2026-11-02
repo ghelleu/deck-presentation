@@ -54,14 +54,14 @@ Passation complète pour un agent (ou une personne) qui reprend le projet. État
 |---|---|---|---|---|---|---|---|---|
 | ALS | The century of a Memory | A. Lange & Söhne | Inauguration | MCI | Nov. 2026 | `/als/` | fr, en | oui |
 | HOW | Press & Retailers Event 2027 | House of Wunder | Événementiel | MCI | Nov. 2026 | `/how/` | en, fr | oui |
-| BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | `/biw/` (+ livret `/biw/book.html`) | en | oui |
+| BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | `/bix/` (+ livret `/bix/book.html`) | en | oui |
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | `/tdp/` | fr, en | non |
 | MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | `/mag/` | fr, en | non |
 | TOT | Powerded by Superheros | TotalEnergies | Soirée | MCI | Nov. 2026 | `/tot/` | fr, en | oui |
 | CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | `/cbm/` | fr | oui |
 
 `/modele/` est en ligne mais **non listé** sur l'accueil (c'est le gabarit de départ).
-Attention : le code BIX est **BIX**, mais son dossier et son adresse restent **`biw/`** (pour ne pas casser les liens déjà envoyés).
+Le dossier et l'adresse de BIX sont **`bix/`** depuis le 02.11.2026. L'ancienne adresse `/biw/` (et `/biw/book.html`) n'est plus qu'une redirection vers `/bix/`, pour les liens déjà envoyés : ne jamais republier le deck dans `biw/`.
 
 ### 2.3 Arborescence du dépôt de la plateforme
 
@@ -78,7 +78,7 @@ deck-presentation/
 ├── robots.txt          Disallow: / (aucune indexation)                                      ← interface
 ├── README.md · MANUEL.md · AGENTS.md · CLAUDE.md (→ AGENTS.md) · HANDOVER.md                ← interface
 ├── CNAME · .nojekyll                                                                        ← interface
-└── als/ how/ biw/ tdp/ mag/ tot/ cbm/   copies publiées des decks                           ← decks
+└── als/ how/ bix/ tdp/ mag/ tot/ cbm/   copies publiées des decks                           ← decks
 ```
 
 ---
@@ -170,13 +170,13 @@ V.go(i, step) · V.goId(id, step) · V.next() · V.prev() · V.current() · V.hi
 <script src="../shared/viewer.js"></script>
 <script src="engine.js"></script>                        <!-- 4. le moteur du deck, qui appelle DeckViewer.mount -->
 ```
-Exception BIX : son propre dossier s'appelle aussi `shared/` (`biw/shared/`), donc il charge les fichiers de la plateforme en **chemin absolu** (`/shared/gate.css`, `/shared/controls.js`…).
+Exception BIX : son propre dossier s'appelle aussi `shared/` (`bix/shared/`), donc il charge les fichiers de la plateforme en **chemin absolu** (`/shared/gate.css`, `/shared/controls.js`…).
 
 ### 3.7 La vérification (`tools/check-decks.py`)
 
-`python3 tools/check-decks.py` (tous) ou `python3 tools/check-decks.py <code>` (un seul). Elle contrôle **chaque page qui porte la barre** (le deck, et un livret comme `biw/book.html`) :
+`python3 tools/check-decks.py` (tous) ou `python3 tools/check-decks.py <code>` (un seul). Elle contrôle **chaque page qui porte la barre** (le deck, et un livret comme `bix/book.html`) :
 fichiers de `shared/` chargés et dans l'ordre (lecteur compris) · slides confiées au lecteur (`DeckViewer.mount`) · boîte de barre vide · aucun bouton, style de barre, écoute du clavier, grille de vignettes ou barre de sélection propre au deck · `config.js` (LANGS, GATE) · `noindex` · PDF présents pour chaque langue · table `pages.json` · ligne cliquable sur l'accueil.
-`ERREUR` = le deck sort de l'interface (bloquant) ; `·` = à regarder. **État actuel : 9/9 pages conformes.** Notes attendues sur BIX : `base.css` chargé avant `controls.css` (la barre commune l'emporte) et vignettes héritées dans `biw/shared/engine.js` (inactives sur le site, voir §6.3).
+`ERREUR` = le deck sort de l'interface (bloquant) ; `·` = à regarder. **État actuel : 9/9 pages conformes.** Notes attendues sur BIX : `base.css` chargé avant `controls.css` (la barre commune l'emporte) et vignettes héritées dans `bix/shared/engine.js` (inactives sur le site, voir §6.3).
 
 ### 3.8 Le modèle (`modele/`)
 
@@ -226,7 +226,7 @@ Toujours : **modifier dans la source, refabriquer la copie, `git add <dossier>` 
 |---|---|---|---|
 | ALS | `~/Projects/als-century-of-exchange` | `python3 -m http.server 4173 --bind 127.0.0.1` | `.tools/bin/python tools/publish-site.py` (vide les notes du présentateur, retire les phrases sous arbitrage si `ARBITRATION: false`, régénère les 2 PDF) → `rsync -a --delete --exclude .git --exclude CNAME --exclude .nojekyll dist/site/ ~/Projects/deck-presentation/als/` → `git add als` |
 | HOW | `~/HOW-sources` (gabarit `tools/index.tpl.html`, textes `tools/meta.json`, PowerPoint source) | depuis la plateforme | `tools/build.py <dossier de travail> ~/Projects/deck-presentation/how` écrit `how/index.html`, `content/*.json`, `export/pages.json`. **`how/engine.js` et `how/styles.css` se modifient directement dans la plateforme** (seule copie) → `git add how` |
-| BIX | `~/Projects/bixter` : `directions/full/` (deck, livret) + `directions/shared/` (moteur et styles de base) | lien `shared` à la racine de `bixter` | copier `directions/full/` → `biw/`, `directions/shared/` → `biw/shared/` ; dans `index.html` et `book.html` remplacer `"../shared/` par `"shared/` **sans toucher** aux chemins absolus `/shared/…` → `git add biw`. Ne pas récupérer le remote `hint3rland` en entier (films, plusieurs Go) |
+| BIX | `~/Projects/bixter` : `directions/full/` (deck, livret) + `directions/shared/` (moteur et styles de base) | lien `shared` à la racine de `bixter` | copier `directions/full/` → `bix/`, `directions/shared/` → `bix/shared/` ; dans `index.html` et `book.html` remplacer `"../shared/` par `"shared/` **sans toucher** aux chemins absolus `/shared/…` → `git add bix`. Ne pas récupérer le remote `hint3rland` en entier (films, plusieurs Go) |
 | TDP | `~/Projects/tour-des-possibles` | `tools/serve.py` (port 4190) | copier sans `shared`, `_src`, `tools`, `.claude` → `git add tdp` |
 | MAG | `~/Projects/magnetic-deck` | `python3 tools/serve.py 4191` | copier sans `shared`, `_src`, `tools` → `git add mag` |
 | TOT | `~/Projects/totalenergies-deck` | `python3 tools/serve.py 4193` | PDF : `python3.11 tools/export-pdf.py` ; rsync vers `tot/` sans `shared`, `_src`, `tools`, `.claude`, `README` → `git add tot` |
@@ -235,7 +235,7 @@ Toujours : **modifier dans la source, refabriquer la copie, `git add <dossier>` 
 Particularités utiles :
 - **ALS** : mode arbitrage (`ARBITRATION` dans `config.js`), annexes avec liens internes (`[data-go]`, folio d'annexe), fenêtre de notes du présentateur (en local seulement), export PowerPoint (`tools/export-pptx.py`).
 - **HOW** : 5 slides **décochées par défaut** (`data-default-hidden`), halo qui suit la souris, vidéos par slide.
-- **BIX** : moteur en deux fichiers (`biw/shared/engine.js` commun à ses pistes + `full.js` pour ce deck), numérotation des slides et des folios refaite par `full.js`, avance automatique sur les films, livret `book.html` (32 pages) avec sa propre barre commune et `data-pages=""` (pas de PDF partiel du livret).
+- **BIX** : moteur en deux fichiers (`bix/shared/engine.js` commun à ses pistes + `full.js` pour ce deck), numérotation des slides et des folios refaite par `full.js`, avance automatique sur les films, livret `book.html` (32 pages) avec sa propre barre commune et `data-pages=""` (pas de PDF partiel du livret).
 - **TDP** : ciel animé en canvas, dessins « widgets » redessinés dans les vignettes via `ready(pages)`.
 - **MAG / TOT** : pas de slides mais **des vues** d'une grande scène (une caméra) ; liste des vues en JSON dans `index.html` ; vignettes = images figées (`snapshot(i)`).
 - **CBM** : étapes dans les slides, certaines slides donnent **plusieurs pages** de PDF (`data-pages="steps"` sur la slide) — d'où une table `pages.json` à 55 pages pour 39 slides.
@@ -263,7 +263,7 @@ Elle se décide dans l'interface, pour tous : la session du deck la demande à D
 
 ### 6.3 Le cas BIX (moteur partagé avec d'autres pistes)
 
-`biw/shared/engine.js` (= `bixter/directions/shared/engine.js`) sert aussi à d'autres pistes non publiées de `bixter`. Il a un drapeau `VIEWER = !!window.DeckViewer` : sur le site (lecteur chargé), il confie tout au lecteur ; ailleurs, il garde son ancien fonctionnement. Ne pas supprimer ce drapeau ni l'ancien code sans l'accord de la session BIX.
+`bix/shared/engine.js` (= `bixter/directions/shared/engine.js`) sert aussi à d'autres pistes non publiées de `bixter`. Il a un drapeau `VIEWER = !!window.DeckViewer` : sur le site (lecteur chargé), il confie tout au lecteur ; ailleurs, il garde son ancien fonctionnement. Ne pas supprimer ce drapeau ni l'ancien code sans l'accord de la session BIX.
 
 ---
 
@@ -312,7 +312,7 @@ Elle se décide dans l'interface, pour tous : la session du deck la demande à D
 
 ### 9.3 Après publication (en ligne)
 ```bash
-for u in "" als/ how/ biw/ biw/book.html tdp/ mag/ tot/ cbm/ modele/ shared/viewer.js shared/controls.js shared/gate.js; do
+for u in "" als/ how/ bix/ bix/book.html tdp/ mag/ tot/ cbm/ modele/ shared/viewer.js shared/controls.js shared/gate.js; do
   printf "%s /%s\n" "$(curl -s -o /dev/null -w '%{http_code}' https://deck-presentation.com/$u)" "$u"; done
 ```
 Tout en `200`. GitHub Pages met ~1 minute à reconstruire : attendre qu'un marqueur du changement apparaisse (`until curl -s … | grep -q …; do sleep 5; done`) avant de vérifier. Puis ouvrir les decks touchés (écran d'accès présent, barre, grille, console). Dire au propriétaire de recharger avec Cmd+Maj+R.
@@ -346,7 +346,7 @@ Tout en `200`. GitHub Pages met ~1 minute à reconstruire : attendre qu'un marqu
 | 3 | Moyen | **Poids du dépôt** : `.git` ≈ 876 Mo en local et en hausse (chaque PDF refait ajoute 10 à 50 Mo ; films BIX). Limites GitHub : 100 Mo/fichier, dépôt conseillé < 1 Go, site Pages ≤ 1 Go. | Compresser les PDF, sortir les films, nettoyer l'historique à terme. |
 | 4 | Moyen | **Tables `pages.json`** à tenir à jour à chaque export (sinon PDF partiel faux). | Les générer dans les outils d'export de chaque deck. |
 | 5 | Faible | Pas de page 404. | Une `404.html` sobre à la racine. |
-| 6 | Faible | `biw/shared/base.css` garde d'anciennes règles de barre/grille (écrasées). | Nettoyer avec la session BIX. |
+| 6 | Faible | `bix/shared/base.css` garde d'anciennes règles de barre/grille (écrasées). | Nettoyer avec la session BIX. |
 | 7 | Info | TDP : des PDF régénérés non commités traînent dans sa source (travail de sa session). | Ne pas y toucher depuis DECK HOME. |
 
 ---
@@ -359,6 +359,7 @@ Tout en `200`. GitHub Pages met ~1 minute à reconstruire : attendre qu'un marqu
 | 31.10.2026 | Barre de commandes commune (`shared/controls.js`, 5 commandes) ; audit, `MANUEL.md`, `AGENTS.md` ; indexation bloquée. |
 | 01.11.2026 | Écran d'accès : code retenu par l'onglet (changer de langue ne le redemande plus). |
 | 02.11.2026 | Code BIW → BIX ; colonne Project ; TDP, MAG, TOT, CBM publiés par leurs sessions ; codes d'accès BIX, CBM, TOT ; barre commune (`controls.css`) et langues (`i18n.js`) ; tous les decks sous la barre commune ; `modele/` et `tools/check-decks.py` ; **lecteur commun** (`viewer.js`) en 4 étapes : modèle, puis TDP/MAG/TOT/CBM, puis ALS/HOW/BIX (+ livret), puis vérification stricte (9/9) ; contexte TOT = MCI ; ce HANDOVER. |
+| 02.11.2026 | BIX : dossier et adresse renommés `bix/` ; `/biw/` redirige. |
 
 ---
 
