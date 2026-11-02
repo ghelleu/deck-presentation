@@ -1,6 +1,6 @@
 # Consignes pour les agents : deck-presentation.com
 
-Lire d'abord [MANUEL.md](MANUEL.md) (vue d'ensemble, recettes, audit), puis [README.md](README.md) (référence technique de la plateforme).
+Lire d'abord [HANDOVER.md](HANDOVER.md) (passation complète : état, méthodes de création et de mise en place, pièges), puis [MANUEL.md](MANUEL.md) (vue d'ensemble, fiches, audit) et [README.md](README.md) (référence technique de la plateforme).
 
 ## Deux projets, deux endroits
 - **L'interface** (la plateforme, ce dépôt) : `index.html` (accueil), `shared/` (écran d'accès, barre de commandes et son apparence, langues, lecteur : touches, vignettes, coches, PDF des slides cochées), `modele/` (le point de départ de tout nouveau deck), `tools/check-decks.py`, `README.md`, `MANUEL.md`, `CNAME`. Elle définit les commandes et l'allure de la barre de tous les decks. **Seule la session « DECK HOME » la modifie.**

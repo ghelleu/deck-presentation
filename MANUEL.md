@@ -1,6 +1,6 @@
 # deck-presentation.com : audit, rapport et manuel de prise en main
 
-État au 31.10.2026. Ce document s'adresse à une personne ou à un agent qui reprend le projet sans contexte. Il complète le [README](README.md), qui reste la référence technique courte de la plateforme.
+État au 31.10.2026. Ce document s'adresse à une personne ou à un agent qui reprend le projet sans contexte. Il complète le [README](README.md), qui reste la référence technique courte de la plateforme. La passation la plus complète (méthodes pas à pas, incidents, pièges) est [HANDOVER.md](HANDOVER.md).
 
 ---
 
@@ -330,3 +330,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | CBM, TDP, MAG et TOT passent sur le lecteur commun : grille des vignettes façon ALS, coches gardées par le navigateur, PDF des slides cochées (`export/pages.json` ajouté à chacun, à refaire si le nombre de pages du PDF change). |
 | 02.11.2026 | ALS, HOW et BIX (deck et livret) passent sur le lecteur commun : tous les decks ont maintenant les mêmes touches, la même grille, les mêmes coches et le PDF des slides cochées. Les vignettes montrent chaque slide au repos (sans animation). |
 | 02.11.2026 | `tools/check-decks.py` devient strict : un deck (et toute page avec la barre, comme le livret de BIX) doit charger le lecteur, lui confier ses slides, et n'écouter aucune touche ni construire ses propres vignettes. 9 pages sur 9 conformes. |
+| 02.11.2026 | `HANDOVER.md` : passation exhaustive pour les agents (état, méthodes de création et de mise en place, git, tests, pièges, risques). |

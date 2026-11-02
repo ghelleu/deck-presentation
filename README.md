@@ -2,7 +2,7 @@
 
 Site servi par GitHub Pages, relié au domaine `deck-presentation.com` acheté chez Gandi.
 
-Vue d'ensemble, recettes et audit : [MANUEL.md](MANUEL.md). Consignes pour les agents : [AGENTS.md](AGENTS.md).
+Passation complète (état, méthodes, pièges) : [HANDOVER.md](HANDOVER.md). Vue d'ensemble, recettes et audit : [MANUEL.md](MANUEL.md). Consignes pour les agents : [AGENTS.md](AGENTS.md).
 
 ## Ce qui est en place
 
