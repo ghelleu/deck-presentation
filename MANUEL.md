@@ -23,7 +23,7 @@ En ligne aujourd'hui :
 |---|---|---|---|---|---|
 | ALS | A. Lange & Söhne | Inauguration | MCI | Nov. 2026 | https://deck-presentation.com/als/ |
 | HOW | House of Wunder | Événementiel | MCI | Nov. 2026 | https://deck-presentation.com/how/ |
-| BIW | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
+| BIX | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
 | CBM | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
 
 ---
@@ -174,7 +174,7 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 - `how/engine.js` et `how/styles.css` se modifient **directement dans le dépôt de la plateforme**, qui en est la seule copie.
 - **Publier** : `git add how && git commit && git push` depuis `~/Projects/deck-presentation`.
 
-### BIW : Bixler's × Rolex
+### BIX : Bixler's × Rolex (adresse /biw/)
 
 - **Source** : `~/Projects/bixter` (privé, `ghelleu/bixter`). Elle copie `Hint3rland/bixter` sans les médias du film. Lire son `CLAUDE.md`, et `assets/film/RULES.md` pour tout ce qui touche au film.
 - **Langue** : anglais seulement, donc pas de bouton langue. **Pas de code d'accès.**
