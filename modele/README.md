@@ -34,7 +34,10 @@ Aperçu : https://deck-presentation.com/modele/ (non listé sur l'accueil).
 | `../shared/controls.css` | Allure et place de la barre (pied de la fenêtre, typo de l'accueil) | La teinter : `--hud-ink`, `--hud-accent`, `--hud-shade` |
 | `../shared/controls.js` | Les 5 boutons, dans cet ordre | Rien : la boîte `.hud-r[data-controls]` reste vide dans la page |
 | `../shared/i18n.js` | Langue, textes traduits, PDF de la langue | Fournir `content/<langue>.json` |
+| `../shared/viewer.js`, `viewer.css` | Le lecteur : touches, vignettes (grille), coches, compteur, progression, PDF des slides cochées | Lui confier ses slides (`DeckViewer.mount`), fournir `export/pages.json`, teinter la grille (`--vw-ground`, `--vw-page`) |
 
-Le moteur (`engine.js`) fait le travail derrière les boutons : changer de slide, vignettes (un clic ouvre la slide, la coche la masque ou l'affiche), plein écran, début, langue. Il ne doit ajouter **ni bouton ni touche** : seulement flèches, espace, Entrée, retour arrière, Page préc./suiv., Début/Fin, F, R, O et Échap. Un deck peut l'enrichir (animations, étapes dans une slide), sans changer ces règles.
+Le moteur (`engine.js`) ne fait que trois choses, qu'il confie au lecteur par `DeckViewer.mount(...)` : la liste des slides (`slides`), comment en afficher une (`show`), et à quoi ressemble sa vignette (`thumb`). S'il a des étapes à l'intérieur d'une slide, il les gère dans `step` (rendre `true` tant qu'il reste une étape). Il n'écoute **aucune touche** et n'ajoute **aucun bouton** : le lecteur s'en charge pour tous les decks. Un deck peut l'enrichir (animations, étapes), sans changer ces règles.
+
+Le PDF des slides cochées : `export/pages.json` dit quelles pages du PDF exporté appartiennent à chaque slide (`{ "pages": { "id-de-la-slide": [0], … } }`, pages comptées à partir de 0). À refaire à chaque export si le nombre de pages change.
 
 Besoin d'une nouvelle fonction commune (une commande, un réglage de la barre) ? Elle se décide dans l'interface, pour tous les decks : la demander à la session « DECK HOME », pas l'ajouter dans le deck.

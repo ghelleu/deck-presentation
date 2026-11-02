@@ -114,6 +114,7 @@ Le plus simple : partir de [`modele/`](modele/README.md), qui le respecte déjà
 ```html
 <link rel="stylesheet" href="../shared/gate.css">     <!-- avant styles.css -->
 <link rel="stylesheet" href="../shared/controls.css"> <!-- avant styles.css : l'allure de la barre -->
+<link rel="stylesheet" href="../shared/viewer.css">   <!-- avant styles.css : la grille des vignettes -->
 <link rel="stylesheet" href="styles.css">             <!-- le deck ; la barre n'y est que teintée (--hud-*) -->
 …
 <div class="hud" role="toolbar">
@@ -125,6 +126,7 @@ Le plus simple : partir de [`modele/`](modele/README.md), qui le respecte déjà
 <script src="../shared/gate.js"></script>
 <script src="../shared/controls.js"></script> <!-- avant le moteur -->
 <script src="../shared/i18n.js"></script>     <!-- les langues (content/<lang>.json) -->
+<script src="../shared/viewer.js"></script>   <!-- le lecteur : touches, vignettes, coches, PDF des slides cochées -->
 <script src="engine.js"></script>
 ```
 
@@ -314,3 +316,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | `shared/controls.css` : l’apparence de la barre devient commune (au pied de la fenêtre, typo de l’accueil). TOT l’adopte, passe en FR/EN et a un PDF par langue. |
 | 02.11.2026 | `shared/i18n.js` : les langues deviennent communes (`content/<lang>.json`, `?lang=`). TOT, TDP et MAG l’utilisent avec la barre commune, en FR/EN, un PDF par langue. |
 | 02.11.2026 | Tous les decks sous l'interface : ALS, HOW, BIX et CBM passent sur `shared/controls.css` (barre teintée seulement). Nouveau : `modele/` (point de départ de tout deck) et `tools/check-decks.py`. Seule la session « DECK HOME » modifie `shared/`. |
+| 02.11.2026 | `shared/viewer.js` + `viewer.css` : le lecteur commun (touches, vignettes en grille façon ALS, coches gardées par le navigateur, PDF des slides cochées). En place sur `modele/` ; TDP, MAG, TOT, CBM, puis ALS, HOW, BIX y passent ensuite. |

@@ -1,0 +1,221 @@
+/* The viewer's overview (shared/viewer.js), the same on every deck of deck-presentation.com: all slides as a
+   grid of four columns, the slides to present ticked, a bar across the top with their count.
+   Load it with gate.css and controls.css, before the deck's styles.css. A deck may only tint it, with the
+   toolbar's variables on :root (--hud-ink, --hud-accent, --hud-shade), --vw-ground (the grid's ground) and
+   --vw-page (the ground of each slide, when the deck's slides are transparent). */
+.vw-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: start;
+  gap: clamp(14px, 2.2vw, 40px);
+  padding: calc(64px + clamp(14px, 2.2vw, 40px)) clamp(14px, 2.2vw, 40px) 96px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--vw-ground, #0c0c0b);
+  color: var(--hud-ink, #f5f2eb);
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+}
+html.vw-open .vw-grid {
+  display: grid;
+}
+html.vw-open body {
+  cursor: default;
+}
+@media (max-width: 900px) {
+  .vw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* a slide in the grid: the page drawn by the deck (1920 × 1080), scaled to its place */
+.vw-tile {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--vw-page, #000);
+  box-shadow: 0 0 0 1px rgba(245, 242, 235, 0.14);
+  transform-origin: 0 0;
+  transition: box-shadow 0.2s ease;
+}
+.vw-tile.vw-flying {
+  z-index: 2;
+  overflow: visible;
+}
+.vw-page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  transform: scale(var(--vw-k, 0.2));
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.vw-page > * {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 1920px !important;
+  height: 1080px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+.vw-page *,
+.vw-page *::before,
+.vw-page *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+/* its title, at the foot */
+.vw-tile::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 12px 8px;
+  font: 600 10px/1.2 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--hud-ink, #f5f2eb);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
+  pointer-events: none;
+}
+.vw-tile.sel {
+  box-shadow: 0 0 0 3px var(--hud-accent, #f5f2eb);
+}
+.vw-tile:hover {
+  box-shadow: 0 0 0 2px rgba(245, 242, 235, 0.5);
+}
+.vw-tile.sel:hover {
+  box-shadow: 0 0 0 3px var(--hud-accent, #f5f2eb);
+}
+
+/* the tick, top right: ticked, the slide is presented; unticked, it is left out (the arrows skip it, so does the PDF) */
+.vw-tick {
+  appearance: none;
+  position: absolute;
+  top: 8%;
+  right: 4.5%;
+  z-index: 3;
+  width: 13%;
+  aspect-ratio: 1;
+  min-width: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--hud-accent, #f5f2eb)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-8.2' fill='none' stroke='%23111' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 70% no-repeat;
+  box-shadow: 0 0 0 2px var(--hud-ink, #f5f2eb), 0 3px 10px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.vw-tick:focus-visible {
+  outline: 2px solid var(--hud-ink, #f5f2eb);
+  outline-offset: 3px;
+}
+/* left out: the page darkens to a ghost, its tick an empty ring */
+.vw-tile.skip .vw-page {
+  opacity: 0.14;
+  filter: grayscale(1);
+}
+.vw-tile.skip {
+  background: #1a1917;
+}
+.vw-tile.skip .vw-tick {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px rgba(245, 242, 235, 0.75);
+}
+.vw-tile.skip::before {
+  content: var(--vw-hidden, "");
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  font: italic 300 clamp(14px, 1.8vw, 30px)/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  color: var(--hud-ink, #f5f2eb);
+  pointer-events: none;
+}
+
+/* the bar across the top while the grid is open: the slides to present and their count */
+.vw-picks {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 101;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 64px;
+  padding: 0 24px 0 32px;
+  background: color-mix(in srgb, var(--vw-ground, #0c0c0b) 92%, transparent);
+  border-bottom: 1px solid rgba(245, 242, 235, 0.16);
+  color: var(--hud-ink, #f5f2eb);
+  font: 400 13px/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+html.vw-open .vw-picks {
+  display: flex;
+}
+.vw-picks-t {
+  font: 600 11px/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.vw-picks-n {
+  flex: 1;
+  color: rgba(245, 242, 235, 0.66);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.vw-picks-n b {
+  color: var(--hud-accent, #f5f2eb);
+  font-weight: 600;
+}
+.vw-picks-b {
+  display: flex;
+  gap: 10px;
+}
+.vw-picks button {
+  padding: 10px 18px;
+  border: 1px solid rgba(245, 242, 235, 0.35);
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: 600 11px/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.vw-picks button:hover {
+  background: rgba(245, 242, 235, 0.1);
+}
+
+/* while the grid is open the toolbar stays on, above it */
+html.vw-open .hud {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+html.gated .vw-grid,
+html.gated .vw-picks {
+  display: none !important;
+}
+@media print {
+  .vw-grid,
+  .vw-picks {
+    display: none !important;
+  }
+}

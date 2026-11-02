@@ -89,6 +89,8 @@ def check(deck, home):
             err.append(f"ne charge pas {name}")
     if min(cfg, g_js, c_js) >= 0 and not cfg < g_js < c_js:
         err.append("ordre des scripts : config.js, puis shared/gate.js, puis shared/controls.js")
+    if pos(js, "viewer.js") < 0 or pos(css, "viewer.css") < 0:
+        note.append("pas encore sur le lecteur commun (shared/viewer.js + viewer.css) : touches et vignettes propres au deck")
     if c_js >= 0 and c_js == len(js) - 1:
         err.append("shared/controls.js doit venir avant le moteur du deck")
 
