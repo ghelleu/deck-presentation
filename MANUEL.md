@@ -206,7 +206,7 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 ### CBM : Caroline Barbier Muller (Swiss Disco, « Le Chalet Disco »)
 
 - **Source** : `~/Projects/cbm-chalet-disco`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub.
-- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Langue** : français seulement, donc pas de bouton langue. **Code d'accès** : oui depuis le 02.11.2026 (`GATE` dans `config.js`).
 - **Aperçu** : `python3 tools/serve.py 4192`, puis http://127.0.0.1:4192/ (avec le lien `shared` vers la plateforme).
 - **Publier** : copier le deck dans `~/Projects/deck-presentation/cbm/`, sans `shared`, `_src`, `tools`, `.claude` ni `README.md`. Ensuite : `git add cbm && git commit && git push`.
 
@@ -237,7 +237,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
   printf "%s /%s\n" "$(curl -s -o /dev/null -w '%{http_code}' https://deck-presentation.com/$u)" "$u"; done
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
-- l'écran d'accès s'affiche sur ALS, HOW et BIX ;
+- l'écran d'accès s'affiche sur ALS, HOW, BIX, CBM et TOT ;
 - la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
@@ -250,7 +250,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 ### 7.1 Ce qui fonctionne
 - Le site, les decks, les fichiers `shared/` et les PDF répondent tous en `200`. HTTPS est forcé et `www` redirige.
 - La barre commune est en place sur les trois decks publiés **et** dans leurs sources (gabarit HOW, ALS, BIW). Les anciens boutons (annexes, notes, aide) et les anciennes touches ont disparu partout.
-- L'écran d'accès commun est actif sur ALS, HOW et BIX (depuis le 02.11.2026). Plus aucun deck n'embarque sa propre copie.
+- L'écran d'accès commun est actif sur ALS, HOW, BIX, CBM et TOT (depuis le 02.11.2026 pour les trois derniers). Plus aucun deck n'embarque sa propre copie.
 - Les dépôts sources ALS et BIW sont propres et synchronisés avec GitHub.
 
 ### 7.2 Corrigé pendant cet audit
@@ -269,7 +269,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 3 | ~~Moyen~~ Corrigé | **Indexation.** L'accueil, avec les noms des clients, pouvait être indexé. Les `robots.txt` placés dans les dossiers des decks sont ignorés : seul celui de la racine compte. | Fait le 31.10.2026 : `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. Ne pas les retirer. |
 | 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIW : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
-| 6 | Corrigé | **BIX n'avait pas d'écran d'accès.** | Fait le 02.11.2026 : `config.js` avec `GATE`, et `/shared/gate.*` chargés dans le deck et le livret. TDP et MAG n'en ont pas (`GATE: null`). |
+| 6 | Corrigé | **BIX n'avait pas d'écran d'accès.** | Fait le 02.11.2026 : `config.js` avec `GATE`, et `/shared/gate.*` chargés dans le deck et le livret. CBM et TOT ont reçu le leur le même jour. TDP et MAG n'en ont pas (`GATE: null`). |
 | 7 | Faible | BIW charge la barre par un chemin absolu (`/shared/controls.js`). C'est correct sur le domaine, mais ça casserait si le site était servi sous un sous-dossier. | Rien à faire tant que le domaine ne change pas. |
 | 8 | Faible | Seules la barre et l'écran d'accès sont communs. La navigation et les vignettes sont réécrites dans chacun des trois moteurs. | Si un 4ᵉ deck arrive, envisager un moteur de vignettes commun dans `shared/`. |
 | 9 | Faible | Il n'y a ni vérification automatique ni page 404. | Script de vérification du §6.5 ; une `404.html` sobre à la racine. |
@@ -303,4 +303,5 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | TDP et MAG publiés (par leurs sessions). Accueil : Bixler's devient BIX (adresse `/biw/` inchangée) ; nouvelle colonne Project. |
 | 02.11.2026 | BIX : écran d'accès à 5 chiffres sur le deck et le livret. |
 | 02.11.2026 | TOT publié (« Powerded by Superheros », soirée TotalEnergies, Hilton Genève), sans code d'accès. Source `~/Projects/totalenergies-deck`, git local sans dépôt GitHub. |
+| 02.11.2026 | CBM et TOT : écran d'accès à 5 chiffres. |
 | 02.11.2026 | `shared/controls.css` : l’apparence de la barre devient commune (au pied de la fenêtre, typo de l’accueil). TOT l’adopte, passe en FR/EN et a un PDF par langue. |
