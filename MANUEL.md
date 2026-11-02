@@ -26,7 +26,7 @@ En ligne aujourd'hui :
 | BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
 | MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | https://deck-presentation.com/mag/ |
-| TOT | Powerded by Superheros | TotalEnergies | Soirée | — | Nov. 2026 | https://deck-presentation.com/tot/ |
+| TOT | Powerded by Superheros | TotalEnergies | Soirée | MCI | Nov. 2026 | https://deck-presentation.com/tot/ |
 | CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | https://deck-presentation.com/cbm/ |
 
 ---
