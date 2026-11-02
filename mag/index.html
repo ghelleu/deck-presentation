@@ -36,15 +36,14 @@
     "RING2": [0, 11900, 30, "spin"],
     "P1": [0, 11140, 60], "P2": [658, 11520, 60], "P3": [658, 12280, 60], "P4": [0, 12660, 60], "P5": [-658, 12280, 60], "P6": [-658, 11520, 60],
     "PH1": [-560, 13700, 120], "PH2": [0, 13700, 110], "PH3": [560, 13700, 110],
-    "W1": [0, 14760, 18], "W2": [0, 15640, 18],
-    "N1": [-1000, 16600, 24], "N4": [1000, 16600, 24]
+    "W1": [0, 14760, 18], "W2": [0, 15640, 18]
   },
   "views": [
     { "id": "couverture",    "label": "Magnetic",                         "kicker": "",                        "cam": [0, 0, 1],           "q": { "A": 1, "B": -1 }, "glow": 1 },
     { "id": "croisement",    "label": "Un croisement",                    "kicker": "01 · Origine",            "cam": [0, -1500, 1],       "q": { "L": 1, "R": -1 } },
     { "id": "deja-la",       "label": "Ce qui était déjà là",             "kicker": "01 · Origine",            "cam": [-1500, -1480, 1],   "q": { "D": 1, "L": -0.8 } },
     { "id": "arrive",        "label": "Ce qui est arrivé",                "kicker": "01 · Origine",            "cam": [1500, -1480, 1],    "q": { "R": 1, "T": -0.8 } },
-    { "id": "evidence",      "label": "Une évidence",                     "kicker": "01 · Origine",            "cam": [0, -1640, 0.82],    "q": { "L": 1, "R": 1, "S": -2 }, "glow": 0.3 },
+    { "id": "evidence",      "label": "Une évidence",                     "kicker": "01 · Origine",            "cam": [0, -1980, 0.82],    "q": { "L": 1, "R": 1, "S": -2 }, "glow": 0.3 },
     { "id": "pour-que",      "label": "Pour que la créativité impact le monde", "kicker": "",                  "cam": [0, -3000, 1],       "q": { "U1": 1, "U2": -1 }, "glow": 1 },
     { "id": "geneve",        "label": "Genève",                           "kicker": "02 · L’Esprit de Genève", "cam": [0, 1700, 1],        "q": { "G": 2 } },
     { "id": "esprit",        "label": "L’Esprit de Genève",               "kicker": "02 · L’Esprit de Genève", "cam": [0, 3000, 1],        "q": { "BK": 1, "G": -1 } },
@@ -71,8 +70,6 @@
     { "id": "collision",     "label": "Collision",                        "kicker": "04 · La méthode · 2 / 3", "cam": [0, 13760, 1.3],     "q": { "PH1": 1, "PH3": 1, "PH2": -1.4 } },
     { "id": "resonance",     "label": "Résonance",                        "kicker": "04 · La méthode · 3 / 3", "cam": [480, 13760, 1.3],   "q": { "PH3": 2 } },
     { "id": "agir",          "label": "Une manière d’agir sur le monde",  "kicker": "",                        "cam": [0, 15200, 1],       "q": { "W2": 1, "W1": -1 }, "glow": 1 },
-    { "id": "lancement",     "label": "Magnetic était lancé",             "kicker": "05 · Le lancement",       "cam": [0, 16600, 1],       "q": { "N1": 1, "N4": -0.3 } },
-    { "id": "lancement-2",   "label": "Le premier projet",                "kicker": "05 · Le lancement",       "cam": [0, 16600, 1],       "q": { "N1": 1, "N4": -1.2 } },
     { "id": "contact",       "label": "Contact",                          "kicker": "",                        "cam": [0, 60, 1],          "q": { "A": 1, "B": -1 }, "glow": 1 }
   ]
 }
@@ -90,8 +87,8 @@
 
     <!-- ============================================ 01 · Origine: two poles -->
     <p class="obj statement" style="--x:0;--y:-1780;--w:1500" data-view="croisement" data-t="croisement.1">Magnetic est né d’un croisement entre<br><em>ce qui était déjà là</em> et <em>ce qui est arrivé</em>.</p>
-    <p class="obj tag" style="--x:-520;--y:-1420" data-view="croisement evidence" data-t="croisement.2"><b>Downtown Studio</b><span>ce qui était déjà là</span></p>
-    <p class="obj tag" style="--x:520;--y:-1420" data-view="croisement evidence" data-t="croisement.3"><b>Together</b><span>ce qui est arrivé</span></p>
+    <p class="obj tag" style="--x:-520;--y:-1420" data-view="croisement" data-t="croisement.2"><b>Downtown Studio</b><span>ce qui était déjà là</span></p>
+    <p class="obj tag" style="--x:520;--y:-1420" data-view="croisement" data-t="croisement.3"><b>Together</b><span>ce qui est arrivé</span></p>
 
     <figure class="obj pic" style="--x:-1960;--y:-1460;--w:760;--h:670" data-view="deja-la"><img data-src="assets/img/downtown.jpg" alt="L’espace de Downtown Studio" data-t-alt="deja-la.alt1"></figure>
     <div class="obj copy" style="--x:-1020;--y:-1480;--w:740" data-view="deja-la">
@@ -176,10 +173,6 @@
 
     <p class="obj line" style="--x:0;--y:15200;--w:1400" data-view="agir" data-t="agir.1">L’Esprit de Genève n’est pas seulement un héritage.<br>C’est une manière singulière d’agir sur le monde<br>et notre ambition est d’en éprouver aujourd’hui<br>toute sa force par la création.</p>
 
-    <!-- ============================================ 05 · Le lancement -->
-    <p class="obj body center-t tl" style="--x:0;--y:16330;--w:1500" data-view="lancement lancement-2" data-t="lancement.1">Cette idée a été présentée à Laurent Finck, de Lumens 8, qui a tout de suite voulu rejoindre l’initiative,<br>en mettant à disposition ses ressources créatives pour les projets à venir.</p>
-    <p class="obj lead center-t nowrap" style="--x:0;--y:16560" data-view="lancement lancement-2" data-t="lancement.2"><em>Magnetic était lancé.</em></p>
-    <p class="obj body center-t tl" style="--x:0;--y:16700;--w:1500" data-view="lancement-2" data-t="lancement-2.1">Un mois plus tard, François Moncarey, du Geneva Lux, se passionne à son tour<br>et nous offre le premier projet de l’association : <em>la Tour des Possibles</em>.</p>
 
   </div>
 </main>

@@ -62,9 +62,6 @@
     "phases.3": "<b>Collision</b><span>bringing ideas together</span>",
     "phases.4": "<b>Resonance</b><span>spreading to the world</span>",
     "agir.1": "The Esprit de Genève is not only a heritage.<br/>It is a singular way of acting on the world,<br/>and our ambition is to test<br/>its full strength today through creation.",
-    "lancement.1": "This idea was presented to Laurent Finck, of Lumens 8, who immediately wanted to join the initiative,<br/>offering his creative resources for the projects to come.",
-    "lancement.2": "<em>Magnetic was launched.</em>",
-    "lancement-2.1": "A month later, François Moncarey, of Geneva Lux, was won over in turn<br/>and gave us the association’s first project: <em>la Tour des Possibles</em>.",
     "chrome.1": "<span>Magnetic</span><i></i><span>for creativity to impact the world</span><i></i><span>November 2026</span>"
   },
   "alt": {
@@ -199,14 +196,6 @@
     "agir": [
       "A way of acting on the world",
       ""
-    ],
-    "lancement": [
-      "Magnetic was launched",
-      "05 · The launch"
-    ],
-    "lancement-2": [
-      "The first project",
-      "05 · The launch"
     ],
     "contact": [
       "Contact",

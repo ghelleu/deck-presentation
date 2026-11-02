@@ -65,21 +65,53 @@
       s += `<g class="spin">${circ(c, c, 800, "dash thin", 0)}</g>`;
       return s;
     },
-    // the three phases: a triangle that draws particles in, spheres that collide, a star that radiates
+    // the three phases, one story: particles drawn along field lines into a pole (attraction),
+    // two ideas meeting and giving birth to a new core (collision), that core sending waves that light up the world (resonance)
     phases(w, h) {
-      const R = rnd(5); let dots = "";
-      for (let k = 0; k < 18; k++) {
-        const a = Math.PI * (0.5 + R()), d = 160 + R() * 120;
-        dots += `<circle class="pdot" cx="${(240 + (R() - 0.5) * 40).toFixed(0)}" cy="${(250 + (R() - 0.5) * 40).toFixed(0)}" r="${(2 + R() * 2.5).toFixed(1)}" style="--fx:${(Math.cos(a) * d).toFixed(0)}px;--fy:${(Math.sin(a) * d).toFixed(0)}px;animation-delay:${(R() * 2.4).toFixed(2)}s"/>`;
+      const R = rnd(11), f = (n) => n.toFixed(1), cy = h / 2;
+      const anim = (attr, vals, kt, dur, extra = "") => `<animate attributeName="${attr}" values="${vals}" keyTimes="${kt}" dur="${dur}s" repeatCount="indefinite" ${extra}/>`;
+      // 1 · attraction
+      const A = [240, cy]; let g1 = "", n = 0;
+      for (let k = 0; k < 14; k++) {
+        const a = (k / 14) * TAU + R() * 0.3, r0 = 200 + R() * 20, sw = 0.55;
+        const sx = A[0] + Math.cos(a) * r0, sy = A[1] + Math.sin(a) * r0;
+        const qx = A[0] + Math.cos(a + sw) * 110, qy = A[1] + Math.sin(a + sw) * 110;
+        const ex = A[0] + Math.cos(a + sw * 1.4) * 22, ey = A[1] + Math.sin(a + sw * 1.4) * 22;
+        const id = `ph-a${k}`;
+        g1 += `<path id="${id}" class="fl" d="M${f(sx)} ${f(sy)}Q${f(qx)} ${f(qy)} ${f(ex)} ${f(ey)}"/>`;
+        for (let j = 0; j < 2; j++) {
+          const d = 3 + R() * 1.4, b = -(R() * d);
+          g1 += `<circle class="pt" r="${f(2.4 + R() * 2.2)}" opacity="0"><animateMotion dur="${f(d)}s" begin="${f(b)}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keyPoints="0;1" keySplines="0.55 0 0.9 0.6"><mpath href="#${id}"/></animateMotion>${anim("opacity", "0;1;1;0", "0;0.18;0.86;1", f(d), `begin="${f(b)}s"`)}</circle>`;
+        }
       }
-      const orbs = [[770, 190, 34, 22, -14, 3.1], [840, 230, 50, -18, 16, 2.6], [800, 300, 22, 16, -20, 2.2], [880, 320, 40, -12, -10, 3.4], [740, 300, 28, 20, 12, 2.8]];
-      let o = ""; orbs.forEach(([x, y, r, ox, oy, t]) => (o += `<circle class="orb" cx="${x}" cy="${y}" r="${r}" style="--ox:${ox}px;--oy:${oy}px;--t:${t}s"/>`));
-      let star = "";
-      for (let k = 0; k < 16; k++) { const a = (k / 16) * TAU, r = k % 2 ? 22 : 92; star += `${k ? "L" : "M"}${(1360 + Math.cos(a) * r).toFixed(1)} ${(250 + Math.sin(a) * r).toFixed(1)}`; }
-      return `<path class="path" d="M340 230 C 480 120, 600 150, 700 220M340 270 C 480 360, 620 360, 720 300"/>
-        <path class="path" d="M930 220 C 1050 120, 1170 140, 1270 230M930 300 C 1050 380, 1180 360, 1280 280"/>
-        <g class="grp g1"><path class="tri" d="M240 140L350 340H130Z"/>${dots}</g><g class="grp g2">${o}</g>
-        <g class="grp g3"><circle class="ring" cx="1360" cy="250" r="90"/><circle class="ring" cx="1360" cy="250" r="90"/><circle class="ring" cx="1360" cy="250" r="90"/><path class="star" d="${star}Z"/></g>`;
+      g1 += `<circle class="core" cx="${A[0]}" cy="${A[1]}" r="13"/><circle class="halo" cx="${A[0]}" cy="${A[1]}" r="24"/>`;
+      // 2 · collision
+      const C = [800, cy], T = 4.2;
+      const pa = `M${C[0] - 210} ${cy + 90}Q${C[0] - 110} ${cy - 90} ${C[0]} ${cy}`, pb = `M${C[0] + 210} ${cy - 90}Q${C[0] + 110} ${cy + 90} ${C[0]} ${cy}`;
+      let g2 = `<path class="trail" d="${pa}"/><path class="trail" d="${pb}"/>`;
+      // each idea is a small gathered group: a core and its particles turning around it
+      const idea = (d, cls) => {
+        let sat = "";
+        for (let k = 0; k < 6; k++) { const a = (k / 6) * TAU + R(), r = 17 + R() * 12; sat += `<circle class="${cls}" cx="${f(Math.cos(a) * r)}" cy="${f(Math.sin(a) * r)}" r="${f(1.8 + R() * 1.6)}"/>`; }
+        return `<g opacity="0"><animateMotion path="${d}" dur="${T}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.42;1" keyPoints="0;1;1" keySplines="0.5 0 0.95 0.7;0 0 1 1"/>${anim("opacity", "0;1;1;0;0", "0;0.08;0.42;0.425;1", T)}<circle class="${cls}" r="9"/><g class="turn">${sat}</g></g>`;
+      };
+      g2 += idea(pa, "pt") + idea(pb, "pt blue");
+      g2 += `<circle class="flash" cx="${C[0]}" cy="${C[1]}" r="4" opacity="0">${anim("r", "4;4;4;95;95", "0;0.41;0.42;0.66;1", T)}${anim("opacity", "0;0;0.95;0;0", "0;0.41;0.42;0.66;1", T)}</circle>`;
+      for (let k = 0; k < 10; k++) {
+        const a = (k / 10) * TAU + R() * 0.4, r1 = 70 + R() * 80;
+        g2 += `<circle class="${k % 2 ? "pt" : "pt blue"}" r="${f(2 + R() * 2)}" opacity="0"><animateMotion path="M${C[0]} ${cy}L${f(C[0] + Math.cos(a) * r1)} ${f(cy + Math.sin(a) * r1)}" dur="${T}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.42;0.8;1" keyPoints="0;0;1;1" keySplines="0 0 1 1;0.2 0.7 0.4 1;0 0 1 1"/>${anim("opacity", "0;0;1;0;0", "0;0.419;0.42;0.8;1", T)}</circle>`;
+      }
+      g2 += `<g opacity="0">${anim("opacity", "0;0;1;1;0", "0;0.43;0.52;0.92;1", T)}<circle class="core" cx="${C[0]}" cy="${C[1]}" r="13"/><circle class="halo" cx="${C[0]}" cy="${C[1]}" r="24"/></g>`;
+      // 3 · resonance
+      const S = [1360, cy], P = 3, R0 = 16, R1 = 215;
+      let g3 = "";
+      for (let k = 0; k < 3; k++) g3 += `<circle class="wv" cx="${S[0]}" cy="${S[1]}" r="${R0}" opacity="0">${anim("r", `${R0};${R1}`, "0;1", P, `begin="${-k}s"`)}${anim("opacity", "0.9;0", "0;1", P, `begin="${-k}s"`)}</circle>`;
+      for (let k = 0; k < 22; k++) {
+        const a = R() * TAU, r = 95 + R() * 115, hit = (((r - R0) / (R1 - R0)) * P) % 1;
+        g3 += `<circle class="pt" cx="${f(S[0] + Math.cos(a) * r)}" cy="${f(S[1] + Math.sin(a) * r)}" r="${f(2.4 + R() * 2.2)}" opacity="0.22">${anim("opacity", "1;0.22;0.22", "0;0.45;1", 1, `begin="${f(hit)}s"`)}</circle>`;
+      }
+      g3 += `<circle class="core" cx="${S[0]}" cy="${S[1]}" r="13"/><circle class="halo" cx="${S[0]}" cy="${S[1]}" r="24"/>`;
+      return `<g class="grp g1">${g1}</g><g class="grp g2">${g2}</g><g class="grp g3">${g3}</g>`;
     },
   };
   function draw(el) {
