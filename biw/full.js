@@ -49,7 +49,7 @@
     const label = `${where}${kind === "act" ? "" : `<b>${no}</b>`}`;
     const corner =
       kind === "annex" && no
-        ? `<button type="button" class="where to-index" title="Annex contents (A)" aria-label="Back to the annex contents"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="4" height="4"/><rect x="7" y="1" width="4" height="4"/><rect x="1" y="7" width="4" height="4"/><rect x="7" y="7" width="4" height="4"/></svg>${label}</button>`
+        ? `<button type="button" class="where to-index" title="Annex contents" aria-label="Back to the annex contents"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="4" height="4"/><rect x="7" y="1" width="4" height="4"/><rect x="1" y="7" width="4" height="4"/><rect x="7" y="7" width="4" height="4"/></svg>${label}</button>`
         : `<span class="where">${label}</span>`;
     s.insertAdjacentHTML(
       "afterbegin",
@@ -884,27 +884,6 @@
         });
       });
 
-  // Back to the beginning: the toolbar button or R (Home also works, from the engine).
-  const restart = () => {
-    const d = window.deck;
-    if (!d || d.state.overview) return;
-    clearTimeout(auto);
-    d.go(d.state.list[0].id, 0);
-  };
-  const btn = document.querySelector('.hud [data-act="restart"]');
-  if (btn)
-    btn.addEventListener("click", () => {
-      restart();
-      btn.blur();
-    });
-  document.addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey || (e.key !== "r" && e.key !== "R"))
-      return;
-    if (document.querySelector(".help.open")) return;
-    restart();
-    e.preventDefault();
-  });
-
   // To the annex contents: the corner label on an annex page
   const toIndex = () => {
     const d = window.deck;
@@ -919,41 +898,13 @@
     toIndex();
   });
 
-  // Slides to present. In All slides (O) each slide carries a tick: an unticked slide is left out
-  // of the presentation (the arrows skip it, the numbers run on without it) and of the PDF; H
-  // ticks or unticks the selected one. The choice stays in this browser. The engine walks
-  // deck.state.list: it is narrowed to the ticked slides, and widened to all of them while the
-  // overview is open (before the engine lays it out, so every slide gets its place).
-  const KEY = "bix-full-hidden";
-  let hidden = new Set();
-  try {
-    hidden = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
-  } catch (e) {
-    /* storage unavailable: everything shows */
-  }
-  const shown = (s) => !hidden.has(s.id);
-  const picks = document.createElement("div");
-  picks.className = "picks";
-  document.body.append(picks);
-  function relist(all) {
-    const d = window.deck;
-    if (!d) return;
-    const st = d.state,
-      cur = st.list[st.i];
-    st.list = all
-      ? SLIDES.slice()
-      : SLIDES.filter((s) => shown(s) || s === cur);
-    st.i = Math.max(0, st.list.indexOf(cur));
-  }
+  // The numbers: the engine's counter and the corner marks, as the slides run (the ticks, the overview
+  // and the PDF of the ticked slides are the platform's viewer's, /shared/viewer.js).
   function renumber() {
     let n = 0,
       page = 0;
     SLIDES.forEach((s) => {
-      s.classList.toggle("skip", !shown(s));
-      s.querySelector(".pick")?.setAttribute("aria-pressed", String(shown(s)));
-      if (!shown(s))
-        s.dataset.label = s.dataset.title.replace(/^Act [IV]+ · /, ""); // no number while out
-      if (!shown(s) || s.dataset.kind === "act") return;
+      if (s.dataset.kind === "act") return;
       s._label = pad(n++); // the engine's counter, as it numbers them
       s.dataset.label = `${s._label} · ${s.dataset.title}`;
       if (s.dataset.kind === "film" || s.dataset.kind === "annex") return;
@@ -961,163 +912,9 @@
         b = s.querySelector(".folio .where b");
       if (b) b.textContent = no;
     });
-    const on = SLIDES.filter(shown).length;
-    picks.innerHTML =
-      `<span class="picks-t">Slides to present</span>` +
-      `<span class="picks-n"><b>${on}</b> of ${SLIDES.length} shown · click a slide to open it, its tick hides or shows it</span>` +
-      `<span class="picks-b">${hidden.size ? '<button type="button" data-all>Show all</button>' : ""}</span>`;
     fillIndex();
   }
-  function save() {
-    try {
-      localStorage.setItem(KEY, JSON.stringify([...hidden]));
-    } catch (e) {
-      /* storage unavailable */
-    }
-    renumber();
-  }
-  function toggle(s) {
-    if (!s) return;
-    if (shown(s)) {
-      if (SLIDES.filter(shown).length > 1) hidden.add(s.id);
-    } else hidden.delete(s.id);
-    save();
-  }
-  SLIDES.forEach((s) => {
-    s.insertAdjacentHTML(
-      "beforeend",
-      '<button type="button" class="pick" aria-pressed="true" aria-label="Show in the presentation"></button>',
-    );
-  });
-  picks.addEventListener("click", (e) => {
-    if (e.target.closest("[data-all]")) {
-      hidden.clear();
-      save();
-    }
-  });
   document.addEventListener("DOMContentLoaded", () => {
-    const d = window.deck;
-    if (!d) return;
-    const stage = document.querySelector(".stage");
-    const opening = () => !d.state.overview && relist(true);
-    document.addEventListener(
-      "click",
-      (e) => e.target.closest('.hud [data-act="overview"]') && opening(),
-      true,
-    );
-    addEventListener(
-      "keydown",
-      (e) => {
-        if (
-          e.metaKey ||
-          e.ctrlKey ||
-          e.altKey ||
-          document.querySelector(".help.open")
-        )
-          return;
-        if (!d.state.overview && ["o", "O", "Escape"].includes(e.key)) opening();
-      },
-      true,
-    );
-    // in the overview the tick (top right) shows or hides the slide; a click elsewhere on it
-    // goes to the engine, which opens it
-    const pick = (s) => {
-      d.state.sel = d.state.list.indexOf(s);
-      d.state.list.forEach((el, k) =>
-        el.classList.toggle("sel", k === d.state.sel),
-      );
-    };
-    document.addEventListener(
-      "click",
-      (e) => {
-        const s = d.state.overview && e.target.closest(".stage .slide");
-        if (!s || !e.target.closest(".pick")) return;
-        e.stopPropagation(); // not the engine's click, which would open it
-        e.preventDefault();
-        pick(s);
-        toggle(s);
-      },
-      true,
-    );
-    addEventListener("keydown", (e) => {
-      if (
-        d.state.overview &&
-        (e.key === "h" || e.key === "H") &&
-        !e.metaKey &&
-        !e.ctrlKey
-      ) {
-        toggle(d.state.list[d.state.sel]);
-        e.preventDefault();
-      }
-    });
-    // the overview is taller than the screen once there are more than 16 slides: the wheel moves
-    // it up and down, and it follows the selected slide (the engine lays it out in 4 columns)
-    let y = 0;
-    const span = () => {
-      const h = (1080 * (1920 - 40 * 5)) / 4 / 1920,
-        rows = Math.ceil(d.state.list.length / 4),
-        top = (1080 - (rows * h + (rows - 1) * 40)) / 2;
-      return { h, top, bottom: top + rows * h + (rows - 1) * 40 };
-    };
-    // in window pixels: the rows stay between the header bar (64 px) and the foot of the window
-    const view = () => {
-      const k =
-        parseFloat(
-          getComputedStyle(document.documentElement).getPropertyValue(
-            "--scale",
-          ),
-        ) || 1;
-      return {
-        k,
-        t: (innerHeight - 1080 * k) / 2,
-        a: 64 + 20,
-        b: innerHeight - 24,
-      };
-    };
-    const scrollTo = (v) => {
-      const { top, bottom } = span(),
-        { k, t, a, b } = view();
-      const hi = (a - t) / k - top, // the first row down to the bar
-        lo = (b - t) / k - bottom; // the last row up to the foot
-      y = lo >= hi ? (lo + hi) / 2 : Math.min(Math.max(v, lo), hi);
-      stage.style.setProperty("--ovy", `${y.toFixed(1)}px`);
-    };
-    const follow = () => {
-      const { h, top } = span(),
-        { k, t, a, b } = view(),
-        row = top + Math.floor(d.state.sel / 4) * (h + 40),
-        at = t + (row + y) * k;
-      if (at < a || at + h * k > b)
-        scrollTo(((a + b) / 2 - t) / k - row - h / 2);
-      else scrollTo(y);
-    };
-    addEventListener(
-      "wheel",
-      (e) => d.state.overview && scrollTo(y - e.deltaY / view().k),
-      { passive: true },
-    );
-    addEventListener("keydown", () => d.state.overview && follow());
-    let open = false;
-    new MutationObserver(() => {
-      const on = stage.classList.contains("overview");
-      if (on === open) return; // only its opening and closing (and not our own class below)
-      open = on;
-      if (on) {
-        stage.classList.add("ov-move"); // so that leaving it eases back with the engine's zoom
-        fitDeck(); // whole in the overview
-        return follow();
-      }
-      relist(false);
-      y = 0;
-      stage.style.setProperty("--ovy", "0px");
-      fitDeck();
-      setTimeout(() => stage.classList.remove("ov-move"), 700);
-    }).observe(stage, { attributes: true, attributeFilter: ["class"] });
-    document.addEventListener(
-      "deck:slide",
-      () => !d.state.overview && relist(false),
-    );
-    relist(false);
     renumber();
     // after the engine's own fit (its resize handler comes first): fill the window
     addEventListener("resize", fitDeck);
@@ -1147,59 +944,4 @@
       `${Math.max(0, (1080 - innerHeight / k) / 2).toFixed(1)}px`,
     );
   }
-
-  // The PDF: the whole deck as it is, or, with slides unticked, only the pages of the ticked ones,
-  // taken from it in the browser (pdf-lib; export/pages.json says which pages are whose).
-  const pdf = document.querySelector('.hud a[href$=".pdf"]');
-  let lib = null;
-  const pdfLib = () =>
-    (lib ||= new Promise((ok, no) => {
-      const sc = document.createElement("script");
-      sc.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js";
-      sc.integrity =
-        "sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==";
-      sc.crossOrigin = "anonymous";
-      sc.onload = () => ok(window.PDFLib);
-      sc.onerror = () => {
-        lib = null;
-        no(new Error("pdf-lib did not load"));
-      };
-      document.head.append(sc);
-    }));
-  pdf?.addEventListener("click", async (e) => {
-    if (!hidden.size) return; // the whole deck: the file itself
-    e.preventDefault();
-    if (pdf.classList.contains("busy")) return;
-    pdf.classList.add("busy");
-    try {
-      const [{ PDFDocument }, map, bytes] = await Promise.all([
-        pdfLib(),
-        fetch(new URL("pages.json", pdf.href)).then((r) => r.json()),
-        fetch(pdf.href).then((r) => r.arrayBuffer()),
-      ]);
-      const src = await PDFDocument.load(bytes);
-      const out = await PDFDocument.create();
-      out.setTitle("Bixler's x Rolex");
-      const pages = SLIDES.filter(shown).flatMap((s) => map.pages[s.id] || []);
-      (await out.copyPages(src, pages)).forEach((p) => out.addPage(p));
-      const url = URL.createObjectURL(
-        new Blob([await out.save()], { type: "application/pdf" }),
-      );
-      const a = Object.assign(document.createElement("a"), {
-        href: url,
-        download: pdf.getAttribute("download"),
-      });
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 60000);
-    } catch (err) {
-      console.warn(
-        "PDF of the ticked slides failed, the whole deck instead:",
-        err,
-      );
-      location.href = pdf.href;
-    } finally {
-      pdf.classList.remove("busy");
-    }
-  });
 })();

@@ -118,7 +118,7 @@
     );
   }
 
-  // Toolbar tooltips, the PDF of the current language, the annex contents, the tick bar.
+  // Toolbar tooltips, the PDF of the current language, the annex contents.
   function renderControls(lang) {
     $$(".hud [aria-label]").forEach((el) => (el.title = el.getAttribute("aria-label")));
     const pdf = $('.hud [data-act="pdf"]'); // the bar comes from ../shared/controls.js
@@ -142,7 +142,6 @@
           return li;
         }),
       );
-    marks();
   }
 
   // Sensitive statements: hidden or rephrased until the Maison has decided (config.js).
@@ -1925,32 +1924,19 @@
     applyStep(s, state.step);
     changed();
   }
-  function next() {
+  // one step forward or back inside the current slide; false at its last / first step (the viewer moves on)
+  function stepBy(d) {
     const s = state.list[state.i];
-    if (state.step < s._steps) setStep(state.step + 1);
-    else if (state.i < state.list.length - 1) go(state.i + 1, 0);
-  }
-  function prev() {
-    if (state.step > 0) setStep(state.step - 1);
-    else if (state.i > 0) go(state.i - 1, state.list[state.i - 1]._steps, { back: true });
+    if (d > 0 && state.step < s._steps) return setStep(state.step + 1), true;
+    if (d < 0 && state.step > 0) return setStep(state.step - 1), true;
+    return false;
   }
 
   let lastSlide = null;
   function changed() {
     const s = state.list[state.i];
     loadImages(state.list[state.i + 1]);
-    try {
-      history.replaceState(null, "", location.search + "#" + s.id);
-    } catch (e) {
-      /* file:// */
-    }
     $("#live").textContent = s.dataset.label;
-    if (!state.overview) relist(false, s); // a hidden slide opened on purpose leaves the list again once left
-    const H = (T.meta && T.meta.hud) || {};
-    $("#hudCount").textContent = `${pad(state.i + 1)} / ${pad(state.list.length)}`;
-    $("#hudTitle").textContent =
-      s.dataset.label + (s._steps ? ` · ${tpl(H.step, { n: state.step, total: s._steps })}` : "");
-    root.style.setProperty("--p", state.list.length > 1 ? state.i / (state.list.length - 1) : 0);
     renderNotes();
     const detail = { slide: s, index: state.i, step: state.step };
     if (s !== lastSlide) {
@@ -1960,165 +1946,9 @@
     document.dispatchEvent(new CustomEvent("deck:step", { detail }));
   }
 
-  /* ======================================================== Contents (overview grid) */
-
-  function tile(k) {
-    const cols = 4,
-      gap = 40,
-      sc = (1920 - gap * (cols + 1)) / cols / 1920;
-    const rows = Math.ceil(state.list.length / cols),
-      w = 1920 * sc,
-      h = 1080 * sc;
-    const top = Math.max(gap, (1080 - (rows * h + (rows - 1) * gap)) / 2);
-    return `translate(${f1(gap + (k % cols) * (w + gap))}px, ${f1(top + Math.floor(k / cols) * (h + gap))}px) scale(${sc.toFixed(4)})`;
-  }
-  function markSel() {
-    state.list.forEach((el, k) => el.classList.toggle("sel", k === state.sel));
-  }
-  function overview(on = !state.overview, pick) {
-    finish();
-    if (on) {
-      if (state.overview) return;
-      relist(true); // every slide gets its place, the hidden ones veiled
-      state.overview = true;
-      state.sel = state.i;
-      stage.classList.add("overview", "ov-move");
-      state.list.forEach((el, k) => {
-        loadImages(el);
-        applyStep(el, el._steps);
-        el.style.transform = tile(k);
-      });
-      markSel();
-      follow();
-      return;
-    }
-    if (!state.overview) return;
-    const target = state.list[pick ?? state.i];
-    const fromT = tile(state.list.indexOf(target));
-    state.overview = false;
-    stage.classList.remove("overview");
-    scrollOv(0, true);
-    state.list.forEach((el) => {
-      el.style.transform = "";
-      el.classList.remove("sel");
-      if (el !== target) applyStep(el, 0);
-    });
-    const was = current();
-    relist(false, target);
-    if (target !== was) go(state.list.indexOf(target), 0, { instant: true });
-    else {
-      applyStep(target, state.step);
-      changed();
-    }
-    if (!reduced) target.animate([{ transform: fromT }, { transform: "none" }], { duration: 650, easing: E });
-    setTimeout(() => stage.classList.remove("ov-move"), 700);
-  }
-
-  /* The overview is taller than the screen (4 columns, 13 rows): the wheel moves it up and down,
-     and it follows the selected slide. --ovy is in slide pixels. */
-  let ovy = 0;
-  function ovSpan() {
-    const h = (1080 * (1920 - 40 * 5)) / 4 / 1920,
-      rows = Math.ceil(state.list.length / 4),
-      top = Math.max(40, (1080 - (rows * h + (rows - 1) * 40)) / 2);
-    return { h, top, bottom: top + rows * h + (rows - 1) * 40 };
-  }
-  function ovView() {
-    const k = parseFloat(getComputedStyle(root).getPropertyValue("--scale")) || 1;
-    return { k, t: (innerHeight - 1080 * k) / 2, a: 64 + 20, b: innerHeight - 24 };
-  }
-  function scrollOv(v, reset) {
-    if (reset) ovy = 0;
-    else {
-      const { top, bottom } = ovSpan(),
-        { k, t, a, b } = ovView();
-      const hi = (a - t) / k - top, // the first row just under the bar
-        lo = (b - t) / k - bottom; // the last row at the foot of the window
-      ovy = lo >= hi ? (lo + hi) / 2 : Math.min(Math.max(v, lo), hi);
-    }
-    stage.style.setProperty("--ovy", `${f1(ovy)}px`);
-  }
-  function follow() {
-    const { h, top } = ovSpan(),
-      { k, t, a, b } = ovView(),
-      row = top + Math.floor(state.sel / 4) * (h + 40),
-      at = t + (row + ovy) * k;
-    if (at < a || at + h * k > b) scrollOv(((a + b) / 2 - t) / k - row - h / 2);
-    else scrollOv(ovy);
-  }
-  addEventListener("wheel", (e) => state.overview && scrollOv(ovy - e.deltaY / ovView().k), { passive: true });
-
-  /* ======================================================== Slides to present (in the overview)
-     Each slide carries a tick: an unticked slide is left out of the presentation (the arrows skip
-     it) and of the PDF. Click its tick or press H to tick or untick it; a click elsewhere on it or Enter
-     opens it. The choice stays in this browser. */
-  const HKEY = "als-hidden";
-  let hidden = new Set();
-  try {
-    hidden = new Set(JSON.parse(localStorage.getItem(HKEY) || "[]").filter((id) => ALL.some((s) => s.id === id)));
-  } catch (e) {
-    /* storage unavailable: everything shows */
-  }
-  const shown = (s) => !hidden.has(s.id);
-  function relist(all, keep = state.list[state.i]) {
-    state.list = all ? ALL.slice() : ALL.filter((s) => shown(s) || s === keep);
-    state.i = Math.max(0, state.list.indexOf(keep));
-  }
-  const picks = $(".picks");
-  ALL.forEach((s) => s.insertAdjacentHTML("beforeend", '<button type="button" class="pick" aria-pressed="true"></button>'));
-  function marks() {
-    const P = (T.meta && T.meta.picks) || {};
-    ALL.forEach((s) => {
-      s.classList.toggle("skip", !shown(s));
-      const b = $(".pick", s);
-      b.setAttribute("aria-pressed", String(shown(s)));
-      b.setAttribute("aria-label", P.tick || "");
-    });
-    root.style.setProperty("--hidden-label", JSON.stringify(P.hidden || ""));
-    // the bar's text comes from our own content files
-    picks.innerHTML =
-      `<span class="picks-t">${P.title || ""}</span>` +
-      `<span class="picks-n">${tpl(P.count, { on: ALL.filter(shown).length, all: ALL.length })}</span>` +
-      `<span class="picks-b">${hidden.size ? `<button type="button" data-all>${P.all}</button>` : ""}</span>`;
-  }
-  function saveHidden() {
-    try {
-      localStorage.setItem(HKEY, JSON.stringify([...hidden]));
-    } catch (e) {
-      /* storage unavailable */
-    }
-    marks();
-  }
-  function toggleShown(s) {
-    if (!s) return;
-    if (shown(s)) {
-      if (ALL.filter(shown).length > 1) hidden.add(s.id);
-    } else hidden.delete(s.id);
-    saveHidden();
-  }
-  picks.addEventListener("click", (e) => {
-    if (e.target.closest("[data-all]")) {
-      hidden.clear();
-      saveHidden();
-    }
-  });
-
-  // Go to a slide by id, even one left out of the presentation (it joins the list while shown).
-  function goId(id, step = 0, opts = {}) {
-    const s = ALL.find((x) => x.id === id);
-    if (!s) return;
-    if (state.overview) overview(false);
-    if (!state.list.includes(s)) {
-      const cur = state.list[state.i];
-      state.list = ALL.filter((x) => shown(x) || x === s || x === cur);
-      state.i = state.list.indexOf(cur);
-    }
-    go(state.list.indexOf(s), step, opts);
-  }
-  const restart = () => {
-    if (state.overview) overview(false);
-    go(0, 0);
-  };
+  // Go to a slide by id (the links inside the slides, the annex folios), through the platform's viewer.
+  let V = null;
+  const goId = (id, step = 0) => V && V.goId(id, step);
   const toAnnexes = () => goId("annexes");
 
   /* ======================================================== Presenter notes (key n) */
@@ -2169,9 +1999,10 @@
     d.documentElement.lang = root.lang;
     d.getElementById("pv").textContent = T.meta.notesPrev;
     d.getElementById("nx").textContent = T.meta.notesNextBtn;
-    d.addEventListener("keydown", onKey);
-    d.getElementById("nx").addEventListener("click", next);
-    d.getElementById("pv").addEventListener("click", prev);
+    // the notes window passes its keys on to the viewer
+    d.addEventListener("keydown", (e) => dispatchEvent(new KeyboardEvent("keydown", { key: e.key })));
+    d.getElementById("nx").addEventListener("click", () => V && V.next());
+    d.getElementById("pv").addEventListener("click", () => V && V.prev());
     renderNotes();
   }
   function renderNotes() {
@@ -2199,108 +2030,16 @@
 
   const help = $("#help");
   const toggleHelp = (force) => help.classList.toggle("open", force);
-  function fullscreen() {
-    const d = document;
-    if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
-    else (root.requestFullscreen || root.webkitRequestFullscreen).call(root);
-  }
-
-  function onKey(e) {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const k = e.key;
-    if (help.classList.contains("open") && (k === "Escape" || k === "?")) {
-      toggleHelp(false);
-      e.preventDefault();
-      return;
-    }
-    if (state.overview) {
-      const move = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 4, ArrowUp: -4 };
-      if (k in move) {
-        state.sel = Math.max(0, Math.min(state.list.length - 1, state.sel + move[k]));
-        markSel();
-        follow();
-      } else if (k === "Enter" || k === " ") overview(false, state.sel);
-      else if (k === "h" || k === "H") toggleShown(state.list[state.sel]);
-      else if (k === "Escape" || k === "o" || k === "O") overview(false);
-      else return;
-      e.preventDefault();
-      return;
-    }
-    switch (k) {
-      case "ArrowRight":
-      case "ArrowDown":
-      case "PageDown":
-      case " ":
-      case "Enter":
-        next();
-        break;
-      case "ArrowLeft":
-      case "ArrowUp":
-      case "PageUp":
-      case "Backspace":
-        prev();
-        break;
-      case "Home":
-      case "r":
-      case "R":
-        restart();
-        break;
-      case "End":
-        go(state.list.length - 1, 0);
-        break;
-      case "o":
-      case "O":
-      case "Escape":
-        overview(true);
-        break;
-      case "f":
-      case "F":
-        fullscreen();
-        break;
-      default:
-        return;
-    }
-    e.preventDefault();
-  }
-  addEventListener("keydown", onKey);
 
   stage.addEventListener("click", (e) => {
-    if (state.overview) {
-      // the tick (top right) shows or hides the slide; anywhere else on it opens it
-      const s = e.target.closest(".slide");
-      if (!s) return;
-      if (e.target.closest(".pick")) {
-        state.sel = state.list.indexOf(s);
-        markSel();
-        toggleShown(s);
-      } else overview(false, state.list.indexOf(s));
-      return;
-    }
     const to = e.target.closest("[data-go]");
     if (to) return goId(to.dataset.go);
     if (e.target.closest(".slide.annex .folio")) return toAnnexes(); // every annex leads back to its contents
     if (e.target.closest("a, button")) return;
-    next();
+    V && V.next();
   });
 
-  let touchX = null;
-  stage.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
-  stage.addEventListener("touchend", (e) => {
-    if (touchX === null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    touchX = null;
-    if (Math.abs(dx) > 50) {
-      e.preventDefault();
-      dx < 0 ? next() : prev();
-    }
-  });
-
-  addEventListener("hashchange", () => {
-    const id = decodeURIComponent(location.hash.slice(1));
-    if (id && id !== state.list[state.i].id) goId(id, 0, { instant: true });
-  });
-
-  /* ======================================================== Toolbar (shows while the mouse moves) */
+  /* ======================================================== Language (the viewer's button calls it) */
 
   function switchLang() {
     const other = CFG.LANGS.find((l) => l !== root.lang);
@@ -2309,90 +2048,6 @@
     u.searchParams.set("lang", other);
     location.href = u.href;
   }
-  const ACTIONS = {
-    restart,
-    overview: () => overview(),
-    lang: switchLang,
-    fullscreen,
-  };
-  $$(".hud button[data-act]").forEach((b) =>
-    b.addEventListener("click", () => {
-      ACTIONS[b.dataset.act]();
-      b.blur();
-    }),
-  );
-
-  // PDF: the exported deck of the current language (tools/export-pdf.py), or, with slides
-  // unticked, only their pages, taken from it in the browser (pdf-lib; export/pages.json says
-  // which page is whose). No exported file (the working copy): the browser's print dialog.
-  const pdfLink = $('.hud [data-act="pdf"]');
-  let lib = null;
-  const pdfLib = () =>
-    (lib ||= new Promise((ok, no) => {
-      const sc = document.createElement("script");
-      sc.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js";
-      sc.integrity = "sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ==";
-      sc.crossOrigin = "anonymous";
-      sc.onload = () => ok(window.PDFLib);
-      sc.onerror = () => {
-        lib = null;
-        no(new Error("pdf-lib did not load"));
-      };
-      document.head.append(sc);
-    }));
-  const saveAs = (href, name) => Object.assign(document.createElement("a"), { href, download: name }).click();
-  pdfLink?.addEventListener("click", async (e) => {
-    e.preventDefault();
-    pdfLink.blur();
-    if (pdfLink.classList.contains("busy")) return;
-    pdfLink.classList.add("busy");
-    const name = pdfLink.getAttribute("download");
-    try {
-      const head = await fetch(pdfLink.href, { method: "HEAD", cache: "no-cache" });
-      if (!head.ok) {
-        window.print();
-        return;
-      }
-      if (!hidden.size) return saveAs(pdfLink.href, name);
-      try {
-        const [{ PDFDocument }, map, bytes] = await Promise.all([
-          pdfLib(),
-          fetch(new URL("pages.json", pdfLink.href), { cache: "no-cache" }).then((r) => r.json()),
-          fetch(pdfLink.href).then((r) => r.arrayBuffer()),
-        ]);
-        const src = await PDFDocument.load(bytes);
-        const out = await PDFDocument.create();
-        out.setTitle(T.meta.title);
-        const pages = ALL.filter(shown).flatMap((s) => map.pages[s.id] || []);
-        (await out.copyPages(src, pages)).forEach((pg) => out.addPage(pg));
-        const url = URL.createObjectURL(new Blob([await out.save()], { type: "application/pdf" }));
-        saveAs(url, name);
-        setTimeout(() => URL.revokeObjectURL(url), 60000);
-      } catch (err) {
-        console.warn("PDF of the ticked slides failed, the whole deck instead:", err);
-        saveAs(pdfLink.href, name);
-      }
-    } finally {
-      pdfLink.classList.remove("busy");
-    }
-  });
-
-  let idleTimer,
-    overHud = false;
-  const hud = $(".hud");
-  hud.addEventListener("mouseenter", () => (overHud = true));
-  hud.addEventListener("mouseleave", () => (overHud = false));
-  function wake() {
-    document.body.classList.add("show-hud");
-    document.body.classList.remove("idle");
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-      if (overHud || help.classList.contains("open")) return wake();
-      document.body.classList.remove("show-hud");
-      document.body.classList.add("idle");
-    }, 2600);
-  }
-  addEventListener("mousemove", wake);
 
   /* ======================================================== Start */
 
@@ -2404,7 +2059,25 @@
     // #id, or #id@step to open a slide at a given step
     const [hid, hstep] = decodeURIComponent(location.hash.slice(1)).split("@");
     const want = ALL.find((s) => s.id === hid);
-    relist(false, want); // a link to a hidden slide still opens it
+    if (!PRINT_MODE) {
+      if (hstep) history.replaceState(null, "", location.search + "#" + hid);
+      V = DeckViewer.mount({
+        slides: ALL.map((s) => ({ id: s.id, label: s.dataset.label })),
+        show: (i, st, instant) =>
+          go(i, st === "end" ? ALL[i]._steps : st, { instant, back: i < state.i, force: V === null }),
+        step: stepBy,
+        thumb: (i) => {
+          const c = ALL[i].cloneNode(true);
+          loadImages(c);
+          applyStep(c, c._steps ?? ALL[i]._steps);
+          c.classList.add("is-active");
+          return c;
+        },
+        lang: switchLang,
+      });
+      if (want && hstep) V.go(ALL.indexOf(want), +hstep);
+      return;
+    }
     go(Math.max(0, state.list.indexOf(want)), +hstep || 0, { instant: true, force: true });
     if (PRINT_MODE) {
       preparePrint();
@@ -2429,9 +2102,9 @@
   });
 
   window.deck = {
-    go: (id, step = 0) => goId(id, step, { instant: true }),
-    next,
-    prev,
+    go: (id, step = 0) => goId(id, step),
+    next: () => V && V.next(),
+    prev: () => V && V.prev(),
     state,
     reduced,
   };

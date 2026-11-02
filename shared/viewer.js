@@ -9,7 +9,8 @@
      <script src="../shared/viewer.js"></script>
    The deck's engine then hands its slides over, once its texts are in place:
      const V = DeckViewer.mount({
-       slides: [{ id, label }, …],         // in order; label: the title in the toolbar and the grid
+       slides: [{ id, label, hidden }, …], // in order; label: the title in the toolbar and the grid;
+                                           //   hidden: left out until ticked (when this browser has no choice yet)
        show(i, step, instant) { … },       // put slide i on screen at this step (0, or "end" for its last)
        step(d) { … return true; },         // optional: one step forward (d = 1) or back (-1) inside the
                                            //   current slide; return false at its first/last step
@@ -22,7 +23,8 @@
    Keys: → ↓ Space Enter PageDown next · ← ↑ Backspace PageUp back · Home R the beginning · End the last
    · F fullscreen · O and Esc the overview (in it: arrows choose, Enter opens). No other key.
    The PDF of the ticked slides: export/pages.json ({ "pages": { id: [page, …] } }) says which pages of the
-   exported PDF are whose; without it, or with every slide ticked, the bar's link downloads the whole PDF. */
+   exported PDF are whose (or the file named by data-pages on the bar's box; data-pages="" for none); without
+   it, or with every slide ticked, the bar's link downloads the whole PDF. */
 (function () {
   const root = document.documentElement;
   const cfg = window.DECK_CONFIG || {};
@@ -37,11 +39,13 @@
     const W = words((root.lang || cfg.LANG || "fr").slice(0, 2)); // the language is set by i18n.js by now
     const S = deck.slides;
     const N = S.length;
-    const KEY = "deck-hidden:" + location.pathname.replace(/[^/]*$/, "");
-    let hidden = new Set();
+    const KEY = "deck-hidden:" + location.pathname.replace(/index\.html$/, ""); // one choice per page (a deck and its book)
+    // left out until ticked: what this browser chose, else the slides the deck leaves out by default ({ hidden: true })
+    let hidden = new Set(S.filter((s) => s.hidden).map((s) => s.id));
     try {
-      hidden = new Set(JSON.parse(localStorage.getItem(KEY) || "[]").filter((id) => S.some((s) => s.id === id)));
-    } catch (e) { /* no storage: every slide shows */ }
+      const saved = localStorage.getItem(KEY);
+      if (saved !== null) hidden = new Set(JSON.parse(saved).filter((id) => S.some((s) => s.id === id)));
+    } catch (e) { /* no storage */ }
     if (hidden.size >= N) hidden.clear();
     const shown = (k) => !hidden.has(S[k].id);
     let cur = Math.max(0, S.findIndex((s) => "#" + s.id === decodeURIComponent(location.hash)));
@@ -110,7 +114,18 @@
         const el = deck.thumb(k);
         if (el) {
           el.removeAttribute("id");
-          el.querySelectorAll("[id]").forEach((x) => x.removeAttribute("id"));
+          // ids must stay unique: drawings keep theirs, renamed, so their gradients, masks and clips still apply
+          const tag = "-vw" + k;
+          el.querySelectorAll("[id]").forEach((x) => (x.closest("svg") ? (x.id += tag) : x.removeAttribute("id")));
+          el.querySelectorAll("svg *").forEach((x) => {
+            for (const a of ["fill", "stroke", "clip-path", "mask", "filter", "marker-start", "marker-end", "href", "xlink:href"]) {
+              const v = x.getAttribute(a);
+              if (v && /^url\(#[^)]+\)$/.test(v)) x.setAttribute(a, v.replace(/\)$/, tag + ")"));
+              else if (v && (a === "href" || a === "xlink:href") && v[0] === "#") x.setAttribute(a, v + tag);
+            }
+            const st = x.getAttribute("style");
+            if (st && st.includes("url(#")) x.setAttribute("style", st.replace(/url\(#([^)]+)\)/g, `url(#$1${tag})`));
+          });
           el.setAttribute("aria-hidden", "true");
           el.setAttribute("inert", "");
           page.append(el);
@@ -225,7 +240,11 @@
       pdfLink.classList.add("busy");
       try {
         const href = pdfLink.getAttribute("href");
-        const map = await fetch(href.replace(/[^/]*$/, "pages.json"), { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject(new Error("no pages.json"))));
+        // the map of pages: data-pages on the bar's box, else pages.json beside the PDF ("" : none, the whole PDF)
+        const box = $(".hud [data-controls]");
+        const mapUrl = box && "pages" in box.dataset ? box.dataset.pages : href.replace(/[^/]*$/, "pages.json");
+        if (!mapUrl) throw new Error("no map of pages for this PDF");
+        const map = await fetch(mapUrl, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : Promise.reject(new Error("no pages.json"))));
         const pages = S.filter((s, k) => shown(k)).flatMap((s) => (map.pages || {})[s.id] || []);
         if (!pages.length) throw new Error("no pages for the ticked slides");
         const [lib, bytes] = await Promise.all([loadLib(), fetch(href).then((r) => r.arrayBuffer())]);

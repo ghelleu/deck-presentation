@@ -65,10 +65,11 @@ html.vw-open body {
   transform: none !important;
   transition: none !important;
 }
+/* no animation in the grid: every element at rest, as its own style draws it (entrances done) */
 .vw-page *,
 .vw-page *::before,
 .vw-page *::after {
-  animation-play-state: paused !important;
+  animation: none !important;
   transition: none !important;
 }
 /* its title, at the foot */

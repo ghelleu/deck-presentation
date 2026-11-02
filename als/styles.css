@@ -1117,8 +1117,8 @@ body.is-black .stage {
     opacity: 1;
   }
 }
-.stage.overview .art .late,
-.stage.overview .art g.cote {
+.vw-page .art .late,
+.vw-page .art g.cote {
   opacity: 1 !important;
   animation: none !important;
 }
@@ -1385,39 +1385,17 @@ body.is-black .stage {
 
 /* ------------------------------------------------------------- Overview (sommaire, key o) */
 
-.stage.overview .slide {
-  visibility: visible;
-  cursor: pointer;
-  transform-origin: 0 0;
-  outline: 2px solid var(--rule);
-  transition: transform 700ms var(--ease);
-}
-.stage.overview .slide.sel {
-  outline: 10px solid var(--accent);
-}
-.stage.overview .slide::before {
-  content: attr(data-label);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 60;
-  padding: 24px 40px;
-  background: var(--paper);
-  color: var(--ink);
-  font: 500 54px/1 var(--mono);
-  letter-spacing: 0.06em;
-}
-.stage.overview .in,
-.stage.overview [data-step],
-.stage.overview [data-only] {
+.vw-page .in,
+.vw-page [data-step],
+.vw-page [data-only] {
   opacity: 1 !important;
   transform: none !important;
   animation: none !important;
 }
-.stage.overview [data-only]:not(.on) {
+.vw-page [data-only]:not(.on) {
   opacity: 0 !important;
 }
-.stage.overview .d {
+.vw-page .d {
   animation: none !important;
   stroke-dasharray: 1 0 !important;
 }
@@ -1459,8 +1437,8 @@ body.is-black .stage {
 
 @media (prefers-reduced-motion: reduce) {
   .slide [data-step],
-  .slide [data-only],
-  .slide.is-active .in {
+.slide [data-only],
+.slide.is-active .in {
     transform: none !important;
     animation-name: fadein !important;
   }
@@ -1468,7 +1446,7 @@ body.is-black .stage {
     animation: none !important;
   }
   .slide .art .late,
-  .slide .art g.cote {
+.slide .art g.cote {
     opacity: 1 !important;
     animation: none !important;
   }
@@ -1494,7 +1472,7 @@ body.is-black .stage {
 }
 @media print {
   html,
-  body {
+body {
     height: auto;
     overflow: visible;
     background: var(--paper);
@@ -1502,7 +1480,7 @@ body.is-black .stage {
     print-color-adjust: exact;
   }
   .stage,
-  body.is-black .stage {
+body.is-black .stage {
     position: static;
     margin: 0;
     width: 1920px;
@@ -1525,14 +1503,14 @@ body.is-black .stage {
     page-break-after: auto;
   }
   *,
-  *::before,
-  *::after {
+*::before,
+*::after {
     animation: none !important;
     transition: none !important;
   }
   .slide .in,
-  .slide .art .late,
-  .slide .art g.cote {
+.slide .art .late,
+.slide .art g.cote {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -1551,8 +1529,8 @@ body.is-black .stage {
     transform: none !important;
   }
   .notes,
-  .help,
-  #live {
+.help,
+#live {
     display: none !important;
   }
 }
@@ -1692,8 +1670,8 @@ body.is-black .stage {
   transform: none;
   transition: transform 1.2s var(--ease) 0.5s;
 }
-.stage.overview .plan06 .pf1,
-.stage.overview .plan06 .pf2 {
+.vw-page .plan06 .pf1,
+.vw-page .plan06 .pf2 {
   transform: none;
 }
 
@@ -1705,7 +1683,7 @@ body.is-black .stage {
 }
 @media print {
   .slide .plan06 .pf1,
-  .slide .plan06 .pf2 {
+.slide .plan06 .pf2 {
     transform: none !important;
   }
 }
@@ -2709,6 +2687,8 @@ body.is-black .stage {
   --hud-ink: #f5f2eb;
   --hud-accent: #cdb88f;
   --hud-shade: rgba(11, 11, 10, 0.86);
+  --vw-ground: #0b0b0a;  /* the overview's ground (../shared/viewer.css) */
+  --vw-page: var(--paper);
 }
 /* the shortcuts panel sits above the toolbar */
 .help {
@@ -2720,136 +2700,8 @@ body.is-black .stage {
 }
 
 /* Overview: on the black of the frame, taller than the screen, moved by the wheel (--ovy) */
-.stage.ov-move {
-  transition: transform 0.65s var(--ease);
-}
-.stage.overview.ov-move {
-  transition: transform 0.25s ease-out;
-}
-.stage.overview {
-  overflow: visible;
-  background: transparent;
-  transform: translateY(calc(var(--ovy, 0px) * var(--scale, 1))) scale(var(--scale, 1));
-}
-.stage.overview .slide {
-  outline: 0;
-  box-shadow: 0 0 0 3px rgba(245, 242, 235, 0.14);
-}
-.stage.overview .slide.sel {
-  box-shadow: 0 0 0 14px #cdb88f;
-}
-.slide > .pick {
-  display: none;
-}
-.stage.overview .slide > .pick {
-  appearance: none;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  z-index: 61;
-  display: block;
-  width: 140px;
-  height: 140px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #6e5a3a
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-8.2' fill='none' stroke='%23f5f2eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    center / 70% no-repeat;
-  box-shadow:
-    0 0 0 8px #f5f2eb,
-    0 6px 18px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
 /* left out: the page darkens to a ghost, its tick an empty ring */
-.stage.overview .slide.skip {
-  box-shadow:
-    inset 0 0 0 4000px #1a1917,
-    0 0 0 3px rgba(245, 242, 235, 0.2);
-}
-.stage.overview .slide.skip.sel {
-  box-shadow:
-    inset 0 0 0 4000px #1a1917,
-    0 0 0 14px #cdb88f;
-}
-.stage.overview .slide.skip > :not(.pick) {
-  filter: opacity(0.14) grayscale(1);
-}
-.stage.overview .slide.skip > .pick {
-  background: transparent;
-  box-shadow: inset 0 0 0 8px rgba(245, 242, 235, 0.75);
-}
-.stage.overview .slide.skip::before {
-  background: transparent;
-  color: rgba(245, 242, 235, 0.6);
-}
-.stage.overview .slide.skip::after {
-  content: var(--hidden-label);
-  position: absolute;
-  inset: 0;
-  z-index: 60;
-  display: grid;
-  place-items: center;
-  font: italic 400 150px/1 var(--serif);
-  color: #f5f2eb;
-  pointer-events: none;
-}
 /* the bar across the top while the overview is open */
-.picks {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 101;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 64px;
-  padding: 0 24px 0 32px;
-  background: rgba(11, 11, 10, 0.92);
-  border-bottom: 1px solid rgba(245, 242, 235, 0.16);
-  color: #f5f2eb;
-  font: 400 13px/1 var(--sans);
-  white-space: nowrap;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-body:has(.stage.overview) .picks {
-  display: flex;
-}
-.picks-t {
-  font: italic 400 26px/1 var(--serif);
-}
-.picks-n {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgba(245, 242, 235, 0.66);
-  letter-spacing: 0.02em;
-}
-.picks-n b {
-  color: #cdb88f;
-  font-weight: 600;
-}
-.picks-b {
-  display: flex;
-  gap: 10px;
-}
-.picks button {
-  padding: 10px 18px;
-  border: 1px solid rgba(245, 242, 235, 0.35);
-  border-radius: 0;
-  background: none;
-  color: inherit;
-  font: 500 11px/1 var(--mono);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.picks button:hover {
-  background: rgba(245, 242, 235, 0.1);
-}
 
 /* Annex contents (key A): three columns of five, each a way in; every annex folio leads back */
 .ax-index .ax-list {
@@ -2897,15 +2749,13 @@ body:has(.stage.overview) .picks {
 .slide.annex .folio {
   cursor: pointer;
 }
-.stage.overview .cover .cv-dial.on {
+.vw-page .cover .cv-dial.on {
   opacity: 0.16 !important;
 }
 
 @media print {
   .hud,
-  .progress,
-  .picks,
-  .slide > .pick {
+.progress {
     display: none !important;
   }
   /* the cover's dial as it ends on screen: dimmed under the title */
@@ -2913,10 +2763,7 @@ body:has(.stage.overview) .picks {
     opacity: 0.16 !important;
   }
   /* the print dialog (no exported PDF): the slides left out stay out */
-  .slide.skip {
-    display: none !important;
   }
-}
 
 /* ============================================================= Round 7 */
 

@@ -1379,10 +1379,10 @@ body[data-deck="full"] {
 .room-copy .split .w > span {
   animation-duration: 1.6s !important;
 }
-.stage.overview .room-photo {
+.vw-page .room-photo {
   width: calc(1280px - var(--cx, 0px));
 }
-.stage.overview .room-photo img {
+.vw-page .room-photo img {
   right: var(--r);
 }
 .room-copy {
@@ -1428,12 +1428,12 @@ body[data-deck="full"] {
   opacity: 0;
 }
 .slide.is-active:not(.full) .folio.half .logo img:first-child,
-.stage.overview .folio.half .logo img:first-child {
+.vw-page .folio.half .logo img:first-child {
   opacity: 1;
   transition-delay: 1.9s;
 }
 .slide.is-active:not(.full) .folio.half .logo img.w,
-.stage.overview .folio.half .logo img.w {
+.vw-page .folio.half .logo img.w {
   opacity: 0;
   transition-delay: 1.9s;
 }
@@ -1514,13 +1514,13 @@ body[data-deck="full"] {
 .slide.held.pan-out.full .room-photo {
   width: 1920px;
 }
-.stage.overview .room.full .room-photo {
+.vw-page .room.full .room-photo {
   width: calc(1280px - var(--cx, 0px));
 }
-.stage.overview .room.full .room-photo img {
+.vw-page .room.full .room-photo img {
   right: var(--r);
 }
-.stage.overview .room.full .room-copy {
+.vw-page .room.full .room-copy {
   opacity: 1;
 }
 /* the event room: the same room from its bar, framed toward the bar. One camera move: both
@@ -2093,7 +2093,9 @@ body[data-deck="full"] {
     transform: translateY(30px);
   }
 }
-.slide.is-active .ax-in :is(tbody tr, .ax-list li, .bar-row) {
+.slide.is-active .ax-in :is(tbody tr,
+.ax-list li,
+.bar-row) {
   animation: ax-row 0.6s var(--ease) both;
   animation-delay: calc(450ms + var(--i) * 90ms + var(--r) * 70ms);
 }
@@ -2133,7 +2135,9 @@ body[data-deck="full"] {
     opacity: 0;
   }
 }
-.slide.is-active .ax-in :is(.ax-photo, .ax-lead, .ax-pic) img {
+.slide.is-active .ax-in :is(.ax-photo,
+.ax-lead,
+.ax-pic) img {
   animation: ax-zoom 7s var(--ease) both;
 }
 @keyframes ax-zoom {
@@ -2260,150 +2264,20 @@ body[data-deck="full"] {
 /* ---- Slides to present (full.js): in All slides, a tick on each slide; an unticked one is
    veiled, left out of the presentation and of the PDF. A bar says how many are in. ---- */
 /* the overview, taller than the screen, moves up and down under the wheel (full.js, --ovy) */
-.stage.ov-move {
-  transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.stage.overview.ov-move {
-  transition: transform 0.25s ease-out;
-}
-.stage.overview {
-  overflow: visible;
-  transform: translateY(calc(var(--ovy, 0px) * var(--scale, 1)))
-    scale(var(--scale, 1));
-}
 /* the overview on black, so the pages read as cards */
-body:has(.stage.overview) {
-  background: #000;
-}
-.stage.overview {
-  background: transparent;
-}
-.stage.overview .slide {
-  box-shadow: none;
-}
-.stage.overview .slide.sel {
-  box-shadow: 0 0 0 14px #c9a96a;
-}
-.slide > .pick {
-  display: none;
-}
-.stage.overview .slide > .pick {
-  appearance: none;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  z-index: 61;
-  display: block;
-  width: 150px;
-  height: 150px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--c-green)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-8.2' fill='none' stroke='%23f9f8f0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    center / 70% no-repeat;
-  box-shadow:
-    0 0 0 9px var(--c-paper),
-    0 6px 18px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
 /* left out: the page darkens to a ghost, its tick an empty ring, its name without a number */
-.stage.overview .slide.skip {
-  box-shadow:
-    inset 0 0 0 4000px #1c1c1c,
-    0 0 0 4px rgba(255, 255, 255, 0.22);
-}
-.stage.overview .slide.skip.sel {
-  box-shadow:
-    inset 0 0 0 4000px #1c1c1c,
-    0 0 0 14px #c9a96a;
-}
-.stage.overview .slide.skip > :not(.pick) {
-  filter: opacity(0.16) grayscale(1);
-}
-.stage.overview .slide.skip > .pick {
-  background: transparent;
-  box-shadow: inset 0 0 0 9px rgba(255, 255, 255, 0.75);
-}
-.stage.overview .slide.skip::before {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.6);
-}
-.stage.overview .slide.skip::after {
-  content: "Hidden";
-  position: absolute;
-  inset: 0;
-  z-index: 60;
-  display: grid;
-  place-items: center;
-  font: italic 400 150px/1 var(--serif);
-  color: #fff;
-  pointer-events: none;
-}
 /* the bar across the top while the overview is open */
-.picks {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 101;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 64px;
-  padding: 0 24px 0 32px;
-  background: rgba(0, 0, 0, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  color: var(--c-paper);
-  font: 400 14px/1 var(--sans);
-  white-space: nowrap;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-body:has(.stage.overview) .picks {
-  display: flex;
-}
-.picks-t {
-  font: italic 400 24px/1 var(--serif);
-}
-.picks-n {
-  color: rgba(249, 248, 240, 0.66);
-  letter-spacing: 0.02em;
-}
-.picks-n b {
-  color: var(--c-paper);
-  font-weight: 600;
-}
-.picks-b {
-  display: flex;
-  gap: 10px;
-}
-.picks button {
-  padding: 10px 18px;
-  border: 1px solid rgba(249, 248, 240, 0.35);
-  border-radius: 999px;
-  background: none;
-  color: inherit;
-  font: 500 13px/1 var(--sans);
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.picks button:hover {
-  background: rgba(249, 248, 240, 0.1);
-}
 @media (prefers-reduced-motion: reduce) {
   .room-photo,
-  #museum .room-evening {
+#museum .room-evening {
     transition: none;
   }
   .slide.is-active .ax-in,
-  .slide.is-active .ax-in * {
+.slide.is-active .ax-in * {
     animation: none !important;
   }
   .nc-building,
-  .nc-film {
+.nc-film {
     transition: opacity 0.3s;
   }
 }
@@ -2478,6 +2352,8 @@ body:has(.stage.overview) .picks {
   --hud-ink: #f9f8f0;
   --hud-accent: #d0d3c7;
   --hud-shade: rgba(15, 27, 24, 0.82);
+  --vw-ground: #0f1b18;  /* the overview's ground (/shared/viewer.css) */
+  --vw-page: #0f1b18;
 }
 
 /* Access screen (structure in /shared/gate.css, from deck-presentation.com): Bixler's look */

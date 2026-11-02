@@ -10,6 +10,10 @@
   const stage = $("#stage");
   const ALL = $$(".slide", stage);
   const DECK = document.body.dataset.deck || "direction";
+  // On deck-presentation.com the platform's viewer (/shared/viewer.js) owns the keys, the toolbar, the
+  // overview, the ticks and the PDF; the other directions of this folder keep the engine's own.
+  const VIEWER = !!window.DeckViewer;
+  let V = null;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const NUMERALS = { 1: "I", 2: "II", 3: "III", 4: "IV" };
   const pad = (n) => String(n).padStart(2, "0");
@@ -484,6 +488,12 @@
 
   function changed() {
     const s = state.list[state.i];
+    if (VIEWER) {
+      $("#live").textContent = s.dataset.title;
+      store.set("slide", s.id);
+      renderNotes();
+      return emit(s);
+    }
     try {
       history.replaceState(null, "", "#" + s.id);
     } catch (e) {
@@ -677,9 +687,13 @@
     }
     e.preventDefault();
   }
-  addEventListener("keydown", onKey);
+  if (!VIEWER) addEventListener("keydown", onKey);
 
   stage.addEventListener("click", (e) => {
+    if (VIEWER) {
+      if (!e.target.closest("a, button")) V && V.next();
+      return;
+    }
     if (state.overview) {
       const s = e.target.closest(".slide");
       if (s) overview(false, state.list.indexOf(s));
@@ -698,7 +712,7 @@
     { passive: true },
   );
   stage.addEventListener("touchend", (e) => {
-    if (touchX === null) return;
+    if (touchX === null || VIEWER) return;
     const dx = e.changedTouches[0].clientX - touchX;
     touchX = null;
     if (Math.abs(dx) > 50) {
@@ -713,12 +727,13 @@
     overview: () => overview(),
     fullscreen,
   };
-  $$(".hud button[data-act]").forEach((b) =>
-    b.addEventListener("click", () => {
-      ACTIONS[b.dataset.act]?.();
-      b.blur();
-    }),
-  );
+  if (!VIEWER)
+    $$(".hud button[data-act]").forEach((b) =>
+      b.addEventListener("click", () => {
+        ACTIONS[b.dataset.act]?.();
+        b.blur();
+      }),
+    );
 
   let idleTimer,
     overHud = false;
@@ -738,7 +753,7 @@
       document.body.classList.add("idle");
     }, 2600);
   }
-  addEventListener("mousemove", wake);
+  if (!VIEWER) addEventListener("mousemove", wake);
 
   /* ======================================================== Start */
 
@@ -751,6 +766,27 @@
   fit();
 
   function start() {
+    if (VIEWER) {
+      V = DeckViewer.mount({
+        slides: ALL.map((s) => ({ id: s.id, label: s.dataset.label })),
+        show: (i, st, instant) =>
+          go(i, st === "end" ? ALL[i]._steps : st, { instant, back: i < state.i, force: V === null }),
+        step(d) {
+          const s = state.list[state.i];
+          if (d > 0 && state.step < s._steps) return setStep(state.step + 1), true;
+          if (d < 0 && state.step > 0) return setStep(state.step - 1), true;
+          return false;
+        },
+        thumb: (i) => {
+          const c = ALL[i].cloneNode(true);
+          applyStep(c, ALL[i]._steps);
+          c.classList.add("is-active");
+          c.querySelectorAll("video").forEach((v) => { v.removeAttribute("autoplay"); v.preload = "none"; });
+          return c;
+        },
+      });
+      return;
+    }
     const id = decodeURIComponent(location.hash.slice(1));
     const k = state.list.findIndex((s) => s.id === id);
     go(Math.max(0, k), 0, { instant: true, force: true });
@@ -765,13 +801,15 @@
 
   window.deck = {
     go: (id, step = 0) =>
-      go(
-        state.list.findIndex((s) => s.id === id),
-        step,
-        { instant: true },
-      ),
-    next,
-    prev,
+      V
+        ? V.goId(id, step)
+        : go(
+            state.list.findIndex((s) => s.id === id),
+            step,
+            { instant: true },
+          ),
+    next: () => (V ? V.next() : next()),
+    prev: () => (V ? V.prev() : prev()),
     state,
     reduced,
   };

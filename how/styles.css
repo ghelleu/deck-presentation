@@ -1412,11 +1412,10 @@ body.is-black .stage {
   opacity: 0;
   transition: opacity 0.8s var(--ease);
 }
-html:is([data-tone="dark"], [data-tone="plum"], [data-tone="velvet"]) body.show-hud .aura-cursor {
+html:is([data-tone="dark"],
+[data-tone="plum"],
+[data-tone="velvet"]) body.show-hud .aura-cursor {
   opacity: 1;
-}
-body:has(.stage.overview) .aura-cursor {
-  opacity: 0 !important;
 }
 .grain {
   position: fixed;
@@ -1427,15 +1426,19 @@ body:has(.stage.overview) .aura-cursor {
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-body:has(.stage.overview) .grain {
-  display: none;
-}
 
 /* ------------------------------------------------------------- Toolbar: the platform's (../shared/controls.css), tinted */
 :root {
   --hud-ink: #f6f4f1;
   --hud-accent: #e3c99d;
   --hud-shade: rgba(13, 11, 18, 0.88);
+  --vw-ground: #0d0b12;  /* the overview's ground (../shared/viewer.css) */
+  --vw-page: #0d0b12;
+}
+/* while the overview is open, no halo and no grain over it */
+html.vw-open .aura-cursor,
+html.vw-open .grain {
+  display: none;
 }
 
 /* ------------------------------------------------------------- Help (key ?) */
@@ -1474,179 +1477,24 @@ body:has(.stage.overview) .grain {
 
 /* ------------------------------------------------------------- Overview (key o) */
 
-.stage.ov-move {
-  transition: transform 0.65s var(--ease);
-}
-.stage.overview.ov-move {
-  transition: transform 0.25s ease-out;
-}
-.stage.overview {
-  overflow: visible;
-  background: transparent;
-  transform: translateY(calc(var(--ovy, 0px) * var(--scale, 1))) scale(var(--scale, 1));
-}
-.stage.overview .slide {
-  visibility: visible;
-  cursor: pointer;
-  transform-origin: 0 0;
-  box-shadow: 0 0 0 3px rgba(246, 244, 241, 0.14);
-  transition: transform 700ms var(--ease);
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-.stage.overview .slide.sel {
-  box-shadow: 0 0 0 14px var(--champagne);
-}
-.stage.overview .slide::before {
-  content: attr(data-label);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 60;
-  max-width: 1500px;
-  padding: 24px 40px;
-  background: var(--night);
-  color: var(--champagne);
-  font: 400 46px/1.15 var(--text);
-  font-stretch: 125%;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.stage.overview [data-step],
-.stage.overview [data-only],
-.stage.overview .fig,
-.stage.overview .dev,
-.stage.overview * {
+.vw-page [data-step],
+.vw-page [data-only],
+.vw-page .fig,
+.vw-page .dev,
+.vw-page * {
   animation: none !important;
 }
-.stage.overview [data-step],
-.stage.overview [data-only].on {
+.vw-page [data-step],
+.vw-page [data-only].on {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;
 }
-.stage.overview [data-only]:not(.on) {
+.vw-page [data-only]:not(.on) {
   opacity: 0 !important;
 }
-.stage.overview .opp-b.on {
+.vw-page .opp-b.on {
   clip-path: none !important;
-}
-.slide > .pick {
-  display: none;
-}
-.stage.overview .slide > .pick {
-  appearance: none;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  z-index: 61;
-  display: block;
-  width: 140px;
-  height: 140px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--plum)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-8.2' fill='none' stroke='%23f6f4f1' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    center / 70% no-repeat;
-  box-shadow:
-    0 0 0 8px var(--ivory),
-    0 6px 18px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-.stage.overview .slide.skip {
-  box-shadow:
-    inset 0 0 0 4000px #17131f,
-    0 0 0 3px rgba(246, 244, 241, 0.2);
-}
-.stage.overview .slide.skip.sel {
-  box-shadow:
-    inset 0 0 0 4000px #17131f,
-    0 0 0 14px var(--champagne);
-}
-.stage.overview .slide.skip > :not(.pick) {
-  filter: opacity(0.14) grayscale(1) !important;
-}
-.stage.overview .slide.skip > .pick {
-  background: transparent;
-  box-shadow: inset 0 0 0 8px rgba(246, 244, 241, 0.75);
-}
-.stage.overview .slide.skip::before {
-  background: transparent;
-  color: rgba(246, 244, 241, 0.6);
-}
-.stage.overview .slide.skip::after {
-  content: var(--hidden-label);
-  position: absolute;
-  inset: 0;
-  z-index: 60;
-  display: grid;
-  place-items: center;
-  font: 400 140px/1 var(--display);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ivory);
-  pointer-events: none;
-}
-.picks {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 101;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 64px;
-  padding: 0 24px 0 32px;
-  background: rgba(13, 11, 18, 0.92);
-  border-bottom: 1px solid rgba(246, 244, 241, 0.16);
-  color: var(--ivory);
-  font: 400 13px/1 var(--text);
-  font-stretch: 125%;
-  white-space: nowrap;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-body:has(.stage.overview) .picks {
-  display: flex;
-}
-.picks-t {
-  font: 400 24px/1 var(--display);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--champagne);
-}
-.picks-n {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgba(246, 244, 241, 0.66);
-  letter-spacing: 0.02em;
-}
-.picks-n b {
-  color: var(--champagne);
-  font-weight: 700;
-}
-.picks-b {
-  display: flex;
-  gap: 10px;
-}
-.picks button {
-  padding: 10px 18px;
-  border: 1px solid rgba(246, 244, 241, 0.35);
-  border-radius: 0;
-  background: none;
-  color: inherit;
-  font: 400 11px/1 var(--text);
-  font-stretch: 125%;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.picks button:hover {
-  background: rgba(246, 244, 241, 0.1);
 }
 
 /* ------------------------------------------------------------- Access screen (structure in ../shared/gate.css): HOW look */
@@ -1674,14 +1522,14 @@ html.gated .aura-cursor {
 
 @media (prefers-reduced-motion: reduce) {
   .slide [data-step],
-  .slide [data-only],
-  .mood-set .fig {
+.slide [data-only],
+.mood-set .fig {
     transform: none !important;
     filter: none !important;
     scale: none !important;
   }
   .slide *,
-  .slide.is-active * {
+.slide.is-active * {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
   }
@@ -1696,7 +1544,7 @@ html.gated .aura-cursor {
 }
 @media print {
   html,
-  body {
+body {
     height: auto;
     overflow: visible;
     background: var(--night);
@@ -1704,7 +1552,7 @@ html.gated .aura-cursor {
     print-color-adjust: exact;
   }
   .stage,
-  body.is-black .stage {
+body.is-black .stage {
     position: static;
     margin: 0;
     width: 1920px;
@@ -1729,8 +1577,8 @@ html.gated .aura-cursor {
     page-break-after: auto;
   }
   *,
-  *::before,
-  *::after {
+*::before,
+*::after {
     animation: none !important;
     transition: none !important;
   }
@@ -1738,16 +1586,14 @@ html.gated .aura-cursor {
     opacity: 1 !important;
   }
   .notes,
-  .help,
-  #live,
-  .hud,
-  .progress,
-  .picks,
-  .aura-cursor,
-  .grain,
-  .compass,
-  .rail,
-  .pick {
+.help,
+#live,
+.hud,
+.progress,
+.aura-cursor,
+.grain,
+.compass,
+.rail {
     display: none !important;
   }
 }
