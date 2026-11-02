@@ -181,9 +181,9 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 ### BIX : Bixler's × Rolex (adresse /biw/)
 
 - **Source** : `~/Projects/bixter` (privé, `ghelleu/bixter`). Elle copie `Hint3rland/bixter` sans les médias du film. Lire son `CLAUDE.md`, et `assets/film/RULES.md` pour tout ce qui touche au film.
-- **Langue** : anglais seulement, donc pas de bouton langue. **Pas de code d'accès.**
-- **Structure différente** des deux autres decks : moteur `full.js`, avec `directions/shared/engine.js` et `base.css`, sans `config.js`. Il y a aussi un livret (`book.html`, avec son PDF) et des films (`film/`).
-- **Publier** : copier `directions/full/` dans `biw/` et `directions/shared/` dans `biw/shared/`. Dans `index.html` et `book.html`, remplacer `"../shared/` par `"shared/`, mais laisser `/shared/controls.js` tel quel. Ensuite : `git add biw && git commit && git push`.
+- **Langue** : anglais seulement, donc pas de bouton langue. **Code d'accès** : oui depuis le 02.11.2026, sur le deck et sur le livret (`directions/full/config.js`, clé `GATE`).
+- **Structure différente** des deux autres decks : moteur `full.js`, avec `directions/shared/engine.js` et `base.css`. Son `config.js` ne sert qu'à la plateforme (`LANGS`, `GATE`). Il y a aussi un livret (`book.html`, avec son PDF) et des films (`film/`).
+- **Publier** : copier `directions/full/` dans `biw/` et `directions/shared/` dans `biw/shared/`. Dans `index.html` et `book.html`, remplacer `"../shared/` par `"shared/`, mais laisser tels quels les fichiers de la plateforme (`/shared/gate.css`, `/shared/gate.js`, `/shared/controls.js`, en chemin absolu). Ensuite : `git add biw && git commit && git push`.
 - Le remote `hint3rland` est configuré pour ne pas télécharger les gros fichiers (`blob:none`). Ne pas le récupérer en entier : il pèse plusieurs gigaoctets de films.
 
 ### TDP : La Tour des Possibles (Magnetic × Geneva Lux 2027)
@@ -232,7 +232,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
   printf "%s /%s\n" "$(curl -s -o /dev/null -w '%{http_code}' https://deck-presentation.com/$u)" "$u"; done
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
-- l'écran d'accès s'affiche sur ALS et HOW ;
+- l'écran d'accès s'affiche sur ALS, HOW et BIX ;
 - la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
@@ -245,7 +245,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 ### 7.1 Ce qui fonctionne
 - Le site, les decks, les fichiers `shared/` et les PDF répondent tous en `200`. HTTPS est forcé et `www` redirige.
 - La barre commune est en place sur les trois decks publiés **et** dans leurs sources (gabarit HOW, ALS, BIW). Les anciens boutons (annexes, notes, aide) et les anciennes touches ont disparu partout.
-- L'écran d'accès commun est actif sur ALS et HOW. Plus aucun deck n'embarque sa propre copie.
+- L'écran d'accès commun est actif sur ALS, HOW et BIX (depuis le 02.11.2026). Plus aucun deck n'embarque sa propre copie.
 - Les dépôts sources ALS et BIW sont propres et synchronisés avec GitHub.
 
 ### 7.2 Corrigé pendant cet audit
@@ -264,7 +264,7 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 3 | ~~Moyen~~ Corrigé | **Indexation.** L'accueil, avec les noms des clients, pouvait être indexé. Les `robots.txt` placés dans les dossiers des decks sont ignorés : seul celui de la racine compte. | Fait le 31.10.2026 : `robots.txt` à la racine (`Disallow: /`) et `noindex` sur l'accueil. Ne pas les retirer. |
 | 4 | Moyen | **Poids.** Le site publié fait environ 265 Mo, l'historique local 582 Mo et le dépôt GitHub 294 Mo. Chaque PDF refait ajoute 20 à 50 Mo d'historique (HOW : 2 × 26 Mo ; BIW : films de 18-19 Mo). Limites GitHub : 100 Mo par fichier, dépôt conseillé sous 1 Go, site Pages limité à 1 Go. | Compresser les PDF, sortir les films vers un hébergement vidéo, et prévoir à terme un nettoyage de l'historique. |
 | 5 | Moyen | **Une seule copie de travail partagée** par plusieurs sessions (`~/Projects/deck-presentation`). Le 30.10, un changement de branche a fait atterrir un commit HOW au mauvais endroit. | Ne jamais changer de branche dans cette copie, ajouter les fichiers par chemin, et travailler dans un `git worktree` pour une branche. |
-| 6 | À décider | **BIW n'a pas d'écran d'accès.** | Donner un code à 5 chiffres si on en veut un. Il faut alors ajouter un `config.js` avec `GATE` et charger `gate.js`/`gate.css` dans la source BIW. |
+| 6 | Corrigé | **BIX n'avait pas d'écran d'accès.** | Fait le 02.11.2026 : `config.js` avec `GATE`, et `/shared/gate.*` chargés dans le deck et le livret. TDP et MAG n'en ont pas (`GATE: null`). |
 | 7 | Faible | BIW charge la barre par un chemin absolu (`/shared/controls.js`). C'est correct sur le domaine, mais ça casserait si le site était servi sous un sous-dossier. | Rien à faire tant que le domaine ne change pas. |
 | 8 | Faible | Seules la barre et l'écran d'accès sont communs. La navigation et les vignettes sont réécrites dans chacun des trois moteurs. | Si un 4ᵉ deck arrive, envisager un moteur de vignettes commun dans `shared/`. |
 | 9 | Faible | Il n'y a ni vérification automatique ni page 404. | Script de vérification du §6.5 ; une `404.html` sobre à la racine. |
@@ -296,3 +296,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 31.10.2026 | Indexation bloquée : `robots.txt` à la racine, `noindex` sur l'accueil. |
 | 01.11.2026 | Écran d'accès : le code est retenu par l'onglet ; changer de langue ou actualiser ne le redemande plus. |
 | 02.11.2026 | TDP et MAG publiés (par leurs sessions). Accueil : Bixler's devient BIX (adresse `/biw/` inchangée) ; nouvelle colonne Project. |
+| 02.11.2026 | BIX : écran d'accès à 5 chiffres sur le deck et le livret. |

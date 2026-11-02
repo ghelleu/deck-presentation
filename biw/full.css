@@ -2486,3 +2486,13 @@ body:has(.stage.overview) .picks {
 .hud a.icon {
   border: 0;
 }
+
+/* Access screen (structure in /shared/gate.css, from deck-presentation.com): Bixler's look */
+.gate {
+  --gate-bg: #0d0c0a;
+  --gate-caret: #b89a5e;
+}
+html.gated .hud,
+html.gated .progress {
+  display: none !important;
+}
