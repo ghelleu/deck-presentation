@@ -73,7 +73,7 @@
   function drawTower(el) {
     const lit = el.dataset.lit === "1";
     const small = el.classList.contains("small");
-    const { X, Y, S } = towerGeometry(1180, 1000, 58);
+    const { X, Y, S } = towerGeometry(960, 1000, 58);
     let dd = 0;
     const seg = (d, cls = "", dur = 1.0, gap = 120) => { const out = `<path class="d ${cls}" pathLength="1" style="--dd:${dd};--dur:${dur}s" d="${d}"/>`; dd += gap; return out; };
     const ell = (cx, cy, rx, ry, half) => {
@@ -83,9 +83,11 @@
       if (half === "back") return `M${l}A${rx} ${ry} 0 0 1 ${r}`;
       return `M${l}A${rx} ${ry} 0 1 0 ${r}A${rx} ${ry} 0 1 0 ${l}`;
     };
-    let s = svgEl(1920, 1080, "tower-svg", small ? "860 60 640 960" : "0 0 1920 1080") +
+    let s = svgEl(1920, 1080, "tower-svg", small ? "640 60 640 960" : "0 0 1920 1080") +
       `<defs><radialGradient id="globeGlow"><stop offset="0" stop-color="#fffdf8"/><stop offset=".3" stop-color="#ffe6bd" stop-opacity=".8"/><stop offset="1" stop-color="#ffe6bd" stop-opacity="0"/></radialGradient>
        <linearGradient id="upBeam" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#dce6ff" stop-opacity="0"/></linearGradient></defs>`;
+    // full sheet: the whole drawing at 80 %, so it clears the kicker and the footer
+    if (!small) s += `<g transform="translate(960 560) scale(0.8) translate(-960 -560)">`;
 
     // ground and base
     s += `<line class="ground" x1="${X(-6.5)}" y1="${Y(0)}" x2="${X(6.5)}" y2="${Y(0)}"/>`;
@@ -153,27 +155,35 @@
     if (!small) {
       // notes, after the annotated axonometry (step 1 left, step 2 right); words from content/<lang>.json (ui.tower)
       const N = UI.tower || [["Sommet", ["Globe lumineux, protégé", "des intempéries"]], ["Modules lumineux", ["9 réflecteurs à tubes LED,", "150 × 40 cm"]], ["Structure", ["Mât en inox Ø 16,7 cm,", "trois sections de 5 m"]], ["Interface", ["Combiné téléphonique", "et écran des vœux"]], ["Haubanage", ["Accroche unique", "sous les modules"]], ["Couronne", ["Deux cercles en truss Ø 6 m,", "néon flex LED"]], ["Lests", ["Environ 1,8 t chacun,", "à 4,5 m du mât"]], ["Base", ["Plateau en bois noir,", "boîtier étanche IP66"]]];
-      const note = (step, side, ty, tx, k, lines, ly = ty) => {
-        const L = side === "l";
-        const x0 = L ? 140 : 1560, xe = L ? 600 : 1520;
-        let t = `<g class="note" data-note="${step}"><text class="k" x="${x0}" y="${ly - 14}">${k}</text>`;
-        lines.forEach((ln, i) => (t += `<text x="${x0}" y="${ly + 14 + i * 25}">${ln}</text>`));
-        t += `<polyline points="${xe},${ly} ${L ? xe + 40 : xe - 40},${ly} ${tx},${ty}"/><circle cx="${tx}" cy="${ty}" r="4"/></g>`;
+      // two symmetric columns around the tower, rows on a regular beat; each leader runs flat, then at 45° to its point
+      const rows = { l: [170, 370, 570, 770], r: [330, 530, 730, 930] };
+      const note = (step, side, row, tx, ty, k, lines) => {
+        const L = side === "l", ly = rows[side][row];
+        const x0 = L ? 460 : 1460, xe = L ? 480 : 1440;
+        const anchor = L ? ' text-anchor="end"' : "";
+        const dy = Math.abs(ty - ly), ex = L ? Math.max(xe + 20, tx - dy) : Math.min(xe - 20, tx + dy);
+        let t = `<g class="note" data-note="${step}"><text class="k" x="${x0}" y="${ly - 14}"${anchor}>${k}</text>`;
+        lines.forEach((ln, i) => (t += `<text x="${x0}" y="${ly + 14 + i * 25}"${anchor}>${ln}</text>`));
+        t += `<polyline points="${xe},${ly} ${ex},${ly} ${tx},${ty}"/><circle cx="${tx}" cy="${ty}" r="4"/></g>`;
         return t;
       };
-      s += note(1, "l", Y(14.55), X(-0.36), N[0][0], N[0][1]);
-      s += note(1, "l", Y(12), X(-0.45), N[1][0], N[1][1]);
-      s += note(1, "l", Y(7), X(-0.1), N[2][0], N[2][1]);
-      s += note(1, "l", Y(1.8), X(0.1), N[3][0], N[3][1], Y(2.6));
-      s += note(2, "r", Y(9.3), X(0), N[4][0], N[4][1]);
-      s += note(2, "r", Y(4.25) + ry, X(2.6), N[5][0], N[5][1], Y(5.4));
-      s += note(2, "r", Y(0.35), X(3.45) + 18, N[6][0], N[6][1], Y(2.6));
-      s += note(2, "r", Y(0.12), X(1.4), N[7][0], N[7][1], Y(1.1));
+      s += note(1, "l", 0, X(-0.3), Y(14.55), N[0][0], N[0][1]);
+      s += note(1, "l", 1, X(-0.42), Y(12.2), N[1][0], N[1][1]);
+      s += note(1, "l", 2, X(-0.09), Y(7.2), N[2][0], N[2][1]);
+      s += note(1, "l", 3, X(0.1), Y(1.8), N[3][0], N[3][1]);
+      s += note(2, "r", 0, X(0), Y(9.3), N[4][0], N[4][1]);
+      s += note(2, "r", 1, X(3), Y(4), N[5][0], N[5][1]);
+      s += note(2, "r", 2, X(3.45), Y(-0.03), N[6][0], N[6][1]);
+      s += note(2, "r", 3, X(2.6), Y(0.32), N[7][0], N[7][1]);
       // dimensions (step 3)
       const dx = X(5.6);
-      s += `<g class="note dim" data-note="3"><line x1="${dx}" y1="${Y(0)}" x2="${dx}" y2="${Y(14.85)}"/><line x1="${dx - 10}" y1="${Y(0)}" x2="${dx + 10}" y2="${Y(0)}"/><line x1="${dx - 10}" y1="${Y(14.85)}" x2="${dx + 10}" y2="${Y(14.85)}"/><text x="${dx - 14}" y="${Y(7.4)}" text-anchor="end">≈ 15 m</text>
+      const gaps = [Y(14.85), ...rows.r.map((r) => [r - 8, r + 8]).flat(), Y(0)];
+      let dline = "";
+      for (let i = 0; i < gaps.length; i += 2) dline += `<line x1="${dx}" y1="${gaps[i]}" x2="${dx}" y2="${gaps[i + 1]}"/>`;
+      s += `<g class="note dim" data-note="3">${dline}<line x1="${dx - 10}" y1="${Y(0)}" x2="${dx + 10}" y2="${Y(0)}"/><line x1="${dx - 10}" y1="${Y(14.85)}" x2="${dx + 10}" y2="${Y(14.85)}"/><text x="${dx - 14}" y="${Y(7.4)}" text-anchor="end">≈ 15 m</text>
         <line x1="${X(-3)}" y1="${Y(5.1)}" x2="${X(3)}" y2="${Y(5.1)}"/><line x1="${X(-3)}" y1="${Y(5.1) - 9}" x2="${X(-3)}" y2="${Y(5.1) + 9}"/><line x1="${X(3)}" y1="${Y(5.1) - 9}" x2="${X(3)}" y2="${Y(5.1) + 9}"/><text x="${X(-1.2)}" y="${Y(5.1) - 12}" text-anchor="end">Ø 6 m</text>
         <line x1="${X(-3.4)}" y1="${Y(3.75)}" x2="${X(-3.4)}" y2="${Y(0)}"/><text x="${X(-3.55)}" y="${Y(0.9)}" text-anchor="end">≈ 4 m</text></g>`;
+      s += "</g>";
     }
     el.innerHTML = s + "</svg>";
   }
