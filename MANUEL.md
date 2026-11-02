@@ -25,7 +25,7 @@ En ligne aujourd'hui :
 | HOW | Press & Retailers Event 2027 | House of Wunder | Événementiel | MCI | Nov. 2026 | https://deck-presentation.com/how/ |
 | BIX | Refonte de Deck | Bixler's | Retail | Downtown studio | Oct. 2026 | https://deck-presentation.com/biw/ |
 | TDP | La Tour des Possibles | Geneva Lux | Installation | Magnetic | Nov. 2026 | https://deck-presentation.com/tdp/ |
-| MAG | Pour que la créativité impact le monde | Magnetic | Association | Magnetic | Nov. 2026 | https://deck-presentation.com/mag/ |
+| MAG | Magnetic | — | Association | Downtown studio | Juin 2026 | https://deck-presentation.com/mag/ |
 | CBM | Swiss Disco | Caroline Barbier Muller | Soirée | MCI | Nov. 2026 | *pas encore en ligne* |
 
 ---
