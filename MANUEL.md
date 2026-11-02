@@ -191,7 +191,7 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 ### TDP : La Tour des Possibles (Magnetic × Geneva Lux 2027)
 
 - **Source** : `~/Projects/tour-des-possibles`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub, donc pas de sauvegarde.
-- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Langues** : français et anglais depuis le 02.11.2026 (`content/fr.json`, `content/en.json`, par `shared/i18n.js` ; un PDF par langue). Les 5 000 vœux de test restent en français. **Pas de code d'accès** (`GATE: null`).
 - **Aperçu** : `tools/serve.py`, puis http://127.0.0.1:4190/ (avec le lien `shared` vers la plateforme).
 - **Publier** : copier le deck dans `~/Projects/deck-presentation/tdp/`, sans `shared`, `_src`, `tools` ni `.claude`. Ensuite : `git add tdp && git commit && git push`.
 - Structure comme ALS : `config.js`, `engine.js`, `styles.css`, et le PDF dans `export/`.
@@ -199,7 +199,7 @@ GitHub Pages reconstruit le site en une minute environ. Les navigateurs gardent 
 ### MAG : Magnetic, présentation de l'association (Deck 2026)
 
 - **Source** : `~/Projects/magnetic-deck`. Lire son `README.md`. Elle est sous git, mais **en local seulement** : pas de dépôt GitHub.
-- **Langue** : français seulement, donc pas de bouton langue. **Pas de code d'accès** (`GATE: null`).
+- **Langues** : français et anglais depuis le 02.11.2026 (`content/fr.json`, `content/en.json`, par `shared/i18n.js` ; un PDF par langue). **Pas de code d'accès** (`GATE: null`).
 - **Aperçu** : `python3 tools/serve.py 4191`, puis http://127.0.0.1:4191/ (avec le lien `shared` vers la plateforme).
 - **Publier** : copier le deck dans `~/Projects/deck-presentation/mag/`, sans `shared`, `_src` ni `tools`. Ensuite : `git add mag && git commit && git push`.
 
@@ -238,7 +238,7 @@ for u in "" als/ how/ biw/ shared/controls.js shared/gate.js shared/gate.css; do
 ```
 Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 - l'écran d'accès s'affiche sur ALS, HOW, BIX, CBM et TOT ;
-- la barre a 5 boutons (4 sur BIX, TDP et MAG, qui n'ont qu'une langue) ;
+- la barre a 5 boutons (4 sur BIX et CBM, qui n'ont qu'une langue) ;
 - le PDF se télécharge ;
 - O, R, F et Échap répondent ;
 - la console du navigateur n'affiche aucune erreur.
@@ -305,3 +305,4 @@ Tout doit renvoyer `200`. Ensuite, ouvrir chaque deck et contrôler :
 | 02.11.2026 | TOT publié (« Powerded by Superheros », soirée TotalEnergies, Hilton Genève), sans code d'accès. Source `~/Projects/totalenergies-deck`, git local sans dépôt GitHub. |
 | 02.11.2026 | CBM et TOT : écran d'accès à 5 chiffres. |
 | 02.11.2026 | `shared/controls.css` : l’apparence de la barre devient commune (au pied de la fenêtre, typo de l’accueil). TOT l’adopte, passe en FR/EN et a un PDF par langue. |
+| 02.11.2026 | `shared/i18n.js` : les langues deviennent communes (`content/<lang>.json`, `?lang=`). TOT, TDP et MAG l’utilisent avec la barre commune, en FR/EN, un PDF par langue. |

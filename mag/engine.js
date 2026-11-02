@@ -1,10 +1,12 @@
 /* Magnetic · deck engine, « plan continu »
    One plane, a camera, a magnetic field whose poles are the content (the plan is the JSON in index.html).
    Each view is a camera position and a set of charges; objects light up in the views they list (data-view).
-   Line drawings are built here (data-draw). Platform contract: ../shared/controls.js fills the .hud box,
-   this engine wires its buttons by data-act (fullscreen, restart, overview, pdf). No other control. */
-(() => {
+   Line drawings are built here (data-draw). Platform contract: ../shared/controls.js fills the .hud box (styled by
+   ../shared/controls.css), ../shared/i18n.js puts in the texts of the language (content/<lang>.json); this engine waits
+   for it, then wires the buttons by data-act (fullscreen, restart, overview, lang, pdf). No other control. */
+(async () => {
   "use strict";
+  const I18N = await window.DECK_I18N, UI = I18N.ui;
   const Q = new URLSearchParams(location.search);
   const PRINT = Q.has("print");
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -15,6 +17,7 @@
 
   const PLAN = JSON.parse(document.getElementById("plan").textContent);
   const POLES = PLAN.poles, NAMES = Object.keys(POLES), VIEWS = PLAN.views;
+  if (I18N.T && I18N.T.views) VIEWS.forEach((v) => { const t = I18N.T.views[v.id]; if (t) [v.label, v.kicker] = t; });
   const world = document.getElementById("world");
   const objs = $$(".obj", world);
   const HI = new Set(objs.map((o) => o.dataset.hi).filter(Boolean));
@@ -269,7 +272,7 @@
     history.replaceState(null, "", "#" + v.id);
     hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + VIEWS.length;
     hudTitle.textContent = v.label || "";
-    bar.style.width = ((i + 1) / VIEWS.length) * 100 + "%";
+    bar.style.setProperty("--p", (i + 1) / VIEWS.length);
   }
   function nextIndex(d) {
     let i = cur + d;
@@ -282,7 +285,7 @@
   let ov = null;
   function buildOverview() {
     ov = document.createElement("div");
-    ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "Toutes les vues");
+    ov.className = "overview"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", UI.overview || "Toutes les vues");
     VIEWS.forEach((v, i) => {
       const card = document.createElement("div"); card.className = "ov-card"; card.dataset.i = i;
       const thumb = document.createElement("div"); thumb.className = "ov-thumb";
@@ -290,7 +293,7 @@
       const cap = document.createElement("div"); cap.className = "ov-cap";
       cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${v.label || ""}</span>`;
       const chk = document.createElement("button"); chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-      chk.setAttribute("aria-label", "Montrer ou masquer cette vue");
+      chk.setAttribute("aria-label", UI.check || "Montrer ou masquer cette vue");
       chk.addEventListener("click", (e) => { e.stopPropagation(); skipped.has(v.id) ? skipped.delete(v.id) : skipped.add(v.id); card.classList.toggle("skipped", skipped.has(v.id)); saveSkip(); });
       card.classList.toggle("skipped", skipped.has(v.id));
       card.append(thumb, cap, chk);
@@ -317,7 +320,7 @@
     const b = e.target.closest("[data-act]");
     if (!b) return;
     const a = b.dataset.act;
-    if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview();
+    if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") I18N.switchLang();
     if (a !== "pdf") b.blur();
   });
   addEventListener("keydown", (e) => {
@@ -343,7 +346,7 @@
     touch = null;
   });
   let hudTimer = 0;
-  addEventListener("mousemove", () => { document.body.classList.add("hud-on"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("hud-on"), 2200); });
+  addEventListener("mousemove", () => { document.body.classList.add("show-hud"); clearTimeout(hudTimer); hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200); });
   addEventListener("resize", resize);
   addEventListener("scroll", () => { if (scrollX || scrollY) scrollTo(0, 0); });
   addEventListener("hashchange", () => { const i = VIEWS.findIndex((v) => "#" + v.id === location.hash); if (i >= 0 && i !== cur) go(i); });

@@ -3,11 +3,13 @@
    and the drawings built in code: the seven chapters as a constellation, the tower,
    the constellation of the tower, the route of the cities, the graph of wishes,
    the receipt screen and the ledger of the test base.
-   Contract of the platform: ../shared/controls.js fills the .hud box; this engine wires
-   its buttons by data-act (fullscreen, restart, overview, lang, pdf). No other control. */
-(() => {
+   Contract of the platform: ../shared/controls.js fills the .hud box (styled by ../shared/controls.css);
+   ../shared/i18n.js puts in the texts of the language (content/<lang>.json); this engine waits for it,
+   then wires the buttons by data-act (fullscreen, restart, overview, lang, pdf). No other control. */
+(async () => {
   "use strict";
   const cfg = window.DECK_CONFIG || {};
+  const I18N = await window.DECK_I18N, UI = I18N.ui;
   const Q = new URLSearchParams(location.search);
   const PRINT = Q.has("print");
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -24,7 +26,7 @@
   const svgEl = (w, h, cls, vb) => `<svg class="${cls}" viewBox="${vb || `0 0 ${w} ${h}`}" preserveAspectRatio="xMidYMid meet" xmlns="${SVG}">`;
 
   /* ---------------------------------------------------------------- folio */
-  const F = cfg.FOLIO || [];
+  const F = UI.folio || cfg.FOLIO || [];
   slides.forEach((s) => {
     if (s.dataset.folio === "no" || !F.length) return;
     const p = document.createElement("p");
@@ -35,7 +37,7 @@
   });
 
   /* ================================================================ drawings */
-  const CHAPTERS = ["Le vœu", "La tour", "Le projet", "La convocation", "La quittance", "La cartographie", "Un mouvement"];
+  const CHAPTERS = UI.chapters || ["Le vœu", "La tour", "Le projet", "La convocation", "La quittance", "La cartographie", "Un mouvement"];
   const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
   const STARS = [[1080, 860], [1215, 700], [1372, 772], [1470, 578], [1622, 508], [1702, 338], [1812, 214]];
 
@@ -149,7 +151,8 @@
     if (lit) s += `<line class="up" x1="${X(0)}" y1="${Y(14.85)}" x2="${X(0)}" y2="${Y(14.85) - 900}" stroke="url(#upBeam)" stroke-width="3" pathLength="1"/>`;
 
     if (!small) {
-      // notes, after the annotated axonometry (step 1 left, step 2 right)
+      // notes, after the annotated axonometry (step 1 left, step 2 right); words from content/<lang>.json (ui.tower)
+      const N = UI.tower || [["Sommet", ["Globe lumineux, protégé", "des intempéries"]], ["Modules lumineux", ["9 réflecteurs à tubes LED,", "150 × 40 cm"]], ["Structure", ["Mât en inox Ø 16,7 cm,", "trois sections de 5 m"]], ["Interface", ["Combiné téléphonique", "et écran des vœux"]], ["Haubanage", ["Accroche unique", "sous les modules"]], ["Couronne", ["Deux cercles en truss Ø 6 m,", "néon flex LED"]], ["Lests", ["Environ 1,8 t chacun,", "à 4,5 m du mât"]], ["Base", ["Plateau en bois noir,", "boîtier étanche IP66"]]];
       const note = (step, side, ty, tx, k, lines, ly = ty) => {
         const L = side === "l";
         const x0 = L ? 140 : 1560, xe = L ? 600 : 1520;
@@ -158,14 +161,14 @@
         t += `<polyline points="${xe},${ly} ${L ? xe + 40 : xe - 40},${ly} ${tx},${ty}"/><circle cx="${tx}" cy="${ty}" r="4"/></g>`;
         return t;
       };
-      s += note(1, "l", Y(14.55), X(-0.36), "Sommet", ["Globe lumineux, protégé", "des intempéries"]);
-      s += note(1, "l", Y(12), X(-0.45), "Modules lumineux", ["9 réflecteurs à tubes LED,", "150 × 40 cm"]);
-      s += note(1, "l", Y(7), X(-0.1), "Structure", ["Mât en inox Ø 16,7 cm,", "trois sections de 5 m"]);
-      s += note(1, "l", Y(1.8), X(0.1), "Interface", ["Combiné téléphonique", "et écran des vœux"], Y(2.6));
-      s += note(2, "r", Y(9.3), X(0), "Haubanage", ["Accroche unique", "sous les modules"]);
-      s += note(2, "r", Y(4.25) + ry, X(2.6), "Couronne", ["Deux cercles en truss Ø 6 m,", "néon flex LED"], Y(5.4));
-      s += note(2, "r", Y(0.35), X(3.45) + 18, "Lests", ["Environ 1,8 t chacun,", "à 4,5 m du mât"], Y(2.6));
-      s += note(2, "r", Y(0.12), X(1.4), "Base", ["Plateau en bois noir,", "boîtier étanche IP66"], Y(1.1));
+      s += note(1, "l", Y(14.55), X(-0.36), N[0][0], N[0][1]);
+      s += note(1, "l", Y(12), X(-0.45), N[1][0], N[1][1]);
+      s += note(1, "l", Y(7), X(-0.1), N[2][0], N[2][1]);
+      s += note(1, "l", Y(1.8), X(0.1), N[3][0], N[3][1], Y(2.6));
+      s += note(2, "r", Y(9.3), X(0), N[4][0], N[4][1]);
+      s += note(2, "r", Y(4.25) + ry, X(2.6), N[5][0], N[5][1], Y(5.4));
+      s += note(2, "r", Y(0.35), X(3.45) + 18, N[6][0], N[6][1], Y(2.6));
+      s += note(2, "r", Y(0.12), X(1.4), N[7][0], N[7][1], Y(1.1));
       // dimensions (step 3)
       const dx = X(5.6);
       s += `<g class="note dim" data-note="3"><line x1="${dx}" y1="${Y(0)}" x2="${dx}" y2="${Y(14.85)}"/><line x1="${dx - 10}" y1="${Y(0)}" x2="${dx + 10}" y2="${Y(0)}"/><line x1="${dx - 10}" y1="${Y(14.85)}" x2="${dx + 10}" y2="${Y(14.85)}"/><text x="${dx - 14}" y="${Y(7.4)}" text-anchor="end">≈ 15 m</text>
@@ -217,7 +220,8 @@
 
   /* Geneva, Lyon, Zaragoza, and further: projected from longitude and latitude. */
   function drawCities(el) {
-    const C = [["Genève", 6.14, 46.2], ["Lyon", 4.84, 45.76], ["Saragosse", -0.89, 41.65]];
+    const names = UI.cities || ["Genève", "Lyon", "Saragosse"];
+    const C = [[names[0], 6.14, 46.2], [names[1], 4.84, 45.76], [names[2], -0.89, 41.65]];
     const P = C.map(([n, lo, la]) => [n, 60 + (lo + 1.2) * 72, 18 + (46.6 - la) * 34]);
     let s = `<svg viewBox="0 0 640 200" xmlns="${SVG}">`;
     s += `<path class="ln" pathLength="1" style="--dd:300" d="M${P[0][1]} ${P[0][2]}L${P[1][1]} ${P[1][2]}"/>`;
@@ -228,7 +232,7 @@
       const lx = i === 2 ? x + 14 : x - 14, ly = i === 0 ? y - 14 : i === 1 ? y + 28 : y + 5;
       s += `<text x="${lx}" y="${ly}" text-anchor="${i === 2 ? "start" : "end"}">${n}${i === 0 ? " · 2027" : ""}</text>`;
     });
-    s += `<text x="604" y="160" text-anchor="end" style="fill:rgba(220,230,255,.32)">d’autres encore</text>`;
+    s += `<text x="604" y="160" text-anchor="end" style="fill:rgba(220,230,255,.32)">${UI.further || "d’autres encore"}</text>`;
     el.innerHTML = s + "</svg>";
   }
 
@@ -239,7 +243,7 @@
   const THEME_NAMES = { sante_proche: "santé d’un proche", sante_collective: "santé collective", egalite: "égalité", spiritualite: "spiritualité",
     humanite: "humanité", democratie: "démocratie", liberte: "liberté", education: "éducation", ideal_personnel: "idéal personnel",
     recherche_emploi: "recherche d’emploi", avenir_enfants: "avenir des enfants", bonheur_quotidien: "bonheur quotidien", personnel_anodin: "personnel anodin" };
-  const themeName = (t) => THEME_NAMES[t] || t.replace(/_/g, " ");
+  const themeName = (t) => (UI.themes && UI.themes[t]) || THEME_NAMES[t] || t.replace(/_/g, " ");
   const GRAPH = (() => {
     const W = window.WISHES;
     if (!W) return null;
@@ -573,7 +577,7 @@
     const total = slides.length;
     hudCount.textContent = String(i + 1).padStart(2, "0") + " / " + total;
     hudTitle.textContent = s.dataset.label || "";
-    bar.style.width = ((i + 1) / total) * 100 + "%";
+    bar.style.setProperty("--p", (i + 1) / total);
   }
 
   function nextIndex(from, d) {
@@ -598,7 +602,7 @@
     ov = document.createElement("div");
     ov.className = "overview";
     ov.setAttribute("role", "dialog");
-    ov.setAttribute("aria-label", "Toutes les slides");
+    ov.setAttribute("aria-label", UI.overview || "Toutes les slides");
     bgThumb = bgThumb || stillSky();
     slides.forEach((s, i) => {
       const card = document.createElement("div");
@@ -621,7 +625,7 @@
       cap.innerHTML = `<b>${String(i + 1).padStart(2, "0")}</b><span>${s.dataset.label || ""}</span>`;
       const chk = document.createElement("button");
       chk.type = "button"; chk.className = "ov-check"; chk.textContent = "✓";
-      chk.setAttribute("aria-label", "Montrer ou masquer cette slide");
+      chk.setAttribute("aria-label", UI.check || "Montrer ou masquer cette slide");
       chk.addEventListener("click", (e) => {
         e.stopPropagation();
         skipped.has(s.id) ? skipped.delete(s.id) : skipped.add(s.id);
@@ -665,6 +669,7 @@
     if (a === "fullscreen") fullscreen();
     else if (a === "restart") restart();
     else if (a === "overview") toggleOverview();
+    else if (a === "lang") I18N.switchLang();
     if (a !== "pdf") b.blur();
   });
 
@@ -694,9 +699,9 @@
 
   let hudTimer = 0;
   addEventListener("mousemove", () => {
-    document.body.classList.add("hud-on");
+    document.body.classList.add("show-hud");
     clearTimeout(hudTimer);
-    hudTimer = setTimeout(() => document.body.classList.remove("hud-on"), 2200);
+    hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200);
   });
 
   function fit() {

@@ -1,0 +1,216 @@
+{
+  "ui": {
+    "title": "Magnetic · Pour que la créativité impact le monde",
+    "overview": "Toutes les vues",
+    "check": "Montrer ou masquer cette vue",
+    "pdfName": "Magnetic - Deck 2026.pdf"
+  },
+  "text": {
+    "couverture.1": "pour que la créativité impact le monde",
+    "contact.1": "<a href=\"mailto:contact@magnetic.ch\">contact@magnetic.ch</a>",
+    "croisement.1": "Magnetic est né d’un croisement entre<br/><em>ce qui était déjà là</em> et <em>ce qui est arrivé</em>.",
+    "croisement.2": "<b>Downtown Studio</b><span>ce qui était déjà là</span>",
+    "croisement.3": "<b>Together</b><span>ce qui est arrivé</span>",
+    "deja-la.1": "Ce qui était déjà là,",
+    "deja-la.2": "c’est <i>Downtown Studio</i>. Un lieu dont les valeurs<br/>(<em>l’individu au cœur du collectif</em>) portaient déjà,<br/>sans le savoir, ce que Magnetic allait exploiter.",
+    "arrive.1": "Ce qui est arrivé,",
+    "arrive.2": "c’est <i>Together</i>, l’expérience immersive du Portail<br/>des Nations. En la réalisant, notre créativité a servi<br/>à transmettre une idée forte et ce faisant<br/>à <em>impacter le monde positivement</em>.",
+    "evidence.1": "De cette rencontre est née une évidence :",
+    "evidence.2": "Si la créativité a pu transmettre<br/>une idée au monde, ne pourrait-elle pas<br/>devenir <em>une méthode pour agir sur lui</em> ?",
+    "pour-que.1": "<span class=\"wm-inline\">Magnetic</span><br/>Pour que la créativité impact le monde",
+    "geneve.1": "Depuis des siècles, Genève, ville d’accueil,<br/>fait émerger des idées, des institutions<br/>et des formes dont la portée<br/><em>dépasse largement son territoire</em>.",
+    "geneve.2": "Genève",
+    "esprit.1": "En 1929, l’écrivain et penseur Robert de Traz<br/>donne un nom à cette singularité :",
+    "esprit.2": "“L’Esprit de Genève.”",
+    "esprit.3": "Une tradition propre à la ville : celle de <em>faire naître<br/>localement des formes capables de déborder sur le monde</em>.",
+    "figures.1": "Calvin",
+    "figures.2": "Rousseau",
+    "figures.3": "Dunant",
+    "figures.4": "Trois figures permettent d’en saisir la logique.",
+    "calvin.1": "<b>Calvin</b>, pour la rigueur et l’exigence éthique comme fondement d’une communauté responsable.",
+    "rousseau.1": "<b>Rousseau</b>, pour l’ouverture au monde à travers une pensée sensible de l’universel.",
+    "dunant.1": "<b>Dunant</b>, pour l’invention d’une compassion politique, traduite en droit international.",
+    "trois-manieres.1": "Trois manières différentes d’articuler<br/>l’universel à partir d’un lieu.",
+    "bien-commun.1": "Cette dynamique a produit des formes majeures du bien commun :",
+    "bien-commun.2": "le Multilatéralisme<br/>qui fera naître l’ONU",
+    "bien-commun.3": "Le Comité international<br/>de la Croix-Rouge.",
+    "bien-commun.4": "Les Conventions<br/>de Genève.",
+    "bien-commun.5": "La Revue de Genève.",
+    "bien-commun.6": "etc",
+    "bien-commun.7": "Dans chaque cas, <em>une initiative située, capable d’acquérir<br/>une portée bien plus vaste qu’elle-même</em>.",
+    "objectif.1": "Jusqu’ici, cet esprit s’est surtout exprimé<br/>dans le champ institutionnel.",
+    "objectif-2.1": "Notre objectif est de l’activer dans celui de <em>la création contemporaine</em><br/>pour en prolonger la puissance transformatrice par un autre moyen.",
+    "objectif-3.1": "Le projet propose de faire de Genève un laboratoire contemporain de cette transposition.<br/>Un espace où une tradition historiquement féconde dans le champ politique peut être traduite<br/>en pratiques culturelles, artistiques et expérimentales qui œuvrent pour le bien commun.",
+    "objectif-3.2": "L’enjeu est d’éprouver une capacité d’impact par le biais de la création.",
+    "reactiver.1": "Réactiver créativement l’Esprit de Genève<br/>pour faire de la création<br/>un outil pour repenser le commun.",
+    "manifeste.1": "Le Manifeste",
+    "principes.1": "Le Manifeste",
+    "principes.2": "<span>01</span><b>Être rigoureux</b>",
+    "principes.3": "<span>02</span><b>Ouvrir le dialogue</b>",
+    "principes.4": "<span>03</span><b>Servir le commun</b>",
+    "principes.5": "<span>04</span><b>Créer la confiance</b>",
+    "principes.6": "<span>05</span><b>Dépasser les frontières</b>",
+    "principes.7": "<span>06</span><b>Partager la connaissance</b>",
+    "p1.1": "Chercher la justesse plutôt que l’effet.<br/>Faire tenir ensemble la forme, l’idée et le geste.",
+    "p2.1": "Faire se rencontrer les disciplines,<br/>les cultures et les savoirs.<br/>La création se construit dans l’échange.",
+    "p3.1": "Concevoir des formes qui ne se referment pas sur elles-mêmes.<br/>Faire de la création un espace<br/>de relation, d’usage ou de partage.",
+    "p4.1": "Accueillir la divergence sans chercher à l’effacer.<br/>Faire de la neutralité un cadre fertile<br/>pour l’expérimentation.",
+    "p5.1": "Partir d’un lieu précis tout en visant plus large.<br/>Produire des formes capables de résonner<br/>au-delà de leur contexte d’origine.",
+    "p6.1": "Documenter, transmettre, rendre accessible.<br/>Une idée gagne en force lorsqu’elle peut circuler.",
+    "phases.1": "Un projet en 3 grandes phases",
+    "phases.2": "<b>Attraction</b><span>partager la vision</span>",
+    "phases.3": "<b>Collision</b><span>faire se rencontrer les idées</span>",
+    "phases.4": "<b>Résonance</b><span>diffuser au monde</span>",
+    "agir.1": "L’Esprit de Genève n’est pas seulement un héritage.<br/>C’est une manière singulière d’agir sur le monde<br/>et notre ambition est d’en éprouver aujourd’hui<br/>toute sa force par la création.",
+    "lancement.1": "Cette idée a été présentée à Laurent Finck, de Lumens 8, qui a tout de suite voulu rejoindre l’initiative,<br/>en mettant à disposition ses ressources créatives pour les projets à venir.",
+    "lancement.2": "<em>Magnetic était lancé.</em>",
+    "lancement-2.1": "Un mois plus tard, François Moncarey, du Geneva Lux, se passionne à son tour<br/>et nous offre le premier projet de l’association : <em>la Tour des Possibles</em>.",
+    "chrome.1": "<span>Magnetic</span><i></i><span>pour que la créativité impact le monde</span><i></i><span>novembre 2026</span>"
+  },
+  "alt": {
+    "deja-la.alt1": "L’espace de Downtown Studio",
+    "arrive.alt1": "Together, l’expérience immersive du Portail des Nations",
+    "figures.alt1": "Portrait de Jean Calvin",
+    "figures.alt2": "Portrait de Jean-Jacques Rousseau",
+    "figures.alt3": "Portrait d’Henry Dunant"
+  },
+  "labels": {},
+  "views": {
+    "couverture": [
+      "Magnetic",
+      ""
+    ],
+    "croisement": [
+      "Un croisement",
+      "01 · Origine"
+    ],
+    "deja-la": [
+      "Ce qui était déjà là",
+      "01 · Origine"
+    ],
+    "arrive": [
+      "Ce qui est arrivé",
+      "01 · Origine"
+    ],
+    "evidence": [
+      "Une évidence",
+      "01 · Origine"
+    ],
+    "pour-que": [
+      "Pour que la créativité impact le monde",
+      ""
+    ],
+    "geneve": [
+      "Genève",
+      "02 · L’Esprit de Genève"
+    ],
+    "esprit": [
+      "L’Esprit de Genève",
+      "02 · L’Esprit de Genève"
+    ],
+    "figures": [
+      "Trois figures",
+      "02 · L’Esprit de Genève"
+    ],
+    "calvin": [
+      "Calvin",
+      "02 · L’Esprit de Genève"
+    ],
+    "rousseau": [
+      "Rousseau",
+      "02 · L’Esprit de Genève"
+    ],
+    "dunant": [
+      "Dunant",
+      "02 · L’Esprit de Genève"
+    ],
+    "trois-manieres": [
+      "Articuler l’universel",
+      "02 · L’Esprit de Genève"
+    ],
+    "bien-commun": [
+      "Les formes du bien commun",
+      "02 · L’Esprit de Genève"
+    ],
+    "objectif": [
+      "Le champ institutionnel",
+      "02 · L’Esprit de Genève"
+    ],
+    "objectif-2": [
+      "La création contemporaine",
+      "02 · L’Esprit de Genève"
+    ],
+    "objectif-3": [
+      "Un laboratoire",
+      "02 · L’Esprit de Genève"
+    ],
+    "reactiver": [
+      "Réactiver l’Esprit de Genève",
+      ""
+    ],
+    "manifeste": [
+      "Le Manifeste",
+      ""
+    ],
+    "principes": [
+      "Six principes",
+      "03 · Le Manifeste"
+    ],
+    "p1": [
+      "Être rigoureux",
+      "03 · Le Manifeste · 1 / 6"
+    ],
+    "p2": [
+      "Ouvrir le dialogue",
+      "03 · Le Manifeste · 2 / 6"
+    ],
+    "p3": [
+      "Servir le commun",
+      "03 · Le Manifeste · 3 / 6"
+    ],
+    "p4": [
+      "Créer la confiance",
+      "03 · Le Manifeste · 4 / 6"
+    ],
+    "p5": [
+      "Dépasser les frontières",
+      "03 · Le Manifeste · 5 / 6"
+    ],
+    "p6": [
+      "Partager la connaissance",
+      "03 · Le Manifeste · 6 / 6"
+    ],
+    "phases": [
+      "Trois phases",
+      "04 · La méthode"
+    ],
+    "attraction": [
+      "Attraction",
+      "04 · La méthode · 1 / 3"
+    ],
+    "collision": [
+      "Collision",
+      "04 · La méthode · 2 / 3"
+    ],
+    "resonance": [
+      "Résonance",
+      "04 · La méthode · 3 / 3"
+    ],
+    "agir": [
+      "Une manière d’agir sur le monde",
+      ""
+    ],
+    "lancement": [
+      "Magnetic était lancé",
+      "05 · Le lancement"
+    ],
+    "lancement-2": [
+      "Le premier projet",
+      "05 · Le lancement"
+    ],
+    "contact": [
+      "Contact",
+      ""
+    ]
+  }
+}

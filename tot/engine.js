@@ -16,23 +16,14 @@
 
   const VIEWS = JSON.parse(document.getElementById("views").textContent);
 
-  /* ================================================================ language: content/<lang>.json, as on every deck of the platform
-     [data-t] gets the inner HTML of its key (line breaks are composed by hand in each language), [data-t-alt] its alt text;
-     ui holds the words drawn by this engine, views the label and chapter of each view. The French in the page is the fallback. */
+  /* ================================================================ language: ../shared/i18n.js has put in the texts of content/<lang>.json;
+     ui holds the words drawn by this engine, views the label and chapter of each view. */
   const CFG = Object.assign({ LANG: "fr", LANGS: ["fr"] }, window.DECK_CONFIG);
-  const asked = Q.get("lang"), LANG = CFG.LANGS.includes(asked) ? asked : CFG.LANG;
-  let T = null;
-  try { T = await (await fetch(`content/${LANG}.json`, { cache: "no-cache" })).json(); } catch (e) { /* opened from disk: keep the page as written */ }
+  const I18N = await window.DECK_I18N, T = I18N.T;
   const UI = Object.assign({ folio: CFG.FOLIO || [], plan: ["Ballroom Zurich", "Ballroom Geneva", "Vestiaire", "Toilettes", "Accès", "Sortie"],
     axo: ["Fresque murale", "Lounge", "Bar / buffet", "Stickers d’onomatopées", "Mange-debout", "Scène", "Photocall", "Vestiaire"],
-    overview: "Toutes les vues", check: "Montrer ou masquer cette vue", pdfName: "TotalEnergies - Powerded by Superheros.pdf" }, T && T.ui);
-  root.lang = LANG;
-  if (T) {
-    if (UI.title) document.title = UI.title;
-    $$("[data-t]").forEach((el) => { const v = T.text[el.dataset.t]; if (typeof v === "string") el.innerHTML = v; });
-    $$("[data-t-alt]").forEach((el) => { const v = T.alt[el.dataset.tAlt]; if (typeof v === "string") el.alt = v; });
-    VIEWS.forEach((v) => { const t = T.views[v.id]; if (t) [v.label, v.kicker] = t; });
-  }
+    overview: "Toutes les vues", check: "Montrer ou masquer cette vue" }, I18N.ui);
+  if (T && T.views) VIEWS.forEach((v) => { const t = T.views[v.id]; if (t) [v.label, v.kicker] = t; });
   const world = document.getElementById("world");
   $$(".page, .panel", world).forEach((e) => (e.dataset.pid = e.id));
   const C = { ink: "#17161A", paper: "#F6F0E1", white: "#FFFDF7", yellow: "#FFD60A", red: "#E8262B", blue: "#1C5BD6", cyan: "#19A7E0", pink: "#F27FA0" };
@@ -358,23 +349,13 @@
     const toggleOverview = () => (overviewOpen() ? closeOverview() : openOverview());
 
     /* ---------------------------------------------------------- controls */
-    // the other language, at the same view
-    function switchLang() {
-      const other = CFG.LANGS.find((l) => l !== LANG);
-      if (!other) return;
-      const u = new URL(location.href); u.searchParams.set("lang", other);
-      location.href = u.href;
-    }
-    // the PDF of the current language (tools/export-pdf.py)
-    const pdf = document.querySelector('.hud [data-act="pdf"]');
-    if (pdf) { pdf.setAttribute("href", `export/TotalEnergies_Powerded-by-Superheros-${LANG}.pdf`); pdf.setAttribute("download", UI.pdfName); }
     function fullscreen() { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen().catch(() => {}); }
     const restart = () => { closeOverview(); go(0); };
     document.addEventListener("click", (e) => {
       const b = e.target.closest("[data-act]");
       if (!b) return;
       const a = b.dataset.act;
-      if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") switchLang();
+      if (a === "fullscreen") fullscreen(); else if (a === "restart") restart(); else if (a === "overview") toggleOverview(); else if (a === "lang") I18N.switchLang();
       if (a !== "pdf") b.blur();
     });
     addEventListener("keydown", (e) => {

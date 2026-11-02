@@ -166,20 +166,9 @@ a { color: inherit; }
   font: 600 12px/1 var(--sans); font-stretch: 125%; letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint); }
 .folio i { flex: 1; height: 1px; background: var(--rule); }
 
-/* ------------------------------------------------------------ hud */
-.hud { position: fixed; left: 0; right: 0; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px;
-  font: 600 11px/1 var(--sans); font-stretch: 125%; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
-  background: linear-gradient(rgba(8, 8, 13, 0.75), rgba(8, 8, 13, 0)); opacity: 0; transition: opacity 0.5s; }
-body.hud-on .hud, .hud:hover, .hud:focus-within { opacity: 1; }
-.hud-l { display: flex; gap: 18px; }
-.hud-title { color: var(--faint); }
-.hud-r { display: flex; gap: 6px; }
-.hud .icon, .hud .lang { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid transparent; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; font: inherit; text-decoration: none; }
-.hud .icon:hover, .hud .lang:hover { border-color: var(--rule); background: rgba(36, 51, 255, 0.18); }
-.hud svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; }
-.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 2px; z-index: 40; background: rgba(242, 242, 245, 0.06); }
-.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--field), var(--field-hi)); transition: width 0.8s var(--ease); }
-html.gated .hud, html.gated .progress, html.gated .chrome { display: none !important; }
+/* ------------------------------------------------------------ the controls: the viewer's bar (../shared/controls.css), tinted */
+:root { --hud-ink: #f2f2f5; --hud-accent: #6f7bff; --hud-shade: rgba(8, 8, 13, 0.88); }
+html.gated .chrome { display: none !important; }
 .gate { --gate-bg: #08080d; --gate-caret: #6f7bff; --gate-code-color: #fff; }
 
 /* ------------------------------------------------------------ snapshots: overview thumbnails and printed pages */
@@ -217,6 +206,6 @@ html.gated .hud, html.gated .progress, html.gated .chrome { display: none !impor
 /* print: one page per view */
 @page { size: 1920px 1080px; margin: 0; }
 html.print, html.print body { overflow: visible; height: auto; }
-html.print .field, html.print .viewport, html.print body > .chrome, html.print .hud, html.print .progress { display: none; }
+html.print .field, html.print .viewport, html.print body > .chrome, html.print .hud, html.print .progress { display: none !important; }
 html.print body { margin: 0; }
 html.print .snap { break-after: page; page-break-after: always; break-inside: avoid; contain: strict; }

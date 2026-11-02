@@ -360,21 +360,8 @@ svg.tower-svg { width: 100%; height: 100%; overflow: visible; }
 .thanks-title { font: 300 italic 120px/1 var(--serif); color: var(--warm); margin-bottom: 30px;
   text-shadow: 0 0 1px #fffaf0, 0 0 30px rgba(255, 240, 215, 0.4), 0 0 120px rgba(220, 230, 255, 0.2); }
 
-/* ------------------------------------------------------------ hud (controls from ../shared/controls.js) */
-.hud { position: fixed; left: 0; right: 0; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 20px; font: 500 12px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
-  background: linear-gradient(rgba(7, 8, 10, 0.75), rgba(7, 8, 10, 0)); opacity: 0; transition: opacity 0.5s; }
-body.hud-on .hud, .hud:hover, .hud:focus-within { opacity: 1; }
-.hud-l { display: flex; gap: 18px; }
-.hud-title { color: var(--faint); }
-.hud-r { display: flex; gap: 6px; }
-.hud .icon, .hud .lang { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid transparent; border-radius: 50%;
-  background: none; color: var(--ink); cursor: pointer; font: inherit; text-decoration: none; }
-.hud .icon:hover, .hud .lang:hover { border-color: var(--rule); background: rgba(220, 230, 255, 0.06); }
-.hud svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; }
-.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 2px; z-index: 40; background: rgba(220, 230, 255, 0.06); }
-.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, rgba(255, 230, 189, 0.2), var(--glow)); transition: width 0.8s var(--ease); }
-html.gated .hud, html.gated .progress { display: none !important; }
+/* ------------------------------------------------------------ the controls: the viewer's bar (../shared/controls.css), tinted */
+:root { --hud-ink: #f4f5f7; --hud-accent: #ffe6bd; --hud-shade: rgba(7, 8, 10, 0.88); }
 .gate { --gate-bg: #07080a; --gate-caret: #ffe6bd; --gate-code-color: #fffdf8; --gate-label-color: rgba(220, 230, 255, 0.6); }
 
 /* ------------------------------------------------------------ overview (O, Esc) */
@@ -414,7 +401,7 @@ html.gated .hud, html.gated .progress { display: none !important; }
 /* ------------------------------------------------------------ print: one page per slide, last step, no hud */
 @page { size: 1920px 1080px; margin: 0; }
 html.print, html.print body { overflow: visible; height: auto; background: var(--night); }
-html.print .sky, html.print .hud, html.print .progress { display: none; }
+html.print .sky, html.print .hud, html.print .progress { display: none !important; }
 html.print .stage { position: static; transform: none; width: 1920px; height: auto; }
 html.print .slide { position: relative; width: 1920px; height: 1080px; break-after: page; page-break-after: always;
   background: radial-gradient(120% 90% at 70% 10%, #0d1018, var(--night) 70%); }
