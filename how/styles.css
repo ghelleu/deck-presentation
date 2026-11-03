@@ -459,6 +459,26 @@ body.is-black .stage {
     transform: rotate(270deg);
   }
 }
+.gold-fx,
+.dv-num,
+.dv-title,
+.end-t {
+  background: linear-gradient(100deg, #8c6a45 0%, #e3c99d 45%, #f4e6c8 55%, #a9825a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* the glow sits on a wrapper: it also keeps the gold lettering clean in the PDF */
+.dv-txt,
+.fx-w {
+  filter: drop-shadow(0 0 40px rgba(227, 201, 157, 0.28));
+}
+.fx-w {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 .dv-txt {
   position: absolute;
   left: 0;
@@ -469,15 +489,12 @@ body.is-black .stage {
 }
 .dv-num {
   font: 400 150px/1 var(--display);
-  color: var(--champagne);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 60px rgba(227, 201, 157, 0.35);
 }
 .dv-title {
   margin-top: 26px;
   font: 400 58px/1.1 var(--display);
-  color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 0.16em;
 }
@@ -655,12 +672,11 @@ body.is-black .stage {
   z-index: 4;
   transform: none;
   filter: none;
-  opacity: 1;
-  clip-path: circle(0% at 78% 50%);
-  transition: clip-path 1700ms var(--soft);
+  opacity: 0;
+  transition: opacity 1400ms var(--ease);
 }
 .slide .opp-b[data-step].on {
-  clip-path: circle(130% at 78% 50%);
+  opacity: 1;
 }
 .opp-b {
   color: var(--ivory);
@@ -703,19 +719,16 @@ body.is-black .stage {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 1000px;
-  height: 1000px;
-  margin: -500px 0 0 -500px;
-  border-radius: 50%;
-  overflow: hidden;
-  filter: blur(90px) saturate(1.5);
-  opacity: 0.8;
+  width: 1240px;
+  height: 860px;
+  margin: -430px 0 0 -620px;
+  background: radial-gradient(28% 34% at 34% 36%, var(--a1), transparent 70%),
+    radial-gradient(28% 34% at 66% 36%, var(--a2), transparent 70%),
+    radial-gradient(48% 28% at 50% 68%, var(--a3), transparent 72%),
+    radial-gradient(20% 14% at 50% 56%, var(--a4), transparent 70%);
+  filter: blur(60px) saturate(1.35);
+  opacity: 0.85;
   animation: orb 14s ease-in-out infinite alternate;
-}
-.co-aura img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 @keyframes orb {
   from {
@@ -914,6 +927,9 @@ body.is-black .stage {
   height: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
+}
+.sc-axo img {
+  mix-blend-mode: normal;
 }
 .slide.is-active .sc-fig img {
   animation: float 9s ease-in-out infinite alternate;
@@ -1228,37 +1244,28 @@ body.is-black .stage {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
+}
+.ad-g {
+  position: absolute;
+  inset: 0;
+}
+.ad-line {
+  position: absolute;
+  width: 1px;
+  background: var(--ink);
 }
 .ad-l {
   position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transform: translateY(-50%);
-  white-space: nowrap;
-}
-.slide .ad-l[data-step] {
-  translate: 0 -50%;
-  transform: translateX(-14px);
-}
-.slide .ad-l[data-step].on {
-  transform: none;
-}
-.ad-l i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--plum);
-  box-shadow: 0 0 0 6px rgba(91, 59, 102, 0.16);
-}
-.ad-l span {
-  font: 400 15px/1 var(--text);
+  padding: 7px 4px 0;
+  text-align: center;
+  font: 300 15px/1.25 var(--text);
   font-stretch: 125%;
-  letter-spacing: 0.12em;
   color: var(--ink);
-  background: rgba(246, 244, 241, 0.85);
-  padding: 6px 10px;
+}
+.slide .ad-g[data-step] {
+  transform: none;
+  filter: none;
 }
 
 /* activation mechanics: an introduction, then each mechanic (title, text, pictures) */
@@ -1357,36 +1364,44 @@ body.is-black .stage {
   animation-delay: 550ms;
 }
 
-/* agenda: the five chapters, a way in to each */
+/* agenda: the PowerPoint layout, a way in to each chapter */
+.ag-label {
+  position: absolute;
+  left: 71px;
+  top: 86px;
+  font: 400 48px/1.1 var(--display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 .ag-list {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 372px;
+  top: 418px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 22px;
+  align-items: flex-start;
 }
 .ag-i {
   appearance: none;
   border: 0;
   background: none;
-  padding: 6px 0;
+  padding: 0;
   cursor: pointer;
-  font: 400 44px/1.15 var(--display);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold);
+  font: 400 36px/1.5 var(--text);
+  font-stretch: 125%;
+  color: var(--ivory);
+  text-align: left;
   transition: color 0.4s var(--ease);
 }
 .ag-i:hover {
-  color: var(--ivory);
+  color: var(--champagne);
+}
+.slide.is-active .ag-label {
+  animation: rise 1300ms var(--ease) both 250ms;
 }
 .slide.is-active .ag-i {
   animation: rise 1300ms var(--ease) both;
-  animation-delay: calc(var(--i) * 140ms + 300ms);
+  animation-delay: calc(var(--i) * 120ms + 400ms);
 }
 
 /* ------------------------------------------------------------- Wrap up */
@@ -1488,8 +1503,6 @@ body.is-black .stage {
   text-align: center;
   font: 400 86px/1.1 var(--display);
   letter-spacing: 0.09em;
-  color: var(--champagne);
-  text-shadow: 0 0 70px rgba(227, 201, 157, 0.4);
 }
 .end-a {
   position: absolute;
