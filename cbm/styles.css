@@ -92,6 +92,14 @@ body[data-kind="full"] .folio span:nth-child(2), .snap.full .folio span:nth-chil
 .cover .ball-wrap { right: 230px; width: 560px; }
 .cover .ball-wrap img, .cover .ball-wrap canvas { width: 560px; height: 560px; }
 
+/* ------------------------------------------------------------ status of an element after the client's feedback */
+.status { margin: 36px 0 0; padding: 18px 0 0; border-top: 2px solid var(--rouge); font: 400 21px/1.45 var(--sans); color: var(--ink-2); max-width: 520px; }
+.status b { display: block; font: 600 15px/1.4 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--rouge); margin-bottom: 8px; }
+.status.keep { border-top-color: var(--sommet); margin-top: 22px; }
+.status.keep b { color: var(--sommet); }
+.lead { font: 400 28px/1.45 var(--sans); color: var(--ink); margin: 40px 0 0; }
+.menu-page .col .title { font-size: 70px; }
+
 /* ------------------------------------------------------------ L’histoire: one paragraph, its pictures */
 .story { margin-top: 56px; }
 .para { font: 400 28px/1.48 var(--sans); color: var(--ink); margin: 0 0 26px; }
