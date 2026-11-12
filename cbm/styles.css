@@ -2,7 +2,7 @@
    The evening's palette: Blanc neige (grounds), Argent miroir, Noir nuit (text), Bleu sommet, Bleu néon, Rouge suisse (signage).
    One grid: 1920 × 1080, margins 120. Fraunces for titles (roman, then italic for the second half), Inter Tight for the rest. */
 :root {
-  --neige: #F1EFE9; --argent: #B1B8B6; --nuit: #15161C; --sommet: #355B88; --neon: #2A22D9; --rouge: #DA291C;
+  --neige: #F1EFE9; --argent: #B1B8B6; --nuit: #15161C; --sommet: #355B88; --glacier: #8FDDF9; --neon: #2A22D9; --rouge: #DA291C;
   --ink: var(--nuit); --ink-2: #4B4D57; --rule: rgba(21, 22, 28, 0.16);
   --serif: "Fraunces", "Times New Roman", serif; --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1); --fit: 1;
@@ -65,6 +65,8 @@ body[data-kind="full"] .folio span:nth-child(2), .snap.full .folio span:nth-chil
 .c-argent { --bg: linear-gradient(115deg, #9EA6A4 0%, #D3D8D7 38%, #A9B0AE 62%, #C9CECD 100%); --fg: var(--nuit); --acc: var(--rouge); --sub: rgba(21, 22, 28, 0.72); }
 .c-sommet { --bg: var(--sommet); --acc: var(--neige); }
 .c-rouge { --bg: var(--rouge); --acc: var(--nuit); }
+.c-glacier { --bg: var(--glacier); --fg: var(--nuit); --acc: var(--neon); --sub: rgba(21, 22, 28, 0.72); }
+.top-label { position: absolute; left: 120px; top: 110px; z-index: 3; }
 .c-neon { --bg: var(--neon); --acc: var(--neige); }
 .ch-text { position: absolute; left: 120px; bottom: 150px; z-index: 3; }
 .chapter .kicker { color: var(--sub); }
@@ -195,6 +197,43 @@ body[data-kind="full"] .folio span:nth-child(2), .snap.full .folio span:nth-chil
 .salon figcaption { position: absolute; left: 390px; top: 50%; width: 450px; transform: translateY(-50%); font: 400 24px/1.35 var(--sans); color: var(--ink); }
 .salon .ours img { outline: 3px solid var(--rouge); outline-offset: 5px; }
 .salon .ours figcaption { color: var(--rouge); }
+
+/* ------------------------------------------------------------ v3 pages (Sissi's PowerPoint of 12 Nov 2026) */
+.title.small { font-size: 64px; }
+#gateau .col.narrow .title { font-size: 58px; }
+.palette-page .swatches { top: 120px; height: 840px; }
+/* the evening's run sheet */
+.runsheet { position: absolute; left: 120px; right: 120px; top: 120px; margin: 0; padding: 0; list-style: none; }
+.runsheet li { display: grid; grid-template-columns: 300px 1fr 420px; gap: 40px; align-items: baseline; padding: 20px 0; border-top: 1px solid var(--rule); font: 400 23px/1.35 var(--sans); color: var(--ink); }
+.runsheet li .t { font: 400 28px/1.2 var(--serif); color: var(--rouge); }
+.runsheet li .e { color: var(--ink-2); font-style: italic; }
+.runsheet li.hd { border-top: 0; padding-top: 0; }
+.runsheet li.hd span { font: 600 16px/1.4 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); font-style: normal; }
+.slide.is-active .runsheet li { animation: rise 0.8s var(--ease) both; animation-delay: calc(300ms + var(--i, -1) * 90ms); }
+/* the menu, in three blocks */
+.menu.v3 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 60px; left: 860px; width: 940px; }
+.menu.v3 section { transform: translateY(16px); border-top: 2px solid var(--rouge); padding: 22px 0 0; }
+.menu.v3 section:nth-child(3) { grid-column: 1 / -1; }
+.menu.v3 li { border-top: 0; padding-top: 0; transform: none; }
+.menu.v3 section.on { transform: none; }
+.menu.v3 h3 { font-size: 36px; margin-bottom: 14px; }
+.menu.v3 p, .menu.v3 li { font: 400 23px/1.42 var(--sans); color: var(--ink-2); margin: 0 0 6px; }
+.menu.v3 .b { font-weight: 600; color: var(--ink); }
+.menu.v3 ul { list-style: none; margin: 0 0 6px; padding: 0; }
+.menu.v3 ul li { padding-left: 1.1em; text-indent: -1.1em; }
+.menu.v3 ul.dash li::before { content: "– "; }
+.menu.v3 ul.dot { padding-left: 1.1em; }
+.menu.v3 ul.dot li::before { content: "• "; }
+/* product shots on white, laid on the page */
+.ph.prod { background: none; }
+.ph.prod img { object-fit: contain; mix-blend-mode: multiply; }
+.acc-label { position: absolute; top: 860px; margin: 0; width: 340px; text-align: center; font: 400 64px/1 var(--serif); letter-spacing: 0.12em; color: var(--rouge); }
+/* plans from SketchUp, the cakes, the option */
+.ph.plan-img { background: #fff; }
+.ph.plan-img img { object-fit: contain; }
+.cakes { position: absolute; left: 640px; top: 120px; width: 1160px; height: 840px; }
+.option-tag { position: absolute; right: 120px; top: 110px; z-index: 3; margin: 0; padding: 10px 18px; background: var(--rouge); color: var(--neige); font: 600 17px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; }
+.lieux .accordion { top: 120px; height: 840px; }
 
 /* ------------------------------------------------------------ toolbar: the platform's (../shared/controls.css), tinted */
 :root { --hud-ink: #F1EFE9; --hud-accent: #DA291C; --hud-shade: rgba(21, 22, 28, 0.85); --vw-ground: #15161C; --vw-page: var(--neige); }

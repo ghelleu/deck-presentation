@@ -3,24 +3,24 @@
   "couverture": [
    0
   ],
-  "chapitre-1": [
-   1
-  ],
   "histoire": [
+   1,
    2,
-   3,
-   4
+   3
   ],
   "mood": [
-   5
-  ],
-  "univers": [
-   6
+   4
   ],
   "deux-univers": [
-   7
+   5
+  ],
+  "chapitre-1": [
+   6
   ],
   "palette": [
+   7
+  ],
+  "invitation": [
    8
   ],
   "chapitre-2": [
@@ -29,109 +29,125 @@
   "chalet-suisse": [
    10
   ],
-  "montagnes": [
+  "matieres": [
    11
   ],
-  "objets-disco": [
+  "textiles": [
    12
   ],
-  "fresque": [
+  "assises": [
    13
   ],
   "tables": [
    14
   ],
-  "insolite": [
+  "objets-disco": [
    15
   ],
-  "diner": [
+  "chapitre-3": [
    16
   ],
-  "chapitre-3": [
+  "montagnes": [
    17
   ],
-  "menu": [
+  "portes": [
    18
   ],
-  "food": [
+  "chapitre-4": [
    19
   ],
-  "chapitre-4": [
+  "deroule": [
    20
   ],
-  "photocall": [
+  "chapitre-5": [
    21
   ],
-  "yodel": [
+  "accueil-exterieur": [
    22
   ],
-  "vinyles": [
-   23
-  ],
-  "chapitre-5": [
+  "reception-vestiaire": [
+   23,
    24
   ],
-  "lumieres": [
-   25
-  ],
-  "karaoke-suisse": [
+  "espace-soiree": [
+   25,
    26
   ],
-  "jukebox": [
-   27
+  "rendus-soiree": [
+   27,
+   28,
+   29,
+   30
   ],
-  "karaoke": [
-   28
+  "apres-ski-bar": [
+   31
   ],
-  "chapitre-6": [
-   29
+  "vinyles": [
+   32
   ],
-  "etat-des-lieux": [
-   30,
-   31,
-   32,
+  "espace-scene": [
    33
   ],
-  "problematiques": [
+  "rendus-scene": [
    34,
-   35,
-   36,
-   37
+   35
   ],
-  "servant-servi": [
+  "chapitre-6": [
+   36
+  ],
+  "menu": [
+   37,
    38,
-   39,
+   39
+  ],
+  "food": [
    40
   ],
-  "scenographie": [
+  "desserts": [
    41
   ],
-  "rendus": [
+  "gateau": [
    42,
-   43,
-   44,
-   45,
-   46,
+   43
+  ],
+  "chapitre-7": [
+   44
+  ],
+  "artistes": [
+   45
+  ],
+  "chapitre-8": [
+   46
+  ],
+  "tenue-hotesses": [
    47
   ],
-  "coupe": [
+  "tenue-hotes": [
    48
   ],
-  "rendu-salon": [
+  "tenue-chef": [
    49
   ],
-  "le-salon": [
+  "tenues": [
    50
   ],
-  "rendus-fin": [
-   51,
+  "accessoires": [
+   51
+  ],
+  "chapitre-9": [
    52
   ],
   "modelisation": [
    53
   ],
+  "etat-des-lieux": [
+   54,
+   55,
+   56,
+   57
+  ],
   "merci": [
-   54
+   58
   ]
  }
 }
