@@ -28,7 +28,7 @@
     s.dataset.s = step;
     $$("[data-step]", s).forEach((e) => { const k = +e.dataset.step; e.classList.toggle("on", step >= k); e.classList.toggle("at", step === k); });
     $$("[data-only]", s).forEach((e) => e.classList.toggle("on", nums(e.dataset.only).includes(step)));
-    // the renders' index: which of the ten we are on
+    // the renders' index: which of the twelve we are on
     const strip = $(".strip", s);
     if (strip) $$("li", strip).forEach((li, i) => li.classList.toggle("cur", i === +s.dataset.strip + step));
   }
@@ -80,8 +80,8 @@
   }
   $$("[data-draw=plan]").forEach(drawPlan);
 
-  /* ================================================================ the renders’ index (ten pictures) */
-  const RENDERS = ["rendu-accueil", "rendu-vestiaire-4", "rendu-rideau-4", "rendu-soiree-1", "rendu-soiree-2", "rendu-photocall", "rendu-soiree-3", "rendu-apres-ski", "rendu-scene-4", "rendu-scene-option"];
+  /* ================================================================ the renders’ index (twelve pictures) */
+  const RENDERS = ["rendu-accueil", "rendu-vestiaire-4", "rendu-rideau-4", "rendu-soiree-1", "rendu-soiree-2", "rendu-soiree-a", "rendu-soiree-b", "rendu-photocall", "rendu-soiree-3", "rendu-apres-ski", "rendu-scene-4", "rendu-scene-option"];
   $$(".strip").forEach((ol) => (ol.innerHTML = RENDERS.map((r, i) => `<li><img src="assets/img/${r}.webp" alt=""><b>${String(i + 1).padStart(2, "0")}</b></li>`).join("")));
 
   /* ================================================================ the disco ball */

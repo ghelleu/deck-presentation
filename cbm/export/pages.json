@@ -77,77 +77,79 @@
    27,
    28,
    29,
-   30
-  ],
-  "apres-ski-bar": [
-   31
-  ],
-  "vinyles": [
+   30,
+   31,
    32
   ],
-  "espace-scene": [
+  "apres-ski-bar": [
    33
   ],
-  "rendus-scene": [
-   34,
+  "vinyles": [
+   34
+  ],
+  "espace-scene": [
    35
   ],
+  "rendus-scene": [
+   36,
+   37
+  ],
   "chapitre-6": [
-   36
+   38
   ],
   "menu": [
-   37,
-   38,
-   39
-  ],
-  "food": [
-   40
-  ],
-  "desserts": [
+   39,
+   40,
    41
   ],
-  "gateau": [
-   42,
+  "food": [
+   42
+  ],
+  "desserts": [
    43
   ],
-  "chapitre-7": [
-   44
-  ],
-  "artistes": [
+  "gateau": [
+   44,
    45
   ],
-  "chapitre-8": [
+  "chapitre-7": [
    46
   ],
-  "tenue-hotesses": [
+  "artistes": [
    47
   ],
-  "tenue-hotes": [
+  "chapitre-8": [
    48
   ],
-  "tenue-chef": [
+  "tenue-hotesses": [
    49
   ],
-  "tenues": [
+  "tenue-hotes": [
    50
   ],
-  "accessoires": [
+  "tenue-chef": [
    51
   ],
-  "chapitre-9": [
+  "tenues": [
    52
   ],
-  "modelisation": [
+  "accessoires": [
    53
   ],
+  "chapitre-9": [
+   54
+  ],
+  "modelisation": [
+   55
+  ],
   "etat-des-lieux": [
-   54,
-   55,
    56,
-   57
+   57,
+   58,
+   59
   ],
   "merci": [
-   58
+   60
   ]
  }
 }
